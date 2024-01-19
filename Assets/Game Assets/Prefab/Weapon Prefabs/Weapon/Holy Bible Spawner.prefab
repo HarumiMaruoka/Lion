@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4848990198979733713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1049601021838976754}
+  - component: {fileID: 2427558464575229925}
+  m_Layer: 0
+  m_Name: Holy Bible Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1049601021838976754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4848990198979733713}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2427558464575229925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4848990198979733713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a622798267ee64b9cbf4fab099a552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerStatus:
+    _maxLife: 0
+    _moveSpeed: 0
+    _attackPower: 0
+    _defense: 0
+    _dexterity: 0
+    _luck: 0
+  _weaponStatus:
+    _attackPower: 6
+    _speed: 0
+    _duration: 0
+    _area: 0
+    _cooldown: 0
+    _amount: 0
+  _baseSpawnInterval: 0.4
+  _baseCooldownTime: 2
+  _upgradePlayerStatusCsv: {fileID: 4900000, guid: 0ffc455a1c4c657489b4ebe0cb64fc9c, type: 3}
+  _upgradeWeaponStatusCsv: {fileID: 4900000, guid: 58c5035f51e5dce488240f99e6bd3134, type: 3}
+  _upgradeCostCsv: {fileID: 4900000, guid: c189bb4dc59534c42913b889a16fce34, type: 3}
+  _data: {fileID: 11400000, guid: f0b2950d261cc02468020c43178b3d06, type: 2}
+  _holyBiblePrefab: {fileID: 2200648345643203264, guid: 41fe217a0cafe0c43b4d9d2a1b4b1500, type: 3}

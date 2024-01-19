@@ -1,0 +1,5 @@
+MaxLife     ,MoveSpeed   ,AttackPower ,Defense     ,Dexterity   ,Luck        
+10,5,2,0,0,0
+15,7,5,1,1,1
+30,9,7,2,2,2
+40,15,10,5,5,5

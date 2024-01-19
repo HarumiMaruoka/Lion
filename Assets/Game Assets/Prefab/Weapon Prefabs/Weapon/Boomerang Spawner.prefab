@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &917661968832019517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429126767015846242}
+  - component: {fileID: 3007240330495057408}
+  m_Layer: 0
+  m_Name: Boomerang Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &429126767015846242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917661968832019517}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3007240330495057408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917661968832019517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252d7c053da2514993c8b60ff4bd06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerStatus:
+    _maxLife: 0
+    _moveSpeed: 0
+    _attackPower: 0
+    _defense: 0
+    _dexterity: 0
+    _luck: 0
+  _weaponStatus:
+    _attackPower: 4
+    _speed: 0
+    _duration: 0
+    _area: 0
+    _cooldown: 0
+    _amount: 0
+  _baseSpawnInterval: 0.3
+  _baseCooldownTime: 2
+  _upgradePlayerStatusCsv: {fileID: 4900000, guid: 6f91b6c8bda4242439281bddc354ff19, type: 3}
+  _upgradeWeaponStatusCsv: {fileID: 4900000, guid: 66458a11962ca80428182c2695459b04, type: 3}
+  _upgradeCostCsv: {fileID: 4900000, guid: edabb003b6292454bb81f8c581fe1bc0, type: 3}
+  _data: {fileID: 11400000, guid: 114613370328837488426c7fa046b91b, type: 2}
+  _boomerangPrefab: {fileID: 5744585631185015170, guid: 04e90fb3d4cc9cd4c980766dcc547727, type: 3}
