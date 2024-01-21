@@ -7,6 +7,10 @@ public class VFXManager : MonoBehaviour
 
     private void Awake()
     {
+        if (_current)
+        {
+            Debug.LogError("Already exists. Have you placed two or more?");
+        }
         _current = this;
     }
 

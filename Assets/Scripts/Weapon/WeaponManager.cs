@@ -26,7 +26,7 @@ public class WeaponManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private DroppedWeapon _droppedWeaponPrefab;
+    private DroppedWeaponManager _droppedWeaponPrefab;
     [SerializeField]
     private Transform _droppedWeaponParent;
     [SerializeField]
@@ -47,8 +47,8 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    private HashSet<DroppedWeapon> _activeItems = new HashSet<DroppedWeapon>();
-    private Stack<DroppedWeapon> _inactiveItems = new Stack<DroppedWeapon>();
+    private HashSet<DroppedWeaponManager> _activeItems = new HashSet<DroppedWeaponManager>();
+    private Stack<DroppedWeaponManager> _inactiveItems = new Stack<DroppedWeaponManager>();
 
     public void DropWeapon(Vector3 position, WeaponType weaponType, float probability) // probabilityは確率を表現する。0.0から1.0で判断する。0の方が出にくく、1の方が出やすい。
     {
@@ -65,7 +65,7 @@ public class WeaponManager : MonoBehaviour
 
 
         // Create Item.
-        DroppedWeapon weapon = null;
+        DroppedWeaponManager weapon = null;
         if (_inactiveItems.Count == 0)
             weapon = Instantiate(_droppedWeaponPrefab, _droppedWeaponParent);
         else
@@ -78,7 +78,7 @@ public class WeaponManager : MonoBehaviour
         weapon.OnDead += DeleteItem;
     }
 
-    private void DeleteItem(DroppedWeapon weapon)
+    private void DeleteItem(DroppedWeaponManager weapon)
     {
         weapon.OnDead -= DeleteItem;
         weapon.gameObject.SetActive(false);

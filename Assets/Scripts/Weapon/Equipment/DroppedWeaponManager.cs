@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-public class DroppedWeapon : MonoBehaviour
+public class DroppedWeaponManager : MonoBehaviour
 {
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
-    public Action<DroppedWeapon> OnDead { get; internal set; }
+    public Action<DroppedWeaponManager> OnDead { get; internal set; }
 
     private WeaponData _weaponData;
 
@@ -39,7 +39,7 @@ public class DroppedWeapon : MonoBehaviour
     private void OnCollectAnimationCompleted()
     {
         var player = PlayerController.Current;
-        var weaponInventory = WeaponInventory.Instance;
+        var weaponInventory = WeaponInventory.Current;
 
         if (player == null)
         {
@@ -52,14 +52,8 @@ public class DroppedWeapon : MonoBehaviour
             return;
         }
 
-        var weaponCollection = WeaponInventory.Instance.WeaponCollection;
-        var capacity = WeaponInventory.Instance.Capacity;
-        if (weaponCollection.Count >= capacity)
-        {
-            Debug.Log("Ç±ÇÍà»è„WeaponÇê∂ê¨Ç≈Ç´Ç‹ÇπÇÒÅB");
-            return;
-        }
-
+        var weaponCollection = WeaponInventory.Current.WeaponCollection;
+        var capacity = WeaponInventory.Current.InventoryCapacity;
         var instance = GameObject.Instantiate(_weaponData.WeaponPrefab, player.WeaponParent);
         weaponInventory.AddWeapon(instance);
         OnDead?.Invoke(this);
