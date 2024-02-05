@@ -170,6 +170,11 @@ MonoBehaviour:
   _dropWeapons:
   - _weaponType: 6
     _probability: 0.8
+  _dropCharacters:
+  - _characterID: 4
+    _probability: 0.6
+  - _characterID: 5
+    _probability: 0.6
 --- !u!58 &1952567355270599755
 CircleCollider2D:
   m_ObjectHideFlags: 0

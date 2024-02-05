@@ -81,6 +81,7 @@ public class EnemyController : MonoBehaviour
         GemManager.Current.CreateGem(transform.position);
         DropItem();
         DropWeapon();
+        DropCharacter();
     }
 
     [SerializeField]
@@ -119,6 +120,8 @@ public class EnemyController : MonoBehaviour
     private DropItemInfo[] _dropItems = null;
     [SerializeField]
     private DropWeaponInfo[] _dropWeapons = null;
+    [SerializeField]
+    private DropCharacterInfo[] _dropCharacters = null;
 
     public void DropItem()
     {
@@ -133,6 +136,14 @@ public class EnemyController : MonoBehaviour
         foreach (var item in _dropWeapons)
         {
             WeaponManager.Current.DropWeapon(transform.position, item.WeaponType, item.Probability);
+        }
+    }
+
+    public void DropCharacter()
+    {
+        foreach (var item in _dropCharacters)
+        {
+            CharacterManager.Current.DropCharacter(transform.position, item.CharacterID, item.Probability);
         }
     }
 
@@ -157,6 +168,18 @@ public class EnemyController : MonoBehaviour
         private float _probability;
 
         public WeaponType WeaponType => _weaponType;
+        public float Probability => _probability;
+    }
+
+    [Serializable]
+    public struct DropCharacterInfo
+    {
+        [SerializeField]
+        private int _characterID;
+        [SerializeField]
+        private float _probability;
+
+        public int CharacterID => _characterID;
         public float Probability => _probability;
     }
 }

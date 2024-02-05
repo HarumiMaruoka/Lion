@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
     private PlayerStatus _playerStatus;
     [SerializeField]
     private WeaponStatus _basicWeaponStatus;
-    [SerializeField]
-    private WeaponBase[] _weapons;
 
     private Rigidbody2D _rigidbody2D;
     private CancellationTokenSource _cancellationOnDestroy = new CancellationTokenSource();
@@ -28,15 +26,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private MoveMode _initialMoveMode;
 
+    public event Action<PlayerStatus> OnPlayerStatusChanged;
+    private void OnPlayerStatusChange(WeaponBase weapon)
+    {
+        OnPlayerStatusChanged?.Invoke(PlayerStatus);
+    }
+
     public PlayerStatus PlayerStatus
     {
         get
         {
             var sum = _playerStatus;
-            for (int i = 0; i < _weapons.Length; i++)
+            var inventory = WeaponInventory.Current;
+            if (!inventory)
             {
-                sum += _weapons[i].PlayerAddStatus;
+                Debug.Log("Weapon Inventory is Missing...");
+                return default;
             }
+
             return sum;
         }
     }
