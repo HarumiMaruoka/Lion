@@ -8,12 +8,12 @@ public class CharacterInventory
     public static CharacterInventory Instance => _instance ??= new CharacterInventory();
     private CharacterInventory() { }
 
-    private HashSet<IndividualCharacterData> _collection = new HashSet<IndividualCharacterData>();
-    public IReadOnlyCollection<IndividualCharacterData> Collection => _collection;
+    private HashSet<CharacterIndividualInfo> _collection = new HashSet<CharacterIndividualInfo>();
+    public IReadOnlyCollection<CharacterIndividualInfo> Collection => _collection;
 
-    public void GetCharacter(RaceCharacterData raceCharacterData)
+    public void GetCharacter(CharacterSpeciesInfo speciesInfo)
     {
-        var instance = new IndividualCharacterData(raceCharacterData, 0);
+        var instance = new CharacterIndividualInfo(speciesInfo, 0);
         _collection.Add(instance);
     }
 }

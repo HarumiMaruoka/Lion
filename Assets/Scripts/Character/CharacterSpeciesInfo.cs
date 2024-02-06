@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class RaceCharacterData : ScriptableObject // 種族としてのキャラデータ
+public class CharacterSpeciesInfo : ScriptableObject // 種族としてのキャラデータ
 {
     [SerializeField]
     private int _id;
@@ -17,6 +17,6 @@ public class RaceCharacterData : ScriptableObject // 種族としてのキャラデータ
 
     public override string ToString()
     {
-        return $"ID: {_id}, Name: {_name}";
+        return $"CharacterID: {_id}, Name: {_name}";
     }
 }

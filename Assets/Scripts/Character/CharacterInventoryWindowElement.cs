@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CharacterSelectWindowElement : MonoBehaviour, IPointerClickHandler
+public class CharacterInventoryWindowElement : MonoBehaviour , IPointerClickHandler
 {
     [SerializeField]
     private Image _background;
@@ -16,9 +16,9 @@ public class CharacterSelectWindowElement : MonoBehaviour, IPointerClickHandler
     public Image ActorImage => _actorImage;
     public Text Label => _label;
 
-    private IndividualCharacterData _characterData;
+    private CharacterIndividualInfo _characterData;
 
-    public IndividualCharacterData CharacterData
+    public CharacterIndividualInfo CharacterData
     {
         get { return _characterData; }
         set
@@ -26,7 +26,7 @@ public class CharacterSelectWindowElement : MonoBehaviour, IPointerClickHandler
             _characterData = value;
             if (value != null)
             {
-                _actorImage.sprite = value.RaceData.Sprite;
+                _actorImage.sprite = value.SpeciesInfo.Sprite;
                 _label.text = value.ToString();
             }
             else
@@ -37,10 +37,10 @@ public class CharacterSelectWindowElement : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public event Action<IndividualCharacterData> OnSelected;
+    public event Action<CharacterIndividualInfo> OnCharacterSelected;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnSelected?.Invoke(_characterData);
+        OnCharacterSelected?.Invoke(_characterData);
     }
 }

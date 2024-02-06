@@ -1,14 +1,14 @@
 using System;
 using UnityEngine;
 
-public class CharacterBehaviour : MonoBehaviour
+public class CharacterBehaviour : MonoBehaviour 
 {
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
-    private IndividualCharacterData _individualCharacterData;
+    private CharacterIndividualInfo _individualCharacterData;
 
-    public IndividualCharacterData IndividualData
+    public CharacterIndividualInfo IndividualData
     {
         get => _individualCharacterData;
         set
@@ -16,7 +16,7 @@ public class CharacterBehaviour : MonoBehaviour
             _individualCharacterData = value;
             if (value != null)
             {
-                _spriteRenderer.sprite = value.RaceData.Sprite;
+                _spriteRenderer.sprite = value.SpeciesInfo.Sprite;
             }
             else
             {
@@ -29,8 +29,4 @@ public class CharacterBehaviour : MonoBehaviour
     {
         IndividualData = null;
     }
-
-    private WeaponBase[] _equippedWeapon = new WeaponBase[4];
-    public WeaponBase[] EquippedWeapon => _equippedWeapon;
-
 }

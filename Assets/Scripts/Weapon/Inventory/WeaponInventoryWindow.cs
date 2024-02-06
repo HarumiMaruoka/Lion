@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSelectWindow : MonoBehaviour
+public class WeaponInventoryWindow : MonoBehaviour
 {
     [SerializeField]
-    private WeaponSelectWindowElement _elementPrefab;
+    private WeaponInventoryWindowElement _elementPrefab;
     [SerializeField]
     private Transform _elementParent;
 
-    private HashSet<WeaponSelectWindowElement> _actives = new HashSet<WeaponSelectWindowElement>();
-    private Stack<WeaponSelectWindowElement> _inactives = new Stack<WeaponSelectWindowElement>();
+    private HashSet<WeaponInventoryWindowElement> _actives = new HashSet<WeaponInventoryWindowElement>();
+    private Stack<WeaponInventoryWindowElement> _inactives = new Stack<WeaponInventoryWindowElement>();
 
-    public event Action<WeaponBase> OnSelected;
+    public event Action<WeaponBase> OnSelectedWeapon;
 
     private void OnEnable()
     {
@@ -29,7 +29,7 @@ public class WeaponSelectWindow : MonoBehaviour
         var weaponCollection = WeaponInventory.Current.WeaponCollection;
         foreach (var item in weaponCollection)
         {
-            WeaponSelectWindowElement elem;
+            WeaponInventoryWindowElement elem;
             if (_inactives.Count != 0)
             {
                 elem = _inactives.Pop();
@@ -42,7 +42,7 @@ public class WeaponSelectWindow : MonoBehaviour
             elem.Weapon = item;
 
             elem.gameObject.SetActive(true);
-            elem.OnSelected += OnSelectedCharacter;
+            elem.OnSelected += OnSelectedWeapon;
             _actives.Add(elem);
         }
     }
@@ -52,15 +52,9 @@ public class WeaponSelectWindow : MonoBehaviour
         foreach (var active in _actives)
         {
             active.gameObject.SetActive(false);
-            active.OnSelected -= OnSelectedCharacter;
+            active.OnSelected -= OnSelectedWeapon;
             _inactives.Push(active);
         }
         _actives.Clear();
-    }
-
-    private void OnSelectedCharacter(WeaponBase selectedWeapon)
-    {
-        OnSelected?.Invoke(selectedWeapon);
-        gameObject.SetActive(false);
     }
 }

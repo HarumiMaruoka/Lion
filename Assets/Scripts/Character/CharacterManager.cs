@@ -28,10 +28,10 @@ public class CharacterManager : MonoBehaviour
     public CharacterBehaviour[] CharacterBehaviours => _characterBehaviours;
 
     [SerializeField]
-    private RaceCharacterData[] _raceCharacterData;
+    private CharacterSpeciesInfo[] _raceCharacterData;
 
-    private Dictionary<int, RaceCharacterData> _idToData = new Dictionary<int, RaceCharacterData>();
-    private Dictionary<string, RaceCharacterData> _nameToData = new Dictionary<string, RaceCharacterData>();
+    private Dictionary<int, CharacterSpeciesInfo> _idToData = new Dictionary<int, CharacterSpeciesInfo>();
+    private Dictionary<string, CharacterSpeciesInfo> _nameToData = new Dictionary<string, CharacterSpeciesInfo>();
 
     private void Initialize()
     {
@@ -48,18 +48,18 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public RaceCharacterData GetRaceCharacterData(int id)
+    public CharacterSpeciesInfo GetRaceCharacterData(int id)
     {
-        if (_idToData.TryGetValue(id, out RaceCharacterData result))
+        if (_idToData.TryGetValue(id, out CharacterSpeciesInfo result))
         {
             return result;
         }
         Debug.Log($"ID {id} is Missing.");
         return null;
     }
-    public RaceCharacterData GetRaceCharacterData(string name)
+    public CharacterSpeciesInfo GetRaceCharacterData(string name)
     {
-        if (_nameToData.TryGetValue(name, out RaceCharacterData result))
+        if (_nameToData.TryGetValue(name, out CharacterSpeciesInfo result))
         {
             return result;
         }

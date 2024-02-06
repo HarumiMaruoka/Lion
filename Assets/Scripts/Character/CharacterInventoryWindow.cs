@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSelectWindow : MonoBehaviour
+public class CharacterInventoryWindow : MonoBehaviour
 {
     [SerializeField]
-    private CharacterSelectWindowElement _elementPrefab;
+    private CharacterInventoryWindowElement _elementPrefab;
     [SerializeField]
     private Transform _elementParent;
 
-    private HashSet<CharacterSelectWindowElement> _actives = new HashSet<CharacterSelectWindowElement>();
-    private Stack<CharacterSelectWindowElement> _inactives = new Stack<CharacterSelectWindowElement>();
+    private HashSet<CharacterInventoryWindowElement> _actives = new HashSet<CharacterInventoryWindowElement>();
+    private Stack<CharacterInventoryWindowElement> _inactives = new Stack<CharacterInventoryWindowElement>();
 
-    public event Action<IndividualCharacterData> OnSelected;
+    public event Action<CharacterIndividualInfo> OnCharacterSelected;
 
     private void OnEnable()
     {
@@ -29,7 +29,7 @@ public class CharacterSelectWindow : MonoBehaviour
         var characterCollection = CharacterInventory.Instance.Collection;
         foreach (var item in characterCollection)
         {
-            CharacterSelectWindowElement elem;
+            CharacterInventoryWindowElement elem;
             if (_inactives.Count != 0)
             {
                 elem = _inactives.Pop();
@@ -42,25 +42,19 @@ public class CharacterSelectWindow : MonoBehaviour
             elem.CharacterData = item;
 
             elem.gameObject.SetActive(true);
-            elem.OnSelected += OnSelectedCharacter;
+            elem.OnCharacterSelected += OnCharacterSelected;
             _actives.Add(elem);
         }
     }
 
     public void Hide()
     {
-        foreach (var active in _actives)
+        foreach (var elem in _actives)
         {
-            active.gameObject.SetActive(false);
-            active.OnSelected -= OnSelectedCharacter;
-            _inactives.Push(active);
+            elem.gameObject.SetActive(false);
+            _inactives.Push(elem);
+            elem.OnCharacterSelected -= OnCharacterSelected;
         }
         _actives.Clear();
-    }
-
-    private void OnSelectedCharacter(IndividualCharacterData selectedCharacter)
-    {
-        OnSelected?.Invoke(selectedCharacter);
-        gameObject.SetActive(false);
     }
 }

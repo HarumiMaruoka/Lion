@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class WeaponSelectWindowElement : MonoBehaviour, IPointerClickHandler
+public class WeaponInventoryWindowElement : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
     private Image _weaponImage;
