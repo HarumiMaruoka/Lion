@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 702220276900902183}
   - component: {fileID: 5697573410538190746}
   m_Layer: 3
-  m_Name: Weapon Select Element
+  m_Name: Weapon Inventory Window Element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,0 +1,25 @@
+// 日本語対応
+using System;
+using UnityEngine;
+
+#ROOTNAMESPACEBEGIN#
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    private static #SCRIPTNAME# _current = null;
+    public static #SCRIPTNAME# Current => _current;
+
+    private void Awake()
+    {
+        if (_current)
+        {
+            Debug.LogError("Already exists. Have you placed two or more?");
+        }
+        _current = this;
+    }
+
+    private void OnDestroy()
+    {
+        _current = null;
+    }
+}
+#ROOTNAMESPACEEND#

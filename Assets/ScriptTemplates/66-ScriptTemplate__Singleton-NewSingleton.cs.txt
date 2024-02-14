@@ -1,0 +1,24 @@
+﻿// 日本語対応
+using System;
+using UnityEngine;
+
+#ROOTNAMESPACEBEGIN#
+public class #SCRIPTNAME#
+{
+    #region Singleton
+    private static #SCRIPTNAME# _instance = new #SCRIPTNAME#();
+    public static #SCRIPTNAME# Instance
+    {
+        get
+        {
+            if(_instance == null)
+            {
+                Debug.LogError($"Error! Please correct!");
+            }
+            return _instance;
+        }
+    }
+    private #SCRIPTNAME#(){}
+    #endregion
+}
+#ROOTNAMESPACEEND#

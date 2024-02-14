@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class WeaponBase : MonoBehaviour
 {
-
     [SerializeField]
     private WeaponData _data;
     [SerializeField]
@@ -68,9 +68,38 @@ public abstract class WeaponBase : MonoBehaviour
 
     public WeaponStatus TotalStatus => WeaponStatus + Player.WeaponStatus;
 
+    private IEnumerator _mainRoutine = null;
+
+    // ‹N“®
+    public void Equip()
+    {
+        if (_mainRoutine != null)
+        {
+            _mainRoutine = MainRoutine();
+        }
+        else
+        {
+            StartCoroutine(_mainRoutine);
+        }
+    }
+
+    // ’âŽ~
+    public void Unequip()
+    {
+        if (_mainRoutine != null)
+        {
+            StopCoroutine(_mainRoutine);
+        }
+        else
+        {
+            Debug.Log("_mainRoutine is null.");
+        }
+    }
+
+
     protected virtual void Start()
     {
-        StartCoroutine(RunAsync(_cancellationOnDestroy.Token));
+        // StartCoroutine(MainRoutine(_cancellationOnDestroy.Token));
     }
 
     private void OnDestroy()
@@ -78,7 +107,7 @@ public abstract class WeaponBase : MonoBehaviour
         _cancellationOnDestroy.Cancel();
     }
 
-    private IEnumerator RunAsync(CancellationToken token)
+    private IEnumerator MainRoutine(CancellationToken token = default)
     {
         while (!token.IsCancellationRequested)
         {

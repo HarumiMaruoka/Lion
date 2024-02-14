@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Reflection;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,59 +8,33 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    #region Singleton
     private static PlayerController _current = null;
     public static PlayerController Current => _current;
-
-    [Header("Basic Information")]
-    [SerializeField]
-    private PlayerStatus _playerStatus;
-    [SerializeField]
-    private WeaponStatus _basicWeaponStatus;
-
-    private Rigidbody2D _rigidbody2D;
-    private CancellationTokenSource _cancellationOnDestroy = new CancellationTokenSource();
-
-    private float TimeScale => GameSpeedManager.Instance.TimeScale;
-
-    public WeaponStatus WeaponStatus => _basicWeaponStatus;
-
-    [SerializeField]
-    private MoveMode _initialMoveMode;
-
-    public event Action<PlayerStatus> OnPlayerStatusChanged;
-    private void OnPlayerStatusChange(WeaponBase weapon)
-    {
-        OnPlayerStatusChanged?.Invoke(PlayerStatus);
-    }
-
-    public PlayerStatus PlayerStatus
-    {
-        get
-        {
-            var sum = _playerStatus;
-            var inventory = WeaponInventory.Current;
-            if (!inventory)
-            {
-                Debug.Log("Weapon Inventory is Missing...");
-                return default;
-            }
-
-            return sum;
-        }
-    }
-
-    private float _life = 0f;
 
     private void Awake()
     {
         _current = this;
     }
 
+    private void OnDestroy()
+    {
+        _cancellationOnDestroy.Cancel();
+        _current = null;
+    }
+    #endregion
+
+    #region Fields and properties
+    private Rigidbody2D _rigidbody2D;
+    private CancellationTokenSource _cancellationOnDestroy = new CancellationTokenSource();
+
+    private float TimeScale => GameSpeedManager.Instance.TimeScale;
+
     private void Start()
     {
         InitializeFields();
         BeginMoveCoroutine(_initialMoveMode);
-
+        InitializeWeapons();
         _levelManager.Initialize();
     }
 
@@ -69,6 +44,56 @@ public class PlayerController : MonoBehaviour
 
         _life = PlayerStatus.MaxLife;
         _lifeGage.Initialize(_life, _life, ref OnLifeChanged);
+    }
+    #endregion
+
+    #region Status
+    [Header("Status")]
+    [SerializeField]
+    private PlayerStatus _playerStatus;
+    [SerializeField]
+    private WeaponStatus _basicWeaponStatus;
+    [SerializeField]
+    private LifeGage _lifeGage;
+
+    private float _life = 0f;
+
+    public WeaponStatus WeaponStatus => _basicWeaponStatus;
+
+    public event Action<float> OnLifeChanged;
+    public event Action<PlayerController> OnDead;
+    public event Action<PlayerStatus> OnPlayerStatusChanged;
+
+    public PlayerStatus PlayerStatus
+    {
+        get
+        {
+            var sum = _playerStatus;
+            return sum;
+        }
+    }
+
+    public void Damage(float value)
+    {
+        _life -= value;
+        OnLifeChanged?.Invoke(_life);
+
+        if (_life <= 0)
+        {
+            OnDead?.Invoke(this);
+        }
+    }
+    #endregion
+
+    #region Move
+    [SerializeField]
+    private MoveMode _initialMoveMode;
+
+    public enum MoveMode
+    {
+        Manual,
+        Auto,
+        GoToBoss,
     }
 
     private Coroutine _moveCoroutine;
@@ -91,12 +116,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        _cancellationOnDestroy.Cancel();
-        _current = null;
-    }
-
     private IEnumerator ManualMoveAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
@@ -106,33 +125,6 @@ public class PlayerController : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(h, v).normalized * PlayerStatus.MoveSpeed * TimeScale;
             yield return null;
         }
-    }
-
-    [SerializeField]
-    private LifeGage _lifeGage;
-
-    public event Action<float> OnLifeChanged;
-    public event Action<PlayerController> OnDead;
-
-    public void Damage(float value)
-    {
-        _life -= value;
-        OnLifeChanged?.Invoke(_life);
-
-        if (_life <= 0)
-        {
-            OnDead?.Invoke(this);
-        }
-    }
-
-    [SerializeField]
-    private LevelManager _levelManager;
-
-    public LevelManager LevelManager => _levelManager;
-
-    public void CollectGem(Gem gem)
-    {
-        StartCoroutine(_levelManager.GetGem(gem));
     }
 
     [SerializeField]
@@ -151,7 +143,22 @@ public class PlayerController : MonoBehaviour
             _wayPointManager.OnNext();
         }
     }
+    #endregion
 
+    #region Level
+    [Header("Level")]
+    [SerializeField]
+    private LevelManager _levelManager;
+
+    public LevelManager LevelManager => _levelManager;
+
+    public void CollectGem(Gem gem)
+    {
+        StartCoroutine(_levelManager.GetGem(gem));
+    }
+    #endregion
+
+    #region Boss
     [SerializeField]
     private Transform _bossBattlePosition;
     [SerializeField]
@@ -167,13 +174,6 @@ public class PlayerController : MonoBehaviour
 
         _rigidbody2D.velocity = Vector3.zero;
         _cutscene.PlayAnimation();
-    }
-
-    public enum MoveMode
-    {
-        Manual,
-        Auto,
-        GoToBoss,
     }
 
     private IEnumerator AwaitArrivalAsync(Vector3 startPos, Vector3 endPos, Transform origin, Action onUpdate, CancellationToken token)
@@ -219,6 +219,7 @@ public class PlayerController : MonoBehaviour
 
         transform.position = endPos;
     }
+    #endregion
 
     #region Teleport
     [Header("Teleport")]
@@ -250,5 +251,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform _weaponParent;
     public Transform WeaponParent => _weaponParent;
+
+    [SerializeField]
+    private WeaponBase[] _playerWeapons;
+
+    public WeaponBase[] PlayerWeapons => _playerWeapons;
+
+    public void InitializeWeapons()
+    {
+        for (int i = 0; i < _playerWeapons.Length; i++)
+        {
+            EquipWeapon(_playerWeapons[i], i);
+        }
+    }
+
+    public WeaponBase EquipWeapon(WeaponBase equipWeapon, int index)
+    {
+        var old = _playerWeapons[index];
+        if (old) old.Unequip();
+
+        _playerWeapons[index] = equipWeapon;
+        if (equipWeapon) equipWeapon.Equip();
+
+        return old;
+    }
     #endregion
 }

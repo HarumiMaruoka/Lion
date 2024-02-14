@@ -4,35 +4,47 @@ using UnityEngine;
 
 public class WeaponInventoryWindow : MonoBehaviour
 {
+    private static WeaponInventoryWindow _current = null;
+    public static WeaponInventoryWindow Current => _current;
+
+    private void Awake()
+    {
+        if (_current)
+        {
+            Debug.LogError("Already exists. Have you placed two or more?");
+        }
+        _current = this;
+        gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        _current = null;
+    }
+
     [SerializeField]
     private WeaponInventoryWindowElement _elementPrefab;
     [SerializeField]
     private Transform _elementParent;
 
     private HashSet<WeaponInventoryWindowElement> _actives = new HashSet<WeaponInventoryWindowElement>();
-    private Stack<WeaponInventoryWindowElement> _inactives = new Stack<WeaponInventoryWindowElement>();
+    private Queue<WeaponInventoryWindowElement> _inactives = new Queue<WeaponInventoryWindowElement>();
 
     public event Action<WeaponBase> OnSelectedWeapon;
-
-    private void OnEnable()
-    {
-        Show();
-    }
-
-    private void OnDisable()
-    {
-        Hide();
-    }
+    public event Action OnShowed;
+    public event Action OnHided;
 
     public void Show()
     {
+        gameObject.SetActive(true);
         var weaponCollection = WeaponInventory.Current.WeaponCollection;
         foreach (var item in weaponCollection)
         {
             WeaponInventoryWindowElement elem;
             if (_inactives.Count != 0)
             {
-                elem = _inactives.Pop();
+                elem = _inactives.Dequeue();
+                elem.transform.SetAsLastSibling(); // Layout Groupの都合でヒエラルキーの一番下に持ってくる。
             }
             else
             {
@@ -45,16 +57,21 @@ public class WeaponInventoryWindow : MonoBehaviour
             elem.OnSelected += OnSelectedWeapon;
             _actives.Add(elem);
         }
+
+        OnShowed?.Invoke();
     }
 
     public void Hide()
     {
+        gameObject.SetActive(false);
         foreach (var active in _actives)
         {
             active.gameObject.SetActive(false);
             active.OnSelected -= OnSelectedWeapon;
-            _inactives.Push(active);
+            _inactives.Enqueue(active);
         }
         _actives.Clear();
+
+        OnHided?.Invoke();
     }
 }

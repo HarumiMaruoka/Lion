@@ -9,9 +9,9 @@ public class DroppedCharacter : MonoBehaviour
 
     public Action<DroppedCharacter> OnDead { get; internal set; }
 
-    private CharacterSpeciesInfo _speciesInfo;
+    private CharacterSpeciesData _speciesInfo;
 
-    public void Initialize(Vector3 position, CharacterSpeciesInfo speciesInfo)
+    public void Initialize(Vector3 position, CharacterSpeciesData speciesInfo)
     {
         _speciesInfo = speciesInfo;
 
@@ -39,7 +39,7 @@ public class DroppedCharacter : MonoBehaviour
 
     private void OnCollectAnimationCompleted()
     {
-        CharacterInventory.Instance.GetCharacter(_speciesInfo);
+        CharacterInventory.Instance.AddCharacter(_speciesInfo);
         OnDead?.Invoke(this);
     }
 }

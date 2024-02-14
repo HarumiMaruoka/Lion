@@ -8,12 +8,50 @@ public class CharacterInventory
     public static CharacterInventory Instance => _instance ??= new CharacterInventory();
     private CharacterInventory() { }
 
-    private HashSet<CharacterIndividualInfo> _collection = new HashSet<CharacterIndividualInfo>();
-    public IReadOnlyCollection<CharacterIndividualInfo> Collection => _collection;
+    private HashSet<CharacterIndividualData> _collection = new HashSet<CharacterIndividualData>();
+    public IReadOnlyCollection<CharacterIndividualData> Collection => _collection;
 
-    public void GetCharacter(CharacterSpeciesInfo speciesInfo)
+    private readonly int Capacity = 20;
+
+    /// <summary>
+    /// V‚µ‚¢ŒÂ‘Ì‚ğæ“¾‚µ‚½‚Æ‚«B
+    /// </summary>
+    /// <param name="speciesData"> í‘°î•ñ </param>
+    public void AddCharacter(CharacterSpeciesData speciesData)
     {
-        var instance = new CharacterIndividualInfo(speciesInfo, 0);
+        if (_collection.Count >= Capacity)
+        {
+            // Debug.Log("Inventory capacity exceeded, cannot collect more characters.");
+            return;
+        }
+
+        var instance = new CharacterIndividualData(speciesData, 0);
         _collection.Add(instance);
+    }
+
+    /// <summary>
+    /// Šù‚É‘¶İ‚·‚éŒÂ‘Ì‚ğæ“¾‚µ‚½‚Æ‚«B
+    /// </summary>
+    /// <param name="speciesData"> ŒÂ‘Ìî•ñ </param>
+    public void AddCharacter(CharacterIndividualData individualData)
+    {
+        if (individualData == null)
+        {
+            Debug.LogWarning("Null is invalid.");
+            return;
+        }
+
+        if (_collection.Count >= Capacity)
+        {
+            Debug.Log("Inventory capacity exceeded, cannot collect more characters.");
+            return;
+        }
+
+        _collection.Add(individualData);
+    }
+
+    public void RemoveCharacter(CharacterIndividualData individualData)
+    {
+        _collection.Remove(individualData);
     }
 }

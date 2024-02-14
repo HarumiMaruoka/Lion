@@ -29,7 +29,7 @@ public class WeaponInventory : MonoBehaviour
     {
         if (_weaponCollection.Count >= InventoryCapacity)
         {
-            Debug.Log("容量がいっぱいです。武器をこれ以上格納できません！");
+            // Debug.Log("容量がいっぱいです。武器をこれ以上格納できません！");
             GameObject.Destroy(weapon.gameObject);
             return;
         }
@@ -37,9 +37,9 @@ public class WeaponInventory : MonoBehaviour
         _weaponCollection.Add(weapon);
     }
 
-    public void RemoveEquipped(WeaponBase remove)
+    public void RemoveWeapon(WeaponBase remove)
     {
         _weaponCollection.Remove(remove);
-        GameObject.Destroy(remove.gameObject);
+        // GameObject.Destroy(remove.gameObject);
     }
 }

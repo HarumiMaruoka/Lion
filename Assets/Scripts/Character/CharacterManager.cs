@@ -14,57 +14,11 @@ public class CharacterManager : MonoBehaviour
             Debug.LogError("Already exists. Have you placed two or more?");
         }
         _current = this;
-        Initialize();
     }
 
     private void OnDestroy()
     {
         _current = null;
-    }
-
-    [SerializeField]
-    private CharacterBehaviour[] _characterBehaviours;
-
-    public CharacterBehaviour[] CharacterBehaviours => _characterBehaviours;
-
-    [SerializeField]
-    private CharacterSpeciesInfo[] _raceCharacterData;
-
-    private Dictionary<int, CharacterSpeciesInfo> _idToData = new Dictionary<int, CharacterSpeciesInfo>();
-    private Dictionary<string, CharacterSpeciesInfo> _nameToData = new Dictionary<string, CharacterSpeciesInfo>();
-
-    private void Initialize()
-    {
-        foreach (var item in _raceCharacterData)
-        {
-            if (!_idToData.TryAdd(item.ID, item))
-            {
-                Debug.LogError($"{item.ToString()}: CharacterIDが重複しています。");
-            }
-            if (!_nameToData.TryAdd(item.Name, item))
-            {
-                Debug.LogError($"{item.ToString()}: Character Nameが重複しています。");
-            }
-        }
-    }
-
-    public CharacterSpeciesInfo GetRaceCharacterData(int id)
-    {
-        if (_idToData.TryGetValue(id, out CharacterSpeciesInfo result))
-        {
-            return result;
-        }
-        Debug.Log($"ID {id} is Missing.");
-        return null;
-    }
-    public CharacterSpeciesInfo GetRaceCharacterData(string name)
-    {
-        if (_nameToData.TryGetValue(name, out CharacterSpeciesInfo result))
-        {
-            return result;
-        }
-        Debug.Log($"{name} is Missing.");
-        return null;
     }
 
     [SerializeField]
@@ -80,7 +34,7 @@ public class CharacterManager : MonoBehaviour
         if (probability > random) return; // 確率を下回ればアイテムを生成しない。
 
         // 指定されたCharacterIDのキャラが見つからなければ警告を出してリターン。
-        var characterData = GetRaceCharacterData(characterID);
+        var characterData = CharacterDataBase.Current.GetRaceCharacterData(characterID);
         if (characterData == null) return;
 
         // Create Character.

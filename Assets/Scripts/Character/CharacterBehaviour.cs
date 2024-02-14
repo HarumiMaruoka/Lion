@@ -6,9 +6,9 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
-    private CharacterIndividualInfo _individualCharacterData;
+    private CharacterIndividualData _individualCharacterData;
 
-    public CharacterIndividualInfo IndividualData
+    public CharacterIndividualData IndividualData
     {
         get => _individualCharacterData;
         set
@@ -16,7 +16,7 @@ public class CharacterBehaviour : MonoBehaviour
             _individualCharacterData = value;
             if (value != null)
             {
-                _spriteRenderer.sprite = value.SpeciesInfo.Sprite;
+                _spriteRenderer.sprite = value.SpeciesData.Sprite;
             }
             else
             {

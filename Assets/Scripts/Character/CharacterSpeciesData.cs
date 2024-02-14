@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class CharacterSpeciesInfo : ScriptableObject // 種族としてのキャラデータ
+public class CharacterSpeciesData : ScriptableObject // 種族としてのキャラデータ
 {
     [SerializeField]
     private int _id;
