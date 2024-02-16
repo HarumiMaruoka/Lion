@@ -248,6 +248,9 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Weapon
+    [Header("Weapon")]
+    [SerializeField]
+    private Transform _initialWeaponParent;
     [SerializeField]
     private Transform _weaponParent;
     public Transform WeaponParent => _weaponParent;
@@ -268,10 +271,10 @@ public class PlayerController : MonoBehaviour
     public WeaponBase EquipWeapon(WeaponBase equipWeapon, int index)
     {
         var old = _playerWeapons[index];
-        if (old) old.Unequip();
+        if (old) old.Inactivate();
 
         _playerWeapons[index] = equipWeapon;
-        if (equipWeapon) equipWeapon.Equip();
+        if (equipWeapon) equipWeapon.Activate(_initialWeaponParent);
 
         return old;
     }

@@ -23,7 +23,7 @@ public class DebugShowEquippeds : MonoBehaviour
         var equippedCharacterCount = equippedCharacterManager.EquippableCharacterCount;
         for (int i = 0; i < equippedCharacterCount; i++)
         {
-            var equippedCharacter = equippedCharacterManager.GetEquippedCharacter(i);
+            var equippedCharacter = equippedCharacterManager.GetEquippedCharacterData(i);
             if (equippedCharacter != null)
             {
                 _stringBuilder.Append($"Character Index: {i} is {equippedCharacter.SpeciesData.Name}.\n");

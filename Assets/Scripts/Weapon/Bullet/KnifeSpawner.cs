@@ -12,7 +12,6 @@ public class KnifeSpawner : WeaponBase
 
     protected override void Start()
     {
-        base.Start();
         _lastPosition = transform.position;
     }
 

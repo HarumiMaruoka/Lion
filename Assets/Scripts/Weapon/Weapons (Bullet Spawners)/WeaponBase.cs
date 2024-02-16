@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Numerics;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,25 +27,6 @@ public abstract class WeaponBase : MonoBehaviour
     public string WeaponName => ToString();
     public abstract override string ToString();
 
-    private bool _isShowedTryGetPlayerStatusWarning = false;
-
-    public PlayerStatus PlayerAddStatus
-    {
-        get
-        {
-            if (TryGetPlayerStatus(out PlayerStatus status)) return status;
-            else
-            {
-                if (!_isShowedTryGetPlayerStatusWarning) // åxçêÇÕàÍìxÇæÇØèoÇ∑ÅB
-                {
-                    _isShowedTryGetPlayerStatusWarning = true;
-                    Debug.LogWarning("The data retrieval has failed, so the assigned values in the inspector will be used.");
-                }
-                return _playerStatus;
-            }
-        }
-    }
-
     private bool _isShowedTryGetWeaponStatusWarning = false;
 
     public WeaponStatus WeaponStatus
@@ -70,21 +52,28 @@ public abstract class WeaponBase : MonoBehaviour
 
     private IEnumerator _mainRoutine = null;
 
-    // ãNìÆ
-    public void Equip()
+    public void Activate(Transform parent)
     {
-        if (_mainRoutine != null)
+        Debug.Log("Activate");
+        if (_mainRoutine == null)
         {
             _mainRoutine = MainRoutine();
         }
+
+        if (parent)
+        {
+            transform.SetParent(parent);
+            transform.position = parent.position;
+        }
         else
         {
-            StartCoroutine(_mainRoutine);
+            Debug.Log("parent is null.");
         }
+
+        StartCoroutine(_mainRoutine);
     }
 
-    // í‚é~
-    public void Unequip()
+    public void Inactivate()
     {
         if (_mainRoutine != null)
         {
@@ -94,13 +83,12 @@ public abstract class WeaponBase : MonoBehaviour
         {
             Debug.Log("_mainRoutine is null.");
         }
+
+        transform.SetParent(WeaponInventory.Current.WeaponParent);
     }
 
 
-    protected virtual void Start()
-    {
-        // StartCoroutine(MainRoutine(_cancellationOnDestroy.Token));
-    }
+    protected virtual void Start() { }
 
     private void OnDestroy()
     {
@@ -211,21 +199,6 @@ public abstract class WeaponBase : MonoBehaviour
         }
 
         return costColumns[ignoreRowCount..];
-    }
-
-
-    public bool TryGetPlayerStatus(out PlayerStatus playerStatus)
-    {
-        if (!_isUpgradeInitialized) UpgradeInitialize();
-
-        var level = _currentLevel;
-        if (_upgradePlayerStatus == null || level < 0 || level >= _upgradePlayerStatus.Length)
-        {
-            playerStatus = default;
-            return false;
-        }
-        playerStatus = _upgradePlayerStatus[level];
-        return true;
     }
 
     public bool TryGetWeaponStatus(out WeaponStatus weaponStatus)

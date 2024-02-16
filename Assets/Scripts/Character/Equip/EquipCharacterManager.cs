@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class EquipCharacterManager : MonoBehaviour
@@ -33,10 +34,12 @@ public class EquipCharacterManager : MonoBehaviour
             return;
         }
 
+        _equippedCharacters[index]?.IndividualData?.Unequip();
         _equippedCharacters[index].IndividualData = characterData;
+        _equippedCharacters[index]?.IndividualData?.Equip(index);
     }
 
-    public CharacterIndividualData GetEquippedCharacter(int index)
+    public CharacterIndividualData GetEquippedCharacterData(int index)
     {
         if (index < 0 || index >= _equippedCharacters.Length)
         {
@@ -45,5 +48,16 @@ public class EquipCharacterManager : MonoBehaviour
         }
 
         return _equippedCharacters[index].IndividualData;
+    }
+
+    public CharacterBehaviour GetCharacterBehaviour(int index)
+    {
+        if (index < 0 || index >= _equippedCharacters.Length)
+        {
+            Debug.LogError("Out of Range: The index is beyond the valid range.");
+            return null;
+        }
+
+        return _equippedCharacters[index];
     }
 }

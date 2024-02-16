@@ -20,6 +20,11 @@ public class WeaponInventory : MonoBehaviour
         _current = null;
     }
 
+    [SerializeField]
+    private Transform _weaponParent;
+
+    public Transform WeaponParent => _weaponParent;
+
     public int InventoryCapacity => 30;
 
     private List<WeaponBase> _weaponCollection = new List<WeaponBase>();
@@ -34,6 +39,7 @@ public class WeaponInventory : MonoBehaviour
             return;
         }
 
+        weapon.Inactivate(); // インベントリの武器は非アクティブにする。
         _weaponCollection.Add(weapon);
     }
 

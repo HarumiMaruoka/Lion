@@ -49,7 +49,7 @@ namespace EquipmentWindowElement
         public void Initialize(int index)
         {
             _index = index;
-            EquippedCharacter = EquipCharacterManager.GetEquippedCharacter(_index);
+            EquippedCharacter = EquipCharacterManager.GetEquippedCharacterData(_index);
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -62,7 +62,7 @@ namespace EquipmentWindowElement
         private void OnCharacterSelected(CharacterIndividualData selected)
         {
             // 装備していたキャラは後で使うので変数に保存する。
-            var old = EquipCharacterManager.GetEquippedCharacter(_index);
+            var old = EquipCharacterManager.GetEquippedCharacterData(_index);
 
             // 選択されたキャラを装備し、インベントリから取り除く。
             // （インベントリの容量がいっぱいである事を想定し、先に取り除く。）

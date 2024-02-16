@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 namespace EquipmentWindowElement
@@ -105,13 +104,26 @@ namespace EquipmentWindowElement
 
         private void OnSelectedWeapon(WeaponBase selected)
         {
-            // 装備していた武器をインベントリに収める。
+            // 後で利用するので装備していた武器を変数に保存する。
             var old = Character.EquippedWeapons[_index];
-            if (old) WeaponInventory.Current.AddWeapon(old);
 
             // 選択された武器を装備し、インベントリから選択された武器を取り除く。
             Character.EquippedWeapons[_index] = selected;
             WeaponInventory.Current.RemoveWeapon(selected);
+            // キャラクターが装備済みであれば武器をアクティブ化する。
+            if (Character.EquipIndex != -1)
+            {
+                var equipCharacter = EquipCharacterManager.Current.GetCharacterBehaviour(Character.EquipIndex);
+                if (equipCharacter) selected.Activate(equipCharacter.transform);
+                else Debug.Log("equipCharacter is null.");
+            }
+
+            // 装備していた武器をインベントリに収める。
+            if (old)
+            {
+                WeaponInventory.Current.AddWeapon(old);
+                old.Inactivate();
+            }
 
             // 武器インベントリウィンドウを閉じる。
             WeaponInventoryWindow.Hide();

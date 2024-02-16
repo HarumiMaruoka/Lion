@@ -21,11 +21,6 @@ public class ThunderboltSpawner : WeaponBase
 
     public override string ToString() => "Thunderbolt";
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     protected override IEnumerator SpawnAsync(WeaponStatus status, CancellationToken token)
     {
         Spawn();

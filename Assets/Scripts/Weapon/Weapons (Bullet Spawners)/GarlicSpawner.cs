@@ -17,7 +17,6 @@ public class GarlicSpawner : WeaponBase
 
     protected override void Start()
     {
-        base.Start();
         _enemies.Capacity = _initialCapacity;
     }
 
