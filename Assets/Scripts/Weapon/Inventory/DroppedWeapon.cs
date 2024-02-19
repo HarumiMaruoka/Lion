@@ -36,6 +36,8 @@ public class DroppedWeapon : MonoBehaviour
             OnCollectAnimationCompleted);
     }
 
+    private static bool _collectionWarningLogFlag = true; // 警告を何度も出さない為のフラグ
+
     private void OnCollectAnimationCompleted()
     {
         var player = PlayerController.Current;
@@ -56,10 +58,16 @@ public class DroppedWeapon : MonoBehaviour
         }
         if (WeaponInventory.Current.WeaponCollection.Count >= capacity)
         {
-            Debug.Log("The weapon inventory capacity is full.");
+            if (_collectionWarningLogFlag) // 警告を何度も出さない為の処理
+            {
+                _collectionWarningLogFlag = false;
+                Debug.Log("The weapon inventory capacity is full.");
+            }
+
             OnDead?.Invoke(this);
             return;
         }
+        _collectionWarningLogFlag = true;
 
         var weaponCollection = WeaponInventory.Current.WeaponCollection;
         var instance = GameObject.Instantiate(_weaponData.WeaponPrefab, player.WeaponParent);

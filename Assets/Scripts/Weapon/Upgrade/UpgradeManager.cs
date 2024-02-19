@@ -29,25 +29,23 @@ public class UpgradeManager : MonoBehaviour
     private WeaponBase _selected; // アップグレード対象
     public WeaponBase Selected => _selected;
 
-    public event Action<WeaponBase> OnSelectedChanged;
+    public event Action<WeaponBase> OnUpgradeTargetChanged;
 
-    public void ChangeUpgradeTarget(WeaponType weaponType)
+    public void ChangeUpgradeTarget(WeaponBase weapon)
     {
         _requestItemCount.Clear();
-        foreach (var i in OnChangedRequestItemCount) { i.Value.Invoke(0); }
+        foreach (var item in OnChangedRequestItemCount)
+        {
+            item.Value.Invoke(0);
+        }
 
-        var weapon = WeaponManager.Current.GetWeapon(weaponType);
-        if (weapon != null)
+        _selected = weapon;
+        if (_selected)
         {
-            _selected = weapon;
             _targetLevel = weapon.CurrentLevel;
-            TargetLevelChanged?.Invoke(_targetLevel);
+            OnTargetLevelChanged?.Invoke(_targetLevel);
         }
-        else
-        {
-            weapon = null;
-        }
-        OnSelectedChanged?.Invoke(_selected);
+        OnUpgradeTargetChanged?.Invoke(_selected);
     }
 
     private Dictionary<ItemData, int> _requestItemCount = new Dictionary<ItemData, int>();
@@ -58,15 +56,15 @@ public class UpgradeManager : MonoBehaviour
     private int _targetLevel;
     public int TargetLevel => _targetLevel;
 
-    public event Action<int> TargetLevelChanged;
+    public event Action<int> OnTargetLevelChanged;
 
     public void TargetLevelUpRequest()
     {
         if (!CanTargetLevelUp) return;
         _targetLevel++;
-        TargetLevelChanged?.Invoke(_targetLevel);
+        OnTargetLevelChanged?.Invoke(_targetLevel);
 
-        var currentLevelUpgradeCost = _selected.UpgradeCosts[_targetLevel];
+        var currentLevelUpgradeCost = _selected.UpgradeCosts;
         foreach (var cost in currentLevelUpgradeCost)
         {
             var item = ItemManager.Current.GetItemData(cost.ItemID);
@@ -84,9 +82,9 @@ public class UpgradeManager : MonoBehaviour
     {
         if (!CanTargetLevelDown) return;
         _targetLevel--;
-        TargetLevelChanged?.Invoke(_targetLevel);
+        OnTargetLevelChanged?.Invoke(_targetLevel);
 
-        var currentLevelUpgradeCost = _selected.UpgradeCosts[_targetLevel];
+        var currentLevelUpgradeCost = _selected.UpgradeCosts;
         foreach (var cost in currentLevelUpgradeCost)
         {
             var item = ItemManager.Current.GetItemData(cost.ItemID);
@@ -165,6 +163,108 @@ public class UpgradeManager : MonoBehaviour
         }
 
         _selected.UpgradeRequest(_targetLevel);
-        ChangeUpgradeTarget(_selected.WeaponType);
+        ChangeUpgradeTarget(_selected);
     }
+
+    [SerializeField]
+    private UpgradeInputData[] _upgradeInputData;
+
+    private Dictionary<WeaponType, PlayerStatus[]> _upgradePlayerStatus = new Dictionary<WeaponType, PlayerStatus[]>();
+    private Dictionary<WeaponType, WeaponStatus[]> _upgradeWeaponStatus = new Dictionary<WeaponType, WeaponStatus[]>();
+    private Dictionary<WeaponType, UpgradeCost[][]> _upgradeCosts = new Dictionary<WeaponType, UpgradeCost[][]>();
+
+    private bool _isInitializedUpgradeData = false;
+
+    private void InitializeUpgradeData()
+    {
+        foreach (var inputData in _upgradeInputData)
+        {
+            var weaponType = inputData.WeaponType;
+            if (!_upgradePlayerStatus.ContainsKey(weaponType) ||
+                !_upgradeWeaponStatus.ContainsKey(weaponType) ||
+                !_upgradeCosts.ContainsKey(weaponType))
+            {
+
+                string[][] playerStatusCsvString = TextAssetToCsv(inputData.PlayerStatusData, 1);
+                var upgradePlayerStatus = new PlayerStatus[playerStatusCsvString.Length];
+                for (int i = 0; i < playerStatusCsvString.Length; i++)
+                {
+                    upgradePlayerStatus[i] = PlayerStatus.Parse(playerStatusCsvString[i]);
+                }
+
+                string[][] weaponStatusCsvString = TextAssetToCsv(inputData.WeaponStatusData, 1);
+                var upgradeWeaponStatus = new WeaponStatus[weaponStatusCsvString.Length];
+                for (int i = 0; i < weaponStatusCsvString.Length; i++)
+                {
+                    upgradeWeaponStatus[i] = WeaponStatus.Parse(weaponStatusCsvString[i]);
+                }
+
+                string[][] costCsvString = TextAssetToCsv(inputData.UpgradeCostData, 1);
+                var upgradeCosts = new UpgradeCost[costCsvString.Length][];
+                for (int i = 0; i < costCsvString.Length; i++)
+                {
+                    upgradeCosts[i] = UpgradeCost.Parse(costCsvString[i]);
+                }
+
+                _upgradePlayerStatus.Add(weaponType, upgradePlayerStatus);
+                _upgradeWeaponStatus.Add(weaponType, upgradeWeaponStatus);
+                _upgradeCosts.Add(weaponType, upgradeCosts);
+            }
+            else
+            {
+                Debug.LogError("キーが重複しています。");
+            }
+        }
+        _isInitializedUpgradeData = true;
+    }
+
+    public PlayerStatus RequestPlayerStatus(int level, WeaponType weaponType)
+    {
+        if (!_isInitializedUpgradeData) InitializeUpgradeData();
+        return _upgradePlayerStatus[weaponType][level];
+    }
+
+    public WeaponStatus RequestWeaponStatus(int level, WeaponType weaponType)
+    {
+        if (!_isInitializedUpgradeData) InitializeUpgradeData();
+        return _upgradeWeaponStatus[weaponType][level];
+    }
+
+    public UpgradeCost[] RequestUpgradeCosts(int level, WeaponType weaponType)
+    {
+        if (!_isInitializedUpgradeData) InitializeUpgradeData();
+        return _upgradeCosts[weaponType][level];
+    }
+
+    public static string[][] TextAssetToCsv(TextAsset csvTextAsset, int ignoreRowCount = 0)
+    {
+        string[] costRows = csvTextAsset.text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        int costRowCount = costRows.Length;
+        string[][] costColumns = new string[costRowCount][];
+
+        for (int i = ignoreRowCount; i < costRowCount; i++)
+        {
+            costColumns[i] = costRows[i].Split(',', StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        return costColumns[ignoreRowCount..];
+    }
+}
+
+[Serializable]
+public struct UpgradeInputData
+{
+    [SerializeField]
+    private TextAsset _playerStatusData;
+    [SerializeField]
+    private TextAsset _weaponStatusData;
+    [SerializeField]
+    private TextAsset _upgradeCostData;
+    [SerializeField]
+    private WeaponType _weaponType;
+
+    public TextAsset PlayerStatusData => _playerStatusData;
+    public TextAsset WeaponStatusData => _weaponStatusData;
+    public TextAsset UpgradeCostData => _upgradeCostData;
+    public WeaponType WeaponType => _weaponType;
 }

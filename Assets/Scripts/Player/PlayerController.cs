@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
 
     public event Action<float> OnLifeChanged;
     public event Action<PlayerController> OnDead;
-    public event Action<PlayerStatus> OnPlayerStatusChanged;
 
     public PlayerStatus PlayerStatus
     {

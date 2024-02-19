@@ -1,26 +1,46 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
-[DefaultExecutionOrder(100)] // WeaponManager‚Ìˆ—‚ÌŒã‚Ìˆ×AŒÄ‚Ño‚µ‚ğ’x‚ç‚¹‚éB
 public class UpgradeWindow : MonoBehaviour
 {
+    [SerializeField]
+    private Text _targetWeaponNameText;
+    [SerializeField]
+    private Text _currentLevelText;
+    [SerializeField]
+    private Text _targetLevelText;
+
     private void Start()
     {
-        CreateUpgradeTargetChangeButtons();
+        ApplyText(UpgradeManager.Current.Selected);
+        UpgradeManager.Current.OnUpgradeTargetChanged += ApplyText;
+        UpgradeManager.Current.OnTargetLevelChanged += OnTargetLevelChanged;
     }
 
-    [SerializeField]
-    private UpgradeTargetChangeButton _upgradeTargetChangeButtonPrefab;
-    [SerializeField]
-    private Transform _upgradeTargetChangeButtonParent;
-
-    private void CreateUpgradeTargetChangeButtons()
+    private void OnDisable()
     {
-        var weapons = WeaponManager.Current.Weapons;
-        foreach (var weapon in weapons)
+        UpgradeManager.Current.ChangeUpgradeTarget(null);
+    }
+
+    private void ApplyText(WeaponBase upgradeTarget)
+    {
+        if (upgradeTarget)
         {
-            var instance = Instantiate(_upgradeTargetChangeButtonPrefab, _upgradeTargetChangeButtonParent);
-            instance.Initialize(weapon.Value);
+            _targetWeaponNameText.text = $"Target Weapon: {upgradeTarget.WeaponName}";
+            _currentLevelText.text = $"Current Level: {upgradeTarget.CurrentLevel}";
+            _targetLevelText.text = $"Target Level: {UpgradeManager.Current.TargetLevel}";
         }
+        else
+        {
+            _targetWeaponNameText.text = $"Target Weapon: Target weapon null.";
+            _currentLevelText.text = $"Current Level: Target weapon null.";
+            _targetLevelText.text = $"Target Level: Target weapon null.";
+        }
+    }
+
+    private void OnTargetLevelChanged(int targetLevel)
+    {
+        _targetLevelText.text = $"Target Level: {targetLevel}";
     }
 }

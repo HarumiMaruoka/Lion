@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class EquipCharacterManager : MonoBehaviour
 {
@@ -25,6 +27,30 @@ public class EquipCharacterManager : MonoBehaviour
     private CharacterBehaviour[] _equippedCharacters;
 
     public int EquippableCharacterCount => _equippedCharacters.Length;
+
+    private List<WeaponBase> _characterEquippedWeapons = new List<WeaponBase>();
+
+    public IEnumerable<WeaponBase> CharacterEquippedWeapons
+    {
+        get
+        {
+            _characterEquippedWeapons.Clear();
+
+            foreach (var character in _equippedCharacters)
+            {
+                if (!character) continue;
+                if (character.IndividualData == null) continue;
+
+                foreach (var weapon in character.IndividualData.EquippedWeapons)
+                {
+                    if (!weapon) continue;
+                    _characterEquippedWeapons.Add(weapon);
+                }
+            }
+
+            return _characterEquippedWeapons;
+        }
+    }
 
     public void EquipCharacter(int index, CharacterIndividualData characterData)
     {

@@ -21,7 +21,9 @@ public class WeaponInventoryWindowElement : MonoBehaviour, IPointerClickHandler
             if (value)
             {
                 _weaponImage.sprite = value.Data.WeaponIcon;
-                _label.text = value.ToString();
+                _label.text =
+                    // $"{value.WeaponName}\n" +
+                    $"Lv. {value.CurrentLevel}\n";
             }
             else
             {

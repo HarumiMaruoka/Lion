@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class CharacterInventory
 {
@@ -12,6 +13,29 @@ public class CharacterInventory
     public IReadOnlyCollection<CharacterIndividualData> Collection => _collection;
 
     private readonly int Capacity = 20;
+
+    private List<WeaponBase> _characterEquippedWeapons = new List<WeaponBase>();
+
+    public IEnumerable<WeaponBase> CharacterEquippedWeapons
+    {
+        get
+        {
+            _characterEquippedWeapons.Clear();
+
+            // キャラクターが装備している武器をリストに登録していく。
+            foreach (var character in _collection)
+            {
+                if (character == null) continue;
+                foreach (var weapon in character.EquippedWeapons)
+                {
+                    if (!weapon) continue;
+                    _characterEquippedWeapons.Add(weapon);
+                }
+            }
+
+            return _characterEquippedWeapons;
+        }
+    }
 
     /// <summary>
     /// 新しい個体を取得したとき。

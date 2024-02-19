@@ -32,7 +32,9 @@ namespace EquipmentWindowElement
                 {
                     _weaponImage.sprite = value.Data.WeaponIcon;
                     _weaponImage.color = Color.white;
-                    _label.text = value.ToString();
+                    _label.text =
+                        //$"{value.WeaponName}\n" +
+                        $"Lv. {value.CurrentLevel}\n";
                 }
                 else
                 {
@@ -99,7 +101,7 @@ namespace EquipmentWindowElement
 
             WeaponInventoryWindow.OnSelectedWeapon += OnSelectedWeapon; // •Ší‚ª‘I‘ğ‚³‚ê‚½‚Æ‚«
             WeaponInventoryWindow.OnHided += OnHidedInventoryWindow; // •Ší‚ª‘I‘ğ‚³‚ê‚¸‚ÉWeaponInventoryWindow‚ª•Â‚¶‚½‚Æ‚«
-            WeaponInventoryWindow.Show();
+            WeaponInventoryWindow.Show(WeaponInventoryWindow.ShowMode.Inventory);
         }
 
         private void OnSelectedWeapon(WeaponBase selected)
