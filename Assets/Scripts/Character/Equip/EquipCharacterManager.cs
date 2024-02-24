@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public class EquipCharacterManager : MonoBehaviour
 {

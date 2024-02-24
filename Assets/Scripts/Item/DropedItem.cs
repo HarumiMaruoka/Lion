@@ -38,7 +38,7 @@ public class DroppedItem : MonoBehaviour
 
         var dir = (this.transform.position - player.transform.position).normalized;
         var initialVelocity = dir * _collectAnimationInitialVelocity;
-        this.StartThrowAnimationCoroutine(player.transform, _collectAnimationDuration, initialVelocity,
+        this.PlayThrowAnimation(player.transform, _collectAnimationDuration, initialVelocity,
             OnCollectAnimationCompleted);
     }
 

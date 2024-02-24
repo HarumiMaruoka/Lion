@@ -82,6 +82,7 @@ public class EnemyController : MonoBehaviour
         DropItem();
         DropWeapon();
         DropCharacter();
+        DropCookingMaterial();
     }
 
     [SerializeField]
@@ -122,6 +123,8 @@ public class EnemyController : MonoBehaviour
     private DropWeaponInfo[] _dropWeapons = null;
     [SerializeField]
     private DropCharacterInfo[] _dropCharacters = null;
+    [SerializeField]
+    private DropCookingMaterialInfo[] _dropCookingMaterials = null;
 
     public void DropItem()
     {
@@ -144,6 +147,14 @@ public class EnemyController : MonoBehaviour
         foreach (var item in _dropCharacters)
         {
             CharacterManager.Current.DropCharacter(transform.position, item.CharacterID, item.Probability);
+        }
+    }
+
+    public void DropCookingMaterial()
+    {
+        foreach (var item in _dropCookingMaterials)
+        {
+            DroppedCookingMaterialManager.Current.DropCookingMaterial(transform.position, item.CookingMaterialID, item.Probability);
         }
     }
 
@@ -182,4 +193,17 @@ public class EnemyController : MonoBehaviour
         public int CharacterID => _characterID;
         public float Probability => _probability;
     }
+
+    [Serializable]
+    public struct DropCookingMaterialInfo
+    {
+        [SerializeField]
+        private int _cookingMaterialID;
+        [SerializeField]
+        private float _probability;
+
+        public int CookingMaterialID => _cookingMaterialID;
+        public float Probability => _probability;
+    }
+
 }

@@ -175,6 +175,15 @@ MonoBehaviour:
     _probability: 0.6
   - _characterID: 5
     _probability: 0.6
+  _dropCookingMaterials:
+  - _cookingMaterialID: 7
+    _probability: 0.1
+  - _cookingMaterialID: 8
+    _probability: 0.2
+  - _cookingMaterialID: 9
+    _probability: 0.3
+  - _cookingMaterialID: 10
+    _probability: 0.4
 --- !u!58 &1952567355270599755
 CircleCollider2D:
   m_ObjectHideFlags: 0

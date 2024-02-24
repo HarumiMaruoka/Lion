@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using UnityEngine;
@@ -56,21 +57,48 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LifeGage _lifeGage;
 
-    private float _life = 0f;
+    private List<PlayerStatus> _playerStatusEffects = new List<PlayerStatus>();
+    private List<WeaponStatus> _weaponStatusEffects = new List<WeaponStatus>();
 
-    public WeaponStatus WeaponStatus => _basicWeaponStatus;
-
-    public event Action<float> OnLifeChanged;
-    public event Action<PlayerController> OnDead;
+    public List<PlayerStatus> PlayerStatusEffects => _playerStatusEffects;
+    public List<WeaponStatus> WeaponStatusEffects => _weaponStatusEffects;
 
     public PlayerStatus PlayerStatus
     {
         get
         {
             var sum = _playerStatus;
+
+            for (int i = 0; i < _playerStatusEffects.Count; i++)
+            {
+                sum += _playerStatusEffects[i];
+            }
+
             return sum;
         }
     }
+
+    public WeaponStatus WeaponStatus
+    {
+        get
+        {
+            var sum = _basicWeaponStatus;
+
+            for (int i = 0; i < _weaponStatusEffects.Count; i++)
+            {
+                sum += _weaponStatusEffects[i];
+            }
+
+            return sum;
+        }
+    }
+
+    private float _life = 0f;
+
+    public float Life => _life;
+
+    public event Action<float> OnLifeChanged;
+    public event Action<PlayerController> OnDead;
 
     public void Damage(float value)
     {
@@ -115,13 +143,41 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private VirtualJoystickUI _virtualJoystickUI;
+
+    private Vector2 _touchBeginPos;
+
     private IEnumerator ManualMoveAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-            _rigidbody2D.velocity = new Vector2(h, v).normalized * PlayerStatus.MoveSpeed * TimeScale;
+            float x = 0f;
+            float y = 0f;
+
+            if (Input.touchCount == 1)
+            {
+                var touch = Input.touches[0];
+                if (touch.phase == TouchPhase.Began)
+                {
+                    _virtualJoystickUI.Begin(touch.position);
+                    _touchBeginPos = touch.position;
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    _virtualJoystickUI.End();
+                }
+                _virtualJoystickUI.ExecuteWhileActive(touch.position);
+
+                var moveDir = (touch.position - _touchBeginPos).normalized;
+                x = moveDir.x;
+                y = moveDir.y;
+            }
+
+            x += Input.GetAxisRaw("Horizontal");
+            y += Input.GetAxisRaw("Vertical");
+
+            _rigidbody2D.velocity = new Vector2(x, y).normalized * PlayerStatus.MoveSpeed * TimeScale;
             yield return null;
         }
     }

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 0, a: 0.20392157}
   m_FlipX: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae18559c0f5bd4647be294e2e420a828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: a075fe3513d547540bb9efb883b882e6, type: 2}
   _playerStatus:
     _maxLife: 0
     _moveSpeed: 0
@@ -145,12 +146,9 @@ MonoBehaviour:
     _amount: 0
   _baseSpawnInterval: 1
   _baseCooldownTime: 0
-  _upgradePlayerStatusCsv: {fileID: 4900000, guid: ec463475e29a8a24caddc2f378b1961c, type: 3}
-  _upgradeWeaponStatusCsv: {fileID: 4900000, guid: 9c9bb19d138ed8841998bc66835c11e6, type: 3}
-  _upgradeCostCsv: {fileID: 4900000, guid: 76a4f725dbc1c904280229442865350d, type: 3}
-  _data: {fileID: 11400000, guid: a075fe3513d547540bb9efb883b882e6, type: 2}
   _initialCapacity: 500
   _radius: 3
+  _garlicSpriteRenderer: {fileID: 7038450092406914717}
   _layerMask:
     serializedVersion: 2
     m_Bits: 64

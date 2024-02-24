@@ -20,7 +20,7 @@ public class UpgradeRequestItemWindowElement : MonoBehaviour
     {
         _itemNameText.text = item.Name;
         ApplyItemCountText(Inventory.GetItemCount(item));
-        Inventory.OnChangedItemCount[item] += ApplyItemCountText;
+        Inventory.OnChangedItemCount[item.ID] += ApplyItemCountText;
 
         UpgradeManager.RequestItemCount.TryGetValue(item, out int requestItemCount);
         ApplyRequestItemCountText(requestItemCount);

@@ -34,11 +34,6 @@ public class WeaponManager : MonoBehaviour
 
     private Dictionary<int, WeaponData> _weaponTypeToData = new Dictionary<int, WeaponData>();
 
-    public WeaponData GetItemData(WeaponType weaponType)
-    {
-        return _weaponTypeToData[(int)weaponType];
-    }
-
     public void InitializeDrop()
     {
         foreach (var data in _weaponData)
@@ -86,12 +81,11 @@ public class WeaponManager : MonoBehaviour
         _inactiveItems.Push(weapon);
     }
 
-    #region àÍéûìIÇ»Ç‚Ç¬ÅB
+    #region Initial Weapon
     [SerializeField]
     private WeaponBase[] _initialWeapons;
 
     private Dictionary<int, WeaponBase> _weapons = new Dictionary<int, WeaponBase>();
-    public IReadOnlyDictionary<int, WeaponBase> Weapons => _weapons;
 
     public void InitializeUpgrade()
     {
@@ -99,11 +93,6 @@ public class WeaponManager : MonoBehaviour
         {
             _weapons.Add((int)weapon.WeaponType, weapon);
         }
-    }
-
-    public WeaponBase GetWeapon(WeaponType weaponType)
-    {
-        return _weapons[(int)weaponType];
     }
     #endregion
 }

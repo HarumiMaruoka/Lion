@@ -31,7 +31,7 @@ public abstract class WeaponBase : MonoBehaviour
 
     private IEnumerator _mainRoutine = null;
 
-    public void Activate(Transform parent)
+    public virtual void Activate(Transform parent)
     {
         if (_mainRoutine == null)
         {
@@ -51,7 +51,7 @@ public abstract class WeaponBase : MonoBehaviour
         StartCoroutine(_mainRoutine);
     }
 
-    public void Inactivate()
+    public virtual void Inactivate()
     {
         if (_mainRoutine != null)
         {

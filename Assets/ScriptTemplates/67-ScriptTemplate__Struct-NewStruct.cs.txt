@@ -1,9 +1,0 @@
-﻿// 日本語対応
-using System;
-using UnityEngine;
-
-[System.Serializable]
-public struct #SCRIPTNAME#
-{
-
-}

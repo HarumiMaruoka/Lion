@@ -10,6 +10,8 @@ public class GarlicSpawner : WeaponBase
     private int _initialCapacity;
     [SerializeField]
     private float _radius;
+    [SerializeField]
+    private SpriteRenderer _garlicSpriteRenderer;
 
     public override WeaponType WeaponType => WeaponType.Garlic;
 
@@ -19,6 +21,19 @@ public class GarlicSpawner : WeaponBase
     {
         _enemies.Capacity = _initialCapacity;
     }
+
+    public override void Activate(Transform parent)
+    {
+        base.Activate(parent);
+        _garlicSpriteRenderer.enabled = true;
+    }
+
+    public override void Inactivate()
+    {
+        base.Inactivate();
+        _garlicSpriteRenderer.enabled = false;
+    }
+
 
     protected override IEnumerator SpawnAsync(WeaponStatus status, CancellationToken token)
     {

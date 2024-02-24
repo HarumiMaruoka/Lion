@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class ThrowAnimationExtensions
 {
-    public static Coroutine StartThrowAnimationCoroutine(this MonoBehaviour throwObject, Transform targetPosition, float duration, Vector3 initialVelocity,
+    public static Coroutine PlayThrowAnimation(this MonoBehaviour throwObject, Transform targetPosition, float duration, Vector3 initialVelocity,
         Action onCompleted = default, CancellationToken token = default)
     {
         return throwObject.StartCoroutine(

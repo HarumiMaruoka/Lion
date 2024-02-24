@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eeb83c713695ae42a86c737d8137e1b, type: 3}
+  m_Name: Cooking Food Data 0
+  m_EditorClassIdentifier: 
+  _id: 0
+  _name: yaminabe
+  _description: 
+  _sprite: {fileID: 21300000, guid: e55f7928bf74cd04c8e989e3e879c978, type: 3}
+  _cookingMaterialID1: 0
+  _cookingMaterialID2: 0
+  _cookingMaterialID3: 0
+  _cookingEffect:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

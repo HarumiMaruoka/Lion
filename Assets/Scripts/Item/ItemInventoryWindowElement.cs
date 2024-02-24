@@ -13,7 +13,7 @@ public class ItemInventoryWindowElement : MonoBehaviour
     {
         _itemNameText.text = item.Name;
         ApplyItemCountText(inventory.GetItemCount(item));
-        inventory.OnChangedItemCount[item] += ApplyItemCountText;
+        inventory.OnChangedItemCount[item.ID] += ApplyItemCountText;
     }
 
     private void ApplyItemCountText(int count)
