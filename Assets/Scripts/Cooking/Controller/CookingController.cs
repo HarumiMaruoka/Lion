@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public class CookingController : MonoBehaviour
@@ -74,8 +75,6 @@ public class CookingController : MonoBehaviour
         OnMakableFoodChanged?.Invoke(null);
     }
 
-    private Coroutine _foodEffectCoroutine = null;
-
     public void MakeFood()
     {
         // 作ることができる料理がなければリターン。
@@ -85,14 +84,8 @@ public class CookingController : MonoBehaviour
             return;
         }
 
-        // 実行中であれば、そのコルーチンを停止し、新しいコルーチンを開始する。
-        if (_foodEffectCoroutine != null)
-        {
-            StopCoroutine(_foodEffectCoroutine);
-        }
-
-        if (_makableFood.CookingEffect != null)
-            StartCoroutine(_makableFood.CookingEffect.RunAsync());
+        // 料理インベントリに料理を追加する。
+        CookingFoodInventory.Instance.Add(_makableFood.ID);
 
         // 選択済み料理素材をインベントリから減らし、
         // 全ての選択済み料理素材を解除する。
@@ -101,5 +94,27 @@ public class CookingController : MonoBehaviour
             CookingMaterialInventory.Instance.Use(_selectedMaterialIDs[i]);
             ExcludeMaterial(i);
         }
+    }
+
+    private CancellationTokenSource _foodEffectCancellationTokenSource = null;
+
+    public void EatFood(CookingFoodData food)
+    {
+        // 実行中であれば、そのコルーチンを停止し、新しいコルーチンを開始する。
+        _foodEffectCancellationTokenSource?.Cancel();
+        _foodEffectCancellationTokenSource = new CancellationTokenSource();
+
+        var cookingEffect = food.CookingEffect;
+        if (cookingEffect != null)
+        {
+            StartCoroutine(food.CookingEffect.RunAsync(_foodEffectCancellationTokenSource.Token));
+        }
+
+        CookingFoodInventory.Instance.Use(food.ID);
+    }
+
+    public void EatFood(int foodID)
+    {
+        EatFood(CookingFoodDataBase.Current.GetData(foodID));
     }
 }

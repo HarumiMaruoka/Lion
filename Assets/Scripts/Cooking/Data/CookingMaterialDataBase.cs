@@ -55,7 +55,8 @@ public class CookingMaterialDataBase : MonoBehaviour
             }
         }
 
-        // UIの初期化。
-        if (_inventoryWindow) _inventoryWindow.Initialize();
+        // 料理素材インベントリおよび UIの初期化。
+        CookingMaterialInventory.Instance.Initialize(this);
+        _inventoryWindow.Initialize(this);
     }
 }

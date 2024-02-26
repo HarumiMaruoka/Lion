@@ -26,6 +26,9 @@ public class CookingFoodDataBase : MonoBehaviour
 
     [SerializeField]
     private CookingFoodData[] _data;
+    [SerializeField]
+    private CookingFoodInventoryWindow _inventoryWindow;
+
     public IEnumerable<CookingFoodData> Data => _data;
 
     private Dictionary<int, CookingFoodData> _idToData = new Dictionary<int, CookingFoodData>();
@@ -47,5 +50,9 @@ public class CookingFoodDataBase : MonoBehaviour
                 Debug.LogWarning($"ID: {element.ID}, Name: {element.Name} が重複しています。");
             }
         }
+
+        // インベントリの初期化および UIの初期化
+        CookingFoodInventory.Instance.Initialize(this);
+        _inventoryWindow.Initialize(this);
     }
 }

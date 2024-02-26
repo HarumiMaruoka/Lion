@@ -12,13 +12,13 @@ public class CookingMaterialInventoryWindow : MonoBehaviour
 
     public Action<int> OnSelected; // 渡される引数は CookingMaterialID
 
-    public void Initialize() // CookingMaterialDataBaseの初期化が完了してから呼び出す。
+    public void Initialize(CookingMaterialDataBase materialDataBase) // CookingMaterialInventoryの初期化が完了してから呼び出す。
     {
         OnSelected += _controller.SelectMaterial;
-        foreach (var single in CookingMaterialDataBase.Current.Data)
+        foreach (var element in materialDataBase.Data)
         {
             var instance = Instantiate(_elementPrefab, _elementParent);
-            instance.Initialize(single);
+            instance.Initialize(element);
             instance.OnSelected += OnSelected;
         }
     }

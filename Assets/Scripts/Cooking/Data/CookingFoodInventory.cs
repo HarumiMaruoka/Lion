@@ -10,6 +10,7 @@ public class CookingFoodInventory
     // KeyはCookingFoodIDを表現する。
     // Valueは所持数を表現する。
     private Dictionary<int, int> _collection = new Dictionary<int, int>();
+    public Dictionary<int, Action<int>> OnCountChanged = new Dictionary<int, Action<int>>();
 
     public void Initialize(CookingFoodDataBase foodDataBase)
     {
@@ -19,37 +20,36 @@ public class CookingFoodInventory
             {
                 Debug.Log($"ID: {element.ID}, Name: {element.Name} が重複しています。");
             }
+            OnCountChanged?.Add(element.ID, null);
         }
 
     }
 
-    public int this[int cookingMaterialID]
+    public int GetCount(int cookingFoodID)
     {
-        get
-        {
-            return _collection[cookingMaterialID];
-        }
+        return _collection[cookingFoodID];
     }
 
-    public void Add(int cookingFoodID) => _collection[cookingFoodID]++;
-    public void Add(int cookingFoodID, int amount) => _collection[cookingFoodID] += amount;
-
-    public void Use(int cookingFoodID) => _collection[cookingFoodID]--;
-    public void Use(int cookingFoodID, int amount) => _collection[cookingFoodID] -= amount;
-
-    public bool TryUse(int cookingFoodID)
+    public void Add(int cookingFoodID, int amount = 1)
     {
-        var count = _collection[cookingFoodID];
-        if (count <= 0) return false;
-        _collection[cookingFoodID]--;
-        return true;
+        var result = (_collection[cookingFoodID] += amount);
+        OnCountChanged[cookingFoodID]?.Invoke(result);
     }
 
-    public bool TryUse(int cookingFoodID, int amount)
+    public void Use(int cookingFoodID, int amount = 1)
+    {
+        var result = (_collection[cookingFoodID] -= amount);
+        OnCountChanged[cookingFoodID]?.Invoke(result);
+    }
+
+    public bool TryUse(int cookingFoodID, int amount = 1)
     {
         var count = _collection[cookingFoodID];
         if (count - amount < 0) return false;
-        _collection[cookingFoodID] -= amount;
+
+        var result = (_collection[cookingFoodID] -= amount);
+        OnCountChanged[cookingFoodID]?.Invoke(result);
+
         return true;
     }
 }
