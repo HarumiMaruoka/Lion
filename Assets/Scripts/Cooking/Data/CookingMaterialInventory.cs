@@ -58,4 +58,41 @@ public class CookingMaterialInventory
         OnCountChanged[cookingMaterialID]?.Invoke(result);
         return true;
     }
+
+    public bool VerifyInventory(CookingFoodData makableFood)
+    {
+        if (!TryUse(makableFood.CookingMaterialID1))
+        {
+            var material = CookingMaterialDataBase.Current.GetData(makableFood.CookingMaterialID1);
+            Debug.Log($"{material.Name} Ç™ë´ÇËÇ‹ÇπÇÒÅB");
+            return false;
+        }
+
+        if (!TryUse(makableFood.CookingMaterialID2))
+        {
+            Add(makableFood.CookingMaterialID1);
+
+            var material = CookingMaterialDataBase.Current.GetData(makableFood.CookingMaterialID2);
+            Debug.Log($"{material.Name} Ç™ë´ÇËÇ‹ÇπÇÒÅB");
+
+            return false;
+        }
+
+        if (!TryUse(makableFood.CookingMaterialID3))
+        {
+            Add(makableFood.CookingMaterialID1);
+            Add(makableFood.CookingMaterialID2);
+
+            var material = CookingMaterialDataBase.Current.GetData(makableFood.CookingMaterialID3);
+            Debug.Log($"{material.Name} Ç™ë´ÇËÇ‹ÇπÇÒÅB");
+
+            return false;
+        }
+
+        Add(makableFood.CookingMaterialID1);
+        Add(makableFood.CookingMaterialID2);
+        Add(makableFood.CookingMaterialID3);
+
+        return true;
+    }
 }

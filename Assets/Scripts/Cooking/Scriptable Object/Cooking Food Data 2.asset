@@ -19,3 +19,14 @@ MonoBehaviour:
   _cookingMaterialID1: 2
   _cookingMaterialID2: 3
   _cookingMaterialID3: 4
+  _cookingEffect:
+    rid: 6769240690142478336
+  references:
+    version: 2
+    RefIds:
+    - rid: 6769240690142478336
+      type: {class: Regeneration, ns: , asm: Assembly-CSharp}
+      data:
+        _duration: 30
+        _interval: 1
+        _amount: 50

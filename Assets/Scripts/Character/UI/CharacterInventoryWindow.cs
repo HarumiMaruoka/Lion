@@ -76,4 +76,21 @@ public class CharacterInventoryWindow : MonoBehaviour
 
         OnHided?.Invoke();
     }
+
+    [SerializeField]
+    private CharacterInformationWindow _characterInformationWindow;
+
+    public void SimpleShow()
+    {
+        OnCharacterSelected += _characterInformationWindow.ShowCharacterInformation;
+        Show();
+
+        OnHided += OnHide;
+
+        void OnHide()
+        {
+            OnHided -= OnHide;
+            OnCharacterSelected -= _characterInformationWindow.ShowCharacterInformation;
+        }
+    }
 }

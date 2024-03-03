@@ -51,19 +51,19 @@ public class PlayerController : MonoBehaviour
     #region Status
     [Header("Status")]
     [SerializeField]
-    private PlayerStatus _playerStatus;
+    private ActorStatus _playerStatus;
     [SerializeField]
     private WeaponStatus _basicWeaponStatus;
     [SerializeField]
     private LifeGage _lifeGage;
 
-    private List<PlayerStatus> _playerStatusEffects = new List<PlayerStatus>();
+    private List<ActorStatus> _playerStatusEffects = new List<ActorStatus>();
     private List<WeaponStatus> _weaponStatusEffects = new List<WeaponStatus>();
 
-    public List<PlayerStatus> PlayerStatusEffects => _playerStatusEffects;
+    public List<ActorStatus> PlayerStatusEffects => _playerStatusEffects;
     public List<WeaponStatus> WeaponStatusEffects => _weaponStatusEffects;
 
-    public PlayerStatus PlayerStatus
+    public ActorStatus PlayerStatus
     {
         get
         {
@@ -100,6 +100,14 @@ public class PlayerController : MonoBehaviour
     public event Action<float> OnLifeChanged;
     public event Action<PlayerController> OnDead;
 
+    public void Heal(float value)
+    {
+        _life += value;
+        OnLifeChanged?.Invoke(_life);
+
+        _life = Mathf.Clamp(_life, 0f, PlayerStatus.MaxLife);
+    }
+
     public void Damage(float value)
     {
         _life -= value;
@@ -109,6 +117,8 @@ public class PlayerController : MonoBehaviour
         {
             OnDead?.Invoke(this);
         }
+
+        _life = Mathf.Clamp(_life, 0f, PlayerStatus.MaxLife);
     }
     #endregion
 

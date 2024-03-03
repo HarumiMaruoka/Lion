@@ -169,7 +169,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField]
     private UpgradeInputData[] _upgradeInputData;
 
-    private Dictionary<WeaponType, PlayerStatus[]> _upgradePlayerStatus = new Dictionary<WeaponType, PlayerStatus[]>();
+    private Dictionary<WeaponType, ActorStatus[]> _upgradePlayerStatus = new Dictionary<WeaponType, ActorStatus[]>();
     private Dictionary<WeaponType, WeaponStatus[]> _upgradeWeaponStatus = new Dictionary<WeaponType, WeaponStatus[]>();
     private Dictionary<WeaponType, UpgradeCost[][]> _upgradeCosts = new Dictionary<WeaponType, UpgradeCost[][]>();
 
@@ -186,10 +186,10 @@ public class UpgradeManager : MonoBehaviour
             {
 
                 string[][] playerStatusCsvString = TextAssetToCsv(inputData.PlayerStatusData, 1);
-                var upgradePlayerStatus = new PlayerStatus[playerStatusCsvString.Length];
+                var upgradePlayerStatus = new ActorStatus[playerStatusCsvString.Length];
                 for (int i = 0; i < playerStatusCsvString.Length; i++)
                 {
-                    upgradePlayerStatus[i] = PlayerStatus.Parse(playerStatusCsvString[i]);
+                    upgradePlayerStatus[i] = ActorStatus.Parse(playerStatusCsvString[i]);
                 }
 
                 string[][] weaponStatusCsvString = TextAssetToCsv(inputData.WeaponStatusData, 1);
@@ -218,7 +218,7 @@ public class UpgradeManager : MonoBehaviour
         _isInitializedUpgradeData = true;
     }
 
-    public PlayerStatus RequestPlayerStatus(int level, WeaponType weaponType)
+    public ActorStatus RequestPlayerStatus(int level, WeaponType weaponType)
     {
         if (!_isInitializedUpgradeData) InitializeUpgradeData();
         return _upgradePlayerStatus[weaponType][level];

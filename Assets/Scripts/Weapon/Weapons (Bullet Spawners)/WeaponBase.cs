@@ -8,7 +8,7 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField]
     private WeaponData _data;
     [SerializeField]
-    protected PlayerStatus _playerStatus;
+    protected ActorStatus _playerStatus;
     [SerializeField]
     protected WeaponStatus _weaponStatus;
     [SerializeField]
@@ -113,7 +113,7 @@ public abstract class WeaponBase : MonoBehaviour
     private int _currentLevel;
     public int CurrentLevel => _currentLevel;
 
-    public PlayerStatus PlayerStatus => UpgradeManager.Current.RequestPlayerStatus(_currentLevel, WeaponType);
+    public ActorStatus PlayerStatus => UpgradeManager.Current.RequestPlayerStatus(_currentLevel, WeaponType);
     public WeaponStatus WeaponStatus => UpgradeManager.Current.RequestWeaponStatus(_currentLevel, WeaponType);
     public UpgradeCost[] UpgradeCosts => UpgradeManager.Current.RequestUpgradeCosts(_currentLevel, WeaponType);
 

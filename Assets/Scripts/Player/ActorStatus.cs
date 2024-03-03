@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public struct PlayerStatus
+public struct ActorStatus
 {
     [SerializeField]
     private float _maxLife;     // ç≈ëÂÉâÉCÉt
@@ -41,9 +41,9 @@ public struct PlayerStatus
         }
     }
 
-    public static PlayerStatus operator +(PlayerStatus a, PlayerStatus b)
+    public static ActorStatus operator +(ActorStatus a, ActorStatus b)
     {
-        PlayerStatus result = new PlayerStatus();
+        ActorStatus result = new ActorStatus();
 
         result._maxLife = a._maxLife + b._maxLife;
         result._moveSpeed = a._moveSpeed + b._moveSpeed;
@@ -55,14 +55,14 @@ public struct PlayerStatus
         return result;
     }
 
-    public static PlayerStatus Parse(string[] csvRow)
+    public static ActorStatus Parse(string[] csvRow)
     {
         if (csvRow == null)
         {
             throw new ArgumentNullException(nameof(csvRow));
         }
 
-        PlayerStatus result = new PlayerStatus();
+        ActorStatus result = new ActorStatus();
 
         if (!float.TryParse(csvRow[0], out result._maxLife) ||
             !float.TryParse(csvRow[1], out result._moveSpeed) ||

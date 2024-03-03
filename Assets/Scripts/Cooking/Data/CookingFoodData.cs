@@ -24,7 +24,7 @@ public class CookingFoodData : ScriptableObject
     private int _cookingMaterialID3;
 
     [SerializeReference, SubclassSelector]
-    private ICookingEffect _cookingEffect;
+    private IFoodEffect _cookingEffect;
 
     public int ID => _id;
     public string Name => _name;
@@ -35,11 +35,11 @@ public class CookingFoodData : ScriptableObject
     public int CookingMaterialID2 => _cookingMaterialID2;
     public int CookingMaterialID3 => _cookingMaterialID3;
 
-    public ICookingEffect CookingEffect => _cookingEffect;
+    public IFoodEffect CookingEffect => _cookingEffect;
     #endregion
 
     #region Equal calculate
-    private List<int> _remainingMaterialID = new List<int>();
+    private List<int> _comparisonList = new List<int>();
 
     public bool Equal(int[] materialIDs)
     {
@@ -48,15 +48,15 @@ public class CookingFoodData : ScriptableObject
             return false;
 
         // 要求料理素材リストを作成し、渡されたデータが正しいかどうかチェックする。
-        _remainingMaterialID.Clear();
+        _comparisonList.Clear();
 
-        _remainingMaterialID.Add(_cookingMaterialID1);
-        _remainingMaterialID.Add(_cookingMaterialID2);
-        _remainingMaterialID.Add(_cookingMaterialID3);
+        _comparisonList.Add(_cookingMaterialID1);
+        _comparisonList.Add(_cookingMaterialID2);
+        _comparisonList.Add(_cookingMaterialID3);
 
         foreach (var item in materialIDs)
         {
-            if (!_remainingMaterialID.Remove(item))
+            if (!_comparisonList.Remove(item))
                 return false;
         }
 

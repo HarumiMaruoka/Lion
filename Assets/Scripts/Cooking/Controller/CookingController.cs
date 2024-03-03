@@ -24,9 +24,6 @@ public class CookingController : MonoBehaviour
                 _selectedMaterialIDs[i] = selectedMaterialID;
                 _onSelectedMaterialChangeds[i]?.Invoke(selectedMaterialID);
 
-                // インベントリから減らす。
-                CookingMaterialInventory.Instance.Use(selectedMaterialID);
-
                 SelectedMaterialChanged();
 
                 return;
@@ -45,8 +42,6 @@ public class CookingController : MonoBehaviour
         _selectedMaterialIDs[index] = -1;
         _onSelectedMaterialChangeds[index]?.Invoke(-1);
 
-        // インベントリに返す。
-        CookingMaterialInventory.Instance.Add(old);
         SelectedMaterialChanged();
         return old;
     }
@@ -75,12 +70,21 @@ public class CookingController : MonoBehaviour
         OnMakableFoodChanged?.Invoke(null);
     }
 
-    public void MakeFood()
+    public void MakeFood(bool isDeselect = true)
     {
-        // 作ることができる料理がなければリターン。
+        // 料理を作れるかどうかチェック。
         if (_makableFood == null)
         {
-            Debug.Log("料理を作ることができません。");
+            Debug.Log("制作可能な料理がありません。");
+            return;
+        }
+        if (!CookingMaterialInventory.Instance.VerifyInventory(_makableFood))
+        {
+            // フラグに応じて、全ての選択済み料理素材を解除する。
+            for (int i = 0; _selectedMaterialIDs.Length > i; i++)
+            {
+                if (isDeselect) ExcludeMaterial(i);
+            }
             return;
         }
 
@@ -88,11 +92,11 @@ public class CookingController : MonoBehaviour
         CookingFoodInventory.Instance.Add(_makableFood.ID);
 
         // 選択済み料理素材をインベントリから減らし、
-        // 全ての選択済み料理素材を解除する。
+        // フラグに応じて、全ての選択済み料理素材を解除する。
         for (int i = 0; _selectedMaterialIDs.Length > i; i++)
         {
             CookingMaterialInventory.Instance.Use(_selectedMaterialIDs[i]);
-            ExcludeMaterial(i);
+            if (isDeselect) ExcludeMaterial(i);
         }
     }
 

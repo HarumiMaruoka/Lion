@@ -27,18 +27,18 @@ MonoBehaviour:
     - rid: 6769240643308093441
       type: {class: TemporaryStatusBoost, ns: , asm: Assembly-CSharp}
       data:
-        _duration: 1
+        _duration: 10
         _playerStatusAmount:
-          _maxLife: 0
-          _moveSpeed: 0
-          _attackPower: 0
-          _defense: 0
-          _dexterity: 0
-          _luck: 0
+          _maxLife: 20
+          _moveSpeed: 30
+          _attackPower: 100
+          _defense: 100
+          _dexterity: 30
+          _luck: 30
         _weaponStatusAmount:
-          _attackPower: 0
-          _speed: 0
-          _duration: 0
-          _area: 0
-          _cooldown: 0
-          _amount: 0
+          _attackPower: 10
+          _speed: 10
+          _duration: 10
+          _area: 10
+          _cooldown: 10
+          _amount: 10

@@ -4,12 +4,12 @@ using System.Threading;
 using UnityEngine;
 
 [Serializable]
-public class TemporaryStatusBoost : ICookingEffect
+public class TemporaryStatusBoost : IFoodEffect
 {
     [SerializeField]
     private float _duration;
     [SerializeField]
-    private PlayerStatus _playerStatusAmount;
+    private ActorStatus _playerStatusAmount;
     [SerializeField]
     private WeaponStatus _weaponStatusAmount;
 

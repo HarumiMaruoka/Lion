@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterIndividualData // 個体としてのキャラデータ
@@ -19,6 +20,13 @@ public class CharacterIndividualData // 個体としてのキャラデータ
 
     private WeaponBase[] _equippedWeapon = new WeaponBase[4];
     public WeaponBase[] EquippedWeapons => _equippedWeapon;
+
+    public ActorStatus Status => _speciesData.GetStatus(_level);
+
+    public ISkill Skill => null; // TODO: Characterのスキルの実装。
+
+    private IProfile[] _dummy = { new DummyProfile(), new DummyProfile(), new DummyProfile(), new DummyProfile() };
+    public IProfile[] Profile => _dummy; // TODO: Characterのプロフィールの実装。
 
     public CharacterBehaviour CharacterBehaviour
     {
