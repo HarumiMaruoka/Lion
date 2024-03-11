@@ -113,7 +113,6 @@ public abstract class WeaponBase : MonoBehaviour
     private int _currentLevel;
     public int CurrentLevel => _currentLevel;
 
-    public ActorStatus PlayerStatus => UpgradeManager.Current.RequestPlayerStatus(_currentLevel, WeaponType);
     public WeaponStatus WeaponStatus => UpgradeManager.Current.RequestWeaponStatus(_currentLevel, WeaponType);
     public UpgradeCost[] UpgradeCosts => UpgradeManager.Current.RequestUpgradeCosts(_currentLevel, WeaponType);
 

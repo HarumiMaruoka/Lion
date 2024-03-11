@@ -17,6 +17,8 @@ public class LevelManager
 
     private Func<IEnumerator> OnLevelUpAsync;
 
+    public int Level => _level;
+
     public void Initialize()
     {
         _text.text = "Level: " + _level.ToString();
@@ -35,7 +37,7 @@ public class LevelManager
         {
             _currentEXP -= _nextEXP;
             _nextEXP *= 1.2f; // ‚¿‚å‚Á‚Æ‚¸‚Â—v‹EXP‚ğ‘‚â‚·B
-            _level++; 
+            _level++;
 
             _text.text = "Level: " + _level.ToString();
 

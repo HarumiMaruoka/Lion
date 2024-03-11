@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class CharacterIndividualData // 個体としてのキャラデータ
+public class CharacterIndividualData : IActor// 個体としてのキャラデータ
 {
     public CharacterIndividualData(CharacterSpeciesData speciesData, int level)
     {
@@ -14,6 +14,7 @@ public class CharacterIndividualData // 個体としてのキャラデータ
     private CharacterSpeciesData _speciesData;
     private int _level;
 
+    public string Name => _speciesData.Name;
     public int EquipIndex => _equipIndex;
     public CharacterSpeciesData SpeciesData => _speciesData;
     public int Level => _level;

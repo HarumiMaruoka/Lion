@@ -23,7 +23,7 @@ public class BossController : MonoBehaviour
 
     /// <summary> ‚±‚Ìƒ{ƒX‚Æí‚¤‚±‚Æ‚ª‚Å‚«‚é‚©‚Ç‚¤‚©B </summary>
     public bool IsChallengeable => _defeatedEnemyCount >= _defeatRequiredEnemyCount;
-    public bool IsPlayerStronger => PlayerController.Current.PlayerStatus.Sum > BattlePower;
+    public bool IsPlayerStronger => PlayerController.Current.Status.Sum > BattlePower;
 
     public event Action<int> OnDeadEnemyCountChanged;
 

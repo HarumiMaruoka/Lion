@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class CharacterBehaviour : MonoBehaviour 
+public class CharacterBehaviour : MonoBehaviour
 {
     [SerializeField]
     private SpriteRenderer _spriteRenderer;

@@ -24,6 +24,8 @@ public class EquipCharacterManager : MonoBehaviour
     [SerializeField]
     private CharacterBehaviour[] _equippedCharacters;
 
+    public CharacterBehaviour[] EquippedCharacters=>_equippedCharacters;
+
     public int EquippableCharacterCount => _equippedCharacters.Length;
 
     private List<WeaponBase> _characterEquippedWeapons = new List<WeaponBase>();

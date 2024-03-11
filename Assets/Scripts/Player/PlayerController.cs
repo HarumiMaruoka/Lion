@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IActor
 {
     #region Singleton
     private static PlayerController _current = null;
@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
 
     private float TimeScale => GameSpeedManager.Instance.TimeScale;
 
+    public string Name => "Player";
+    public int Level => _levelManager.Level;
+
     private void Start()
     {
         InitializeFields();
@@ -42,7 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
 
-        _life = PlayerStatus.MaxLife;
+        _life = Status.MaxLife;
         _lifeGage.Initialize(_life, _life, ref OnLifeChanged);
     }
     #endregion
@@ -70,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public ActorStatus PlayerStatus
+    public ActorStatus Status
     {
         get
         {
@@ -112,7 +115,7 @@ public class PlayerController : MonoBehaviour
         _life += value;
         OnLifeChanged?.Invoke(_life);
 
-        _life = Mathf.Clamp(_life, 0f, PlayerStatus.MaxLife);
+        _life = Mathf.Clamp(_life, 0f, Status.MaxLife);
     }
 
     public void Damage(float value)
@@ -125,7 +128,7 @@ public class PlayerController : MonoBehaviour
             OnDead?.Invoke(this);
         }
 
-        _life = Mathf.Clamp(_life, 0f, PlayerStatus.MaxLife);
+        _life = Mathf.Clamp(_life, 0f, Status.MaxLife);
     }
     #endregion
 
@@ -194,7 +197,7 @@ public class PlayerController : MonoBehaviour
             x += Input.GetAxisRaw("Horizontal");
             y += Input.GetAxisRaw("Vertical");
 
-            _rigidbody2D.velocity = new Vector2(x, y).normalized * PlayerStatus.MoveSpeed * TimeScale;
+            _rigidbody2D.velocity = new Vector2(x, y).normalized * Status.MoveSpeed * TimeScale;
             yield return null;
         }
     }
@@ -210,7 +213,7 @@ public class PlayerController : MonoBehaviour
             Vector3 targetPos = _wayPointManager.CurrentTarget.position;
             var dir = (targetPos - startPos).normalized;
 
-            yield return AwaitArrivalAsync(startPos, targetPos, transform, () => _rigidbody2D.velocity = dir * PlayerStatus.MoveSpeed * TimeScale, token);
+            yield return AwaitArrivalAsync(startPos, targetPos, transform, () => _rigidbody2D.velocity = dir * Status.MoveSpeed * TimeScale, token);
 
             _wayPointManager.OnNext();
         }
@@ -244,7 +247,7 @@ public class PlayerController : MonoBehaviour
         if (startPos != targetPos)
         {
             var dir = (targetPos - startPos).normalized;
-            yield return AwaitArrivalAsync(startPos, targetPos, transform, () => _rigidbody2D.velocity = dir * PlayerStatus.MoveSpeed * TimeScale, token);
+            yield return AwaitArrivalAsync(startPos, targetPos, transform, () => _rigidbody2D.velocity = dir * Status.MoveSpeed * TimeScale, token);
         }
 
         _rigidbody2D.velocity = Vector3.zero;
