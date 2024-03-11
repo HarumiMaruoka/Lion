@@ -46,6 +46,8 @@ public class CharacterSpeciesData : ScriptableObject // 種族としてのキャラデータ
 
     public ActorStatus GetStatus(int level)
     {
+        return default;
+
         if (_levelData == null) { _levelData = CreateLevelData(); }
         if (level < 0 || level >= _levelData.Length)
         {

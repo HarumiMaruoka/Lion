@@ -39,8 +39,8 @@ public class BossBattleAnimationController : MonoBehaviour
     {
         _isPlayerVictoried = _bossController.IsPlayerStronger;
 
-        _playerBattlePowerLabel.text = _playerController.BattlePower.ToString();
-        _bossBattlePowerLabel.text = _bossController.BattlePower.ToString();
+        _playerBattlePowerLabel.text = "êÌì¨óÕ: " + _playerController.BattlePower.ToString(".0");
+        _bossBattlePowerLabel.text = "êÌì¨óÕ: " + _bossController.BattlePower.ToString(".0");
 
         _animationWindow.SetActive(true);
         _bossBattleAnimator.SetBool(_isPlayerStrongerAnimationParameterName, _isPlayerVictoried);

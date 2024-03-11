@@ -24,7 +24,7 @@ public struct ActorStatus
     public float Dexterity => _dexterity;
     public float Luck => _luck;
 
-    public float Sum // 合計戦闘力。ボスとの戦闘の際、勝ち負けの判定で使う。
+    public float BattlePower // 合計戦闘力。ボスとの戦闘の際、勝ち負けの判定で使う。
     {
         get
         {

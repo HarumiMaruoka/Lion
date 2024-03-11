@@ -44,6 +44,8 @@ public class CharacterIndividualData : IActor// 個体としてのキャラデータ
         }
     }
 
+    public float BattlePower { get => Status.BattlePower; }
+
     public void Equip(int index)
     {
         _equipIndex = index;

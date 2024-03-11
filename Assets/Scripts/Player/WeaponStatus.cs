@@ -56,6 +56,21 @@ public struct WeaponStatus
     public float Cooldown => _cooldown;
     public int Amount => _amount;
 
+    public float BattlePower
+    {
+        get
+        {
+            float sum = 0;
+            sum += _attackPower;
+            sum += _speed;
+            sum += _duration;
+            sum += _area;
+            sum += _cooldown;
+            sum += _amount;
+            return sum;
+        }
+    }
+
     public static WeaponStatus operator +(WeaponStatus a, WeaponStatus b)
     {
         WeaponStatus result = new WeaponStatus();

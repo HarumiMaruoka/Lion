@@ -69,7 +69,27 @@ public class PlayerController : MonoBehaviour, IActor
     {
         get
         {
-            return 0;
+            float sum = 0f;
+            sum += _playerStatus.BattlePower;
+            foreach (var weapon in PlayerWeapons)
+            {
+                if (weapon) sum += weapon.BattlePower;
+            }
+
+            foreach (var character in EquipCharacterManager.Current.EquippedCharacters)
+            {
+                if (character && character.IndividualData != null)
+                {
+                    sum += character.IndividualData.BattlePower;
+
+                    foreach (var weapon in character.IndividualData.EquippedWeapons)
+                    {
+                        if (weapon) sum += weapon.BattlePower;
+                    }
+                }
+            }
+
+            return sum;
         }
     }
 
@@ -180,14 +200,8 @@ public class PlayerController : MonoBehaviour, IActor
                 var touch = Input.touches[0];
                 if (touch.phase == TouchPhase.Began)
                 {
-                    _virtualJoystickUI.Begin(touch.position);
                     _touchBeginPos = touch.position;
                 }
-                else if (touch.phase == TouchPhase.Ended)
-                {
-                    _virtualJoystickUI.End();
-                }
-                _virtualJoystickUI.ExecuteWhileActive(touch.position);
 
                 var moveDir = (touch.position - _touchBeginPos).normalized;
                 x = moveDir.x;

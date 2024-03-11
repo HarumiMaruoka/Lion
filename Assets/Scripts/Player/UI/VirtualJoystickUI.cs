@@ -13,6 +13,23 @@ public class VirtualJoystickUI : MonoBehaviour
 
     private Vector2 _beginPosition;
 
+    private void Update()
+    {
+        if (Input.touchCount == 1)
+        {
+            var touch = Input.touches[0];
+            if (touch.phase == TouchPhase.Began)
+            {
+                Begin(touch.position);
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                End();
+            }
+            ExecuteWhileActive(touch.position);
+        }
+    }
+
     public void Begin(Vector2 position)
     {
         _beginPosition = position;

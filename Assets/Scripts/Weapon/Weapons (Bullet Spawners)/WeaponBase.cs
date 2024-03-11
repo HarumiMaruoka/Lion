@@ -116,6 +116,8 @@ public abstract class WeaponBase : MonoBehaviour
     public WeaponStatus WeaponStatus => UpgradeManager.Current.RequestWeaponStatus(_currentLevel, WeaponType);
     public UpgradeCost[] UpgradeCosts => UpgradeManager.Current.RequestUpgradeCosts(_currentLevel, WeaponType);
 
+    public float BattlePower { get => WeaponStatus.BattlePower; }
+
     public event Action<int> OnLevelChanged;
 
     public void UpgradeRequest(int level)
