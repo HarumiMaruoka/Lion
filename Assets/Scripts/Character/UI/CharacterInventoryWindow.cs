@@ -30,9 +30,25 @@ public class CharacterInventoryWindow : MonoBehaviour
     private HashSet<CharacterInventoryWindowElement> _actives = new HashSet<CharacterInventoryWindowElement>();
     private Queue<CharacterInventoryWindowElement> _inactives = new Queue<CharacterInventoryWindowElement>();
 
-    public event Action<CharacterIndividualData> OnCharacterSelected;
     public event Action OnShowed;
     public event Action OnHided;
+
+    private Action<CharacterIndividualData> _onCharacterSelectedBuffer; // V‚µ‚¢—v‘f‚ª¶¬‚³‚ê‚½‚Æ‚«‚É“o˜^‚·‚×‚«ŠÖ”ŒQ‚ğˆê“I‚É‹L‰¯‚µ‚Ä‚¨‚­—ÌˆæB
+    public event Action<CharacterIndividualData> OnCharacterSelected
+    {
+        add
+        {
+            _onCharacterSelectedBuffer += value;
+            foreach (var element in _actives) element.OnCharacterSelected += value;
+            foreach (var element in _inactives) element.OnCharacterSelected += value;
+        }
+        remove
+        {
+            _onCharacterSelectedBuffer -= value;
+            foreach (var element in _actives) element.OnCharacterSelected -= value;
+            foreach (var element in _inactives) element.OnCharacterSelected -= value;
+        }
+    }
 
     public void Show()
     {
@@ -50,12 +66,12 @@ public class CharacterInventoryWindow : MonoBehaviour
             else
             {
                 elem = Instantiate(_elementPrefab, _elementParent);
+                elem.OnCharacterSelected += _onCharacterSelectedBuffer;
             }
 
             elem.CharacterData = item;
 
             elem.gameObject.SetActive(true);
-            elem.OnCharacterSelected += OnCharacterSelected;
             _actives.Add(elem);
         }
 
@@ -70,7 +86,6 @@ public class CharacterInventoryWindow : MonoBehaviour
         {
             elem.gameObject.SetActive(false);
             _inactives.Enqueue(elem);
-            elem.OnCharacterSelected -= OnCharacterSelected;
         }
         _actives.Clear();
 

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -26,16 +28,33 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private int _capacity;
 
-    private int _activeEnemyCount = 0;
-
     private Dictionary<int, HashSet<EnemyController>> _activeEnemiesDictionary = new Dictionary<int, HashSet<EnemyController>>();
     private Dictionary<int, Stack<EnemyController>> _inactiveEnemiesDictionary = new Dictionary<int, Stack<EnemyController>>();
 
     private HashSet<EnemyController> _activeEnemies = new HashSet<EnemyController>();
+    private HashSet<EnemyController> _inactiveEnemies = new HashSet<EnemyController>();
     public IEnumerable<EnemyController> ActiveEnemies => _activeEnemies;
+
+    private Action<int, EnemyController> _onEnemyDeadBuffer;
+    public event Action<int, EnemyController> OnEnemyDead
+    {
+        add
+        {
+            _onEnemyDeadBuffer += value;
+            foreach (var elem in _activeEnemies) elem.OnDead += value;
+            foreach (var elem in _inactiveEnemies) elem.OnDead += value;
+        }
+        remove
+        {
+            _onEnemyDeadBuffer -= value;
+            foreach (var elem in _activeEnemies) elem.OnDead -= value;
+            foreach (var elem in _inactiveEnemies) elem.OnDead -= value;
+        }
+    }
 
     public void CreateEnemy(int enemyID, Vector3 position)
     {
+        // ディクショナリに要素が無ければ追加する。
         if (!_activeEnemiesDictionary.TryGetValue(enemyID, out HashSet<EnemyController> activeEnemies))
         {
             activeEnemies = new HashSet<EnemyController>();
@@ -47,14 +66,18 @@ public class EnemyManager : MonoBehaviour
             _inactiveEnemiesDictionary.Add(enemyID, inactiveEnemies);
         }
 
-        if (_activeEnemyCount > _capacity) return;
+        // キャパシティを超える場合は無効。
+        if (_activeEnemies.Count > _capacity) return;
 
+        // 非アクティブなエネミーがいなければ生成する。
         EnemyController enemy = null;
         if (inactiveEnemies.Count == 0)
         {
             var enemyPrefab = _enemyPrefabs[enemyID];
             enemy = Instantiate(enemyPrefab, transform);
+            enemy.OnDead += _onEnemyDeadBuffer;
         }
+        // 非アクティブなエネミーがいれば、そのエネミーを利用する。
         else
         {
             enemy = inactiveEnemies.Pop();
@@ -66,8 +89,7 @@ public class EnemyManager : MonoBehaviour
         enemy.OnDead += OnDeadEnemy;
 
         _activeEnemies.Add(enemy);
-
-        _activeEnemyCount++;
+        _inactiveEnemies.Remove(enemy);
     }
 
     private void OnDeadEnemy(int enemyID, EnemyController enemy)
@@ -81,7 +103,6 @@ public class EnemyManager : MonoBehaviour
         inactiveEnemies.Push(enemy);
 
         _activeEnemies.Remove(enemy);
-
-        _activeEnemyCount--;
+        _inactiveEnemies.Add(enemy);
     }
 }

@@ -78,4 +78,15 @@ public struct ActorStatus
 
         return result;
     }
+
+    public override string ToString()
+    {
+        return
+            $"MaxLife: {_maxLife}\n" +
+            $"MoveSpeed: {_moveSpeed}\n" +
+            $"AttackPower: {_attackPower}\n" +
+            $"Defense: {_defense}\n" +
+            $"Dexterity: {_dexterity}\n" +
+            $"Luck: {_luck}";
+    }
 }

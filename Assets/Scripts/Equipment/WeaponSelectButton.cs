@@ -27,14 +27,16 @@ namespace EquipmentWindowElement
             }
             set
             {
+                var old = _weapon;
                 _weapon = value;
                 if (value != null)
                 {
                     _weaponImage.sprite = value.Data.WeaponIcon;
                     _weaponImage.color = Color.white;
-                    _label.text =
-                        //$"{value.WeaponName}\n" +
-                        $"Lv. {value.CurrentLevel}\n";
+                    ApplyLevelLabel(value.CurrentLevel);
+
+                    if (old) old.OnLevelChanged -= ApplyLevelLabel;
+                    value.OnLevelChanged += ApplyLevelLabel;
                 }
                 else
                 {
@@ -69,6 +71,11 @@ namespace EquipmentWindowElement
                     Weapon = null;
                 }
             }
+        }
+
+        private void ApplyLevelLabel(int level)
+        {
+            _label.text = $"Lv. {level}";
         }
 
         public void SetIndex(int index)

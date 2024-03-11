@@ -69,4 +69,15 @@ public struct WeaponStatus
 
         return result;
     }
+
+    public override string ToString()
+    {
+        return
+            $"AttackPower: {_attackPower}\n" +
+            $"Speed: {_speed}\n" +
+            $"Duration: {_duration}\n" +
+            $"Area: {_area}\n" +
+            $"Cooldown: {_cooldown}\n" +
+            $"Amount: {_amount}";
+    }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -62,6 +61,14 @@ public class PlayerController : MonoBehaviour
 
     public List<ActorStatus> PlayerStatusEffects => _playerStatusEffects;
     public List<WeaponStatus> WeaponStatusEffects => _weaponStatusEffects;
+
+    public float BattlePower
+    {
+        get
+        {
+            return 0;
+        }
+    }
 
     public ActorStatus PlayerStatus
     {
@@ -224,21 +231,24 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Boss
+    [Header("Boss")]
     [SerializeField]
     private Transform _bossBattlePosition;
     [SerializeField]
-    private BossCutscene _cutscene;
+    private BossBattleAnimationController _bossBattleAnimationController;
 
     private IEnumerator GoToBoss(CancellationToken token)
     {
         var startPos = transform.position;
         var targetPos = _bossBattlePosition.position;
-        var dir = (targetPos - startPos).normalized;
-
-        yield return AwaitArrivalAsync(startPos, targetPos, transform, () => _rigidbody2D.velocity = dir * PlayerStatus.MoveSpeed * TimeScale, token);
+        if (startPos != targetPos)
+        {
+            var dir = (targetPos - startPos).normalized;
+            yield return AwaitArrivalAsync(startPos, targetPos, transform, () => _rigidbody2D.velocity = dir * PlayerStatus.MoveSpeed * TimeScale, token);
+        }
 
         _rigidbody2D.velocity = Vector3.zero;
-        _cutscene.PlayAnimation();
+        _bossBattleAnimationController.Play();
     }
 
     private IEnumerator AwaitArrivalAsync(Vector3 startPos, Vector3 endPos, Transform origin, Action onUpdate, CancellationToken token)
