@@ -1,42 +1,21 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterAppreciationWindow : MonoBehaviour
 {
     [SerializeField]
-    private ParticleSystem _dirtParticle;
+    private Image _characterImage;
 
-    private bool _isDirtParticleStopRequested = false;
-
-    public void CreateDirtParticle()
+    public void Show(CharacterIndividualData selectedCharacter)
     {
-
+        gameObject.SetActive(true);
+        _characterImage.sprite = selectedCharacter.SpeciesData.Sprite;
     }
 
-    [SerializeField]
-    private ParticleSystem _bubbleParticle;
-
-    public void StartBubbleParticle()
+    public void Hide()
     {
-        _bubbleParticle.Play();
-    }
-
-    public void StopBubbleParticle()
-    {
-        _bubbleParticle.Stop();
-    }
-
-    [SerializeField]
-    private ParticleSystem _heartParticle;
-
-    public void StartHeartParticle()
-    {
-        _heartParticle.Play();
-    }
-
-    public void StopHeartParticle()
-    {
-        _heartParticle.Stop();
+        gameObject.SetActive(false);
     }
 }

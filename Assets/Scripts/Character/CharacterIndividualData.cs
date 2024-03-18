@@ -73,4 +73,7 @@ public class CharacterIndividualData : IActor// 個体としてのキャラデータ
     {
         return $"Name: {_speciesData.Name}\nLevel: {_level}";
     }
+
+    private bool _isDirty = true;
+    public bool IsDirty => _isDirty;
 }

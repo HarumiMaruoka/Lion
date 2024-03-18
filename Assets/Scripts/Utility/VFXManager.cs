@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class VFXManager : MonoBehaviour
@@ -33,5 +34,18 @@ public class VFXManager : MonoBehaviour
 
         var damageVFX = Instantiate(_damageVFXPrefab, position, Quaternion.identity, _damageVFXParent);
         damageVFX.Initialize(damageValue);
+    }
+
+    [SerializeField]
+    private GameObject _bubblePrefab;
+    [SerializeField]
+    private Transform _bubbleParent;
+
+    internal void CreateBubbleVFX(Vector3 mousePosition)
+    {
+        if (_bubblePrefab)
+            Instantiate(_bubblePrefab, mousePosition, Quaternion.identity, _bubbleParent);
+        else
+            Debug.Log("_bubblePrefab is unassigned.");
     }
 }
