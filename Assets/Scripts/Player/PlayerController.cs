@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -163,12 +165,16 @@ public class PlayerController : MonoBehaviour, IActor
         GoToBoss,
     }
 
+    public event Action<MoveMode> OnMoveModeChanged;
+
     private Coroutine _moveCoroutine;
+    public MoveMode CurrentMoveMode { get; private set; }
 
     public void BeginMoveCoroutine(MoveMode moveMode)
     {
         if (_moveCoroutine != null) StopCoroutine(_moveCoroutine);
 
+        CurrentMoveMode = moveMode;
         if (moveMode == MoveMode.Manual)
         {
             _moveCoroutine = StartCoroutine(ManualMoveAsync(_cancellationOnDestroy.Token));
@@ -181,6 +187,8 @@ public class PlayerController : MonoBehaviour, IActor
         {
             _moveCoroutine = StartCoroutine(GoToBoss(_cancellationOnDestroy.Token));
         }
+
+        OnMoveModeChanged?.Invoke(moveMode);
     }
 
     [SerializeField]
@@ -188,10 +196,31 @@ public class PlayerController : MonoBehaviour, IActor
 
     private Vector2 _touchBeginPos;
 
+    private int _selectUICount = 0;
+
+    public int SelectUICount => _selectUICount;
+
+    public void OnUISelect()
+    {
+        _selectUICount++;
+    }
+
+    public void OnUIDeselect()
+    {
+        _selectUICount--;
+    }
+
     private IEnumerator ManualMoveAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
+            // UIëÄçÏíÜÇ≈Ç†ÇÍÇŒñ≥å¯ÅB
+            if (_selectUICount != 0)
+            {
+                yield return null;
+                continue;
+            }
+
             float x = 0f;
             float y = 0f;
 

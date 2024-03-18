@@ -95,7 +95,7 @@ public class CharacterInventoryWindow : MonoBehaviour
     [SerializeField]
     private CharacterInformationWindow _characterInformationWindow;
 
-    public void SimpleShow()
+    public void ShowCharacterInformationMode()
     {
         OnCharacterSelected += _characterInformationWindow.ShowCharacterInformation;
         Show();

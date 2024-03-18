@@ -49,6 +49,13 @@ public class CharacterSpeciesData : ScriptableObject // 種族としてのキャラデータ
         return default;
 
         if (_levelData == null) { _levelData = CreateLevelData(); }
+
+        if (_levelData == null || _levelData.Length == 0)
+        {
+            Debug.Log($"レベルのデータがありません。");
+            return default;
+        }
+
         if (level < 0 || level >= _levelData.Length)
         {
             Debug.Log($"範囲外のレベルが選択されました。Name: {Name},Level: {level}.");

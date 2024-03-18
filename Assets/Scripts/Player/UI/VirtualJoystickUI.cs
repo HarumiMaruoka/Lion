@@ -15,6 +15,11 @@ public class VirtualJoystickUI : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerController.Current.SelectUICount != 0)
+        {
+            return;
+        }
+
         if (Input.touchCount == 1)
         {
             var touch = Input.touches[0];
