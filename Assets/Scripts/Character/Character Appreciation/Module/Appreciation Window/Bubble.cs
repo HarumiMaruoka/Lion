@@ -22,6 +22,13 @@ public class Bubble : MonoBehaviour
         Play();
     }
 
+    private void OnEnable()
+    {
+        var col = _image.color;
+        col.a = 0f;
+        _image.color = col;
+    }
+
     public void Play()
     {
         Stop(); // 既に再生中のコルーチンは破棄する。

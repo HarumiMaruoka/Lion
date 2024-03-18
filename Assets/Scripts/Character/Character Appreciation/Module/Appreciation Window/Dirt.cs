@@ -13,17 +13,17 @@ public class Dirt : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField]
     private float _dirtinessLevel; // 汚れ度
 
-    public void Initialize(float maxDirtinessLevel, float initialDirtinessLevel)
+    public void Initialize(float maxDirtinessLevel, float dirtinessLevel, Vector2 pos)
     {
+        transform.position = pos;
         _maxDirtinessLevel = maxDirtinessLevel;
-        _dirtinessLevel = initialDirtinessLevel;
+        _dirtinessLevel = dirtinessLevel;
+
+        UpdateAlpha();
     }
 
     private void Update()
     {
-        // このオブジェクト上でドラッグされていれば
-        // 泡パーティクルを生成し、汚れ度を減らす。
-        if (!_isMouseOver) return;
         DragUpdate();
     }
 
@@ -37,6 +37,11 @@ public class Dirt : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (_isMouseOver)
+        {
+            DragUpdate();
+        }
+
         _isMouseOver = false;
         _currentMousePosition = Vector2.zero;
     }
@@ -47,8 +52,12 @@ public class Dirt : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private float _bubbleVFXInterval = 0.2f;
     private float _bubbleVFXIntervalTimer = 0f;
 
+    public event Action<Dirt> OnDestroyed;
+
     private void DragUpdate()
     {
+        if (!_isMouseOver) return;
+
         _previousMousePosition = _currentMousePosition;
         _currentMousePosition = Input.mousePosition;
 
@@ -63,10 +72,15 @@ public class Dirt : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             _dirtinessLevel -= magnitude;
             UpdateAlpha();
 
-            if (_bubbleVFXIntervalTimer <= 0)
+            if (_bubbleVFXIntervalTimer <= 0f)
             {
                 _bubbleVFXIntervalTimer = _bubbleVFXInterval;
                 VFXManager.Current.CreateBubbleVFX(Input.mousePosition);
+            }
+
+            if (_dirtinessLevel < 0)
+            {
+                OnDestroyed?.Invoke(this);
             }
         }
     }

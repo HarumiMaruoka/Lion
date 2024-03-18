@@ -20,11 +20,6 @@ public class Heart : MonoBehaviour
     private Coroutine _moveCoroutine = null;
     private Coroutine _fadeCoroutine = null;
 
-    private void Start()
-    {
-        Play();
-    }
-
     public void Play()
     {
         Stop(); // 既に再生中のコルーチンは破棄する。
@@ -37,6 +32,10 @@ public class Heart : MonoBehaviour
         if (_mainCoroutine != null) StopCoroutine(_mainCoroutine);
         if (_moveCoroutine != null) StopCoroutine(_moveCoroutine);
         if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
+
+        var col = _image.color;
+        col.a = 0f;
+        _image.color = col;
     }
 
     public IEnumerator PlayAsync(float totalDuration)

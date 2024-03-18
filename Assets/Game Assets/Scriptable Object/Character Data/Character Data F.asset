@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 5
   _name: Sample F
-  _sprite: {fileID: 21300000, guid: 731a8b5d6b350144db84a042480e9665, type: 3}
+  _sprite: {fileID: 21300000, guid: 63390e154e4994945862dadc198e511c, type: 3}
+  _description: 
+  _levelInputData: {fileID: 0}
