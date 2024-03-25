@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActorStatusWindow : MonoBehaviour
+public class ActorStatusWindow : MonoBehaviour // ステータスウィンドウの要素。
 {
     [SerializeField]
     private Text _title;

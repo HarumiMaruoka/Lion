@@ -18,6 +18,8 @@ public abstract class WeaponBase : MonoBehaviour
 
     private CancellationTokenSource _cancellationOnDestroy = new CancellationTokenSource();
 
+    protected IActor _equippedActor;
+
     protected PlayerController Player => PlayerController.Current;
 
     public WeaponData Data => _data;
@@ -31,8 +33,10 @@ public abstract class WeaponBase : MonoBehaviour
 
     private IEnumerator _mainRoutine = null;
 
-    public virtual void Activate(Transform parent)
+    public virtual void Activate(IActor equippedActor, Transform parent)
     {
+        _equippedActor = equippedActor;
+
         if (_mainRoutine == null)
         {
             _mainRoutine = MainRoutine();

@@ -12,6 +12,6 @@ public class AxeSpawner : WeaponBase
     protected override void Spawn()
     {
         var instance = Instantiate(_axePrefab, transform);
-        instance.Initialize(TotalStatus);
+        instance.Initialize(_equippedActor, TotalStatus);
     }
 }

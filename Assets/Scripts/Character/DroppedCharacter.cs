@@ -2,44 +2,47 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class DroppedCharacter : MonoBehaviour
+namespace Character
 {
-    [SerializeField]
-    private SpriteRenderer _spriteRenderer;
-
-    public Action<DroppedCharacter> OnDead { get; internal set; }
-
-    private CharacterSpeciesData _speciesInfo;
-
-    public void Initialize(Vector3 position, CharacterSpeciesData speciesInfo)
+    public class DroppedCharacter : MonoBehaviour
     {
-        _speciesInfo = speciesInfo;
+        [SerializeField]
+        private SpriteRenderer _spriteRenderer;
 
-        transform.position = position;
-        _spriteRenderer.sprite = speciesInfo.Sprite;
+        public Action<DroppedCharacter> OnDead { get; internal set; }
 
-        PlayCollectAnimation();
-    }
+        private CharacterSpeciesData _speciesInfo;
 
-    [SerializeField]
-    private float _collectAnimationInitialVelocity;
-    [SerializeField]
-    private float _collectAnimationDuration;
+        public void Initialize(Vector3 position, CharacterSpeciesData speciesInfo)
+        {
+            _speciesInfo = speciesInfo;
 
-    private void PlayCollectAnimation()
-    {
-        var player = PlayerController.Current;
-        if (player == null) return;
+            transform.position = position;
+            _spriteRenderer.sprite = speciesInfo.Sprite;
 
-        var dir = (this.transform.position - player.transform.position).normalized;
-        var initialVelocity = dir * _collectAnimationInitialVelocity;
-        this.PlayThrowAnimation(player.transform, _collectAnimationDuration, initialVelocity,
-            OnCollectAnimationCompleted);
-    }
+            PlayCollectAnimation();
+        }
 
-    private void OnCollectAnimationCompleted()
-    {
-        CharacterInventory.Instance.AddCharacter(_speciesInfo);
-        OnDead?.Invoke(this);
+        [SerializeField]
+        private float _collectAnimationInitialVelocity;
+        [SerializeField]
+        private float _collectAnimationDuration;
+
+        private void PlayCollectAnimation()
+        {
+            var player = PlayerController.Current;
+            if (player == null) return;
+
+            var dir = (this.transform.position - player.transform.position).normalized;
+            var initialVelocity = dir * _collectAnimationInitialVelocity;
+            this.PlayThrowAnimation(player.transform, _collectAnimationDuration, initialVelocity,
+                OnCollectAnimationCompleted);
+        }
+
+        private void OnCollectAnimationCompleted()
+        {
+            CharacterInventory.Instance.AddCharacter(_speciesInfo);
+            OnDead?.Invoke(this);
+        }
     }
 }

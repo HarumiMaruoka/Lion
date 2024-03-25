@@ -14,7 +14,7 @@ public class HolyBibleSpawner : WeaponBase
     protected override void Spawn()
     {
         var instance = Instantiate(_holyBiblePrefab, transform);
-        instance.Initialize(TotalStatus, Player.transform, TotalStatus.Amount, _spawnCounter, _baseSpawnInterval);
+        instance.Initialize(_equippedActor, TotalStatus, Player.transform, TotalStatus.Amount, _spawnCounter, _baseSpawnInterval);
         _spawnCounter++;
     }
 }

@@ -61,6 +61,10 @@ public class PlayerController : MonoBehaviour, IActor
     [SerializeField]
     private LifeGage _lifeGage;
 
+    private Ability _ability;
+
+    public Ability Ability => _ability;
+
     private List<ActorStatus> _playerStatusEffects = new List<ActorStatus>();
     private List<WeaponStatus> _weaponStatusEffects = new List<WeaponStatus>();
 
@@ -194,53 +198,65 @@ public class PlayerController : MonoBehaviour, IActor
     [SerializeField]
     private VirtualJoystickUI _virtualJoystickUI;
 
+    private bool _isMovable = true;
+
     private Vector2 _touchBeginPos;
-
-    private int _selectUICount = 0;
-
-    public int SelectUICount => _selectUICount;
-
-    public void OnUISelect()
-    {
-        _selectUICount++;
-    }
-
-    public void OnUIDeselect()
-    {
-        _selectUICount--;
-    }
 
     private IEnumerator ManualMoveAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
-            // UI操作中であれば無効。
-            if (_selectUICount != 0)
+            if (WindowBase.OpenedWindowCount != 0)
             {
                 yield return null;
                 continue;
             }
 
-            float x = 0f;
-            float y = 0f;
+            Vector2 moveDir = new();
 
+#if UNITY_EDITOR_WIN // Editor実行中ではスマホとそれ以外両方を組み合わせる。
+            // スマホ操作時、マニュアル移動開始時に
+            // UIとドラッグ開始場所が重なっていればマニュアル移動は無効。
             if (Input.touchCount == 1)
             {
                 var touch = Input.touches[0];
                 if (touch.phase == TouchPhase.Began)
                 {
                     _touchBeginPos = touch.position;
+
+                    if (MouseUtility.IsMouseOverUI())
+                        _isMovable = false;
+                    else
+                        _isMovable = true;
                 }
 
-                var moveDir = (touch.position - _touchBeginPos).normalized;
-                x = moveDir.x;
-                y = moveDir.y;
+                if (_isMovable)
+                    moveDir = touch.position - _touchBeginPos;
             }
+            moveDir += new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+#elif UNITY_ANDROID || UNITY_IOS // スマホではドラッグで操作する。
+            // スマホ操作時、マニュアル移動開始時に
+            // UIとドラッグ開始場所が重なっていればマニュアル移動は無効。
+            if (Input.touchCount == 1)
+            {
+                var touch = Input.touches[0];
+                if (touch.phase == TouchPhase.Began)
+                {
+                    _touchBeginPos = touch.position;
 
-            x += Input.GetAxisRaw("Horizontal");
-            y += Input.GetAxisRaw("Vertical");
+                    if (MouseUtility.IsMouseOverUI())
+                        _isMovable = false;
+                    else
+                        _isMovable = true;
+                }
 
-            _rigidbody2D.velocity = new Vector2(x, y).normalized * Status.MoveSpeed * TimeScale;
+                if (_isMovable)
+                    moveDir = touch.position - _touchBeginPos;
+            }
+#else // スマホ以外では"InputManager"の"Horizontal"と"Vertical"を利用する。
+            moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+#endif
+            _rigidbody2D.velocity = moveDir.normalized * Status.MoveSpeed * TimeScale;
             yield return null;
         }
     }
@@ -395,7 +411,7 @@ public class PlayerController : MonoBehaviour, IActor
         if (old) old.Inactivate();
 
         _playerWeapons[index] = equipWeapon;
-        if (equipWeapon) equipWeapon.Activate(_initialWeaponParent);
+        if (equipWeapon) equipWeapon.Activate(this, _initialWeaponParent);
 
         return old;
     }

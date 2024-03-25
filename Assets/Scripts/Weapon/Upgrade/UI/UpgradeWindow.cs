@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeWindow : MonoBehaviour
+public class UpgradeWindow : WindowBase
 {
     [SerializeField]
     private Text _targetWeaponNameText;
@@ -18,8 +18,9 @@ public class UpgradeWindow : MonoBehaviour
         UpgradeManager.Current.OnTargetLevelChanged += OnTargetLevelChanged;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         UpgradeManager.Current.ChangeUpgradeTarget(null);
     }
 

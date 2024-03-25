@@ -19,9 +19,11 @@ public class Boomerang : MonoBehaviour
     private float TimeScale => GameSpeedManager.Instance.TimeScale;
 
     private WeaponStatus _status;
+    private IActor _equippedActor;
 
-    public void Initialize(WeaponStatus status)
+    public void Initialize(IActor equippedActor, WeaponStatus status)
     {
+        _equippedActor = equippedActor;
         _status = status;
     }
 
@@ -54,7 +56,7 @@ public class Boomerang : MonoBehaviour
     {
         if (collision.TryGetComponent(out EnemyController enemy))
         {
-            enemy.Damage(_status.AttackPower);
+            enemy.Damage(_equippedActor, _status.AttackPower);
             return;
         }
         if (collision.tag == "Wall")

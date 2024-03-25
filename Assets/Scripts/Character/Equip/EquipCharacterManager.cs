@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Character;
 
 public class EquipCharacterManager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class EquipCharacterManager : MonoBehaviour
     [SerializeField]
     private CharacterBehaviour[] _equippedCharacters;
 
-    public CharacterBehaviour[] EquippedCharacters=>_equippedCharacters;
+    public CharacterBehaviour[] EquippedCharacters => _equippedCharacters;
 
     public int EquippableCharacterCount => _equippedCharacters.Length;
 

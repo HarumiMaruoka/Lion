@@ -1,32 +1,65 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CharacterBehaviour : MonoBehaviour
+namespace Character
 {
-    [SerializeField]
-    private SpriteRenderer _spriteRenderer;
-
-    private CharacterIndividualData _individualCharacterData;
-
-    public CharacterIndividualData IndividualData
+    public class CharacterBehaviour : MonoBehaviour, ISkillUser, IPointerClickHandler
     {
-        get => _individualCharacterData;
-        set
+        [SerializeField]
+        private SpriteRenderer _spriteRenderer;
+
+        private CharacterIndividualData _individualCharacterData;
+
+        public CharacterIndividualData IndividualData
         {
-            _individualCharacterData = value;
-            if (value != null)
+            get => _individualCharacterData;
+            set
             {
-                _spriteRenderer.sprite = value.SpeciesData.Sprite;
-            }
-            else
-            {
-                _spriteRenderer.sprite = null;
+                _individualCharacterData = value;
+                if (value != null)
+                {
+                    _spriteRenderer.sprite = value.SpeciesData.Sprite;
+                }
+                else
+                {
+                    _spriteRenderer.sprite = null;
+                }
             }
         }
-    }
 
-    private void Start()
-    {
-        IndividualData = null;
+        public Transform Transform => transform;
+
+        public int SkillID => _individualCharacterData.SpeciesData.SkillID;
+
+        public ActorStatus Status => throw new NotImplementedException();
+
+        private void Start()
+        {
+            IndividualData = null;
+        }
+
+        private Coroutine _skillCoroutine = null;
+
+        public void UseSkill()
+        {
+            if (_individualCharacterData == null)
+            {
+                return;
+            }
+
+            if (_skillCoroutine != null)
+            {
+                StopCoroutine(_skillCoroutine);
+            }
+
+            _skillCoroutine = StartCoroutine(
+                _individualCharacterData.PlaySkillAsync(this, () => _skillCoroutine = null));
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            UseSkill();
+        }
     }
 }

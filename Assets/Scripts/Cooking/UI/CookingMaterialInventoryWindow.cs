@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class CookingMaterialInventoryWindow : MonoBehaviour
+public class CookingMaterialInventoryWindow : WindowBase
 {
     [SerializeField]
     private CookingController _controller;

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [DefaultExecutionOrder(-90)]
-public class GameInitializer : MonoBehaviour
+public class GameInitializerBegin : MonoBehaviour
 {
     private void Awake()
     {

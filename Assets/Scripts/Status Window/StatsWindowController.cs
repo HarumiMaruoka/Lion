@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatsWindowController : MonoBehaviour
+public class StatsWindowController : WindowBase
 {
     [SerializeField]
     private ActorStatusWindow _actorStatusWindowPrefab;

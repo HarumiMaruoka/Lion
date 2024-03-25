@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ItemInventoryWindowController : MonoBehaviour
+public class ItemInventoryWindowController : WindowBase
 {
     [SerializeField]
     private ItemInventoryWindowElement _inventoryWindowElementPrefab;

@@ -16,11 +16,13 @@ public class HolyWater : MonoBehaviour
 
     private float TimeScale => GameSpeedManager.Instance.TimeScale;
 
+    private IActor _equippedActor;
     private WeaponStatus _status;
     private float _elapsed = 0f;
 
-    public void Initialize(WeaponStatus status)
+    public void Initialize(IActor equippedActor, WeaponStatus status)
     {
+        _equippedActor = equippedActor;
         _status = status;
     }
 
@@ -59,7 +61,7 @@ public class HolyWater : MonoBehaviour
     private IEnumerator AttackAsync(EnemyController enemy, CancellationToken token)
     {
         var elapsed = 0f;
-        enemy.Damage(_status.AttackPower);
+        enemy.Damage(_equippedActor, _status.AttackPower);
         while (!token.IsCancellationRequested)
         {
             elapsed += Time.deltaTime * TimeScale;
@@ -67,7 +69,7 @@ public class HolyWater : MonoBehaviour
             if (elapsed > _damageInterval)
             {
                 elapsed -= _damageInterval;
-                enemy.Damage(_status.AttackPower);
+                enemy.Damage(_equippedActor, _status.AttackPower);
             }
             yield return null;
         }

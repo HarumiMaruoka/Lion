@@ -13,13 +13,13 @@ public class VirtualJoystickUI : MonoBehaviour
 
     private Vector2 _beginPosition;
 
+    private void Start()
+    {
+        End();
+    }
+
     private void Update()
     {
-        if (PlayerController.Current.SelectUICount != 0)
-        {
-            return;
-        }
-
         if (Input.touchCount == 1)
         {
             var touch = Input.touches[0];
@@ -37,6 +37,8 @@ public class VirtualJoystickUI : MonoBehaviour
 
     public void Begin(Vector2 position)
     {
+        if (MouseUtility.IsMouseOverUI()) return;
+
         _beginPosition = position;
 
         _background.enabled = true;

@@ -31,7 +31,7 @@ public class KnifeSpawner : WeaponBase
     {
         var randomPoint = GetRandomPoint();
         var knife = Instantiate(_knifePrefab, transform.position + randomPoint, Quaternion.identity, transform);
-        knife.Initialize(TotalStatus, _lastDir);
+        knife.Initialize(_equippedActor, TotalStatus, _lastDir);
     }
 
     [SerializeField]

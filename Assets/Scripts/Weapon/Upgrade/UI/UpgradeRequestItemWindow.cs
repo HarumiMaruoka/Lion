@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class UpgradeRequestItemWindow : MonoBehaviour
+public class UpgradeRequestItemWindow : WindowBase
 {
     [SerializeField]
     private UpgradeRequestItemWindowElement _elementPrefab;

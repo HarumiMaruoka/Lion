@@ -10,14 +10,17 @@ public class HolyWaterThrowAnimation : MonoBehaviour
     [SerializeField]
     private float _duration;
 
+    private IActor _equippedActor;
+
     private Vector2 _targetPosition;
 
     private WeaponStatus _status;
 
     private float TimeScale => GameSpeedManager.Instance.TimeScale;
 
-    public void Initialize(WeaponStatus status, Vector2 targetPosition)
+    public void Initialize(IActor equippedActor, WeaponStatus status, Vector2 targetPosition)
     {
+        _equippedActor = equippedActor;
         _status = status;
         _targetPosition = targetPosition;
     }
@@ -33,7 +36,7 @@ public class HolyWaterThrowAnimation : MonoBehaviour
         var endPos = _targetPosition;
         yield return Animation(startPos, endPos);
         var instance = Instantiate(_holyWaterPrefab, transform.position, Quaternion.identity, transform.parent);
-        instance.Initialize(_status);
+        instance.Initialize(_equippedActor, _status);
         Destroy(gameObject);
     }
 

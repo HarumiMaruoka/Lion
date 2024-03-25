@@ -41,7 +41,7 @@ public class VFXManager : MonoBehaviour
     [SerializeField]
     private Transform _bubbleParent;
 
-    internal void CreateBubbleVFX(Vector3 mousePosition)
+    public void CreateBubbleVFX(Vector3 mousePosition)
     {
         if (_bubblePrefab)
             Instantiate(_bubblePrefab, mousePosition, Quaternion.identity, _bubbleParent);

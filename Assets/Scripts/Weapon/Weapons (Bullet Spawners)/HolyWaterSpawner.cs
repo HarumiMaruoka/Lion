@@ -16,7 +16,7 @@ public class HolyWaterSpawner : WeaponBase
         var windowBottomRight = GameWindowArea.Current.BottomRight;
 
         var targetPos = GetRandomSpawnPosition(windowTopLeft, windowBottomRight);
-        holyWaterThrowAnimation.Initialize(TotalStatus, targetPos);
+        holyWaterThrowAnimation.Initialize(_equippedActor, TotalStatus, targetPos);
     }
 
     [SerializeField]

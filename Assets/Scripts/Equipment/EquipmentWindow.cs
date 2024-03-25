@@ -1,8 +1,8 @@
-using EquipmentWindowElement;
 using System;
+using EquipmentWindowElement;
 using UnityEngine;
 
-public class EquipmentWindow : MonoBehaviour
+public class EquipmentWindow : WindowBase
 {
     [SerializeField]
     private EquipmentWindowElementGroup _elementPrefab;

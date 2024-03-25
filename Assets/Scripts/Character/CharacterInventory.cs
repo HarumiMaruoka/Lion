@@ -1,81 +1,83 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 
-public class CharacterInventory
+namespace Character
 {
-    private static CharacterInventory _instance = null;
-    public static CharacterInventory Instance => _instance ??= new CharacterInventory();
-    private CharacterInventory() { }
-
-    private HashSet<CharacterIndividualData> _collection = new HashSet<CharacterIndividualData>();
-    public IReadOnlyCollection<CharacterIndividualData> Collection => _collection;
-
-    private readonly int Capacity = 20;
-
-    private List<WeaponBase> _characterEquippedWeapons = new List<WeaponBase>();
-
-    public IEnumerable<WeaponBase> CharacterEquippedWeapons
+    public class CharacterInventory
     {
-        get
-        {
-            _characterEquippedWeapons.Clear();
+        private static CharacterInventory _instance = null;
+        public static CharacterInventory Instance => _instance ??= new CharacterInventory();
+        private CharacterInventory() { }
 
-            // キャラクターが装備している武器をリストに登録していく。
-            foreach (var character in _collection)
+        private HashSet<CharacterIndividualData> _collection = new HashSet<CharacterIndividualData>();
+        public IReadOnlyCollection<CharacterIndividualData> Collection => _collection;
+
+        private readonly int Capacity = 20;
+
+        private List<WeaponBase> _characterEquippedWeapons = new List<WeaponBase>();
+
+        public IEnumerable<WeaponBase> CharacterEquippedWeapons
+        {
+            get
             {
-                if (character == null) continue;
-                foreach (var weapon in character.EquippedWeapons)
+                _characterEquippedWeapons.Clear();
+
+                // キャラクターが装備している武器をリストに登録していく。
+                foreach (var character in _collection)
                 {
-                    if (!weapon) continue;
-                    _characterEquippedWeapons.Add(weapon);
+                    if (character == null) continue;
+                    foreach (var weapon in character.EquippedWeapons)
+                    {
+                        if (!weapon) continue;
+                        _characterEquippedWeapons.Add(weapon);
+                    }
                 }
+
+                return _characterEquippedWeapons;
+            }
+        }
+
+        /// <summary>
+        /// 新しい個体を取得したとき。
+        /// </summary>
+        /// <param name="speciesData"> 種族情報 </param>
+        public void AddCharacter(CharacterSpeciesData speciesData)
+        {
+            if (_collection.Count >= Capacity)
+            {
+                // Debug.Log("Inventory capacity exceeded, cannot collect more characters.");
+                return;
             }
 
-            return _characterEquippedWeapons;
+            var instance = new CharacterIndividualData(speciesData, 0);
+            _collection.Add(instance);
         }
-    }
 
-    /// <summary>
-    /// 新しい個体を取得したとき。
-    /// </summary>
-    /// <param name="speciesData"> 種族情報 </param>
-    public void AddCharacter(CharacterSpeciesData speciesData)
-    {
-        if (_collection.Count >= Capacity)
+        /// <summary>
+        /// 既に存在する個体を取得したとき。
+        /// </summary>
+        /// <param name="speciesData"> 個体情報 </param>
+        public void AddCharacter(CharacterIndividualData individualData)
         {
-            // Debug.Log("Inventory capacity exceeded, cannot collect more characters.");
-            return;
+            if (individualData == null)
+            {
+                Debug.LogWarning("Null is invalid.");
+                return;
+            }
+
+            if (_collection.Count >= Capacity)
+            {
+                Debug.Log("Inventory capacity exceeded, cannot collect more characters.");
+                return;
+            }
+
+            _collection.Add(individualData);
         }
 
-        var instance = new CharacterIndividualData(speciesData, 0);
-        _collection.Add(instance);
-    }
-
-    /// <summary>
-    /// 既に存在する個体を取得したとき。
-    /// </summary>
-    /// <param name="speciesData"> 個体情報 </param>
-    public void AddCharacter(CharacterIndividualData individualData)
-    {
-        if (individualData == null)
+        public void RemoveCharacter(CharacterIndividualData individualData)
         {
-            Debug.LogWarning("Null is invalid.");
-            return;
+            _collection.Remove(individualData);
         }
-
-        if (_collection.Count >= Capacity)
-        {
-            Debug.Log("Inventory capacity exceeded, cannot collect more characters.");
-            return;
-        }
-
-        _collection.Add(individualData);
-    }
-
-    public void RemoveCharacter(CharacterIndividualData individualData)
-    {
-        _collection.Remove(individualData);
     }
 }

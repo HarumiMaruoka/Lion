@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WeaponStatusWindow : MonoBehaviour
+public class WeaponStatusWindow : MonoBehaviour // ステータスウィンドウの要素。
 {
     [SerializeField]
     private Text _title;

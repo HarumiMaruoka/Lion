@@ -12,9 +12,11 @@ public class Axe : MonoBehaviour
     private float _minInitialSpeed;
 
     private WeaponStatus _status;
+    private IActor _equippedActor;
 
-    public void Initialize(WeaponStatus status)
+    public void Initialize(IActor equippedActor, WeaponStatus status)
     {
+        _equippedActor = equippedActor;
         _status = status;
     }
 
@@ -78,7 +80,7 @@ public class Axe : MonoBehaviour
     {
         if (collision.TryGetComponent(out EnemyController enemy))
         {
-            enemy.Damage(_status.AttackPower);
+            enemy.Damage(_equippedActor, _status.AttackPower);
 
             _hitCount++;
             if (_hitCount >= _maxHitCount)

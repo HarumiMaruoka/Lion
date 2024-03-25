@@ -16,10 +16,12 @@ public class HolyBible : MonoBehaviour
 
     private float TimeScale => GameSpeedManager.Instance.TimeScale;
 
+    private IActor _equippedActor;
     private WeaponStatus _status;
 
-    public void Initialize(WeaponStatus status, Transform centerTransform, int maxCount, int count, float spawnInterval)
+    public void Initialize(IActor equippedActor, WeaponStatus status, Transform centerTransform, int maxCount, int count, float spawnInterval)
     {
+        _equippedActor = equippedActor;
         _status = status;
 
         float proportion = (float)count / (float)maxCount; // äÑÇËçáÇ¢ÇèoÇ∑ÅB
@@ -72,7 +74,7 @@ public class HolyBible : MonoBehaviour
             if (_hits.Contains(enemy)) return;
             else
             {
-                enemy.Damage(_status.AttackPower);
+                enemy.Damage(_equippedActor, _status.AttackPower);
                 StartCoroutine(HitIntervalAsync(enemy));
             }
         }

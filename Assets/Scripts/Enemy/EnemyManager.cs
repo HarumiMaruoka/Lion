@@ -104,4 +104,38 @@ public class EnemyManager : MonoBehaviour
         _activeEnemies.Remove(enemy);
         _inactiveEnemies.Add(enemy);
     }
+
+    public EnemyController GetNearestEnemy(Vector2 position)
+    {
+        if (_activeEnemies.Count == 0)
+        {
+            return null;
+        }
+
+        EnemyController result = null;
+        float minDistance = float.MaxValue;
+
+        foreach (var enemy in _activeEnemies)
+        {
+            if (!result)
+            {
+                result = enemy;
+            }
+            else
+            {
+                var distance = ((Vector2)enemy.transform.position - position).sqrMagnitude;
+                if (Mathf.Approximately(distance, 0f))
+                {
+                    continue;
+                }
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    result = enemy;
+                }
+            }
+        }
+
+        return result;
+    }
 }

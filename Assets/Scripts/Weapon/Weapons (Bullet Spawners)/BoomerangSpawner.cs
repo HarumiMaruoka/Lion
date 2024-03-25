@@ -13,6 +13,6 @@ public class BoomerangSpawner : WeaponBase
     protected override void Spawn()
     {
         var instance = Instantiate(_boomerangPrefab, transform);
-        instance.Initialize(TotalStatus);
+        instance.Initialize(_equippedActor, TotalStatus);
     }
 }

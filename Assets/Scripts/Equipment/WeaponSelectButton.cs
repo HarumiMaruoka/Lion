@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Character;
 
 namespace EquipmentWindowElement
 {
@@ -123,7 +124,7 @@ namespace EquipmentWindowElement
             if (Character.EquipIndex != -1)
             {
                 var equipCharacter = EquipCharacterManager.Current.GetCharacterBehaviour(Character.EquipIndex);
-                if (equipCharacter) selected.Activate(equipCharacter.transform);
+                if (equipCharacter) selected.Activate(equipCharacter.IndividualData, equipCharacter.transform);
                 else Debug.Log("equipCharacter is null.");
             }
 

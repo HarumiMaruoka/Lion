@@ -54,7 +54,7 @@ public class ThunderboltSpawner : WeaponBase
             var index = UnityEngine.Random.Range(0, _enemies.Count);
             var enemy = _enemies.ElementAt(index);
             enemy.OnDead += RemoveEnemy;
-            enemy.Damage(TotalStatus.AttackPower);
+            enemy.Damage(_equippedActor, TotalStatus.AttackPower);
             enemy.OnDead -= RemoveEnemy;
             Instantiate(_thunderboltVFXPrefab, enemy.transform.position, Quaternion.identity);
         }

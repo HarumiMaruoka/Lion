@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Character;
 
-public class WeaponInventoryWindow : MonoBehaviour
+public class WeaponInventoryWindow : WindowBase
 {
     private static WeaponInventoryWindow _current = null;
     public static WeaponInventoryWindow Current => _current;

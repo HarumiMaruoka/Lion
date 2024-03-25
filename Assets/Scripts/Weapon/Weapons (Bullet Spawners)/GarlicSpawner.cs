@@ -22,9 +22,9 @@ public class GarlicSpawner : WeaponBase
         _enemies.Capacity = _initialCapacity;
     }
 
-    public override void Activate(Transform parent)
+    public override void Activate(IActor equippedActor, Transform parent)
     {
-        base.Activate(parent);
+        base.Activate(equippedActor, parent);
         _garlicSpriteRenderer.enabled = true;
     }
 
@@ -67,7 +67,7 @@ public class GarlicSpawner : WeaponBase
             var sqrDistance = (this.transform.position - enemy.transform.position).sqrMagnitude;
             if (sqrDistance < _radius * _radius)
             {
-                enemy.Damage(TotalStatus.AttackPower * TotalStatus.Amount);
+                enemy.Damage(_equippedActor, TotalStatus.AttackPower * TotalStatus.Amount);
             }
         }
     }

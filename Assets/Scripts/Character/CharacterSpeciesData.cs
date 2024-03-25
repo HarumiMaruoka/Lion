@@ -31,8 +31,19 @@ public class CharacterSpeciesData : ScriptableObject // 種族としてのキャラデータ
 
     public ActorStatus[] StatusData => _levelData ??= CreateLevelData();
 
+    [SerializeField]
+    private int _skillID;
+
+    public int SkillID { get => _skillID; }
+
     private ActorStatus[] CreateLevelData()
     {
+        if (!_levelInputData)
+        {
+            Debug.Log("Level data is not assigned.");
+            return null;
+        }
+
         var csv = _levelInputData.LoadCsv();
         var result = new ActorStatus[csv.Length];
 
@@ -46,8 +57,6 @@ public class CharacterSpeciesData : ScriptableObject // 種族としてのキャラデータ
 
     public ActorStatus GetStatus(int level)
     {
-        return default;
-
         if (_levelData == null) { _levelData = CreateLevelData(); }
 
         if (_levelData == null || _levelData.Length == 0)

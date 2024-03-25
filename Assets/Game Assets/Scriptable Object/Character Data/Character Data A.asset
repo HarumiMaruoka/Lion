@@ -15,3 +15,6 @@ MonoBehaviour:
   _id: 0
   _name: Sample A
   _sprite: {fileID: 21300000, guid: 52542b8339102404692fc86d50b8f106, type: 3}
+  _description: 
+  _levelInputData: {fileID: 0}
+  _skillID: 2

@@ -8,9 +8,11 @@ public class Knife : MonoBehaviour
     private float TimeScale => GameSpeedManager.Instance.TimeScale;
     private Vector2 _dir;
     private WeaponStatus _status;
+    private IActor _equippedActor;
 
-    public void Initialize(WeaponStatus status, Vector2 dir)
+    public void Initialize(IActor equippedActor, WeaponStatus status, Vector2 dir)
     {
+        _equippedActor = equippedActor;
         _status = status;
         _dir = dir.normalized;
         _position = transform.position;
@@ -33,7 +35,7 @@ public class Knife : MonoBehaviour
     {
         if (collision.TryGetComponent(out EnemyController enemy))
         {
-            enemy.Damage(_status.AttackPower);
+            enemy.Damage(_equippedActor, _status.AttackPower);
             Destroy(gameObject);
             return;
         }

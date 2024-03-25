@@ -1,11 +1,12 @@
 using System;
-using System.Collections;
-using System.Threading;
 using UnityEngine;
 
-public interface ISkill
+namespace Character
 {
-    string Name { get; }
-    string Description { get; }
-    IEnumerator RunEffectAsync(CancellationToken token = default);
+    public interface ISkill
+    {
+        string Name { get; }
+        string Description { get; }
+        ISkillBehavior Behavior { get; }
+    }
 }
