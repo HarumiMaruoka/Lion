@@ -1,0 +1,8 @@
+﻿[ChangeCaption, アリス]
+[PrintText,「そっか、また今度一緒に遊ぼうね。」, 3]
+
+[ChangeCaption, ボブ]
+[PrintText, 「うん、またね。」, 3]
+
+[ChangeCaption, プレイヤー]
+[PrintText, 「またね。」, 3]

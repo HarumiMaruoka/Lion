@@ -1,0 +1,21 @@
+﻿[FadeScreen, 0, 1]
+
+[ActorAction, アリス, Move, 0, 0, 1]
+[ActorAction, ボブ, Rotate, 360, 1]
+[ActorAction, ボブ, Scale, 2, 2, 1]
+
+[ActorAction, アリス, ChangeSprite, 1, 1]
+
+// PlayAnimationは後でテストする。
+
+[ActorAction, アリス, Flip, "Right", 1]
+[ActorAction, アリス, Flip, "Left", 1]
+
+[ActorAction, ボブ, Fade, 0, 1]
+[ActorAction, ボブ, Fade, 1, 1]
+
+[BeginGroup]
+[ActorAction, アリス, Shake, 10,  3, Position]
+[ActorAction, アリス, Shake, 5,   3, Rotation]
+[ActorAction, アリス, Shake, 0.1, 3, Scale]
+[EndGroup]

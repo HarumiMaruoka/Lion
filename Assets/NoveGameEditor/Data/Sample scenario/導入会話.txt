@@ -1,0 +1,21 @@
+﻿[ScreenFade, 0, 1]
+
+[ActorAction, アリス, Jump, 250, 50, 300, 0.5]
+[ActorAction, アリス, Jump, 0, 50, 300, 0.5]
+
+[BackgroundAction, Change, 公園 1 A昼, 1]
+
+[BeginGroup]
+[ActorAction, アリス, Move, -500, 50, 2]
+[ActorAction, ボブ, Move, 500, 50, 2]
+[EndGroup]
+
+[BackgroundAction, Change, 公園 2 C夜, 1]
+
+[ChangeCaption, アリス]
+[PrintText, 「おはよう！今日は天気がいいね！」, 3]
+
+[ChangeCaption, ボブ]
+[PrintText, 「おはよう、アリス。うん、確かに。でも少し暑すぎるかも。」, 3]
+
+[ActorAction, アリス, Reaction, 怒り]

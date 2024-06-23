@@ -1,0 +1,5 @@
+﻿[ChangeCaption, ボブ]
+[PrintText, 「そうだよね。最近、暑い日が続いてるからね。」, 3]
+
+[ChangeCaption, アリス]
+[PrintText, 「でも、暑い日にはアイスクリームが美味しいよね！」, 3]

@@ -1,0 +1,5 @@
+﻿[ChangeCaption, アリス]
+[PrintText, 「そうだよね！放課後に公園に行かない？散歩するのにちょうどいい天気だし。」, 3]
+
+[ChangeCaption, ボブ]
+[PrintText, 「それはいいね。僕も行きたい。」, 3]

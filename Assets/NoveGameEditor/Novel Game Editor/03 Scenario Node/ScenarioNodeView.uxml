@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Novel%20Game%20Editor/03%20Talk%20Node/TalkNodeView.uss?fileID=7433441132597879392&amp;guid=b27819abad7f0084d83ab36b0b32ca2c&amp;type=3#TalkNodeView" />
+    <ui:VisualElement name="selection-border" style="flex-grow: 1;">
+        <ui:VisualElement name="node-border" style="max-width: none; min-width: 120px; min-height: 60px;">
+            <ui:VisualElement name="title" style="border-bottom-color: rgb(36, 36, 36);">
+                <ui:Label name="title-label" text="Talk Node" class="unity-text-element unity-label" style="padding-left: 12px; padding-right: 12px; padding-top: 12px;" />
+                <ui:Label tabindex="-1" text="Node Name" parse-escape-sequences="true" display-tooltip-when-elided="true" name="node-name" style="padding-left: 20px; padding-bottom: 4px; padding-top: 4px; padding-right: 20px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="contents" style="border-top-color: rgb(46, 46, 46);">
+                <ui:VisualElement name="top" style="flex-grow: 1; flex-direction: row; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-right-width: 0; border-bottom-width: 0; border-left-width: 0; justify-content: space-between;" />
+                <ui:VisualElement name="middle" style="flex-grow: 1; flex-direction: row; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-right-width: 0; border-bottom-width: 0; border-left-width: 0; justify-content: space-between;">
+                    <ui:VisualElement name="input" style="border-left-color: rgb(36, 36, 36); border-right-color: rgb(36, 36, 36); border-top-color: rgb(36, 36, 36); border-bottom-color: rgb(36, 36, 36); border-right-width: 1px; border-bottom-width: 1px; border-top-width: 1px; background-color: rgb(77, 77, 77);" />
+                    <ui:VisualElement name="output" />
+                </ui:VisualElement>
+                <ui:VisualElement name="bottom" style="flex-grow: 1; flex-direction: row; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-right-width: 0; border-bottom-width: 0; border-left-width: 0; justify-content: space-between;">
+                    <ui:VisualElement name="spacing" style="flex-grow: 1; height: 12px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

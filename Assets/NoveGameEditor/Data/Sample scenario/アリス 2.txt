@@ -1,0 +1,5 @@
+﻿[ChangeCaption, アリス]
+[PrintText, 「見て見て！あの花、綺麗だね。」, 3]
+
+[ChangeCaption, ボブ]
+[PrintText, 「本当だ。写真に撮っておこう。」, 3]
