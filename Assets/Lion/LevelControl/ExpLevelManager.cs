@@ -1,9 +1,14 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Lion
+namespace Lion.LevelManagement
 {
+    /// <summary>
+    /// 経験値の取得によってレベルアップする機能を提供するクラス。
+    /// </summary>
+    /// <typeparam name="T">
+    /// ステータスを表す構造体。IStatusを実装している必要がある。
+    /// </typeparam>
     public class ExpLevelManager<T> where T : struct, IStatus
     {
         public int Level { get; private set; }

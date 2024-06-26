@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Lion
+namespace Lion.LevelManagement
 {
     public interface IStatus
     {

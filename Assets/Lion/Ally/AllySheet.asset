@@ -1,5 +1,41 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4373820906710739135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
+  m_Name: AllySheet (Lion.Ally.AllySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 3
+  <Name>k__BackingField: "\u533B\u8005"
+  <IconSprite>k__BackingField: {fileID: 0}
+  <ExpStatusTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}
+--- !u!114 &-3110606214687434344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
+  m_Name: AllySheet (Lion.Ally.AllySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 1
+  <Name>k__BackingField: "\u30BB\u30D0\u30B9"
+  <IconSprite>k__BackingField: {fileID: 0}
+  <ExpStatusTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}
 --- !u!114 &-2832546642427691544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,8 +49,25 @@ MonoBehaviour:
   m_Name: LayoutData
   m_EditorClassIdentifier: 
   <Sheet>k__BackingField: {fileID: 11400000}
-  HorizontalSpacings: []
-  VerticalSpacings: []
+  HorizontalSpacings:
+  - 16
+  - 50
+  - 37
+  - 50
+  - 64
+  - 120
+  - 98
+  - 50
+  - 145
+  - 50
+  - 155
+  - 50
+  VerticalSpacings:
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
   GridLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.3}
   GridLineSize: {x: 3, y: 2}
   GridLineOffset: {x: 2, y: 21}
@@ -30,5 +83,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15e501fabed35a48aadfbd413c01b13, type: 3}
   m_Name: AllySheet
   m_EditorClassIdentifier: 
-  _collection: []
+  _collection:
+  - {fileID: 8877345889039845840}
+  - {fileID: -3110606214687434344}
+  - {fileID: 9113433894777809624}
+  - {fileID: -4373820906710739135}
+  - {fileID: 74048530040732478}
   WindowLayout: {fileID: -2832546642427691544}
+--- !u!114 &74048530040732478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
+  m_Name: AllySheet (Lion.Ally.AllySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 4
+  <Name>k__BackingField: "\u935B\u51B6\u5C4B"
+  <IconSprite>k__BackingField: {fileID: 0}
+  <ExpStatusTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}
+--- !u!114 &8877345889039845840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
+  m_Name: AllySheet (Lion.Ally.AllySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0
+  <Name>k__BackingField: "\u30A2\u30FC\u30B5\u30FC"
+  <IconSprite>k__BackingField: {fileID: 0}
+  <ExpStatusTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}
+--- !u!114 &9113433894777809624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
+  m_Name: AllySheet (Lion.Ally.AllySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 2
+  <Name>k__BackingField: "\u82B8\u8853\u5BB6"
+  <IconSprite>k__BackingField: {fileID: 0}
+  <ExpStatusTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
+  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}

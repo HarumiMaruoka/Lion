@@ -1,0 +1,296 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7221210096833853313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 10
+  <Name>k__BackingField: Dragon Tooth
+  <Icon>k__BackingField: {fileID: 21300000, guid: 032a1f925e05c4cd9b1184d743faaf7d, type: 3}
+--- !u!114 &-6796253052010326237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 7
+  <Name>k__BackingField: Blue Ring
+  <Icon>k__BackingField: {fileID: 21300000, guid: 5c2483e1551aa4a9f8c8d3160cc2321e, type: 3}
+--- !u!114 &-6354770671822779525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 3
+  <Name>k__BackingField: Hard Tooth
+  <Icon>k__BackingField: {fileID: 21300000, guid: 5fec365d77e074f8eac23fab90980ce4, type: 3}
+--- !u!114 &-3459684803790855656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 9
+  <Name>k__BackingField: Red Cyristal
+  <Icon>k__BackingField: {fileID: 21300000, guid: d109eb57c31f14a049a7ca9653c3fc58, type: 3}
+--- !u!114 &-2671751951968763631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 4
+  <Name>k__BackingField: Red Gem
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8b4a830f86af3494184f1a5d94419afc, type: 3}
+--- !u!114 &-2234088462581964838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 6
+  <Name>k__BackingField: Blue Potion 3
+  <Icon>k__BackingField: {fileID: 21300000, guid: a91499afdafe74bebb6c4502e78f5dc7, type: 3}
+--- !u!114 &-1771942745418765323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 1
+  <Name>k__BackingField: Iron Bracelet
+  <Icon>k__BackingField: {fileID: 21300000, guid: cb5c2c3c463c24362a010caf2f3ad5b9, type: 3}
+--- !u!114 &-1623818942882084994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 12
+  <Name>k__BackingField: Magic Book
+  <Icon>k__BackingField: {fileID: 21300000, guid: d1952c69ac0afbf489b5ab1887b2ffae, type: 3}
+--- !u!114 &-637419558273270178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 8
+  <Name>k__BackingField: Book
+  <Icon>k__BackingField: {fileID: 21300000, guid: e2e7ba296f0b64d62a8fbf6e414032ad, type: 3}
+--- !u!114 &-518069770444924583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0
+  <Name>k__BackingField: Green Axe
+  <Icon>k__BackingField: {fileID: 21300000, guid: 05edeabb82c2f4d3abeca03e6079fa9f, type: 3}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8df4260f1062de43b06b330bce256b8, type: 3}
+  m_Name: ItemSheet
+  m_EditorClassIdentifier: 
+  _collection:
+  - {fileID: -518069770444924583}
+  - {fileID: -1771942745418765323}
+  - {fileID: 5006159270584045420}
+  - {fileID: -6354770671822779525}
+  - {fileID: -2671751951968763631}
+  - {fileID: 642975457122327721}
+  - {fileID: -2234088462581964838}
+  - {fileID: -6796253052010326237}
+  - {fileID: -637419558273270178}
+  - {fileID: -3459684803790855656}
+  - {fileID: -7221210096833853313}
+  - {fileID: 4972720991215660177}
+  - {fileID: -1623818942882084994}
+  - {fileID: 2486341569345609171}
+  - {fileID: 4383114741112304661}
+  WindowLayout: {fileID: 3830075617493379278}
+--- !u!114 &642975457122327721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 5
+  <Name>k__BackingField: Leaf
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8cdaa21219cc64009b610045c4e309c2, type: 3}
+--- !u!114 &2486341569345609171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 13
+  <Name>k__BackingField: Gear
+  <Icon>k__BackingField: {fileID: 21300000, guid: dcefc0c97ed9ad54f93ab82e40ccad7d, type: 3}
+--- !u!114 &3830075617493379278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ad2a58c7beda946a3a48472404ab5c, type: 3}
+  m_Name: LayoutData
+  m_EditorClassIdentifier: 
+  <Sheet>k__BackingField: {fileID: 11400000}
+  HorizontalSpacings:
+  - 16
+  - 50
+  - 37
+  - 100
+  - 25
+  - 120
+  VerticalSpacings:
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  GridLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.3}
+  GridLineSize: {x: 3, y: 2}
+  GridLineOffset: {x: 2, y: 21}
+--- !u!114 &4383114741112304661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 14
+  <Name>k__BackingField: Peanuts
+  <Icon>k__BackingField: {fileID: 21300000, guid: 2c0364b31f6dd9442b6578dc67f84583, type: 3}
+--- !u!114 &4972720991215660177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 11
+  <Name>k__BackingField: Emerald
+  <Icon>k__BackingField: {fileID: 21300000, guid: 38c8e6e92170cd646915b811341a9a4a, type: 3}
+--- !u!114 &5006159270584045420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46968e6df9a4e3488feda66a21e074f, type: 3}
+  m_Name: ItemSheet (Lion.Item.ItemSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 2
+  <Name>k__BackingField: Blue Eye
+  <Icon>k__BackingField: {fileID: 21300000, guid: a7824fd2a3a1d4569b239f37ce014d38, type: 3}
