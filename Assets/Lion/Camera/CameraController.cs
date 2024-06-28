@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Lion.CameraControls
+namespace Lion.CameraUtility
 {
     public class CameraController : MonoBehaviour
     {

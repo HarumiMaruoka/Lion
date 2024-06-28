@@ -12,30 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
   m_Name: AllySheet (Lion.Ally.AllySheet)
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 3
-  <Name>k__BackingField: "\u533B\u8005"
-  <IconSprite>k__BackingField: {fileID: 0}
-  <ExpStatusTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}
---- !u!114 &-3110606214687434344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
-  m_Name: AllySheet (Lion.Ally.AllySheet)
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 1
-  <Name>k__BackingField: "\u30BB\u30D0\u30B9"
-  <IconSprite>k__BackingField: {fileID: 0}
-  <ExpStatusTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}
+  <ID>k__BackingField: 2
+  <Name>k__BackingField: Artist
+  <ActorSprite>k__BackingField: {fileID: 6373048116405451881, guid: f374107ba66790641b6b7c9d0d9a49d3, type: 3}
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: 4774691f98ff854459606b26393717a6, type: 3}
+  <Prefab>k__BackingField: {fileID: 0}
+  <SkillPrefab>k__BackingField: {fileID: 0}
 --- !u!114 &-2832546642427691544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,14 +35,14 @@ MonoBehaviour:
   - 16
   - 50
   - 37
-  - 50
-  - 64
+  - 76
+  - 82
   - 120
-  - 98
-  - 50
-  - 145
-  - 50
-  - 155
+  - 70
+  - 120
+  - 42
+  - 160
+  - 68
   - 50
   VerticalSpacings:
   - 20
@@ -85,10 +67,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collection:
   - {fileID: 8877345889039845840}
-  - {fileID: -3110606214687434344}
   - {fileID: 9113433894777809624}
   - {fileID: -4373820906710739135}
   - {fileID: 74048530040732478}
+  - {fileID: 7317601577366007892}
   WindowLayout: {fileID: -2832546642427691544}
 --- !u!114 &74048530040732478
 MonoBehaviour:
@@ -102,12 +84,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
   m_Name: AllySheet (Lion.Ally.AllySheet)
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 3
+  <Name>k__BackingField: Doctor
+  <ActorSprite>k__BackingField: {fileID: 6373048116405451881, guid: 6fc66c021eec74942b4e71a3fde4dc04, type: 3}
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: 72a7a67ea4905184f8a2075422ff4d05, type: 3}
+  <Prefab>k__BackingField: {fileID: 0}
+  <SkillPrefab>k__BackingField: {fileID: 0}
+--- !u!114 &7317601577366007892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
+  m_Name: AllySheet (Lion.Ally.AllySheet)
+  m_EditorClassIdentifier: 
   <ID>k__BackingField: 4
-  <Name>k__BackingField: "\u935B\u51B6\u5C4B"
-  <IconSprite>k__BackingField: {fileID: 0}
-  <ExpStatusTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: Blacksmith
+  <ActorSprite>k__BackingField: {fileID: 6373048116405451881, guid: 77ba605bbd83f4448bc8683510c3155e, type: 3}
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: e9f00bf9217d1c44fb23e46e585cf39a, type: 3}
+  <Prefab>k__BackingField: {fileID: 0}
+  <SkillPrefab>k__BackingField: {fileID: 0}
 --- !u!114 &8877345889039845840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,11 +121,11 @@ MonoBehaviour:
   m_Name: AllySheet (Lion.Ally.AllySheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
-  <Name>k__BackingField: "\u30A2\u30FC\u30B5\u30FC"
-  <IconSprite>k__BackingField: {fileID: 0}
-  <ExpStatusTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: Arthur
+  <ActorSprite>k__BackingField: {fileID: 6373048116405451881, guid: 0e3502a80399d164ea01f1868f65acbf, type: 3}
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: 3883df57ed54de24aaace377adfc8e49, type: 3}
+  <Prefab>k__BackingField: {fileID: 0}
+  <SkillPrefab>k__BackingField: {fileID: 0}
 --- !u!114 &9113433894777809624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,9 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b7ea872d5f0249b2839f1bc957ead, type: 3}
   m_Name: AllySheet (Lion.Ally.AllySheet)
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 2
-  <Name>k__BackingField: "\u82B8\u8853\u5BB6"
-  <IconSprite>k__BackingField: {fileID: 0}
-  <ExpStatusTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpCostTable>k__BackingField: {fileID: 0}
-  <ItemLevelUpStatusTable>k__BackingField: {fileID: 0}
+  <ID>k__BackingField: 1
+  <Name>k__BackingField: Sebas
+  <ActorSprite>k__BackingField: {fileID: -606836463, guid: 836ba81373ddf664c8a192783efe0ecd, type: 3}
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: d71a647d75e02404fabbbd96f094519f, type: 3}
+  <Prefab>k__BackingField: {fileID: 0}
+  <SkillPrefab>k__BackingField: {fileID: 0}

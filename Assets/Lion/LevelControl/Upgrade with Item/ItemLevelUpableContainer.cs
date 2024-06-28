@@ -22,6 +22,7 @@ namespace Lion.LevelManagement
             itemLevelUpables.Remove(itemLevelUpable);
             OnRemoved?.Invoke(itemLevelUpable);
         }
+
         public IEnumerator<IItemLevelUpable> GetEnumerator()
         {
             return itemLevelUpables.GetEnumerator();

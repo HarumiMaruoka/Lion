@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Lion.CameraControls
+namespace Lion.CameraUtility
 {
     public class CameraSizeSlider : MonoBehaviour
     {

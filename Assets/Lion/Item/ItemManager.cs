@@ -7,12 +7,12 @@ namespace Lion.Item
     {
         public static ItemManager Instance { get; private set; } = new ItemManager();
 
-        private ItemSheet _itemSheet;
-        public ItemSheet ItemSheet => _itemSheet ??= Resources.Load<ItemSheet>("ItemSheet");
+        public ItemSheet ItemSheet { get; private set; }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Initialize()
         {
+            Instance.ItemSheet = ScriptableObject.Instantiate(Resources.Load<ItemSheet>("ItemSheet"));
             Instance.ItemSheet.Initialize();
         }
     }

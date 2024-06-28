@@ -10,7 +10,7 @@ namespace Lion.Item
         [field: SerializeField] public Sprite Icon { get; private set; }
         [field: SerializeField] public int Price { get; private set; }
 
-        [SerializeField] private int _count;
+        private int _count;
         public int Count
         {
             get => _count;
