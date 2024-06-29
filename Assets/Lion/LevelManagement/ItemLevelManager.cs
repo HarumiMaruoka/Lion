@@ -10,16 +10,16 @@ namespace Lion.LevelManagement
     /// <typeparam name="T"> 
     /// ステータスを表す構造体。IStatusを実装している必要がある。
     /// </typeparam>
-    public class ItemStatusLevelManager<T> where T : struct, IStatus
+    public class ItemLevelManager<T> : LevelManager<T>, IItemLevelManager where T : IStatus
     {
-        public int Level { get; private set; }
-        public int MaxLevel => LevelUpCostTable.Count;
+        /// <summary>
+        /// Keyはレベル、Valueはレベルアップに必要なアイテムとその個数を表す構造体のリスト。
+        /// </summary>
         public Dictionary<int, List<LevelUpCost>> LevelUpCostTable { get; private set; }
-        public T[] StatusTable { get; private set; }
 
-        public ItemStatusLevelManager(TextAsset levelUpCostTable, TextAsset statusTable)
+        public ItemLevelManager(TextAsset levelUpCostTable, TextAsset statusTable)
         {
-            Level = 1;
+            CurrentLevel = 1;
 
             var input = levelUpCostTable.LoadCsv(1);
             LevelUpCostTable = new Dictionary<int, List<LevelUpCost>>();
@@ -48,25 +48,26 @@ namespace Lion.LevelManagement
             for (int i = 0; i < input.Length; i++)
             {
                 var row = input[i];
-                T data = default;
-                data.ItemCsvLoad(row);
+                T data = default; // ここでエラーが発生する場合は、T型が構造体か確認してください。諸事情でwhere T : structが使えないので。
+                data.LoadItemSheet(row);
                 StatusTable[i] = data;
             }
         }
 
-        public void ApplyLevel(int level)
+        public List<LevelUpCost> GetLevelUpCosts(int level)
         {
-            Level = level;
+            return LevelUpCostTable[level];
         }
 
-        public T GetStatus()
+
+        public string GetCurrentStatusText()
         {
-            return StatusTable[Level - 1];
+            return GetStatusText(CurrentLevel);
         }
 
-        public T GetStatus(int level)
+        public string GetStatusText(int level)
         {
-            return StatusTable[level - 1];
+            return StatusTable[level - 1].ToString();
         }
     }
 

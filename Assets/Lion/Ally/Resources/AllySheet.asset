@@ -16,7 +16,7 @@ MonoBehaviour:
   <Name>k__BackingField: Artist
   <ActorSprite>k__BackingField: {fileID: 6373048116405451881, guid: f374107ba66790641b6b7c9d0d9a49d3, type: 3}
   <IconSprite>k__BackingField: {fileID: 21300000, guid: 4774691f98ff854459606b26393717a6, type: 3}
-  <Prefab>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 5382674748804693776, guid: 23b7c6375ab2fb14f8a6456f24ea35e5, type: 3}
   <SkillPrefab>k__BackingField: {fileID: 0}
 --- !u!114 &-2832546642427691544
 MonoBehaviour:
@@ -88,7 +88,7 @@ MonoBehaviour:
   <Name>k__BackingField: Doctor
   <ActorSprite>k__BackingField: {fileID: 6373048116405451881, guid: 6fc66c021eec74942b4e71a3fde4dc04, type: 3}
   <IconSprite>k__BackingField: {fileID: 21300000, guid: 72a7a67ea4905184f8a2075422ff4d05, type: 3}
-  <Prefab>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 594437043919560837, guid: 0f1d3879f2246cf408b6445ef00ee1d7, type: 3}
   <SkillPrefab>k__BackingField: {fileID: 0}
 --- !u!114 &7317601577366007892
 MonoBehaviour:
@@ -106,7 +106,7 @@ MonoBehaviour:
   <Name>k__BackingField: Blacksmith
   <ActorSprite>k__BackingField: {fileID: 6373048116405451881, guid: 77ba605bbd83f4448bc8683510c3155e, type: 3}
   <IconSprite>k__BackingField: {fileID: 21300000, guid: e9f00bf9217d1c44fb23e46e585cf39a, type: 3}
-  <Prefab>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 684037437989157979, guid: b0fbab7b239dcab469eeff4703c08b2e, type: 3}
   <SkillPrefab>k__BackingField: {fileID: 0}
 --- !u!114 &8877345889039845840
 MonoBehaviour:
@@ -124,7 +124,7 @@ MonoBehaviour:
   <Name>k__BackingField: Arthur
   <ActorSprite>k__BackingField: {fileID: 6373048116405451881, guid: 0e3502a80399d164ea01f1868f65acbf, type: 3}
   <IconSprite>k__BackingField: {fileID: 21300000, guid: 3883df57ed54de24aaace377adfc8e49, type: 3}
-  <Prefab>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 8738883393003376477, guid: 07ad3863c347ab74d80c7aab4d8dc4cc, type: 3}
   <SkillPrefab>k__BackingField: {fileID: 0}
 --- !u!114 &9113433894777809624
 MonoBehaviour:
@@ -142,5 +142,5 @@ MonoBehaviour:
   <Name>k__BackingField: Sebas
   <ActorSprite>k__BackingField: {fileID: -606836463, guid: 836ba81373ddf664c8a192783efe0ecd, type: 3}
   <IconSprite>k__BackingField: {fileID: 21300000, guid: d71a647d75e02404fabbbd96f094519f, type: 3}
-  <Prefab>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 5468523299922734317, guid: a984d21488b1ea0479106b64b0225d1f, type: 3}
   <SkillPrefab>k__BackingField: {fileID: 0}

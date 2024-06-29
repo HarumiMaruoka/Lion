@@ -1,3 +1,4 @@
+
 using Lion.LevelManagement;
 using System;
 using UnityEngine;
@@ -13,8 +14,8 @@ namespace Lion.Player
         private ExpLevelManager<Status> _expLevelManager;
         public ExpLevelManager<Status> ExpLevelManager => GetOrCreateExpLevelManager();
 
-        private ItemStatusLevelManager<Status> _itemLevelManager;
-        public ItemStatusLevelManager<Status> ItemLevelManager => GetOrCreateItemLevelManager();
+        private ItemLevelManager<Status> _itemLevelManager;
+        public ItemLevelManager<Status> ItemLevelManager => GetOrCreateItemLevelManager();
 
         private ExpLevelManager<Status> GetOrCreateExpLevelManager()
         {
@@ -26,13 +27,13 @@ namespace Lion.Player
             return _expLevelManager;
         }
 
-        private ItemStatusLevelManager<Status> GetOrCreateItemLevelManager()
+        private ItemLevelManager<Status> GetOrCreateItemLevelManager()
         {
             if (_itemLevelManager == null)
             {
                 var itemLevelUpCostTable = Resources.Load<TextAsset>("PlayerData_ItemLevelUpCostTable");
                 var itemLevelStatusTable = Resources.Load<TextAsset>("PlayerData_ItemLevelStatusTable");
-                _itemLevelManager = new ItemStatusLevelManager<Status>(itemLevelUpCostTable, itemLevelStatusTable);
+                _itemLevelManager = new ItemLevelManager<Status>(itemLevelUpCostTable, itemLevelStatusTable);
             }
             return _itemLevelManager;
         }

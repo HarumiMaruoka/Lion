@@ -5,7 +5,7 @@ namespace Lion.LevelManagement
 {
     public interface IStatus
     {
-        void ItemCsvLoad(string[] row);
-        void ExpCsvLoad(string[] row);
+        void LoadExpSheet(string[] row);
+        void LoadItemSheet(string[] row);
     }
 }

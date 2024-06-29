@@ -30,10 +30,10 @@ namespace Lion.Player.UI
 
         private void UpdateLevelAndExp(int exp)
         {
-            _expSlider.minValue = PlayerExpManager.GetLevelExp();
+            _expSlider.minValue = PlayerExpManager.GetCurrentLevelExp();
             _expSlider.maxValue = PlayerExpManager.GetNextLevelExp();
             _expSlider.value = PlayerExpManager.Exp;
-            _levelText.text = PlayerExpManager.Level.ToString();
+            _levelText.text = PlayerExpManager.CurrentLevel.ToString();
 
             _expText.text = $"{PlayerExpManager.Exp}/{PlayerExpManager.GetNextLevelExp()}";
         }

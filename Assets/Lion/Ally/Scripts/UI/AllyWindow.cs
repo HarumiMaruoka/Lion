@@ -11,10 +11,12 @@ namespace Lion.Ally.UI
 
         private List<Row> _rows = new List<Row>();
 
+        public Action<AllyData> OnSelectedBuffer;
         public event Action<AllyData> OnSelected
         {
             add
             {
+                OnSelectedBuffer += value;
                 foreach (var row in _rows)
                 {
                     row.Left.OnSelected += value;
@@ -23,6 +25,7 @@ namespace Lion.Ally.UI
             }
             remove
             {
+                OnSelectedBuffer -= value;
                 foreach (var row in _rows)
                 {
                     row.Left.OnSelected -= value;
@@ -57,6 +60,8 @@ namespace Lion.Ally.UI
             for (int i = 0; i < CalculateRowCount(); i++)
             {
                 var row = Instantiate(_rowPrefab, _rowPrent);
+                row.Left.OnSelected += OnSelectedBuffer;
+                row.Right.OnSelected += OnSelectedBuffer;
                 _rows.Add(row);
             }
 
@@ -74,6 +79,12 @@ namespace Lion.Ally.UI
             {
                 row.UpdateUI();
             }
+        }
+
+        public event Action OnDisabled;
+        private void OnDisable()
+        {
+            OnDisabled?.Invoke();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
     public class ActorIcon : MonoBehaviour
     {
         [SerializeField]
-        private TMPro.TextMeshProUGUI _label;
+        private TMPro.TextMeshProUGUI _levelLabel;
         [SerializeField]
         private Image _icon;
         [SerializeField]
@@ -21,22 +21,22 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
             else Debug.LogWarning("Button is not found.");
         }
 
-        public IItemLevelUpable Item { get; private set; }
+        public IItemLevelable Item { get; private set; }
 
-        public event Action<IItemLevelUpable> OnClicked;
+        public event Action<IItemLevelable> OnClicked;
 
-        public void SetItem(IItemLevelUpable itemLevelUpable)
+        public void SetItem(IItemLevelable itemLevelUpable)
         {
             if (Item != null)
             {
-                Item.OnLevelUp -= OnLevelUp;
+                Item.ItemLevelManager.OnLevelChanged -= OnLevelUp;
                 Item.OnActiveChanged -= OnActiveChanged;
             }
 
             Item = itemLevelUpable;
             UpdateLabel();
 
-            Item.OnLevelUp += OnLevelUp;
+            Item.ItemLevelManager.OnLevelChanged += OnLevelUp;
             Item.OnActiveChanged += OnActiveChanged;
 
             _icon.sprite = Item.IconSprite;
@@ -47,7 +47,7 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
         {
             if (Item != null)
             {
-                Item.OnLevelUp -= OnLevelUp;
+                Item.ItemLevelManager.OnLevelChanged -= OnLevelUp;
                 Item.OnActiveChanged -= OnActiveChanged;
             }
         }
@@ -59,7 +59,7 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
 
         private void UpdateLabel()
         {
-            _label.text = $"Lv: {Item.Level}/{Item.MaxLevel}";
+            _levelLabel.text = $"Lv: {Item.ItemLevelManager.CurrentLevel}/{Item.ItemLevelManager.MaxLevel}";
         }
 
         private void OnActiveChanged(bool isActive)

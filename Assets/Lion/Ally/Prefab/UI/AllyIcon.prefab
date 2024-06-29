@@ -1087,7 +1087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5045326938243675120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1106,7 +1106,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -18, y: -10}
-  m_SizeDelta: {x: 0, y: 48}
+  m_SizeDelta: {x: 174.45999, y: 48}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &8565984967999103035
 CanvasRenderer:
@@ -1910,6 +1910,7 @@ MonoBehaviour:
   _haveCount: {fileID: 7741130492471223040}
   _skillName: {fileID: 2705742653981735648}
   _lockedLabel: {fileID: 4954503664271798654}
+  _activatedLabel: {fileID: 3604465566504152861}
 --- !u!222 &2213308275093832618
 CanvasRenderer:
   m_ObjectHideFlags: 0

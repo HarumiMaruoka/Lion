@@ -26,7 +26,9 @@ namespace Lion.Ally.UI
             get => _ally;
             set
             {
+                if (_ally != null) _ally.OnActiveChanged -= OnActiveChanged;
                 _ally = value;
+                if (_ally != null) _ally.OnActiveChanged += OnActiveChanged;
                 UpdateUI();
             }
         }
@@ -51,13 +53,18 @@ namespace Lion.Ally.UI
 
                 _actorView.sprite = _ally.IconSprite;
                 _name.text = _ally.Name;
-                _expLevel.text = _ally.ExpLevelManager.Level.ToString();
-                _itemLevel.text = _ally.ItemLevelUpManager.Level.ToString();
+                _expLevel.text = _ally.ExpLevelManager.CurrentLevel.ToString();
+                _itemLevel.text = _ally.ItemLevelManager.CurrentLevel.ToString();
                 _haveCount.text = _ally.Count.ToString();
                 _skillName.text = "not implemented"; /*_ally.SkillPrefab.Name;*/
                 _lockedLabel.SetActive(!_ally.Unlocked);
                 _activatedLabel.SetActive(_ally.Activated);
             }
+        }
+
+        private void OnActiveChanged(bool isActive)
+        {
+            _activatedLabel.SetActive(isActive);
         }
     }
 }

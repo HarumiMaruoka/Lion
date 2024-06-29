@@ -15,34 +15,34 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
         [SerializeField]
         private Transform _parent;
 
-        private Dictionary<IItemLevelUpable, ActorIcon> _elements = new();
+        private Dictionary<IItemLevelable, ActorIcon> _elements = new();
 
         private void Start()
         {
             Initialize();
 
-            LevelManager.Instance.ItemLevelUpableContainer.OnAdded += OnAdded;
-            LevelManager.Instance.ItemLevelUpableContainer.OnRemoved += OnRemoved;
+            ItemLevelableContainer.Instance.OnAdded += OnAdded;
+            ItemLevelableContainer.Instance.OnRemoved += OnRemoved;
         }
 
         private void OnDestroy()
         {
-            LevelManager.Instance.ItemLevelUpableContainer.OnAdded -= OnAdded;
-            LevelManager.Instance.ItemLevelUpableContainer.OnRemoved -= OnRemoved;
+            ItemLevelableContainer.Instance.OnAdded -= OnAdded;
+            ItemLevelableContainer.Instance.OnRemoved -= OnRemoved;
         }
 
         private void Initialize()
         {
             OnSelected += OnSelectedTarget;
 
-            foreach (var item in LevelManager.Instance.ItemLevelUpableContainer)
+            foreach (var item in ItemLevelableContainer.Instance)
             {
                 OnAdded(item);
             }
         }
 
-        public event Action<IItemLevelUpable> OnSelectedBuffer;
-        public event Action<IItemLevelUpable> OnSelected
+        public event Action<IItemLevelable> OnSelectedBuffer;
+        public event Action<IItemLevelable> OnSelected
         {
             add
             {
@@ -62,7 +62,7 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
             }
         }
 
-        private void OnAdded(IItemLevelUpable item)
+        private void OnAdded(IItemLevelable item)
         {
             var element = Instantiate(_prefab, _parent);
             element.SetItem(item);
@@ -70,7 +70,7 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
             _elements.Add(item, element);
         }
 
-        private void OnRemoved(IItemLevelUpable item)
+        private void OnRemoved(IItemLevelable item)
         {
             if (_elements.Remove(item, out var element))
             {
@@ -82,7 +82,7 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
         [SerializeField]
         private ItemLevelUpWindow _itemLevelUpWindow;
 
-        public void OnSelectedTarget(IItemLevelUpable target)
+        public void OnSelectedTarget(IItemLevelable target)
         {
             _itemLevelUpWindow.Open(target);
         }

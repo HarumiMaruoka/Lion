@@ -11,13 +11,13 @@ namespace Lion.Player
 
         public float MoveSpeed => 3f + Speed * 0.03f;
 
-        public void ExpCsvLoad(string[] row)
+        public void LoadExpSheet(string[] row)
         {
             Health = float.Parse(row[2]);
             Speed = float.Parse(row[3]);
         }
 
-        public void ItemCsvLoad(string[] row)
+        public void LoadItemSheet(string[] row)
         {
             Health = float.Parse(row[1]);
             Speed = float.Parse(row[2]);
@@ -34,7 +34,9 @@ namespace Lion.Player
 
         public override string ToString()
         {
-            return $"Health: {Health}, Speed: {Speed}";
+            return 
+                $"Health: {Health}\n" +
+                $"Speed: {Speed}";
         }
     }
 }

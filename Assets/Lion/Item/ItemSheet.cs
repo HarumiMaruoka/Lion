@@ -15,6 +15,7 @@ namespace Lion.Item
         {
             foreach (var itemData in this)
             {
+                itemData.Count = 0;
                 if (!_itemDataById.TryAdd(itemData.ID, itemData))
                 {
                     Debug.LogError($"ItemSheet: Duplicate ID: {itemData.ID}");

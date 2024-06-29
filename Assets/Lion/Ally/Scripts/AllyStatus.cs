@@ -16,7 +16,7 @@ namespace Lion.Ally
 
         public float MoveSpeed => 3f + Speed * 0.03f;
 
-        public void ExpCsvLoad(string[] row)
+        public void LoadExpSheet(string[] row)
         {
             HP = float.Parse(row[2]);
             MP = float.Parse(row[3]);
@@ -27,7 +27,7 @@ namespace Lion.Ally
             Luck = float.Parse(row[8]);
         }
 
-        public void ItemCsvLoad(string[] row)
+        public void LoadItemSheet(string[] row)
         {
             HP = float.Parse(row[1]);
             MP = float.Parse(row[2]);
@@ -50,6 +50,18 @@ namespace Lion.Ally
                 Range = a.Range + b.Range,
                 Luck = a.Luck + b.Luck,
             };
+        }
+
+        public override string ToString()
+        {
+            return
+                $"HP: {HP}\n" +
+                $"MP: {MP}\n" +
+                $"Attack: {Attack}\n" +
+                $"Defense: {Defense}\n" +
+                $"Speed: {Speed}\n" +
+                $"Range: {Range}\n" +
+                $"Luck: {Luck}";
         }
     }
 }

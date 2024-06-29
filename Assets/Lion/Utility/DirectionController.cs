@@ -6,12 +6,10 @@ namespace Lion.Ally.Utility
     public class DirectionController : MonoBehaviour
     {
         private Vector2 _lastPos;
-        private Vector3 _initialScale;
 
         private void Start()
         {
             _lastPos = transform.position;
-            _initialScale = transform.localScale;
         }
 
         private void Update()
@@ -23,13 +21,13 @@ namespace Lion.Ally.Utility
 
         private void UpdateDirection(Vector2 direction)
         {
-            if (direction.x > 0)
+            if (direction.x > 0 && transform.localScale.x < 0)
             {
-                transform.localScale = new Vector3(_initialScale.x, _initialScale.y, 1);
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 1);
             }
-            else if (direction.x < 0)
+            else if (direction.x < 0 && transform.localScale.x > 0)
             {
-                transform.localScale = new Vector3(-_initialScale.x, _initialScale.y, 1);
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
             }
         }
     }

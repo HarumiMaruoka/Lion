@@ -1,6 +1,4 @@
 using Lion.Item;
-using Lion.Manager;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,10 +7,10 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
 {
     public class ItemLevelUpWindow : MonoBehaviour
     {
-        public IItemLevelUpable Target;
-        public int Level => Target.Level;
+        public IItemLevelable Target;
+        public int Level => Target.ItemLevelManager.CurrentLevel;
         public int NextLevel { get; private set; }
-        public int MaxLevel => Target.MaxLevel;
+        public int MaxLevel => Target.ItemLevelManager.MaxLevel;
 
         /// <summary>
         /// Key: アイテムID, Value: 必要個数
@@ -36,15 +34,15 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
             _applyLevelButton.onClick.AddListener(ApplyLevel);
         }
 
-        public void Open(IItemLevelUpable target)
+        public void Open(IItemLevelable target)
         {
             Target = target;
             NextLevel = Level;
-
             _actorSpriteView.sprite = Target.ActorSprite;
-            UpdateView();
 
             _levelUpCosts.Clear();
+            UpdateView();
+
             gameObject.SetActive(true);
         }
 
@@ -55,13 +53,29 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
 
         public void ApplyLevel()
         {
-            // アイテムを消費する処理
-            Debug.Log("ここにアイテムを消費する処理を書く。");
+            // アイテムが足りているか確認
+            foreach (var c in _levelUpCosts)
+            {
+                var item = ItemManager.Instance.ItemSheet.GetItemData(c.Key);
+                if (item.Count < c.Value)
+                {
+                   　// Debug.LogWarning("アイテムが足りません。");
+                    return;
+                }
+            }
 
+            // アイテムを消費する処理
+            foreach (var c in _levelUpCosts)
+            {
+                var item = ItemManager.Instance.ItemSheet.GetItemData(c.Key);
+                var itemData = ItemManager.Instance.ItemSheet.GetItemData(c.Key);
+                itemData.Count -= c.Value;
+            }
+
+            // レベルアップ処理
             if (Level < MaxLevel)
             {
-                Target.LevelUp(NextLevel);
-                NextLevel = Level;
+                Target.ItemLevelManager.ApplyLevel(NextLevel);
             }
 
             Open(Target);
@@ -73,7 +87,7 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
             {
                 NextLevel++;
                 // 消費アイテムの計算
-                var costs = Target.GetLevelUpCosts(NextLevel);
+                var costs = Target.ItemLevelManager.GetLevelUpCosts(NextLevel);
                 foreach (var c in costs)
                 {
                     if (_levelUpCosts.ContainsKey(c.ItemID))
@@ -94,7 +108,7 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
             if (NextLevel > Level)
             {
                 // 消費アイテムの計算
-                var costs = Target.GetLevelUpCosts(NextLevel);
+                var costs = Target.ItemLevelManager.GetLevelUpCosts(NextLevel);
                 foreach (var c in costs)
                 {
                     if (_levelUpCosts.ContainsKey(c.ItemID))
@@ -119,7 +133,7 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
             _levelUpCosts.Clear();
             for (var i = Level; i < MaxLevel; i++)
             {
-                var costs = Target.GetLevelUpCosts(i + 1);
+                var costs = Target.ItemLevelManager.GetLevelUpCosts(i + 1);
                 foreach (var c in costs)
                 {
                     if (_levelUpCosts.ContainsKey(c.ItemID))
@@ -157,8 +171,8 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
             // レベル表示の更新
             _levelLabel.text = $"Lv: {Level}";
             _nextLevelLabel.text = $"Lv: {NextLevel}";
-            _statusLabel.text = Target.GetStatus().ToString();
-            _nextStatusLabel.text = Target.GetStatus(NextLevel).ToString();
+            _statusLabel.text = Target.ItemLevelManager.GetCurrentStatusText().ToString();
+            _nextStatusLabel.text = Target.ItemLevelManager.GetStatusText(NextLevel).ToString();
             // 消費アイテムの表示
             foreach (var icon in _activeItemIcon)
             {

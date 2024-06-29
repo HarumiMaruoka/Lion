@@ -9,19 +9,15 @@ namespace Lion.LevelManagement
     /// <typeparam name="T">
     /// ステータスを表す構造体。IStatusを実装している必要がある。
     /// </typeparam>
-    public class ExpLevelManager<T> where T : struct, IStatus
+    public class ExpLevelManager<T> : LevelManager<T> where T : IStatus
     {
-        public int Level { get; private set; }
-        public int MaxLevel => ExpTable.Length;
         public int Exp { get; private set; }
         public int[] ExpTable { get; private set; }
-        public T[] StatusTable { get; private set; }
-
         public event Action<int> OnExpChanged;
 
         public ExpLevelManager(TextAsset expTable)
         {
-            Level = 1;
+            CurrentLevel = 1;
             Exp = 0;
 
             var input = expTable.LoadCsv(1);
@@ -34,8 +30,8 @@ namespace Lion.LevelManagement
                 var row = input[i];
                 ExpTable[i] = int.Parse(row[1]);
 
-                T data = default;
-                data.ExpCsvLoad(row);
+                T data = default; // ここでエラーが発生する場合は、T型が構造体か確認してください。諸事情でwhere T : structが使えないので。
+                data.LoadExpSheet(row);
                 StatusTable[i] = data;
             }
         }
@@ -44,12 +40,12 @@ namespace Lion.LevelManagement
         {
             Exp += exp;
 
-            if (Level >= MaxLevel) return;
+            if (CurrentLevel >= MaxLevel) return;
 
-            while (Exp >= ExpTable[Level])
+            while (Exp >= ExpTable[CurrentLevel])
             {
-                Level++;
-                if (Level >= MaxLevel) break;
+                CurrentLevel++;
+                if (CurrentLevel >= MaxLevel) break;
             }
 
             OnExpChanged?.Invoke(exp);
@@ -59,32 +55,27 @@ namespace Lion.LevelManagement
         {
             Exp = exp;
 
-            if (Level >= MaxLevel) return;
+            if (CurrentLevel >= MaxLevel) return;
 
-            while (Exp >= ExpTable[Level])
+            while (Exp >= ExpTable[CurrentLevel])
             {
-                Level++;
-                if (Level >= MaxLevel) break;
+                CurrentLevel++;
+                if (CurrentLevel >= MaxLevel) break;
             }
 
             OnExpChanged?.Invoke(exp);
         }
 
-        public T GetStatus()
+        public int GetCurrentLevelExp()
         {
-            return StatusTable[Level - 1];
-        }
-
-        public int GetLevelExp()
-        {
-            return ExpTable[Level - 1];
+            return ExpTable[CurrentLevel - 1];
         }
 
         public int GetNextLevelExp()
         {
-            if (Level >= MaxLevel) return 0;
+            if (CurrentLevel >= MaxLevel) return 0;
 
-            return ExpTable[Level];
+            return ExpTable[CurrentLevel];
         }
     }
 }
