@@ -34,7 +34,7 @@ namespace Lion.Player
 
         public override string ToString()
         {
-            return 
+            return
                 $"Health: {Health}\n" +
                 $"Speed: {Speed}";
         }

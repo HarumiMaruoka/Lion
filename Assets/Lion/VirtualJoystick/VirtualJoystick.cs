@@ -1,13 +1,39 @@
+using Lion.LionDebugger;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Lion
 {
+    [RequireComponent(typeof(Image))]
     public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField]
         private VirtualJoystickUI _ui;
+
+        [SerializeField]
+        private DebugModeToggle _debugModeToggle;
+
+        private Color _initialColor;
+        private Image _draggableArea;
+
+        private void Start()
+        {
+            _draggableArea = GetComponent<Image>();
+            _initialColor = _draggableArea.color;
+
+            _debugModeToggle.DebugModeChanged += OnDebugModeChanged;
+            OnDebugModeChanged(_debugModeToggle.IsDebugMode);
+        }
+
+        private void OnDebugModeChanged(bool isDebugMode)
+        {
+            if (isDebugMode)
+                _draggableArea.color = _initialColor;
+            else
+                _draggableArea.color = Color.clear;
+        }
 
         public Vector2 Vector => _currentTouchPoint - _beginTouchPoint;
 

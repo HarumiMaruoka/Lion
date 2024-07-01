@@ -9,13 +9,15 @@ namespace Lion.LevelManagement
     /// <typeparam name="T">
     /// ステータスを表す構造体。IStatusを実装している必要がある。
     /// </typeparam>
-    public class ExpLevelManager<T> : LevelManager<T> where T : IStatus
+    public class ExpLevelManager : LevelManager
     {
         public int Exp { get; private set; }
         public int[] ExpTable { get; private set; }
         public event Action<int> OnExpChanged;
 
-        public ExpLevelManager(TextAsset expTable)
+        public ExpLevelManager() { }
+
+        public void Initialize<T>(TextAsset expTable) where T : IStatus, new()
         {
             CurrentLevel = 1;
             Exp = 0;
@@ -23,14 +25,14 @@ namespace Lion.LevelManagement
             var input = expTable.LoadCsv(1);
 
             ExpTable = new int[input.Length];
-            StatusTable = new T[input.Length];
+            StatusTable = new IStatus[input.Length];
 
             for (int i = 0; i < input.Length; i++)
             {
                 var row = input[i];
                 ExpTable[i] = int.Parse(row[1]);
 
-                T data = default; // ここでエラーが発生する場合は、T型が構造体か確認してください。諸事情でwhere T : structが使えないので。
+                T data = new();
                 data.LoadExpSheet(row);
                 StatusTable[i] = data;
             }

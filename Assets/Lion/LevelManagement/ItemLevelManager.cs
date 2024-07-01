@@ -10,14 +10,16 @@ namespace Lion.LevelManagement
     /// <typeparam name="T"> 
     /// ステータスを表す構造体。IStatusを実装している必要がある。
     /// </typeparam>
-    public class ItemLevelManager<T> : LevelManager<T>, IItemLevelManager where T : IStatus
+    public class ItemLevelManager : LevelManager
     {
         /// <summary>
         /// Keyはレベル、Valueはレベルアップに必要なアイテムとその個数を表す構造体のリスト。
         /// </summary>
         public Dictionary<int, List<LevelUpCost>> LevelUpCostTable { get; private set; }
 
-        public ItemLevelManager(TextAsset levelUpCostTable, TextAsset statusTable)
+        public ItemLevelManager() { }
+
+        public void Initialize<T>(TextAsset levelUpCostTable, TextAsset statusTable) where T : IStatus, new()
         {
             CurrentLevel = 1;
 
@@ -43,12 +45,12 @@ namespace Lion.LevelManagement
             }
 
             input = statusTable.LoadCsv(1);
-            StatusTable = new T[input.Length];
+            StatusTable = new IStatus[input.Length];
 
             for (int i = 0; i < input.Length; i++)
             {
                 var row = input[i];
-                T data = default; // ここでエラーが発生する場合は、T型が構造体か確認してください。諸事情でwhere T : structが使えないので。
+                T data = new T();
                 data.LoadItemSheet(row);
                 StatusTable[i] = data;
             }
@@ -57,17 +59,6 @@ namespace Lion.LevelManagement
         public List<LevelUpCost> GetLevelUpCosts(int level)
         {
             return LevelUpCostTable[level];
-        }
-
-
-        public string GetCurrentStatusText()
-        {
-            return GetStatusText(CurrentLevel);
-        }
-
-        public string GetStatusText(int level)
-        {
-            return StatusTable[level - 1].ToString();
         }
     }
 

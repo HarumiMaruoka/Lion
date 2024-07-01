@@ -23,14 +23,7 @@ namespace Lion.Ally
             {typeof(ReturnState), new ReturnState()},
         };
 
-        public void SetState<T>() where T : IState
-        {
-            CurrentState?.Exit(this);
-            CurrentState = _states[typeof(T)];
-            CurrentState.Enter(this);
-        }
-
-        private void Start()
+        protected virtual void Start()
         {
             Rigidbody2D = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>();
@@ -40,6 +33,13 @@ namespace Lion.Ally
         private void Update()
         {
             CurrentState?.Update(this);
+        }
+
+        public void SetState<T>() where T : IState
+        {
+            CurrentState?.Exit(this);
+            CurrentState = _states[typeof(T)];
+            CurrentState.Enter(this);
         }
     }
 

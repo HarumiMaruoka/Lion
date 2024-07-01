@@ -18,8 +18,8 @@ namespace Lion.Player
         public Sprite ActorSprite => _actorSprite;
         public Sprite IconSprite => _iconSprite;
 
-        private ItemLevelManager<Status> _levelManager;
-        public IItemLevelManager ItemLevelManager => _levelManager ??= PlayerManager.Instance.ItemLevelManager;
+        private ItemLevelManager _levelManager;
+        public ItemLevelManager ItemLevelManager => _levelManager ??= PlayerManager.Instance.ItemLevelManager;
 
         private void OnEnable()
         {

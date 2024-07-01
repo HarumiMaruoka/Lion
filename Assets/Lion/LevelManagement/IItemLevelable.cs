@@ -5,7 +5,7 @@ namespace Lion.LevelManagement
 {
     public interface IItemLevelable
     {
-        IItemLevelManager ItemLevelManager { get; }
+        ItemLevelManager ItemLevelManager { get; }
 
         bool IsActive { get; }
         event Action<bool> OnActiveChanged;

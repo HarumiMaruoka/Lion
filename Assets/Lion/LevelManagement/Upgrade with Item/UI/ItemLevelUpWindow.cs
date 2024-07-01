@@ -171,8 +171,8 @@ namespace Lion.LevelManagement.UI.UpgradeWithItem
             // レベル表示の更新
             _levelLabel.text = $"Lv: {Level}";
             _nextLevelLabel.text = $"Lv: {NextLevel}";
-            _statusLabel.text = Target.ItemLevelManager.GetCurrentStatusText().ToString();
-            _nextStatusLabel.text = Target.ItemLevelManager.GetStatusText(NextLevel).ToString();
+            _statusLabel.text = Target.ItemLevelManager.GetCurrentStatus().ToString();
+            _nextStatusLabel.text = Target.ItemLevelManager.GetNextStatus(NextLevel).ToString();
             // 消費アイテムの表示
             foreach (var icon in _activeItemIcon)
             {

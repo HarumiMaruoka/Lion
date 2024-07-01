@@ -24,10 +24,14 @@ namespace Lion.Ally
             {
                 if (value.Count == 0) return;
 
-                if (_activatedAlly) _activatedAlly.Deactivate();
+                if (_activatedAlly) 
+                    _activatedAlly.Deactivate();
+
                 if (_activatedAlly != value) _activatedAlly = value;
                 else _activatedAlly = null;
-                if (_activatedAlly) _activatedAlly.Activate();
+
+                if (_activatedAlly)
+                    _activatedAlly.Activate();
             }
         }
 

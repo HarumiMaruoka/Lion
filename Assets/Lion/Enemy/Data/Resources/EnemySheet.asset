@@ -1,0 +1,266 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9006858705220595547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 4
+  <Name>k__BackingField: Beard A
+  <HP>k__BackingField: 55
+  <Attack>k__BackingField: 2
+  <Speed>k__BackingField: 3
+  <Prefab>k__BackingField: {fileID: -6143724357630855863, guid: 7344097d39db56048bb62d3523fdeb15, type: 3}
+--- !u!114 &-8319648104112750296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4365b5a18647df46ab351df3611dcf6, type: 3}
+  m_Name: LayoutData
+  m_EditorClassIdentifier: 
+  <Sheet>k__BackingField: {fileID: 11400000}
+  HorizontalSpacings:
+  - 16
+  - 50
+  - 37
+  - 96
+  - 21
+  - 50
+  - 41
+  - 50
+  - 40
+  - 50
+  - 41
+  - 200
+  VerticalSpacings:
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  GridLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.3}
+  GridLineSize: {x: 3, y: 2}
+  GridLineOffset: {x: 2, y: 21}
+--- !u!114 &-6162065492527219612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 1
+  <Name>k__BackingField: Ball A
+  <HP>k__BackingField: 42
+  <Attack>k__BackingField: 3
+  <Speed>k__BackingField: 6
+  <Prefab>k__BackingField: {fileID: 6481542198328760811, guid: 9b8ee1381f968444183b0a5a17f363b6, type: 3}
+--- !u!114 &-5789346517195401744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 2
+  <Name>k__BackingField: Bat A
+  <HP>k__BackingField: 37
+  <Attack>k__BackingField: 3.3
+  <Speed>k__BackingField: 5
+  <Prefab>k__BackingField: {fileID: -1416891416175601292, guid: ecade9a19468e9642b314f07140c2b76, type: 3}
+--- !u!114 &-5359065008452702478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 5
+  <Name>k__BackingField: Bug A
+  <HP>k__BackingField: 45
+  <Attack>k__BackingField: 3
+  <Speed>k__BackingField: 6.8
+  <Prefab>k__BackingField: {fileID: 1157433411491397553, guid: c9b7aaaa9d3807b409d94ae8e63c4248, type: 3}
+--- !u!114 &-3966988760497233229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0
+  <Name>k__BackingField: Air A
+  <HP>k__BackingField: 40
+  <Attack>k__BackingField: 1
+  <Speed>k__BackingField: 2
+  <Prefab>k__BackingField: {fileID: -6283885135241203547, guid: a5c5dd625da773145bcb3f40588ebc4a, type: 3}
+--- !u!114 &-3064342495752904076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 8
+  <Name>k__BackingField: Chest A
+  <HP>k__BackingField: 60
+  <Attack>k__BackingField: 3.5
+  <Speed>k__BackingField: 4.5
+  <Prefab>k__BackingField: {fileID: -4899068923960935031, guid: 75bccdd000732964d82391ae85ac2bb1, type: 3}
+--- !u!114 &-1898885191069231381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 10
+  <Name>k__BackingField: Cloud A
+  <HP>k__BackingField: 62
+  <Attack>k__BackingField: 4
+  <Speed>k__BackingField: 4
+  <Prefab>k__BackingField: {fileID: 7856109419079683546, guid: cb1acea4f7f93d74395b1521a63ec90a, type: 3}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d7393e8daa9c049b7925853be38bc0, type: 3}
+  m_Name: EnemySheet
+  m_EditorClassIdentifier: 
+  _collection:
+  - {fileID: -3966988760497233229}
+  - {fileID: -6162065492527219612}
+  - {fileID: -5789346517195401744}
+  - {fileID: 5357572138349784265}
+  - {fileID: -9006858705220595547}
+  - {fileID: -5359065008452702478}
+  - {fileID: 7220245420784729375}
+  - {fileID: 861870034245923816}
+  - {fileID: -3064342495752904076}
+  - {fileID: 9087711565718688336}
+  - {fileID: -1898885191069231381}
+  WindowLayout: {fileID: -8319648104112750296}
+--- !u!114 &861870034245923816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 7
+  <Name>k__BackingField: Cat A
+  <HP>k__BackingField: 57
+  <Attack>k__BackingField: 3.7
+  <Speed>k__BackingField: 5
+  <Prefab>k__BackingField: {fileID: 7136731091205265545, guid: 2a38970047f441249b4c59db07d099c9, type: 3}
+--- !u!114 &5357572138349784265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 3
+  <Name>k__BackingField: Bat Small A
+  <HP>k__BackingField: 52
+  <Attack>k__BackingField: 2.8
+  <Speed>k__BackingField: 4
+  <Prefab>k__BackingField: {fileID: 8091542806934143589, guid: 21da72e1d50308d46a7d9ac2af73cecc, type: 3}
+--- !u!114 &7220245420784729375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 6
+  <Name>k__BackingField: BugB
+  <HP>k__BackingField: 50
+  <Attack>k__BackingField: 3.3
+  <Speed>k__BackingField: 3.2
+  <Prefab>k__BackingField: {fileID: -5868440404828093431, guid: cb7cda5f93e19594da38705637a22a26, type: 3}
+--- !u!114 &9087711565718688336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e90096174b26744fae3faa78f3952f6, type: 3}
+  m_Name: EnemySheet (Lion.Enemy.EnemySheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 9
+  <Name>k__BackingField: Chicken A
+  <HP>k__BackingField: 61
+  <Attack>k__BackingField: 3.9
+  <Speed>k__BackingField: 4.2
+  <Prefab>k__BackingField: {fileID: 1776033368024993572, guid: 4edcf5a26f45f44478203005f16923f6, type: 3}

@@ -3,6 +3,7 @@ using Lion.LevelManagement;
 using Lion.Player;
 using System;
 using UnityEngine;
+using UnityEngine.XR;
 
 namespace Lion.Ally
 {
@@ -12,22 +13,23 @@ namespace Lion.Ally
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public Sprite ActorSprite { get; private set; }
         [field: SerializeField] public Sprite IconSprite { get; private set; }
-        [field: SerializeField] public GameObject Prefab { get; private set; }
+        [field: SerializeField] public AllyController Prefab { get; private set; }
         [field: SerializeField] public SkillController SkillPrefab { get; private set; }
 
-        private GameObject _instance;
+        private AllyController _instance;
         public event Action<bool> OnActiveChanged;
         public bool IsActive => _instance != null;
 
         public void Activate()
         {
             _instance = Instantiate(Prefab, PlayerController.Instance.transform.position, Quaternion.identity);
+            _instance.AllyData = this;
             OnActiveChanged?.Invoke(true);
         }
 
         public void Deactivate()
         {
-            Destroy(_instance);
+            Destroy(_instance.gameObject);
             _instance = null;
             OnActiveChanged?.Invoke(false);
         }
@@ -39,9 +41,9 @@ namespace Lion.Ally
             get => _count;
             set
             {
-                if (_count == 0 && value > 0) 
+                if (_count == 0 && value > 0)
                     ItemLevelableContainer.Instance.Add(this);
-                else if (_count > 0 && value == 0) 
+                else if (_count > 0 && value == 0)
                     ItemLevelableContainer.Instance.Remove(this);
 
                 _count = value;
@@ -56,18 +58,26 @@ namespace Lion.Ally
         private TextAsset LoadLevelUpCostAsset() => Resources.Load<TextAsset>($"Ally_{ID}_ItemLevelUpCostTable");
         private TextAsset LoadLevelUpStatusAsset() => Resources.Load<TextAsset>($"Ally_{ID}_ItemLevelStatusTable");
 
-        private ExpLevelManager<AllyStatus> CreateExpLevelManager() => new ExpLevelManager<AllyStatus>(LoadExpStatusAsset());
-        private ItemLevelManager<AllyStatus> CreateItemStatusLevelManager() => new ItemLevelManager<AllyStatus>(LoadLevelUpCostAsset(), LoadLevelUpStatusAsset());
+        private ExpLevelManager CreateExpLevelManager()
+        {
+            var instance = new ExpLevelManager();
+            instance.Initialize<AllyStatus>(LoadExpStatusAsset());
+            return instance;
+        }
+        private ItemLevelManager CreateItemStatusLevelManager()
+        {
+            var instance = new ItemLevelManager();
+            instance.Initialize<AllyStatus>(LoadLevelUpCostAsset(), LoadLevelUpStatusAsset());
+            return instance;
+        }
 
 
-        private ExpLevelManager<AllyStatus> _expLevelManager;
-        public ExpLevelManager<AllyStatus> ExpLevelManager => _expLevelManager ??= CreateExpLevelManager();
+        private ExpLevelManager _expLevelManager;
+        public ExpLevelManager ExpLevelManager => _expLevelManager ??= CreateExpLevelManager();
 
-        private ItemLevelManager<AllyStatus> _itemLevelManager;
-        public ItemLevelManager<AllyStatus> ItemLevelManager => _itemLevelManager ??= CreateItemStatusLevelManager();
+        private ItemLevelManager _itemLevelManager;
+        public ItemLevelManager ItemLevelManager => _itemLevelManager ??= CreateItemStatusLevelManager();
 
-        public AllyStatus Status => _expLevelManager.GetStatus() + _itemLevelManager.GetStatus();
-
-        IItemLevelManager IItemLevelable.ItemLevelManager => ItemLevelManager;
+        public AllyStatus Status => (AllyStatus)_expLevelManager.GetCurrentStatus() + (AllyStatus)_itemLevelManager.GetCurrentStatus();
     }
 }

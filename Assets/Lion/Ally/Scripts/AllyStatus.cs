@@ -8,7 +8,7 @@ namespace Lion.Ally
     {
         public float HP;
         public float MP;
-        public float Attack;
+        public float AttackPower;
         public float Defense;
         public float Speed;
         public float Range;
@@ -20,7 +20,7 @@ namespace Lion.Ally
         {
             HP = float.Parse(row[2]);
             MP = float.Parse(row[3]);
-            Attack = float.Parse(row[4]);
+            AttackPower = float.Parse(row[4]);
             Defense = float.Parse(row[5]);
             Speed = float.Parse(row[6]);
             Range = float.Parse(row[7]);
@@ -31,7 +31,7 @@ namespace Lion.Ally
         {
             HP = float.Parse(row[1]);
             MP = float.Parse(row[2]);
-            Attack = float.Parse(row[3]);
+            AttackPower = float.Parse(row[3]);
             Defense = float.Parse(row[4]);
             Speed = float.Parse(row[5]);
             Range = float.Parse(row[6]);
@@ -44,7 +44,7 @@ namespace Lion.Ally
             {
                 HP = a.HP + b.HP,
                 MP = a.MP + b.MP,
-                Attack = a.Attack + b.Attack,
+                AttackPower = a.AttackPower + b.AttackPower,
                 Defense = a.Defense + b.Defense,
                 Speed = a.Speed + b.Speed,
                 Range = a.Range + b.Range,
@@ -57,7 +57,7 @@ namespace Lion.Ally
             return
                 $"HP: {HP}\n" +
                 $"MP: {MP}\n" +
-                $"Attack: {Attack}\n" +
+                $"Attack: {AttackPower}\n" +
                 $"Defense: {Defense}\n" +
                 $"Speed: {Speed}\n" +
                 $"Range: {Range}\n" +

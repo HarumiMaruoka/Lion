@@ -15,7 +15,7 @@ namespace Lion.Player.UI
         [SerializeField]
         private TextMeshProUGUI _expText = default;
 
-        private ExpLevelManager<Status> PlayerExpManager => PlayerManager.Instance.ExpLevelManager;
+        private ExpLevelManager PlayerExpManager => PlayerManager.Instance.ExpLevelManager;
 
         private void Start()
         {

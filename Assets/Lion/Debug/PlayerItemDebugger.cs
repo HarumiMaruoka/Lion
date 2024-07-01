@@ -20,7 +20,7 @@ namespace Lion.LionDebugger
                     _text.text += $"Item ID: {PlayerManager.Instance.ItemLevelManager.LevelUpCostTable[level][i].ItemID}: " +
                         $"Amount: {PlayerManager.Instance.ItemLevelManager.LevelUpCostTable[level][i].Amount}, ";
                 }
-                _text.text += $"Status: {PlayerManager.Instance.ItemLevelManager.GetStatus(level).ToString()}\n";
+                _text.text += $"Status: {PlayerManager.Instance.ItemLevelManager.GetNextStatus(level).ToString()}\n";
             }
         }
     }
