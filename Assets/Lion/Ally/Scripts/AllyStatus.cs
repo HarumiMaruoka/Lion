@@ -13,6 +13,7 @@ namespace Lion.Ally
         public float Speed;
         public float Range;
         public float Luck;
+        public int AvailableMinionsCount; // 使役可能なミニオンの数
 
         public float MoveSpeed => 3f + Speed * 0.03f;
 
@@ -25,6 +26,7 @@ namespace Lion.Ally
             Speed = float.Parse(row[6]);
             Range = float.Parse(row[7]);
             Luck = float.Parse(row[8]);
+            AvailableMinionsCount = int.Parse(row[9]);
         }
 
         public void LoadItemSheet(string[] row)
@@ -36,6 +38,7 @@ namespace Lion.Ally
             Speed = float.Parse(row[5]);
             Range = float.Parse(row[6]);
             Luck = float.Parse(row[7]);
+            AvailableMinionsCount = int.Parse(row[8]);
         }
 
         public static AllyStatus operator +(AllyStatus a, AllyStatus b)
@@ -49,6 +52,7 @@ namespace Lion.Ally
                 Speed = a.Speed + b.Speed,
                 Range = a.Range + b.Range,
                 Luck = a.Luck + b.Luck,
+                AvailableMinionsCount = a.AvailableMinionsCount + b.AvailableMinionsCount
             };
         }
 
@@ -61,7 +65,8 @@ namespace Lion.Ally
                 $"Defense: {Defense}\n" +
                 $"Speed: {Speed}\n" +
                 $"Range: {Range}\n" +
-                $"Luck: {Luck}";
+                $"Luck: {Luck}\n" +
+                $"Minion Count: {AvailableMinionsCount}";
         }
     }
 }

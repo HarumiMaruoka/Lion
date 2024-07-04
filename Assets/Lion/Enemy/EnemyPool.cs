@@ -1,3 +1,4 @@
+using Lion.Minion;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,14 @@ namespace Lion.Enemy
                 return _activeEnemies[instanceID];
             }
             return null;
+        }
+
+        public bool TryGetEnemy(int instanceID, out EnemyController enemy)
+        {
+            enemy = null;
+            if (!_activeEnemies.ContainsKey(instanceID)) return false;
+            enemy = _activeEnemies[instanceID];
+            return true;
         }
 
         public EnemyPool(EnemySheet enemyDatas)

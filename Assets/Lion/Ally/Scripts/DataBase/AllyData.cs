@@ -52,22 +52,21 @@ namespace Lion.Ally
         }
 
         public bool Unlocked => _count > 0;
-        public bool Activated => _instance != null;
-
-        private TextAsset LoadExpStatusAsset() => Resources.Load<TextAsset>($"Ally_{ID}_ExpLevelStatusTable");
-        private TextAsset LoadLevelUpCostAsset() => Resources.Load<TextAsset>($"Ally_{ID}_ItemLevelUpCostTable");
-        private TextAsset LoadLevelUpStatusAsset() => Resources.Load<TextAsset>($"Ally_{ID}_ItemLevelStatusTable");
 
         private ExpLevelManager CreateExpLevelManager()
         {
             var instance = new ExpLevelManager();
-            instance.Initialize<AllyStatus>(LoadExpStatusAsset());
+            var expTable = Resources.Load<TextAsset>($"Ally_{ID}_ExpLevelStatusTable");
+            instance.Initialize<AllyStatus>(expTable);
             return instance;
         }
+
         private ItemLevelManager CreateItemStatusLevelManager()
         {
             var instance = new ItemLevelManager();
-            instance.Initialize<AllyStatus>(LoadLevelUpCostAsset(), LoadLevelUpStatusAsset());
+            var costTable = Resources.Load<TextAsset>($"Ally_{ID}_ItemLevelUpCostTable");
+            var statusTable = Resources.Load<TextAsset>($"Ally_{ID}_ItemLevelStatusTable");
+            instance.Initialize<AllyStatus>(costTable, statusTable);
             return instance;
         }
 

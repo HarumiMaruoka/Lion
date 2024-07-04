@@ -1,0 +1,57 @@
+using Lion.Ally;
+using Lion.Ally.UI;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Lion.Formation.UI
+{
+    [RequireComponent(typeof(Button))]
+    public class AllySelectWindowOpenButton : MonoBehaviour
+    {
+        [SerializeField] private Image _icon;
+        [SerializeField] private AllyWindow _allySelectWindow;
+
+        private void Start()
+        {
+            GetComponent<Button>().onClick.AddListener(OpenWindow);
+            ApplyIcon();
+        }
+
+        private void OpenWindow()
+        {
+            _allySelectWindow.Open(mode: AllyWindow.Mode.Formation);
+            _allySelectWindow.OnSelected += OnSelectedAlly;
+            _allySelectWindow.OnDisabled += OnClosedWindwo;
+        }
+
+        private void OnClosedWindwo()
+        {
+            _allySelectWindow.OnSelected -= OnSelectedAlly;
+            _allySelectWindow.OnDisabled -= OnClosedWindwo;
+        }
+
+        private void OnSelectedAlly(AllyData data)
+        {
+            if (!data.Unlocked) return;
+
+            FormationManager.Instance.ActivatedAlly = data;
+            ApplyIcon();
+            _allySelectWindow.Close();
+        }
+
+        private void ApplyIcon()
+        {
+            if (FormationManager.Instance.ActivatedAlly == null)
+            {
+                _icon.sprite = null;
+                _icon.color = Color.clear;
+            }
+            else
+            {
+                _icon.sprite = FormationManager.Instance.ActivatedAlly.IconSprite;
+                _icon.color = Color.white;
+            }
+        }
+    }
+}

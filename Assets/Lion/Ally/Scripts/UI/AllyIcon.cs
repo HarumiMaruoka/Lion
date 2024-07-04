@@ -18,6 +18,9 @@ namespace Lion.Ally.UI
 
         [SerializeField] private GameObject _lockedLabel;
         [SerializeField] private GameObject _activatedLabel;
+        [SerializeField] private GameObject _removeLabel;
+
+        public bool IsFormationMode { get; set; }
 
         private AllyData _ally;
 
@@ -58,7 +61,8 @@ namespace Lion.Ally.UI
                 _haveCount.text = _ally.Count.ToString();
                 _skillName.text = "not implemented"; /*_ally.SkillPrefab.Name;*/
                 _lockedLabel.SetActive(!_ally.Unlocked);
-                _activatedLabel.SetActive(_ally.Activated);
+                _activatedLabel.SetActive(_ally.IsActive);
+                _removeLabel.SetActive(IsFormationMode && _ally.IsActive);
             }
         }
 

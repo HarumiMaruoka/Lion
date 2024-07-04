@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8510367125455094862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c03cc0468af74499fc6d0d5b969803, type: 3}
+  m_Name: MinionSheet (Lion.Minion.MinionSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0
+  <Name>k__BackingField: ChibiRobot
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: 79ae5f08dbb59483baceb4ceeae85b0b, type: 3}
+  <ActorSprite>k__BackingField: {fileID: 21300000, guid: 79ae5f08dbb59483baceb4ceeae85b0b, type: 3}
+  <Prefab>k__BackingField: {fileID: 4458609382866859347, guid: eccc26e2977b0924c8f0ba61afcf3bc4, type: 3}
+--- !u!114 &-8106053766186286468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c03cc0468af74499fc6d0d5b969803, type: 3}
+  m_Name: MinionSheet (Lion.Minion.MinionSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 2
+  <Name>k__BackingField: Wolf
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: c9f13fdf83a3dc349a0fd9f2640c5818, type: 3}
+  <ActorSprite>k__BackingField: {fileID: 21300000, guid: c9f13fdf83a3dc349a0fd9f2640c5818, type: 3}
+  <Prefab>k__BackingField: {fileID: 8191213026010549355, guid: 0b716b9b5cc9a2c4aae9cc3571148848, type: 3}
+--- !u!114 &-4467718516866792505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c03cc0468af74499fc6d0d5b969803, type: 3}
+  m_Name: MinionSheet (Lion.Minion.MinionSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 1
+  <Name>k__BackingField: Cat
+  <IconSprite>k__BackingField: {fileID: -1690786751, guid: 590af8f38727d264a9d41fd02adc7f7c, type: 3}
+  <ActorSprite>k__BackingField: {fileID: -1690786751, guid: 590af8f38727d264a9d41fd02adc7f7c, type: 3}
+  <Prefab>k__BackingField: {fileID: 3316308766165302299, guid: 92d73d76cb517dd47b5d4286d688443f, type: 3}
+--- !u!114 &-390116572959013320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1571de3c26b316647a1d5b71499deba4, type: 3}
+  m_Name: LayoutData
+  m_EditorClassIdentifier: 
+  <Sheet>k__BackingField: {fileID: 11400000}
+  HorizontalSpacings:
+  - 14
+  - 50
+  - 37
+  - 80
+  - 71.1
+  - 104.7
+  - 69.1
+  - 127.8
+  - 71
+  - 180.24
+  VerticalSpacings:
+  - 20
+  - 20
+  - 20
+  GridLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.3}
+  GridLineSize: {x: 3, y: 2}
+  GridLineOffset: {x: 2, y: 21}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a42b4cd565e23242b6b31c2612ecac5, type: 3}
+  m_Name: MinionSheet
+  m_EditorClassIdentifier: 
+  _collection:
+  - {fileID: -8510367125455094862}
+  - {fileID: -4467718516866792505}
+  - {fileID: -8106053766186286468}
+  WindowLayout: {fileID: -390116572959013320}

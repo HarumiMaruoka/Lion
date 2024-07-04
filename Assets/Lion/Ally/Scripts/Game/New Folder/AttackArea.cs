@@ -10,9 +10,11 @@ namespace Lion.Ally
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            var enemy = EnemyManager.Instance.EnemyPool.FindEnemy(collision.gameObject.GetInstanceID());
-            if (enemy == null) return;
-            enemy.Damage(AllyController.Status.AttackPower);
+            int instanceID = collision.gameObject.GetInstanceID();
+            if (EnemyManager.Instance.EnemyPool.TryGetEnemy(instanceID, out EnemyController enemy))
+            {
+                enemy.Damage(AllyController.Status.AttackPower);
+            }
         }
     }
 }

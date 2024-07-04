@@ -8,21 +8,21 @@ namespace Lion.LionDebugger
     public class DebugModeToggle : MonoBehaviour
     {
         private Toggle _toggle;
+        private Toggle Toggle => _toggle ??= GetComponent<Toggle>();
 
         [SerializeField]
         private GameObject[] _debugObjects;
         [SerializeField]
         private MonoBehaviour[] _debugScripts;
 
-        private void Start()
+        private void Awake()
         {
-            _toggle = GetComponent<Toggle>();
-            _toggle.onValueChanged.AddListener(OnValueChanged);
+            Toggle.onValueChanged.AddListener(OnValueChanged);
             OnValueChanged(_toggle.isOn);
         }
 
         public event Action<bool> DebugModeChanged;
-        public bool IsDebugMode => _toggle.isOn;
+        public bool IsDebugMode => Toggle.isOn;
 
         private void OnValueChanged(bool isOn)
         {
