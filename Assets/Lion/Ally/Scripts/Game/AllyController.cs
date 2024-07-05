@@ -1,3 +1,4 @@
+using Lion.Gem;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Lion.Ally
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
-    public class AllyController : MonoBehaviour
+    public class AllyController : MonoBehaviour, IGemCollector
     {
         public AllyData AllyData { get; set; }
         public AllyStatus Status => AllyData == null ? default : AllyData.Status;
@@ -40,6 +41,11 @@ namespace Lion.Ally
             CurrentState?.Exit(this);
             CurrentState = _states[typeof(T)];
             CurrentState.Enter(this);
+        }
+
+        public void CollectGem(int amount)
+        {
+            AllyData.ExpLevelManager.AddExp(amount);
         }
     }
 

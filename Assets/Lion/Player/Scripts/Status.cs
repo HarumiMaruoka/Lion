@@ -8,6 +8,7 @@ namespace Lion.Player
     {
         public float Health;
         public float Speed;
+        public float BattlePower => Health + Speed;
 
         public float MoveSpeed => 3f + Speed * 0.03f;
 

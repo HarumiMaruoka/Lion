@@ -55,7 +55,7 @@ namespace Lion.Minion.States
         {
             var currentPosition = minion.transform.position;
             var direction = (_destination - currentPosition).normalized;
-            minion.Rigidbody2D.velocity = direction * (1.4f + minion.Status.Speed * 0.02f);
+            minion.Rigidbody2D.velocity = direction * minion.Status.MoveSpeed;
 
             return Vector2.SqrMagnitude(currentPosition - _destination) < 0.01f;
         }

@@ -20,17 +20,18 @@ namespace Lion.Minion.UI
         [SerializeField] private GameObject _detachLabel;
 
         public bool IsFormationMode { get; set; }
+        public MinionData FormationModeMinion { get; set; }
 
         private MinionData _minion;
 
-        public MinionData Ally
+        public MinionData Minion
         {
             get => _minion;
             set
             {
-                if (_minion != null) _minion.OnActiveChanged -= OnActiveChanged;
+                UnsubscribeFromMinionEvents(_minion);
                 _minion = value;
-                if (_minion != null) _minion.OnActiveChanged += OnActiveChanged;
+                SubscribeToMinionEvents(_minion);
                 UpdateUI();
             }
         }
@@ -41,6 +42,11 @@ namespace Lion.Minion.UI
         {
             UpdateUI();
             GetComponent<Button>().onClick.AddListener(() => OnSelected?.Invoke(_minion));
+        }
+
+        private void OnDestroy()
+        {
+            UnsubscribeFromMinionEvents(_minion);
         }
 
         public void UpdateUI()
@@ -61,13 +67,53 @@ namespace Lion.Minion.UI
                 _skillName.text = "not implemented"; /*_minion.SkillPrefab.Name;*/
                 _lockedLabel.SetActive(!_minion.Unlocked);
                 _activatedLabel.SetActive(_minion.IsActive);
-                _detachLabel.SetActive(IsFormationMode && _minion.IsActive);
+                _detachLabel.SetActive(FormationModeMinion == _minion && IsFormationMode && _minion.IsActive);
             }
+        }
+
+        private void SubscribeToMinionEvents(MinionData minion)
+        {
+            if (minion == null) return;
+            minion.OnActiveChanged += OnActiveChanged;
+            minion.OnCountChanged += OnCountChanged;
+            minion.OnUnlockStatusChanged += OnUnlockStatusChanged;
+            minion.ExpLevelManager.OnLevelChanged += OnExpLevelChanged;
+            minion.ItemLevelManager.OnLevelChanged += OnItemLevelChanged;
+        }
+
+        private void UnsubscribeFromMinionEvents(MinionData minion)
+        {
+            if (minion == null) return;
+            minion.OnActiveChanged -= OnActiveChanged;
+            minion.OnCountChanged -= OnCountChanged;
+            minion.OnUnlockStatusChanged -= OnUnlockStatusChanged;
+            minion.ExpLevelManager.OnLevelChanged -= OnExpLevelChanged;
+            minion.ItemLevelManager.OnLevelChanged -= OnItemLevelChanged;
         }
 
         private void OnActiveChanged(bool isActive)
         {
             _activatedLabel.SetActive(isActive);
+        }
+
+        private void OnCountChanged(int count)
+        {
+            _haveCount.text = _minion.Count.ToString();
+        }
+
+        private void OnUnlockStatusChanged(bool isUnlocked)
+        {
+            _lockedLabel.SetActive(!isUnlocked);
+        }
+
+        private void OnExpLevelChanged(int level)
+        {
+            _expLevel.text = level.ToString();
+        }
+
+        private void OnItemLevelChanged(int level)
+        {
+            _itemLevel.text = level.ToString();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Lion.Minion.States
             // 目的地に向かって移動する。
             var currentPosition = minion.transform.position;
             var direction = (_destination - currentPosition).normalized;
-            minion.Rigidbody2D.velocity = direction * (1.6f + minion.Status.Speed * 0.03f);
+            minion.Rigidbody2D.velocity = direction * minion.Status.MoveSpeed * 1.5f;
 
             // プレイヤーと離れすぎている場合、強制的に目的地に移動させる。
             if (minion.IsTooFarFromPlayer())

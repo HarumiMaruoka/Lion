@@ -1,3 +1,4 @@
+using Lion.Gem;
 using Lion.Minion.States;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ namespace Lion.Minion
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
-    public class MinionController : MonoBehaviour
+    public class MinionController : MonoBehaviour, IGemCollector
     {
         [SerializeField] private MinionBullet _bulletPrefab;
 
@@ -121,6 +122,11 @@ namespace Lion.Minion
             float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
             var instance = Instantiate(_bulletPrefab, transform.position, Quaternion.Euler(0f, 0f, angle));
             instance.Controller = this;
+        }
+
+        public void CollectGem(int amount)
+        {
+            MinionData.ExpLevelManager.AddExp(amount);
         }
     }
 

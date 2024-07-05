@@ -13,6 +13,21 @@ namespace Lion.Formation
     {
         public static FormationManager Instance { get; private set; } = new FormationManager();
 
+        public float BattlePower
+        {
+            get
+            {
+                float battlePower = 0;
+                if (ActivatedAlly != null) battlePower += ActivatedAlly.Status.BattlePower;
+                for (int i = 0; i < _activatedMinions.Length; i++)
+                {
+                    if (_activatedMinions[i] == null) continue;
+                    battlePower += _activatedMinions[i].Status.BattlePower;
+                }
+                return battlePower;
+            }
+        }
+
         private AllyData _activatedAlly;
         public event Action<AllyData> OnActivatedAllyChanged;
 
@@ -48,26 +63,21 @@ namespace Lion.Formation
 
         private MinionData[] _activatedMinions = new MinionData[4];
         public Action<MinionData>[] OnActivatedMinionChanged = new Action<MinionData>[4];
-        public MinionData[] ActivatedMinions => _activatedMinions;
 
-        public void Activation(MinionData minion, int index)
+        public int ActivatableMinionsCount => _activatedMinions.Length;
+
+        public MinionData GetActivatedMinion(int index)
         {
             if (index < 0 || index >= _activatedMinions.Length)
             {
                 Debug.LogWarning("Index is out of range.");
-                return;
+                return null;
             }
 
-            if (_activatedMinions[index] != null) _activatedMinions[index].Deactivate();
-
-            if (minion == _activatedMinions[index]) _activatedMinions[index] = null;
-            else _activatedMinions[index] = minion;
-
-            if (minion != null) minion.Activate();
-            OnActivatedMinionChanged[index]?.Invoke(minion);
+            return _activatedMinions[index];
         }
 
-        public void Deactivation(int index)
+        public void SetActivatedMinion(MinionData next, int index)
         {
             if (index < 0 || index >= _activatedMinions.Length)
             {
@@ -75,8 +85,15 @@ namespace Lion.Formation
                 return;
             }
 
-            if (_activatedMinions[index] != null) _activatedMinions[index].Deactivate();
-            _activatedMinions[index] = null;
+            var old = _activatedMinions[index];
+            if (old != null) old.Deactivate();
+
+            if (old == next) _activatedMinions[index] = null;
+            else _activatedMinions[index] = next;
+
+            if (_activatedMinions[index] != null) _activatedMinions[index].Activate();
+
+            OnActivatedMinionChanged[index]?.Invoke(_activatedMinions[index]);
         }
 
         public void ClearMinions()
@@ -86,6 +103,7 @@ namespace Lion.Formation
                 if (_activatedMinions[i] == null) continue;
                 _activatedMinions[i].Deactivate();
                 _activatedMinions[i] = null;
+                OnActivatedMinionChanged[i]?.Invoke(null);
             }
         }
     }

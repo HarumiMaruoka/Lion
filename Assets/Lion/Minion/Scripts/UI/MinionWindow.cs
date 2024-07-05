@@ -42,18 +42,18 @@ namespace Lion.Minion.UI
 
         private IEnumerable<MinionData> _last;
 
-        public void Open(IEnumerable<MinionData> minions = null, Mode mode = Mode.Normal)
+        public void Open(IEnumerable<MinionData> minions = null, Mode mode = Mode.Normal, MinionData minion = null)
         {
             if (minions == null) minions = MinionManager.Instance.MinionSheet;
 
             gameObject.SetActive(true);
             if (_last == minions)
             {
-                UpdateIcons(mode);
+                UpdateIcons(mode, minion);
             }
             else
             {
-                UpdateIcons(minions, mode);
+                UpdateIcons(minions, mode, minion);
                 _last = minions;
             }
         }
@@ -86,7 +86,7 @@ namespace Lion.Minion.UI
             }
         }
 
-        public void UpdateIcons(IEnumerable<MinionData> allies, Mode mode)
+        public void UpdateIcons(IEnumerable<MinionData> allies, Mode mode, MinionData minion)
         {
             var count = allies.Count();
             // 既存のアイコンに対して、新しいデータを割り当てる。
@@ -95,23 +95,28 @@ namespace Lion.Minion.UI
             {
                 var icon = GetIcon(index);
                 icon.IsFormationMode = mode == Mode.Formation;
-                icon.Ally = ally;
+                icon.Minion = ally;
+                icon.FormationModeMinion = minion;
                 index++;
             }
             // 残りのアイコンに対して、nullを割り当てる。
             for (int i = count; i < MinionManager.Instance.MinionSheet.Count; i++)
             {
                 var icon = GetIcon(i);
-                icon.Ally = null;
+                icon.Minion = null;
             }
         }
 
-        public void UpdateIcons(Mode mode)
+        public void UpdateIcons(Mode mode, MinionData minion)
         {
             foreach (var row in _rows)
             {
                 row.Left.IsFormationMode = mode == Mode.Formation;
                 row.Right.IsFormationMode = mode == Mode.Formation;
+
+                row.Left.FormationModeMinion = minion;
+                row.Right.FormationModeMinion = minion;
+
                 row.UpdateUI();
             }
         }

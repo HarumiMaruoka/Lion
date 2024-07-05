@@ -20,6 +20,13 @@ namespace Lion.Ally
         public event Action<bool> OnActiveChanged;
         public bool IsActive => _instance != null;
 
+        public void Initialize()
+        {
+            Count = 0;
+            ExpLevelManager = ExpLevelManager.Create<AllyStatus>($"Ally_{ID}_ExpLevelStatusTable");
+            ItemLevelManager = ItemLevelManager.Create<AllyStatus>($"Ally_{ID}_ItemLevelUpCostTable", $"Ally_{ID}_ItemLevelStatusTable");
+        }
+
         public void Activate()
         {
             _instance = Instantiate(Prefab, PlayerController.Instance.transform.position, Quaternion.identity);
@@ -36,15 +43,22 @@ namespace Lion.Ally
 
         private int _count; // èäéùêîÅB
         public event Action<int> OnCountChanged;
+        public event Action<bool> OnUnlockStatusChanged;
         public int Count
         {
             get => _count;
             set
             {
                 if (_count == 0 && value > 0)
+                {
                     ItemLevelableContainer.Instance.Add(this);
+                    OnUnlockStatusChanged?.Invoke(true);
+                }
                 else if (_count > 0 && value == 0)
+                {
                     ItemLevelableContainer.Instance.Remove(this);
+                    OnUnlockStatusChanged?.Invoke(false);
+                }
 
                 _count = value;
                 OnCountChanged?.Invoke(value);
@@ -52,31 +66,9 @@ namespace Lion.Ally
         }
 
         public bool Unlocked => _count > 0;
+        public ExpLevelManager ExpLevelManager { get; private set; }
+        public ItemLevelManager ItemLevelManager { get; private set; }
 
-        private ExpLevelManager CreateExpLevelManager()
-        {
-            var instance = new ExpLevelManager();
-            var expTable = Resources.Load<TextAsset>($"Ally_{ID}_ExpLevelStatusTable");
-            instance.Initialize<AllyStatus>(expTable);
-            return instance;
-        }
-
-        private ItemLevelManager CreateItemStatusLevelManager()
-        {
-            var instance = new ItemLevelManager();
-            var costTable = Resources.Load<TextAsset>($"Ally_{ID}_ItemLevelUpCostTable");
-            var statusTable = Resources.Load<TextAsset>($"Ally_{ID}_ItemLevelStatusTable");
-            instance.Initialize<AllyStatus>(costTable, statusTable);
-            return instance;
-        }
-
-
-        private ExpLevelManager _expLevelManager;
-        public ExpLevelManager ExpLevelManager => _expLevelManager ??= CreateExpLevelManager();
-
-        private ItemLevelManager _itemLevelManager;
-        public ItemLevelManager ItemLevelManager => _itemLevelManager ??= CreateItemStatusLevelManager();
-
-        public AllyStatus Status => (AllyStatus)_expLevelManager.GetCurrentStatus() + (AllyStatus)_itemLevelManager.GetCurrentStatus();
+        public AllyStatus Status => (AllyStatus)ExpLevelManager.GetCurrentStatus() + (AllyStatus)ItemLevelManager.GetCurrentStatus();
     }
 }

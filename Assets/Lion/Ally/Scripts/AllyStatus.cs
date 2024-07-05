@@ -15,6 +15,7 @@ namespace Lion.Ally
         public float Luck;
         public int AvailableMinionsCount; // 使役可能なミニオンの数
 
+        public float BattlePower => HP + AttackPower + Defense + Speed + Range + Luck;
         public float MoveSpeed => 3f + Speed * 0.03f;
 
         public void LoadExpSheet(string[] row)

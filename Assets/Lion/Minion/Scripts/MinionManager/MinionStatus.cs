@@ -15,6 +15,9 @@ namespace Lion.Minion
         public float Range;
         public float Luck;
 
+        public float BattlePower => HP + Attack + Defense + Speed + Range + Luck;
+        public float MoveSpeed => 3f + Speed * 0.03f;
+
         public static MinionStatus operator +(MinionStatus a, MinionStatus b)
         {
             return new MinionStatus()

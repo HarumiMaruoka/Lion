@@ -15,9 +15,17 @@ namespace Lion.LevelManagement
         public int[] ExpTable { get; private set; }
         public event Action<int> OnExpChanged;
 
-        public ExpLevelManager() { }
+        private ExpLevelManager() { }
 
-        public void Initialize<T>(TextAsset expTable) where T : IStatus, new()
+        public static ExpLevelManager Create<T>(string tablePath) where T : IStatus, new()
+        {
+            var manager = new ExpLevelManager();
+            var expTable = Resources.Load<TextAsset>(tablePath);
+            manager.Initialize<T>(expTable);
+            return manager;
+        }
+
+        private void Initialize<T>(TextAsset expTable) where T : IStatus, new()
         {
             CurrentLevel = 1;
             Exp = 0;

@@ -15,7 +15,7 @@ namespace Lion.Ally
         {
             foreach (var data in this)
             {
-                data.Count = 0;
+                data.Initialize();
                 _allyDataByID.Add(data.ID, data);
             }
         }

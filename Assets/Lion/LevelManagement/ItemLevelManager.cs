@@ -17,9 +17,18 @@ namespace Lion.LevelManagement
         /// </summary>
         public Dictionary<int, List<LevelUpCost>> LevelUpCostTable { get; private set; }
 
-        public ItemLevelManager() { }
+        private ItemLevelManager() { }
 
-        public void Initialize<T>(TextAsset levelUpCostTable, TextAsset statusTable) where T : IStatus, new()
+        public static ItemLevelManager Create<T>(string costPath, string statusPath) where T : IStatus, new()
+        {
+            var instance = new ItemLevelManager();
+            var costTable = Resources.Load<TextAsset>(costPath);
+            var statusTable = Resources.Load<TextAsset>(statusPath);
+            instance.Initialize<T>(costTable, statusTable);
+            return instance;
+        }
+
+        private void Initialize<T>(TextAsset levelUpCostTable, TextAsset statusTable) where T : IStatus, new()
         {
             CurrentLevel = 1;
 

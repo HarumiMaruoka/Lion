@@ -1,4 +1,5 @@
 using Lion.CameraUtility;
+using Lion.Mission;
 using Lion.UI;
 using System;
 using UnityEngine;
@@ -45,6 +46,7 @@ namespace Lion.Enemy
         private void Die()
         {
             EnemyManager.Instance.EnemyPool.ReturnEnemy(this);
+            MainMission.Instance.KillCount++;
         }
     }
 }

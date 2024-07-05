@@ -29,9 +29,9 @@ namespace Lion.Ally.UI
             get => _ally;
             set
             {
-                if (_ally != null) _ally.OnActiveChanged -= OnActiveChanged;
+                UnsubscribeFromAllyEvents(_ally);
                 _ally = value;
-                if (_ally != null) _ally.OnActiveChanged += OnActiveChanged;
+                SubscribeToAllyEvents(_ally);
                 UpdateUI();
             }
         }
@@ -42,6 +42,11 @@ namespace Lion.Ally.UI
         {
             UpdateUI();
             GetComponent<Button>().onClick.AddListener(() => OnSelected?.Invoke(_ally));
+        }
+
+        private void OnDestroy()
+        {
+            UnsubscribeFromAllyEvents(_ally);
         }
 
         public void UpdateUI()
@@ -66,9 +71,49 @@ namespace Lion.Ally.UI
             }
         }
 
+        private void SubscribeToAllyEvents(AllyData ally)
+        {
+            if (ally == null) return;
+            ally.OnActiveChanged += OnActiveChanged;
+            ally.OnCountChanged += OnCountChanged;
+            ally.OnUnlockStatusChanged += OnUnlockStatusChanged;
+            ally.ExpLevelManager.OnLevelChanged += OnExpLevelChanged;
+            ally.ItemLevelManager.OnLevelChanged += OnItemLevelChanged;
+        }
+
+        private void UnsubscribeFromAllyEvents(AllyData ally)
+        {
+            if (ally == null) return;
+            ally.OnActiveChanged -= OnActiveChanged;
+            ally.OnCountChanged -= OnCountChanged;
+            ally.OnUnlockStatusChanged -= OnUnlockStatusChanged;
+            ally.ExpLevelManager.OnLevelChanged -= OnExpLevelChanged;
+            ally.ItemLevelManager.OnLevelChanged -= OnItemLevelChanged;
+        }
+
         private void OnActiveChanged(bool isActive)
         {
             _activatedLabel.SetActive(isActive);
+        }
+
+        private void OnCountChanged(int count)
+        {
+            _haveCount.text = _ally.Count.ToString();
+        }
+
+        private void OnUnlockStatusChanged(bool isUnlocked)
+        {
+            _lockedLabel.SetActive(!isUnlocked);
+        }
+
+        private void OnExpLevelChanged(int level)
+        {
+            _expLevel.text = level.ToString();
+        }
+
+        private void OnItemLevelChanged(int level)
+        {
+            _itemLevel.text = level.ToString();
         }
     }
 }
