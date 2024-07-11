@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3377362586606491333}
   - component: {fileID: 4247190985117881405}
   - component: {fileID: -8137942340053785535}
-  - component: {fileID: -8649356392447499999}
   m_Layer: 0
   m_Name: DroppedGem
   m_TagString: Untagged
@@ -98,39 +97,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34b91af5f92dbc4fa3ba86aaca82eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Amount>k__BackingField: 1
---- !u!58 &-8649356392447499999
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 651596201633680828}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.2

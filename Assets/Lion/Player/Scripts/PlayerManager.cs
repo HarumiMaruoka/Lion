@@ -14,6 +14,7 @@ namespace Lion.Player
         {
             ExpLevelManager = ExpLevelManager.Create<Status>("PlayerData_ExpLevelStatusTable");
             ItemLevelManager = ItemLevelManager.Create<Status>("PlayerData_ItemLevelUpCostTable", "PlayerData_ItemLevelStatusTable");
+            HealthManager = new HealthManager(100);
         }
 
         public Status Status => (Status)ExpLevelManager.GetCurrentStatus() + (Status)ItemLevelManager.GetCurrentStatus();
@@ -21,5 +22,6 @@ namespace Lion.Player
 
         public ExpLevelManager ExpLevelManager { get; private set; }
         public ItemLevelManager ItemLevelManager { get; private set; }
+        public HealthManager HealthManager { get; private set; }
     }
 }

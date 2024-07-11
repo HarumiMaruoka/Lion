@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Lion.Gem
@@ -6,5 +6,6 @@ namespace Lion.Gem
     public interface IGemCollector
     {
         void CollectGem(int amount);
+        Transform transform { get; }
     }
 }

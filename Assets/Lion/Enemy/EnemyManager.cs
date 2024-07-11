@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +18,11 @@ namespace Lion.Enemy
             Instance.EnemySheet.Initialize();
 
             SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        public static bool TryGetEnemy(GameObject gameObject, out EnemyController enemy)
+        {
+            return Instance.EnemyPool.TryGetEnemy(gameObject, out enemy);
         }
 
         private static void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)

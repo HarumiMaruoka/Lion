@@ -1,5 +1,3 @@
-using Lion.Gem;
-using Lion.Gold;
 using Lion.Manager;
 using System;
 using UnityEngine;
@@ -8,7 +6,7 @@ using UnityEngine.UI;
 namespace Lion.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerMove : MonoBehaviour, IGoldCollector, IGemCollector
+    public class PlayerMove : MonoBehaviour
     {
         public PlayerManager PlayerManager => PlayerManager.Instance;
 
@@ -93,17 +91,6 @@ namespace Lion.Player
             var dir = (_targetPointForAutoMove - transform.position).normalized;
             _rigidbody2D.velocity = dir * PlayerManager.Status.MoveSpeed * TimeScale;
         }
-
-        public void CollectGold(int amount)
-        {
-
-        }
-
-        public void CollectGem(int amount)
-        {
-            PlayerManager.ExpLevelManager.AddExp(amount);
-        }
-
 
         public void ChangeMoveMode(MoveMode mode)
         {

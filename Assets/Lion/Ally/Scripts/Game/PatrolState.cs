@@ -12,52 +12,62 @@ namespace Lion.Ally
 
         private Vector3 _destination;
 
-        public void Enter(AllyController minion)
+        public void Enter(AllyController ally)
         {
-            minion.Animator.Play(_runAnimation);
+            ally.Animator.Play(_runAnimation);
             // 目的地を設定する。
             _destination = Camera.main.GetRandomCameraArea();
+            // 向きを設定する。
+            var direction = _destination - ally.transform.position;
+            if (direction.x > 0 && ally.transform.localScale.x < 0)
+            {
+                ally.transform.localScale = new Vector3(Mathf.Abs(ally.transform.localScale.x), ally.transform.localScale.y, 1);
+            }
+            else if (direction.x < 0 && ally.transform.localScale.x > 0)
+            {
+                ally.transform.localScale = new Vector3(-Mathf.Abs(ally.transform.localScale.x), ally.transform.localScale.y, 1);
+            }
         }
 
-        public void Update(AllyController minion)
+        public void Update(AllyController ally)
         {
             // 移動し目的地に到達したら、確率に応じてIdleStateかAttackStateに遷移する。
-            if (MoveTowardsDestination(minion))
+            if (MoveTowardsDestination(ally))
             {
-                ChangeStateBasedOnProbability(minion);
+                ChangeStateBasedOnProbability(ally);
                 return;
             }
 
             // カメラの範囲外になった場合、ReturnStateに遷移する。
-            if (Camera.main.IsFarFromCamera(minion.transform.position))
+            if (Camera.main.IsFarFromCamera(ally.transform.position))
             {
-                minion.SetState<ReturnState>();
+                ally.SetState<ReturnState>();
                 return;
             }
         }
 
-        public void Exit(AllyController servantDemon)
+        public void Exit(AllyController ally)
         {
-            servantDemon.Rigidbody2D.velocity = Vector2.zero;
+            ally.Rigidbody2D.velocity = Vector2.zero;
         }
 
-        private void ChangeStateBasedOnProbability(AllyController minion)
+        private void ChangeStateBasedOnProbability(AllyController ally)
         {
             if (UnityEngine.Random.Range(0f, 1f) < _attackStateTransitionProbability)
             {
-                minion.SetState<AttackState>();
+                ally.SetState<AttackState>();
             }
             else
             {
-                minion.SetState<IdleState>();
+                ally.SetState<IdleState>();
             }
         }
 
-        private bool MoveTowardsDestination(AllyController minion)
+        private bool MoveTowardsDestination(AllyController ally)
         {
-            var currentPosition = minion.transform.position;
+            var currentPosition = ally.transform.position;
             var direction = (_destination - currentPosition).normalized;
-            minion.Rigidbody2D.velocity = direction * (1.4f + minion.Status.Speed * 0.02f);
+            ally.Rigidbody2D.velocity = direction * (1.4f + ally.Status.Speed * 0.02f);
 
             return Vector2.SqrMagnitude(currentPosition - _destination) < 0.01f;
         }

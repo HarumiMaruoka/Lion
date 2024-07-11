@@ -51,3 +51,18 @@ https://assetstore.unity.com/packages/2d/characters/medieval-king-pack-2-174863
 
 Pixel Mobs
 https://assetstore.unity.com/packages/2d/characters/pixel-mobs-54995
+
+Martial Hero
+https://assetstore.unity.com/packages/2d/characters/martial-hero-170422
+
+Safe Area Helper
+https://assetstore.unity.com/packages/tools/gui/safe-area-helper-130488?clickref=1100lyEBG4dZ&utm_source=partnerize&utm_medium=affiliate&utm_campaign=unity_affiliate
+
+Poison FX
+https://assetstore.unity.com/packages/2d/characters/poison-fx-230960
+
+Slashes pixel sprite effects
+https://assetstore.unity.com/packages/2d/textures-materials/slashes-pixel-sprite-effects-255772
+
+2D Pixel FX:Element
+https://assetstore.unity.com/packages/2d/characters/2d-pixel-fx-element-195209

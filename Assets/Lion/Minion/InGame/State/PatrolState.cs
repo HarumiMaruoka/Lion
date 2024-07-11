@@ -15,6 +15,17 @@ namespace Lion.Minion.States
             minion.Animator.Play(_runAnimation);
             // 目的地を設定する。
             _destination = minion.GetRandomPositionNearPlayer();
+
+            // 向きを設定する。
+            var direction = _destination - minion.transform.position;
+            if (direction.x > 0 && minion.transform.localScale.x < 0)
+            {
+                minion.transform.localScale = new Vector3(Mathf.Abs(minion.transform.localScale.x), minion.transform.localScale.y, 1);
+            }
+            else if (direction.x < 0 && minion.transform.localScale.x > 0)
+            {
+                minion.transform.localScale = new Vector3(-Mathf.Abs(minion.transform.localScale.x), minion.transform.localScale.y, 1);
+            }
         }
 
         public void Update(MinionController minion)

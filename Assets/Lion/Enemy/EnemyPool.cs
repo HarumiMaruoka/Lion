@@ -1,4 +1,4 @@
-using Lion.Minion;
+Ôªøusing Lion.Minion;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +10,13 @@ namespace Lion.Enemy
         private Dictionary<int, HashSet<EnemyController>> _activePool = new Dictionary<int, HashSet<EnemyController>>();
         private Dictionary<int, Queue<EnemyController>> _inactivePool = new Dictionary<int, Queue<EnemyController>>();
 
-        // ÉLÅ[ÇÕgameObjectÇÃÉCÉìÉXÉ^ÉìÉXID
+        // „Ç≠„Éº„ÅØgameObject„ÅÆ„Ç§„É≥„Çπ„Çø„É≥„ÇπID
         private Dictionary<int, EnemyController> _activeEnemies = new Dictionary<int, EnemyController>();
         public Dictionary<int, EnemyController> ActiveEnemies => _activeEnemies;
+
+        public int ActiveCount => _activeEnemies.Count;
+
+        public int Capacity = 300;
 
         public EnemyController FindEnemy(int instanceID)
         {
@@ -23,8 +27,9 @@ namespace Lion.Enemy
             return null;
         }
 
-        public bool TryGetEnemy(int instanceID, out EnemyController enemy)
+        public bool TryGetEnemy(GameObject gameObject, out EnemyController enemy)
         {
+            var instanceID = gameObject.GetInstanceID();
             enemy = null;
             if (!_activeEnemies.ContainsKey(instanceID)) return false;
             enemy = _activeEnemies[instanceID];
@@ -40,8 +45,14 @@ namespace Lion.Enemy
             }
         }
 
-        public EnemyController GetEnemy(int id)
+        public EnemyController GetOrCreateEnemy(int id, Transform parent)
         {
+            if (ActiveCount >= Capacity)
+            {
+                // Debug.LogWarning("Pool is full");
+                return null;
+            }
+
             if (!_inactivePool.ContainsKey(id))
             {
                 Debug.LogError($"Invalid Enemy ID: {id}");
@@ -52,7 +63,7 @@ namespace Lion.Enemy
             {
                 var enemyData = EnemyManager.Instance.EnemySheet.GetEnemyData(id);
                 if (enemyData == null || enemyData.Prefab == null) return null;
-                var instance = GameObject.Instantiate(enemyData.Prefab);
+                var instance = GameObject.Instantiate(enemyData.Prefab, parent);
                 instance.EnemyData = enemyData;
                 _inactivePool[id].Enqueue(instance);
             }

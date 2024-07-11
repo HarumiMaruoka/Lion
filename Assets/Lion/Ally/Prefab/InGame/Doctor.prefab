@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 3257263087783049037}
   - component: {fileID: 3562153337959415222}
   - component: {fileID: 987220592112496728}
-  - component: {fileID: 2216207197196101015}
   - component: {fileID: 4369513182066636406}
   - component: {fileID: 3513206423177184306}
   - component: {fileID: 8066138997864282981}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Doctor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,18 +102,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackArea: {fileID: 5576162903452422890}
---- !u!114 &2216207197196101015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 594437043919560837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b34d3c1dae72dc04dbc91a9bdb3aeed0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &4369513182066636406
 Rigidbody2D:
   serializedVersion: 4
@@ -127,7 +114,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 300
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -141,7 +128,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &3513206423177184306
 Animator:
   serializedVersion: 5
@@ -192,7 +179,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.05, y: 0}
@@ -209,7 +196,7 @@ GameObject:
   - component: {fileID: 3881869215487487822}
   - component: {fileID: 5576162903452422890}
   - component: {fileID: 7321860996538004979}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Attack Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

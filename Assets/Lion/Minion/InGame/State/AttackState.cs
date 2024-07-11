@@ -1,4 +1,6 @@
-﻿namespace Lion.Minion.States
+﻿using UnityEngine;
+
+namespace Lion.Minion.States
 {
     public class AttackState : IState
     {
@@ -11,6 +13,7 @@
 
         public void Update(MinionController minion)
         {
+            minion.Rigidbody2D.velocity = Vector2.zero;
             if (minion.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
             {
                 minion.SetState<IdleState>();

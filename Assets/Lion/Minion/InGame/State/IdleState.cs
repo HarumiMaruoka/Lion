@@ -23,6 +23,8 @@ namespace Lion.Minion.States
 
         public void Update(MinionController minion)
         {
+            minion.Rigidbody2D.velocity = Vector2.zero;
+
             _elapsed += Time.deltaTime;
             // 一定時間経過したら確率に応じて、PatrolStateかAttackStateに遷移する。
             if (_elapsed > _changeTime)

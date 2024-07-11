@@ -1,4 +1,5 @@
-using Lion.Gem;
+ï»¿using Lion.Gem;
+using Lion.Gold;
 using Lion.Minion.States;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace Lion.Minion
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
-    public class MinionController : MonoBehaviour, IGemCollector
+    public class MinionController : MonoBehaviour, IActor
     {
         [SerializeField] private MinionBullet _bulletPrefab;
 
@@ -39,26 +40,24 @@ namespace Lion.Minion
             InitialScale = transform.localScale;
 
             SetState<PatrolState>();
+
+            GemCollectorContainer.Instance.Register(gameObject, this);
+            GoldCollectorContainer.Instance.Register(gameObject, this);
+        }
+
+        private void OnDestroy()
+        {
+            GemCollectorContainer.Instance.Unregister(gameObject);
+            GoldCollectorContainer.Instance.Unregister(gameObject);
         }
 
         private void Update()
         {
             _currentState.Update(this);
 
-            // À•Wƒoƒbƒtƒ@[‚ÌXVB
+            // åº§æ¨™ãƒãƒƒãƒ•ã‚¡ãƒ¼ã®æ›´æ–°ã€‚
             if (CurrentPos != (Vector2)transform.position) PreviousPos = CurrentPos;
             CurrentPos = transform.position;
-
-            // Œü‚«‚ÌXVB
-            var scale = transform.localScale;
-            if (CurrentPos.x - PreviousPos.x > 0)
-            {
-                transform.localScale = new Vector3(InitialScale.x, InitialScale.y, InitialScale.z);
-            }
-            else if (CurrentPos.x - PreviousPos.x < 0)
-            {
-                transform.localScale = new Vector3(-InitialScale.x, InitialScale.y, InitialScale.z);
-            }
         }
 
         private IState _currentState;
@@ -117,7 +116,7 @@ namespace Lion.Minion
             return IsFarFromPlayer(new Vector2(width, height));
         }
 
-        public void Fire() // ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚©‚çŒÄ‚Ño‚·B
+        public void Fire() // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã‹ã‚‰å‘¼ã³å‡ºã™ã€‚
         {
             float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
             var instance = Instantiate(_bulletPrefab, transform.position, Quaternion.Euler(0f, 0f, angle));
@@ -127,6 +126,11 @@ namespace Lion.Minion
         public void CollectGem(int amount)
         {
             MinionData.ExpLevelManager.AddExp(amount);
+        }
+
+        public void CollectGold(int amount)
+        {
+
         }
     }
 

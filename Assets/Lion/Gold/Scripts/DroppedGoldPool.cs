@@ -1,32 +1,53 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Lion.Gold
 {
     public class DroppedGoldPool : MonoBehaviour
     {
+        public static DroppedGoldPool Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Debug.LogWarning("DroppedGoldPool is already exist.");
+            }
+        }
+
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
+
         [SerializeField]
         private DroppedGold _prefab = default;
 
         private readonly HashSet<DroppedGold> _activePool = new HashSet<DroppedGold>();
         private readonly Queue<DroppedGold> _inactivePool = new Queue<DroppedGold>();
 
-        public DroppedGold CreateDroppedGold(Vector3 position, int amount)
+        public int ActiveCount => _activePool.Count;
+
+        public DroppedGold CreateDroppedGold(IGoldCollector collector, Vector3 position, int amount)
         {
             DroppedGold gold;
             if (_inactivePool.Count == 0)
             {
                 gold = Instantiate(_prefab, position, Quaternion.identity, transform);
-                gold.Amount = amount;
                 gold.Pool = this;
             }
             else
             {
                 gold = _inactivePool.Dequeue();
-                gold.transform.position = position;
-                gold.Amount = amount;
                 gold.gameObject.SetActive(true);
             }
+
+            gold.Initialize(collector, position, amount);
             _activePool.Add(gold);
             return gold;
         }

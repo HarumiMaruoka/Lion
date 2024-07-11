@@ -1,7 +1,8 @@
+﻿using Lion.Gold;
 using System;
 using UnityEngine;
 
-namespace Lion.Gold.Debug
+namespace Lion.LionDebugger
 {
     public class GoldDropper : MonoBehaviour
     {
@@ -22,7 +23,7 @@ namespace Lion.Gold.Debug
             {
                 Vector3 position = transform.position + new Vector3(UnityEngine.Random.Range(-_range, _range), UnityEngine.Random.Range(-_range, _range), 0);
                 int goldValue = UnityEngine.Random.Range(_minGoldValue, _maxGoldValue);
-                _droppedGoldPool.CreateDroppedGold(position, goldValue);
+                _droppedGoldPool.CreateDroppedGold(null, position, goldValue);
             }
         }
     }

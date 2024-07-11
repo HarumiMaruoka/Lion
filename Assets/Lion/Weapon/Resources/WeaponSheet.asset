@@ -1,0 +1,380 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8671529141633717599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 2
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &-8154780974454789261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 16
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &-4912032021663799282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 11
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &-3397136514727225672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 18
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &-2756049713853691823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 1
+  <Name>k__BackingField: Arcane Bolt
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &-2749451086840084307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 13
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &-1328914966425610783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 7
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &-374820364891968732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 10
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f050c3a3157a7dd4c9dab8d68dfd059f, type: 3}
+  m_Name: WeaponSheet
+  m_EditorClassIdentifier: 
+  _collection:
+  - {fileID: 8283328714818100354}
+  - {fileID: -2756049713853691823}
+  - {fileID: -8671529141633717599}
+  - {fileID: 1731174038761297919}
+  - {fileID: 3594213285696177036}
+  - {fileID: 7013423313710781883}
+  - {fileID: 6323072386367113529}
+  - {fileID: -1328914966425610783}
+  - {fileID: 8494286907066572973}
+  - {fileID: 7667949040993983263}
+  - {fileID: -374820364891968732}
+  - {fileID: -4912032021663799282}
+  - {fileID: 4532584526250865904}
+  - {fileID: -2749451086840084307}
+  - {fileID: 1242254529665463209}
+  - {fileID: 4772775959587323514}
+  - {fileID: -8154780974454789261}
+  - {fileID: 7298137934866688962}
+  - {fileID: -3397136514727225672}
+  - {fileID: 8270729639430045269}
+  WindowLayout: {fileID: 4910399322062827081}
+--- !u!114 &1242254529665463209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 14
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &1731174038761297919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 3
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &3594213285696177036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 4
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &4532584526250865904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 12
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &4772775959587323514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 15
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &4910399322062827081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1722d72f045c80a488b1b95eef4d9a05, type: 3}
+  m_Name: LayoutData
+  m_EditorClassIdentifier: 
+  <Sheet>k__BackingField: {fileID: 11400000}
+  HorizontalSpacings:
+  - 16
+  - 50
+  - 37
+  - 119.43
+  - 41
+  - 50
+  VerticalSpacings:
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  GridLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.3}
+  GridLineSize: {x: 3, y: 2}
+  GridLineOffset: {x: 2, y: 21}
+--- !u!114 &6323072386367113529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 6
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &7013423313710781883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 5
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &7298137934866688962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 17
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &7667949040993983263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 9
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &8270729639430045269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 19
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &8283328714818100354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0
+  <Name>k__BackingField: Acid Spray
+  <Prefab>k__BackingField: {fileID: 0}
+--- !u!114 &8494286907066572973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
+  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 8
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}

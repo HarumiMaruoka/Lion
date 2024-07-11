@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 4
   <Name>k__BackingField: Beard A
-  <HP>k__BackingField: 55
+  <Life>k__BackingField: 56
   <Attack>k__BackingField: 2
   <Speed>k__BackingField: 3
+  <Exp>k__BackingField: 18
+  <Gold>k__BackingField: 23
   <Prefab>k__BackingField: {fileID: -6143724357630855863, guid: 7344097d39db56048bb62d3523fdeb15, type: 3}
 --- !u!114 &-8319648104112750296
 MonoBehaviour:
@@ -35,15 +37,19 @@ MonoBehaviour:
   - 16
   - 50
   - 37
-  - 96
-  - 21
-  - 50
+  - 99.39
+  - 27.1
+  - 56.9
   - 41
   - 50
   - 40
   - 50
   - 41
-  - 200
+  - 40
+  - 30
+  - 40
+  - 41
+  - 50
   VerticalSpacings:
   - 20
   - 20
@@ -73,9 +79,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 1
   <Name>k__BackingField: Ball A
-  <HP>k__BackingField: 42
+  <Life>k__BackingField: 23
   <Attack>k__BackingField: 3
   <Speed>k__BackingField: 6
+  <Exp>k__BackingField: 12
+  <Gold>k__BackingField: 22
   <Prefab>k__BackingField: {fileID: 6481542198328760811, guid: 9b8ee1381f968444183b0a5a17f363b6, type: 3}
 --- !u!114 &-5789346517195401744
 MonoBehaviour:
@@ -91,9 +99,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 2
   <Name>k__BackingField: Bat A
-  <HP>k__BackingField: 37
+  <Life>k__BackingField: 34
   <Attack>k__BackingField: 3.3
   <Speed>k__BackingField: 5
+  <Exp>k__BackingField: 14
+  <Gold>k__BackingField: 12
   <Prefab>k__BackingField: {fileID: -1416891416175601292, guid: ecade9a19468e9642b314f07140c2b76, type: 3}
 --- !u!114 &-5359065008452702478
 MonoBehaviour:
@@ -109,9 +119,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 5
   <Name>k__BackingField: Bug A
-  <HP>k__BackingField: 45
+  <Life>k__BackingField: 67
   <Attack>k__BackingField: 3
   <Speed>k__BackingField: 6.8
+  <Exp>k__BackingField: 20
+  <Gold>k__BackingField: 23
   <Prefab>k__BackingField: {fileID: 1157433411491397553, guid: c9b7aaaa9d3807b409d94ae8e63c4248, type: 3}
 --- !u!114 &-3966988760497233229
 MonoBehaviour:
@@ -127,9 +139,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
   <Name>k__BackingField: Air A
-  <HP>k__BackingField: 40
+  <Life>k__BackingField: 12
   <Attack>k__BackingField: 1
   <Speed>k__BackingField: 2
+  <Exp>k__BackingField: 10
+  <Gold>k__BackingField: 11
   <Prefab>k__BackingField: {fileID: -6283885135241203547, guid: a5c5dd625da773145bcb3f40588ebc4a, type: 3}
 --- !u!114 &-3064342495752904076
 MonoBehaviour:
@@ -145,9 +159,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 8
   <Name>k__BackingField: Chest A
-  <HP>k__BackingField: 60
+  <Life>k__BackingField: 98
   <Attack>k__BackingField: 3.5
   <Speed>k__BackingField: 4.5
+  <Exp>k__BackingField: 26
+  <Gold>k__BackingField: 30
   <Prefab>k__BackingField: {fileID: -4899068923960935031, guid: 75bccdd000732964d82391ae85ac2bb1, type: 3}
 --- !u!114 &-1898885191069231381
 MonoBehaviour:
@@ -163,9 +179,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 10
   <Name>k__BackingField: Cloud A
-  <HP>k__BackingField: 62
+  <Life>k__BackingField: 111
   <Attack>k__BackingField: 4
   <Speed>k__BackingField: 4
+  <Exp>k__BackingField: 30
+  <Gold>k__BackingField: 31
   <Prefab>k__BackingField: {fileID: 7856109419079683546, guid: cb1acea4f7f93d74395b1521a63ec90a, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -206,9 +224,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 7
   <Name>k__BackingField: Cat A
-  <HP>k__BackingField: 57
+  <Life>k__BackingField: 89
   <Attack>k__BackingField: 3.7
   <Speed>k__BackingField: 5
+  <Exp>k__BackingField: 24
+  <Gold>k__BackingField: 25
   <Prefab>k__BackingField: {fileID: 7136731091205265545, guid: 2a38970047f441249b4c59db07d099c9, type: 3}
 --- !u!114 &5357572138349784265
 MonoBehaviour:
@@ -224,9 +244,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 3
   <Name>k__BackingField: Bat Small A
-  <HP>k__BackingField: 52
+  <Life>k__BackingField: 45
   <Attack>k__BackingField: 2.8
   <Speed>k__BackingField: 4
+  <Exp>k__BackingField: 16
+  <Gold>k__BackingField: 22
   <Prefab>k__BackingField: {fileID: 8091542806934143589, guid: 21da72e1d50308d46a7d9ac2af73cecc, type: 3}
 --- !u!114 &7220245420784729375
 MonoBehaviour:
@@ -242,9 +264,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 6
   <Name>k__BackingField: BugB
-  <HP>k__BackingField: 50
+  <Life>k__BackingField: 88
   <Attack>k__BackingField: 3.3
   <Speed>k__BackingField: 3.2
+  <Exp>k__BackingField: 22
+  <Gold>k__BackingField: 24
   <Prefab>k__BackingField: {fileID: -5868440404828093431, guid: cb7cda5f93e19594da38705637a22a26, type: 3}
 --- !u!114 &9087711565718688336
 MonoBehaviour:
@@ -260,7 +284,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 9
   <Name>k__BackingField: Chicken A
-  <HP>k__BackingField: 61
+  <Life>k__BackingField: 101
   <Attack>k__BackingField: 3.9
   <Speed>k__BackingField: 4.2
+  <Exp>k__BackingField: 28
+  <Gold>k__BackingField: 32
   <Prefab>k__BackingField: {fileID: 1776033368024993572, guid: 4edcf5a26f45f44478203005f16923f6, type: 3}

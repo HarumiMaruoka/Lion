@@ -1,4 +1,5 @@
-using Lion.CameraUtility;
+ï»¿using Lion.CameraUtility;
+using Lion.Gold;
 using System;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ namespace Lion.Enemy
 
         private void SpawnEnemy()
         {
-            var enemy = EnemyManager.Instance.EnemyPool.GetEnemy(GetRandomEnemyID());
+            var enemy = EnemyManager.Instance.EnemyPool.GetOrCreateEnemy(GetRandomEnemyID(), transform);
             if (enemy == null) return;
             enemy.transform.position = GetRandomPosition();
         }
@@ -75,19 +76,19 @@ namespace Lion.Enemy
 
         private Vector3 GetRandomPosition()
         {
-            // ã•ÓA‰º•ÓA¶•ÓA‰E•Ó‚Ì‚Ç‚ê‚©‚Éƒ‰ƒ“ƒ_ƒ€‚ÉoŒ»
+            // ä¸Šè¾ºã€ä¸‹è¾ºã€å·¦è¾ºã€å³è¾ºã®ã©ã‚Œã‹ã«ãƒ©ãƒ³ãƒ€ãƒ ã«å‡ºç¾
             var random = UnityEngine.Random.Range(0, 4);
             switch (random)
             {
-                case 0: // ã•Ó
+                case 0: // ä¸Šè¾º
                     return new Vector3(UnityEngine.Random.Range(BottomLeft.x, TopRight.x), TopRight.y, 0f);
-                case 1: // ‰º•Ó
+                case 1: // ä¸‹è¾º
                     return new Vector3(UnityEngine.Random.Range(BottomLeft.x, TopRight.x), BottomLeft.y, 0f);
-                case 2: // ¶•Ó
+                case 2: // å·¦è¾º
                     return new Vector3(BottomLeft.x, UnityEngine.Random.Range(BottomLeft.y, TopRight.y), 0f);
-                case 3: // ‰E•Ó
+                case 3: // å³è¾º
                     return new Vector3(TopRight.x, UnityEngine.Random.Range(BottomLeft.y, TopRight.y), 0f);
-                default: // ‚±‚±‚É‚Í—ˆ‚È‚¢
+                default: // ã“ã“ã«ã¯æ¥ãªã„
                     return Vector3.zero;
             }
 

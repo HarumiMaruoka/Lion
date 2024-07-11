@@ -6,14 +6,32 @@ namespace Lion.CameraUtility
 {
     public static class CameraExtensions
     {
+        private static int _frameCountA = 0;
+        private static int _frameCountB = 0;
+
+        private static Vector2 _topRight = Vector2.zero;
+        private static Vector2 _bottomLeft = Vector2.zero;
+
         public static Vector2 GetWorldTopRight(this Camera camera)
         {
-            return camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+            if (_frameCountA != Time.frameCount)
+            {
+                _frameCountA = Time.frameCount;
+                _topRight = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+            }
+
+            return _topRight;
         }
 
         public static Vector2 GetWorldBottomLeft(this Camera camera)
         {
-            return camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
+            if (_frameCountB != Time.frameCount)
+            {
+                _frameCountB = Time.frameCount;
+                _bottomLeft = camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
+            }
+
+            return _bottomLeft;
         }
 
         // ÉJÉÅÉâÇ©ÇÁàÍíËãóó£ó£ÇÍÇƒÇ¢ÇÈÇ©Ç«Ç§Ç©Çï‘Ç∑ÅB

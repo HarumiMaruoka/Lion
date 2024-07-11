@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +29,8 @@ namespace Lion.UI
 
         public DamageVFX Create(Vector3 worldPosition, float value)
         {
-            var canvasPosition = Camera.main.WorldToScreenPoint(worldPosition);
+            // var canvasPosition = Camera.main.WorldToScreenPoint(worldPosition);
+             var canvasPosition = worldPosition;
 
             DamageVFX vfx;
 

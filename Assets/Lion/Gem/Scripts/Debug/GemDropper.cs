@@ -1,7 +1,9 @@
+﻿using Lion.Gem;
+using Lion.Player;
 using System;
 using UnityEngine;
 
-namespace Lion.Gem.Debug
+namespace Lion.Lin
 {
     public class GemDropper : MonoBehaviour
     {
@@ -22,7 +24,7 @@ namespace Lion.Gem.Debug
             {
                 Vector3 position = transform.position + new Vector3(UnityEngine.Random.Range(-_range, _range), UnityEngine.Random.Range(-_range, _range), 0);
                 int expValue = UnityEngine.Random.Range(_minExpMount, _maxExpAmount);
-                _droppedGemPool.CreateDroppedGem(position, expValue);
+                _droppedGemPool.CreateDroppedGem(PlayerController.Instance, position, expValue);
             }
         }
     }

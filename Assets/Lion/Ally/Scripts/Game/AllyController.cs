@@ -1,4 +1,5 @@
-using Lion.Gem;
+﻿using Lion.Gem;
+using Lion.Gold;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace Lion.Ally
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
-    public class AllyController : MonoBehaviour, IGemCollector
+    public class AllyController : MonoBehaviour, IActor
     {
         public AllyData AllyData { get; set; }
         public AllyStatus Status => AllyData == null ? default : AllyData.Status;
@@ -29,6 +30,15 @@ namespace Lion.Ally
             Rigidbody2D = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>();
             SetState<IdleState>();
+
+            GemCollectorContainer.Instance.Register(gameObject, this);
+            GoldCollectorContainer.Instance.Register(gameObject, this);
+        }
+
+        private void OnDestroy()
+        {
+            GemCollectorContainer.Instance.Unregister(gameObject);
+            GoldCollectorContainer.Instance.Unregister(gameObject);
         }
 
         private void Update()
@@ -46,6 +56,11 @@ namespace Lion.Ally
         public void CollectGem(int amount)
         {
             AllyData.ExpLevelManager.AddExp(amount);
+        }
+
+        public void CollectGold(int amount)
+        {
+
         }
     }
 
