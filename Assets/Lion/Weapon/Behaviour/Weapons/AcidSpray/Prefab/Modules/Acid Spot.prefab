@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 292911736899412145}
   _damageInterval: 0.5
+  _damageVFXPrefab: {fileID: 163013484662667022, guid: d3f8885632be8da4780e5da4d3bd8154, type: 3}
 --- !u!58 &2855096177875528134
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -18,12 +18,18 @@ namespace Lion.Weapon.Behaviour.AcidSprayModule
 
         private AcidSpot _acidEffect;
 
+        private void Update()
+        {
+            if (_sprayAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+            {
+                Destroy(gameObject);
+            }
+        }
+
         public void CreateAcidSpot() // アニメーションイベントから呼び出す。
         {
             _acidEffect = Instantiate(_acidSpotPrefab, _acidSpotPosition.position, Quaternion.identity);
             _acidEffect.Initialize(Parameter);
-            // 酸のエフェクトが消えたら自身も消滅する。
-            _acidEffect.OnDestroyed += () => Destroy(gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

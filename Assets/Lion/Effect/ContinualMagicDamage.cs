@@ -1,5 +1,6 @@
 ﻿using Lion.UI;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lion.Damage
@@ -36,6 +37,8 @@ namespace Lion.Damage
         private float _intervalElapsedTime = 0f;
         private float _delayElapsedTime = 0f;
 
+        public ParticleSystem StateVFX { get; set; }
+
         private void Update()
         {
             if (!_isInitialized)
@@ -47,7 +50,11 @@ namespace Lion.Damage
             _delayElapsedTime += Time.deltaTime;
             _intervalElapsedTime += Time.deltaTime;
 
-            if (_delayElapsedTime > Delay) Destroy(this);
+            if (_delayElapsedTime > Delay)
+            {
+                if (StateVFX) StateVFX.Stop();
+                Destroy(this);
+            }
 
             if (_intervalElapsedTime >= Interval)
             {
@@ -66,6 +73,7 @@ namespace Lion.Damage
         private void OnTargetDead()
         {
             Damagable.OnDead -= OnTargetDead;
+            if (StateVFX) Destroy(StateVFX.gameObject);
             Destroy(this);
         }
     }

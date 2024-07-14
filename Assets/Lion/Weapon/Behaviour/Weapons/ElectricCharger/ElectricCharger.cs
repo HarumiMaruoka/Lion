@@ -1,69 +1,61 @@
-﻿using Cysharp.Threading.Tasks;
-using Lion.Weapon.Behaviour.ElectricChargerModules;
-using System;
+﻿using Lion.Weapon.Behaviour.ElectricChargerModules;
+using System.Collections;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour
 {
-    // エレクトリックチャージャー (Electric Charger):
-    // プレイヤーの周囲に電気フィールドを発生させ、近づいてきた敵に電撃を与える。
-    // フィールドは徐々に拡大し、連鎖して他の敵にもダメージを与える。
     public class ElectricCharger : WeaponBehaviour
     {
-        private Func<UniTask>[] _tasks = new Func<UniTask>[2];
-
         [SerializeField]
         private float _minFireInterval = 0.5f;
         [SerializeField]
         private float _maxFireInterval = 2f;
 
-        private float WaitTime
-        {
-            get
-            {
-                if (Parameter == null) return _minFireInterval;
-                return Mathf.Clamp(_maxFireInterval - Parameter.AttackSpeed * 0.01f, _minFireInterval, _maxFireInterval);
-            }
-        }
-
-        private void Start()
-        {
-            _tasks[0] = Fire;
-            _tasks[1] = Wait;
-
-            RunSequence();
-        }
-
-        private async void RunSequence()
-        {
-            int index = 0;
-            while (this)
-            {
-                await _tasks[index]();
-                index = (index + 1) % _tasks.Length;
-            }
-        }
-
         [SerializeField]
         private ElectricField _electricFieldPrefab;
 
-        private async UniTask Fire()
-        {
-            var bullet = Instantiate(_electricFieldPrefab, transform.position, transform.rotation);
-            bullet.Parameter = Parameter;
+        private ElectricField _electricField;
 
-            while (bullet)
+        private float AttackSpeed => Parameter == null ? 1f : Parameter.AttackSpeed;
+        private float WaitTime => Mathf.Clamp(_maxFireInterval - AttackSpeed * 0.01f, _minFireInterval, _maxFireInterval);
+
+        private void OnEnable()
+        {
+            StartCoroutine(RunSequence());
+        }
+
+        private void OnDisable()
+        {
+            if (_electricField) Destroy(_electricField.gameObject);
+        }
+
+        private IEnumerator RunSequence()
+        {
+            while (enabled)
             {
-                await UniTask.Yield();
+                yield return Fire();
+                yield return Wait();
             }
         }
 
-        private async UniTask Wait()
+        private IEnumerator Fire()
+        {
+            if (_electricField) Destroy(_electricField.gameObject);
+            _electricField = Instantiate(_electricFieldPrefab, transform.position, transform.rotation, transform);
+            _electricField.Parameter = Parameter;
+
+            while (_electricField)
+            {
+                yield return null;
+            }
+        }
+
+        private IEnumerator Wait()
         {
             var w = WaitTime;
             for (float t = 0f; t < w; t += Time.deltaTime)
             {
-                await UniTask.Yield();
+                yield return null;
             }
         }
     }

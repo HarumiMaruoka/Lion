@@ -7,6 +7,7 @@ using Lion.Damage;
 using System;
 using UnityEngine;
 using Lion.Player;
+using Cysharp.Threading.Tasks;
 
 namespace Lion.Enemy
 {
@@ -15,16 +16,17 @@ namespace Lion.Enemy
     public class EnemyController : MonoBehaviour, IDamagable
     {
         public EnemyData EnemyData { get; set; }
-
         public event Action OnDead;
 
-        private Rigidbody2D _rigidbody2D;
-        private Animator _animator;
+        public Rigidbody2D Rigidbody2D { get; private set; }
+        public Animator Animator { get; private set; }
+        public SpriteRenderer SpriteRenderer { get; private set; }
 
         private void Awake()
         {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
+            Rigidbody2D = GetComponent<Rigidbody2D>();
+            Animator = GetComponent<Animator>();
+            SpriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         public void Initialize()
@@ -36,7 +38,9 @@ namespace Lion.Enemy
         {
             var playerPosition = PlayerController.Instance.transform.position;
             var direction = (playerPosition - transform.position).normalized;
-            _rigidbody2D.velocity = direction * EnemyData.MoveSpeed;
+            Rigidbody2D.velocity = direction * EnemyData.MoveSpeed;
+
+            if (IsFreezed) Rigidbody2D.velocity = Vector2.zero;
 
             if (Camera.main.IsTooFarFromCamera(transform.position)) Die(false, null);
         }
@@ -60,16 +64,46 @@ namespace Lion.Enemy
 
         public void PhysicalDamage(float physicalPower, IActor actor)
         {
+            var old = _hp;
             _hp -= physicalPower;
+            OnDamaged?.Invoke();
             DamageVFXPool.Instance.Create(transform.position, physicalPower);
-            if (_hp <= 0) Die(true, actor);
+            if (old > 0 && _hp <= 0) Die(true, actor);
         }
 
         public void MagicDamage(float magicPower, IActor actor)
         {
+            var old = _hp;
             _hp -= magicPower;
+            OnDamaged?.Invoke();
             DamageVFXPool.Instance.Create(transform.position, magicPower);
-            if (_hp <= 0) Die(true, actor);
+            if (old > 0 && _hp <= 0) Die(true, actor);
+        }
+
+        public Action OnDamaged;
+
+        private int _freezeCount = 0;
+
+        public bool IsFreezed => _freezeCount > 0;
+
+        public void Freeze()
+        {
+            if (_freezeCount == 0)
+            {
+                Animator.enabled = false; // アニメーションを停止
+            }
+
+            _freezeCount++;
+        }
+
+        public void Unfreeze()
+        {
+            _freezeCount--;
+
+            if (_freezeCount == 0)
+            {
+                Animator.enabled = true; // アニメーションを再開
+            }
         }
     }
 }

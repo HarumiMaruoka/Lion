@@ -16,8 +16,6 @@ namespace Lion.Enemy
 
         public int ActiveCount => _activeEnemies.Count;
 
-        public int Capacity = 300;
-
         public EnemyController FindEnemy(int instanceID)
         {
             if (_activeEnemies.ContainsKey(instanceID))
@@ -47,12 +45,6 @@ namespace Lion.Enemy
 
         public EnemyController GetOrCreateEnemy(int id, Transform parent)
         {
-            if (ActiveCount >= Capacity)
-            {
-                // Debug.LogWarning("Pool is full");
-                return null;
-            }
-
             if (!_inactivePool.ContainsKey(id))
             {
                 Debug.LogError($"Invalid Enemy ID: {id}");
@@ -78,12 +70,6 @@ namespace Lion.Enemy
 
         public void ReturnEnemy(EnemyController enemy)
         {
-            if (!_activePool.ContainsKey(enemy.EnemyData.ID))
-            {
-                Debug.LogError($"Invalid Enemy ID: {enemy.EnemyData.ID}");
-                return;
-            }
-
             enemy.gameObject.SetActive(false);
             _activePool[enemy.EnemyData.ID].Remove(enemy);
             _activeEnemies.Remove(enemy.gameObject.GetInstanceID());

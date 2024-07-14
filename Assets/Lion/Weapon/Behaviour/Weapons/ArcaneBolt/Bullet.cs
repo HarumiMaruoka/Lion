@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Lion.Weapon.Behaviour.ArcaneBoltModule
 {
-    public class ArcaneBoltBullet : Missile
+    public class Bullet : Missile
     {
         public IWeaponParameter Parameter { get; set; }
         public float Speed => Parameter == null ? 10f : Parameter.AttackSpeed;

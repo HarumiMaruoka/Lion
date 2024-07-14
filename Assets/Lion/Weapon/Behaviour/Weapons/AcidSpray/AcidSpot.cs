@@ -56,6 +56,9 @@ namespace Lion.Weapon.Behaviour.AcidSprayModule
 
         public event Action OnDestroyed;
 
+        [SerializeField]
+        private ParticleSystem _damageVFXPrefab;
+
         private Dictionary<GameObject, ContinualMagicDamage> _continualDamageRegistry = new Dictionary<GameObject, ContinualMagicDamage>();
 
         public void OnTriggerEnter2D(Collider2D collision)
@@ -69,6 +72,12 @@ namespace Lion.Weapon.Behaviour.AcidSprayModule
                 var continualDamage = enemy.gameObject.AddComponent<ContinualMagicDamage>();
                 continualDamage.Initialzie(_weaponParameter?.Actor, enemy, DamageInterval, DamageDuration, MagicAttackPower);
                 _continualDamageRegistry.Add(enemy.gameObject, continualDamage);
+
+                if (_damageVFXPrefab != null)
+                {
+                    var vfx = Instantiate(_damageVFXPrefab, enemy.transform);
+                    continualDamage.StateVFX = vfx;
+                }
             }
         }
     }

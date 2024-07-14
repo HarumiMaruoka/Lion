@@ -1,4 +1,4 @@
-GUI - Casual Fantasy
+ï»¿GUI - Casual Fantasy
 https://assetstore.unity.com/packages/2d/gui/gui-casual-fantasy-265651
 
 GUI Pro - Fantasy RPG
@@ -7,7 +7,7 @@ https://assetstore.unity.com/packages/2d/gui/gui-pro-fantasy-rpg-170168
 5250 Fantasy RPG Icons Pack
 https://assetstore.unity.com/packages/2d/gui/icons/5250-fantasy-rpg-icons-pack-229460
 
-2Dƒgƒbƒvƒ_ƒEƒ“ƒ^ƒCƒ‹ƒZƒbƒgƒtƒ@ƒ“ƒ^ƒW[ƒhƒŠ[ƒ€ƒ‰ƒ“ƒh
+2Dãƒˆãƒƒãƒ—ãƒ€ã‚¦ãƒ³ã‚¿ã‚¤ãƒ«ã‚»ãƒƒãƒˆãƒ•ã‚¡ãƒ³ã‚¿ã‚¸ãƒ¼ãƒ‰ãƒªãƒ¼ãƒ ãƒ©ãƒ³ãƒ‰
 https://assetstore.unity.com/packages/2d/environments/2d-topdown-tilesets-fantasy-dreamland-231554
 
 Warped Chibi Robot
@@ -66,3 +66,12 @@ https://assetstore.unity.com/packages/2d/textures-materials/slashes-pixel-sprite
 
 2D Pixel FX:Element
 https://assetstore.unity.com/packages/2d/characters/2d-pixel-fx-element-195209
+
+Pixel FX - Earth
+https://assetstore.unity.com/packages/vfx/pixel-fx-earth-216352
+
+2D Pixel FX:StateEffect(Particle)
+https://assetstore.unity.com/packages/vfx/particles/2d-pixel-fx-stateeffect-particle-233528
+
+Pixel FX - Ice
+https://assetstore.unity.com/packages/vfx/pixel-fx-ice-221150

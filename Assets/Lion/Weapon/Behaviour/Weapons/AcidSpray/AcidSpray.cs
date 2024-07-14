@@ -1,66 +1,62 @@
-﻿using Cysharp.Threading.Tasks;
-using Lion.Weapon.Behaviour.AcidSprayModule;
-using System;
-using System.Collections.Generic;
+﻿using Lion.Weapon.Behaviour.AcidSprayModule;
+using System.Collections;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour
 {
-    // アシッドスプレー (Acid Spray):
-    // 酸を噴射し、前方の広範囲に渡ってダメージを与える。
-    // 酸は一定時間地面に残り、踏んだ敵に持続ダメージを与える。
     public class AcidSpray : WeaponBehaviour
     {
         [SerializeField]
         private float _minWaitTime = 0.5f;
-
         [SerializeField]
         private float _maxWaitTime = 1.8f;
 
-        // 酸の噴射エフェクト
-        public SprayEffect _sprayEffect;
+        [SerializeField]
+        private SprayEffect _sprayEffectPrefab;
 
-        private Func<UniTask>[] _actionSequence = new Func<UniTask>[2];
+        private SprayEffect _sprayEffect;
 
-        private void Start()
+        private void OnEnable()
         {
-            _actionSequence[0] = Spray;
-            _actionSequence[1] = Wait;
-
-            RunSequence();
+            StartCoroutine(RunSequence());
         }
 
-        private async void RunSequence()
+        private void OnDisable()
         {
-            int index = 0;
-            while (this)
+            if (_sprayEffect) Destroy(_sprayEffect.gameObject);
+        }
+
+        private IEnumerator RunSequence()
+        {
+            while (this.enabled)
             {
-                await _actionSequence[index]();
-                index = (index + 1) % _actionSequence.Length;
+                yield return Spray();
+                yield return Wait();
             }
         }
 
-        private async UniTask Spray()
+        private IEnumerator Spray()
         {
+            if (_sprayEffect) Destroy(_sprayEffect.gameObject);
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, UnityEngine.Random.Range(0f, 360f)));
 
-            var sprayEffect = Instantiate(_sprayEffect, transform.position, rotation);
-            sprayEffect.Parameter = Parameter;
+            _sprayEffect = Instantiate(_sprayEffectPrefab, transform.position, rotation);
+            _sprayEffect.Parameter = Parameter;
 
-            while (sprayEffect)
+            while (_sprayEffect != null)
             {
-                await UniTask.Yield();
+                yield return null;
             }
         }
 
-        private async UniTask Wait()
+        private IEnumerator Wait()
         {
             var waitDuration = _minWaitTime;
             if (Parameter != null) waitDuration = Mathf.Clamp(_maxWaitTime - Parameter.AttackSpeed / 100f, _minWaitTime, _maxWaitTime);
 
             for (float t = 0; t < waitDuration; t += Time.deltaTime)
             {
-                await UniTask.Yield();
+                yield return null;
             }
         }
     }

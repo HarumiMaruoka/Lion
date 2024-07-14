@@ -1,70 +1,70 @@
-﻿using Cysharp.Threading.Tasks;
-using Lion.Weapon.Behaviour.ArcaneBoltModule;
-using System;
+﻿using Lion.Weapon.Behaviour.ArcaneBoltModule;
+using System.Collections;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour
 {
-    // アーケインボルト (Arcane Bolt):
-    // 魔法のエネルギーを集中させたボルトを放ち、敵に当たると爆発して範囲内の敵にダメージを与える。
-    // ボルトは追尾性能があり、正確に敵を狙う。
     public class ArcaneBolt : WeaponBehaviour
     {
         [SerializeField]
-        private ArcaneBoltBullet _bullet;
+        private Bullet _bulletPrefab;
 
         [SerializeField]
         private float _minWaitTime = 0.5f;
         [SerializeField]
         private float _maxWaitTime = 1.5f;
 
+        private Bullet _bullet;
+
         public float Speed => Parameter == null ? 10f : Parameter.AttackSpeed;
 
-        private Func<UniTask>[] _actionSequence = new Func<UniTask>[2];
-
-        private void Start()
+        private void OnEnable()
         {
-            _actionSequence[0] = Shoot;
-            _actionSequence[1] = Wait;
-
-            RunSequence();
+            StartCoroutine(RunSequence());
         }
 
-        private async UniTask Shoot()
+        private void OnDisable()
         {
-            var bullet = Instantiate(_bullet, transform.position, transform.rotation);
-            bullet.Parameter = Parameter;
+            if (_bullet) Destroy(_bullet.gameObject);
+        }
 
-            while (bullet)
+        private IEnumerator RunSequence()
+        {
+            while (enabled)
             {
-                await UniTask.Yield();
+                yield return Shoot();
+                yield return Wait();
             }
         }
 
-        private async UniTask Wait()
+        private IEnumerator Shoot()
+        {
+            if (_bullet) Destroy(_bullet.gameObject);
+            _bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation);
+            _bullet.Parameter = Parameter;
+
+            // バレットが存在する間、次のフレームまで待機
+            while (_bullet != null)
+            {
+                yield return null;
+            }
+        }
+
+        private IEnumerator Wait()
         {
             var waitDuration = _minWaitTime;
             if (Parameter != null) waitDuration = CalculateAdjustedWaitTime();
 
+            // 指定された時間だけ待機
             for (float t = 0; t < waitDuration; t += Time.deltaTime)
             {
-                await UniTask.Yield();
+                yield return null;
             }
         }
 
         private float CalculateAdjustedWaitTime()
         {
             return Mathf.Clamp(_maxWaitTime - Speed / 100f, _minWaitTime, _maxWaitTime);
-        }
-
-        private async void RunSequence()
-        {
-            var index = 0;
-            while (this)
-            {
-                await _actionSequence[index]();
-                index = (index + 1) % _actionSequence.Length;
-            }
         }
     }
 }

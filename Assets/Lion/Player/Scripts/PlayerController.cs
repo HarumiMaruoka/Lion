@@ -9,6 +9,10 @@ namespace Lion.Player
     {
         public static PlayerController Instance { get; private set; }
 
+        private Vector3 _previousPosition = new Vector3(-1, 0, 0);
+        private Vector3 _currentPosition;
+        public Vector3 Direction => (_currentPosition - _previousPosition).normalized;
+
         private void Awake()
         {
             if (Instance == null)
@@ -22,6 +26,16 @@ namespace Lion.Player
 
             GemCollectorContainer.Instance.Register(gameObject, this);
             GoldCollectorContainer.Instance.Register(gameObject, this);
+        }
+
+        private void Update()
+        {
+
+            if (transform.position != _currentPosition)
+            {
+                _previousPosition = _currentPosition;
+                _currentPosition = transform.position;
+            }
         }
 
         private void OnDestroy()

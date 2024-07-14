@@ -37,11 +37,6 @@ namespace Lion.Gem
 
         private void Update()
         {
-            if (_period < 0)
-            {
-                Fire();
-                return;
-            }
             _period -= Time.deltaTime;
 
             var acceleration = Vector3.zero;
@@ -56,6 +51,11 @@ namespace Lion.Gem
             _position += _velocity * Time.deltaTime;
 
             transform.position = _position;
+
+            if (_period <= 0)
+            {
+                Fire();
+            }
         }
 
         private void Fire()

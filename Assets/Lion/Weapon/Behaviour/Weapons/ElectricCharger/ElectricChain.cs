@@ -38,6 +38,8 @@ namespace Lion.Weapon.Behaviour.ElectricChargerModules
 
                 await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
             }
+
+            Destroy(gameObject);
         }
 
         [SerializeField]
@@ -48,11 +50,12 @@ namespace Lion.Weapon.Behaviour.ElectricChargerModules
             var center = (from.position + to.position) / 2f;
             var angle = Vector2.SignedAngle(Vector2.up, to.position - from.position);
 
-            var chain = Instantiate(_chainVFXPrefab, center, Quaternion.Euler(0, 0, angle));
-            Destroy(chain.gameObject, 0.1f);
-
+            var vfx = Instantiate(_chainVFXPrefab, center, Quaternion.Euler(0, 0, angle));
+           
             var distance = Vector2.Distance(from.position, to.position);
-            chain.size = new Vector2(chain.size.x, distance);
+            vfx.size = new Vector2(vfx.size.x, distance);
+
+            Destroy(vfx.gameObject, 0.1f);
         }
 
         private Collider2D[] _nears = new Collider2D[10];
