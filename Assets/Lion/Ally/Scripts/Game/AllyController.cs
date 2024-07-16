@@ -33,6 +33,8 @@ namespace Lion.Ally
 
             GemCollectorContainer.Instance.Register(gameObject, this);
             GoldCollectorContainer.Instance.Register(gameObject, this);
+
+            Life = Status.HP;
         }
 
         private void OnDestroy()
@@ -61,6 +63,33 @@ namespace Lion.Ally
         public void CollectGold(int amount)
         {
 
+        }
+
+        private float _life;
+        public event Action<float> OnLifeChanged;
+        public float Life
+        {
+            get => _life;
+            set
+            {
+                _life = Mathf.Clamp(value, 0f, Status.HP);
+                OnLifeChanged?.Invoke(_life);
+            }
+        }
+
+        public void Heal(float amount)
+        {
+            Life += amount;
+        }
+
+        public void Revive()
+        {
+            Life = Status.HP;
+        }
+
+        public void Damage(float amount)
+        {
+            Life -= amount;
         }
     }
 

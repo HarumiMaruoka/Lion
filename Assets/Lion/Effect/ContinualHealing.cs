@@ -1,0 +1,42 @@
+﻿using System;
+using UnityEngine;
+
+public class ContinualHealing : MonoBehaviour
+{
+    private static GameObject _healEffect;
+    private static GameObject HealEffect => _healEffect ??= Resources.Load<GameObject>("HealEffect");
+
+    public IActor Actor { get; set; }
+
+    public float HealAmount { get; set; }
+    public float HealInterval { get; set; }
+    public float Duration { get; set; }
+
+    private float _intervalTimer;
+    private float _durationTimer;
+
+    private void Start()
+    {
+        _intervalTimer = HealInterval;
+        _durationTimer = Duration;
+
+        var healEffect = Instantiate(HealEffect, transform.position, Quaternion.identity, transform);
+    }
+
+    private void Update()
+    {
+        _intervalTimer -= Time.deltaTime;
+        _durationTimer -= Time.deltaTime;
+
+        if (_intervalTimer <= 0)
+        {
+            Actor.Heal(HealAmount);
+            _intervalTimer = HealInterval;
+        }
+
+        if (_durationTimer <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+}

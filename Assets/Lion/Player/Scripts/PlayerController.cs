@@ -60,5 +60,31 @@ namespace Lion.Player
             PlayerManager.Instance.ExpLevelManager.AddExp(amount);
         }
 
+        private float _life;
+        public event Action<float> OnLifeChanged;
+        public float Life
+        {
+            get => _life;
+            set
+            {
+                _life = Mathf.Clamp(value, 0f, PlayerManager.Instance.Status.HP);
+                OnLifeChanged?.Invoke(_life);
+            }
+        }
+
+        public void Heal(float amount)
+        {
+            Life += amount;
+        }
+
+        public void Revive()
+        {
+            Life = PlayerManager.Instance.Status.HP;
+        }
+
+        public void Damage(float amount)
+        {
+            Life -= amount;
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace Lion.Weapon.Behaviour.FreezeCannonModules
     public class FirstBullet : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
+        [SerializeField] private Collider2D _collider2D;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SecondBullet _secondBulletPrefab;
 
@@ -42,6 +43,7 @@ namespace Lion.Weapon.Behaviour.FreezeCannonModules
 
         private IEnumerator GenerateState()
         {
+            _collider2D.enabled = false;
             _animator.Play("Ice_Shard_Start");
             _rigidbody2D.velocity = Vector2.zero;
 
@@ -54,6 +56,7 @@ namespace Lion.Weapon.Behaviour.FreezeCannonModules
 
         private IEnumerator ShootState()
         {
+            _collider2D.enabled = true;
             _animator.Play("Ice_Shard_Static");
             _rigidbody2D.velocity = _velocity;
 
@@ -68,6 +71,7 @@ namespace Lion.Weapon.Behaviour.FreezeCannonModules
 
         private IEnumerator HitState()
         {
+            _collider2D.enabled = false;
             _animator.Play("Ice_Shard_End");
             _rigidbody2D.velocity = Vector2.zero;
 

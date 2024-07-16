@@ -12,7 +12,7 @@ namespace Lion.Weapon.Behaviour.GravityHammerModules
         public IWeaponParameter Parameter { get; set; }
 
         private float MagicPower => Parameter == null ? 1f : Parameter.MagicPower;
-        private float GravityPower => 0.1f + MagicPower / 1000f;
+        private float GravityPower => 0.05f + MagicPower / 10000f;
 
         private float _timer;
         private float Lifetime => Parameter == null ? 3f : 3f + Parameter.Duration;
