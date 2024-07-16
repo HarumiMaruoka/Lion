@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ContinualHealing : MonoBehaviour
 {
-    private static GameObject _healEffect;
-    private static GameObject HealEffect => _healEffect ??= Resources.Load<GameObject>("HealEffect");
+    private static GameObject _healEffectPrefab;
+    private static GameObject HealEffectPrefab => _healEffectPrefab ??= Resources.Load<GameObject>("HealEffect");
 
     public IActor Actor { get; set; }
 
@@ -15,12 +15,19 @@ public class ContinualHealing : MonoBehaviour
     private float _intervalTimer;
     private float _durationTimer;
 
+    private GameObject _healEffect;
+
     private void Start()
     {
         _intervalTimer = HealInterval;
         _durationTimer = Duration;
 
-        var healEffect = Instantiate(HealEffect, transform.position, Quaternion.identity, transform);
+        _healEffect = Instantiate(HealEffectPrefab, transform.position, Quaternion.identity, transform);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(_healEffect);
     }
 
     private void Update()
@@ -36,7 +43,7 @@ public class ContinualHealing : MonoBehaviour
 
         if (_durationTimer <= 0)
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Lion.CameraUtility;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using Lion.CameraUtility;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -13,11 +15,13 @@ namespace Lion.Weapon.Behaviour.HealingOrbModules
         private HealingArea _healingSpotPrefab;
 
         [SerializeField]
+        private Ease _ease = Ease.Linear;
+        [SerializeField]
         private float _fallingDuration = 1f;
 
         private void Start()
         {
-            StartCoroutine(FallAsync());
+            transform.DOMove(GetTargetPosition(), _fallingDuration).SetEase(_ease).OnComplete(OnComplete);
         }
 
         private Vector3 GetTargetPosition()
@@ -31,27 +35,29 @@ namespace Lion.Weapon.Behaviour.HealingOrbModules
             return new Vector3(x, y, 0);
         }
 
-        private IEnumerator FallAsync()
+        private async void OnComplete()
         {
-            var targetPosition = GetTargetPosition();
-            var startPosition = transform.position;
-            var duration = _fallingDuration;
-
-            for (float t = 0f; t < duration; t += Time.deltaTime)
+            try
             {
-                var x = transform.position.x;
-                var y = Mathf.Lerp(startPosition.y, targetPosition.y, t / duration);
+                var startScale = transform.localScale;
+                var duration = 0.5f;
 
-                transform.position = new Vector3(x, y, 0);
-                yield return null;
+                for (float t = 0; t < duration; t += Time.deltaTime)
+                {
+                    var scaleX = Mathf.Lerp(startScale.x, 0, t / duration);
+                    var scaleY = Mathf.Lerp(startScale.y, 0, t / duration);
+                    transform.localScale = new Vector3(scaleX, scaleY, 1);
+                    await UniTask.Yield(this.GetCancellationTokenOnDestroy());
+                }
+                var healingSpot = Instantiate(_healingSpotPrefab, transform.position, Quaternion.Euler(90, 0, 0));
+                healingSpot.Parameter = Parameter;
+
+                Destroy(gameObject);
             }
-
-            transform.position = targetPosition;
-
-            var healingSpot = Instantiate(_healingSpotPrefab, transform.position, Quaternion.Euler(90, 0, 0));
-            healingSpot.Parameter = Parameter;
-
-            Destroy(gameObject);
+            catch (OperationCanceledException)
+            {
+                return;
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Lion.Weapon.Behaviour.HealingOrbModules
         [SerializeField]
         private float _healInterval = 0.5f;
 
-        private float Duration => Parameter == null ? 1f : Parameter.Duration;
+        private float Duration => Parameter == null ? 3f : Parameter.Duration;
         private float Size => Parameter == null ? 1f : Parameter.Size;
         private float HealAmount => Parameter == null ? 1f : Parameter.MagicPower;
 

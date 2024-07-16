@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healingSpotPrefab: {fileID: -6432142480019371766, guid: 0eade3740e595ab419a9241907b8d5d1, type: 3}
-  _fallingDuration: 1
+  _ease: 6
+  _fallingDuration: 3
 --- !u!95 &6336860772841949209
 Animator:
   serializedVersion: 5

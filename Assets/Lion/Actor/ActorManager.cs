@@ -14,13 +14,13 @@ namespace Lion.Actor
             return _actorDict.TryGetValue(instanceId, out actor);
         }
 
-        public static void RegisterActor(IActor actor)
+        public static void Register(IActor actor)
         {
             var instanceId = actor.gameObject.GetInstanceID();
             _actorDict[instanceId] = actor;
         }
 
-        public static void UnregisterActor(IActor actor)
+        public static void Unregister(IActor actor)
         {
             var instanceId = actor.gameObject.GetInstanceID();
             _actorDict.Remove(instanceId);

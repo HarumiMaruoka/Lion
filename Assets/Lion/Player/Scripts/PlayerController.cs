@@ -1,4 +1,5 @@
-﻿using Lion.Gem;
+﻿using Lion.Actor;
+using Lion.Gem;
 using Lion.Gold;
 using System;
 using UnityEngine;
@@ -26,6 +27,8 @@ namespace Lion.Player
 
             GemCollectorContainer.Instance.Register(gameObject, this);
             GoldCollectorContainer.Instance.Register(gameObject, this);
+
+            ActorManager.Register(this);
         }
 
         private void Update()
@@ -43,6 +46,8 @@ namespace Lion.Player
             Instance = null;
             GemCollectorContainer.Instance.Unregister(gameObject);
             GoldCollectorContainer.Instance.Unregister(gameObject);
+
+            ActorManager.Unregister(this);
         }
 
         public void Damage(int amount)

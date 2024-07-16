@@ -1,4 +1,5 @@
-﻿using Lion.Gem;
+﻿using Lion.Actor;
+using Lion.Gem;
 using Lion.Gold;
 using Lion.Minion.States;
 using System;
@@ -45,12 +46,16 @@ namespace Lion.Minion
             GoldCollectorContainer.Instance.Register(gameObject, this);
 
             Life = Status.HP;
+
+            ActorManager.Register(this);
         }
 
         private void OnDestroy()
         {
             GemCollectorContainer.Instance.Unregister(gameObject);
             GoldCollectorContainer.Instance.Unregister(gameObject);
+
+            ActorManager.Unregister(this);
         }
 
         private void Update()

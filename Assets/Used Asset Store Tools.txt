@@ -75,3 +75,6 @@ https://assetstore.unity.com/packages/vfx/particles/2d-pixel-fx-stateeffect-part
 
 Pixel FX - Ice
 https://assetstore.unity.com/packages/vfx/pixel-fx-ice-221150
+
+DOTween Pro
+https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416
