@@ -78,3 +78,12 @@ https://assetstore.unity.com/packages/vfx/pixel-fx-ice-221150
 
 DOTween Pro
 https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416
+
+Warped Explosion Pack 3
+https://assetstore.unity.com/packages/2d/textures-materials/abstract/warped-explosion-pack-3-197356
+
+Super Pixel Projectiles Pack 1
+https://assetstore.unity.com/packages/2d/textures-materials/super-pixel-projectiles-pack-1-270322
+
+20 Evolving Fantasy RPG Weapons
+https://assetstore.unity.com/packages/2d/textures-materials/20-evolving-fantasy-rpg-weapons-61204

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7041816156011858432}
   - component: {fileID: 9007474698099539800}
   - component: {fileID: 3694949369892936392}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BeardA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2527361080029975544}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.9664898, y: 0.92337847, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
