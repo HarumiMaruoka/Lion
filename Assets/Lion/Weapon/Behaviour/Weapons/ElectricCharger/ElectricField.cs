@@ -69,7 +69,7 @@ namespace Lion.Weapon.Behaviour.ElectricChargerModules
                 isHit = true;
 
                 await chain.Fire(enemy);
-                Destroy(gameObject);
+                if (gameObject) Destroy(gameObject);
             }
         }
     }

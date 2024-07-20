@@ -36,8 +36,8 @@ namespace Lion.Weapon.Behaviour.MetallicSwarmModules
 
         private void MoveInit()
         {
-            MoveUpdate();
             _angleOffset = UnityEngine.Random.Range(0, Mathf.PI * 2f);
+            MoveUpdate();
         }
 
         private float _angleOffset;
@@ -75,12 +75,10 @@ namespace Lion.Weapon.Behaviour.MetallicSwarmModules
             _missileIndex++;
             if (_missileIndex > _missileCount)
             {
-                // 自爆するプログラムを書く。
                 Explode();
             }
             else
             {
-                // ミサイルを発射するプログラムを書く。
                 LaunchMissile();
             }
         }

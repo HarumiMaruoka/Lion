@@ -2,7 +2,6 @@
 using Lion.Actor;
 using System;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour.HealingOrbModules

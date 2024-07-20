@@ -1,6 +1,5 @@
 ﻿using Lion.Damage;
 using System;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour.BloodSickleModules

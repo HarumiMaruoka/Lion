@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour
 {
-    // �^�C���f�B�X�g�[�^�[ (Time Distorter):
-    // �G�̓������ꎞ�I�ɒx�����鎞��̘c�݂𔭐�������B
-    // �U���͂͒Ⴂ���A�G�̓����𐧌����Đ퓬��L���ɐi�߂邱�Ƃ��ł���B
+    // タイムディストーター (Time Distorter):
+    // 敵の動きを一時的に遅くする時空の歪みを発生させる。
+    // 攻撃力は低いが、敵の動きを制限して戦闘を有利に進めることができる。
     public class TimeDistorter : WeaponBehaviour
     {
 

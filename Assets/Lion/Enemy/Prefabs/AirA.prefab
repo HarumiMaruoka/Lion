@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514b17677092d404baee0f5faa969615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackRange: 0.6
+  _attackInterval: 0.3
 --- !u!212 &5284798387488876804
 SpriteRenderer:
   m_ObjectHideFlags: 0

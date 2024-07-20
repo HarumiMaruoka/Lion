@@ -50,11 +50,6 @@ namespace Lion.Player
             ActorManager.Unregister(this);
         }
 
-        public void Damage(int amount)
-        {
-            PlayerManager.Instance.HealthManager.Damage(amount);
-        }
-
         public void CollectGold(int amount)
         {
 
@@ -65,31 +60,16 @@ namespace Lion.Player
             PlayerManager.Instance.ExpLevelManager.AddExp(amount);
         }
 
-        private float _life;
-        public event Action<float> OnLifeChanged;
-        public float Life
+        public event Action<float> OnHPChanged
         {
-            get => _life;
-            set
-            {
-                _life = Mathf.Clamp(value, 0f, PlayerManager.Instance.Status.HP);
-                OnLifeChanged?.Invoke(_life);
-            }
+            add => PlayerManager.Instance.HPManager.OnHPChanged += value;
+            remove => PlayerManager.Instance.HPManager.OnHPChanged -= value;
         }
 
-        public void Heal(float amount)
-        {
-            Life += amount;
-        }
+        public float MaxHP => PlayerManager.Instance.HPManager.MaxHP;
+        public float CurrentHP => PlayerManager.Instance.HPManager.CurrentHP;
 
-        public void Revive()
-        {
-            Life = PlayerManager.Instance.Status.HP;
-        }
-
-        public void Damage(float amount)
-        {
-            Life -= amount;
-        }
+        public void Heal(float amount) => PlayerManager.Instance.HPManager.Heal(amount);
+        public void Damage(float amount) => PlayerManager.Instance.HPManager.Damage(amount);
     }
 }

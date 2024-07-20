@@ -1,19 +1,19 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lion.LevelManagement
 {
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ğÁ”ï‚µ‚ÄƒŒƒxƒ‹ƒAƒbƒv‚·‚é‹@”\‚ğ’ñ‹Ÿ‚·‚éƒNƒ‰ƒXB
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ¶ˆè²»ã—ã¦ãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ã™ã‚‹æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
     /// </summary>
     /// <typeparam name="T"> 
-    /// ƒXƒe[ƒ^ƒX‚ğ•\‚·\‘¢‘ÌBIStatus‚ğÀ‘•‚µ‚Ä‚¢‚é•K—v‚ª‚ ‚éB
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¡¨ã™æ§‹é€ ä½“ã€‚IStatusã‚’å®Ÿè£…ã—ã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
     /// </typeparam>
     public class ItemLevelManager : LevelManager
     {
         /// <summary>
-        /// Key‚ÍƒŒƒxƒ‹AValue‚ÍƒŒƒxƒ‹ƒAƒbƒv‚É•K—v‚ÈƒAƒCƒeƒ€‚Æ‚»‚ÌŒÂ”‚ğ•\‚·\‘¢‘Ì‚ÌƒŠƒXƒgB
+        /// Keyã¯ãƒ¬ãƒ™ãƒ«ã€Valueã¯ãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ã«å¿…è¦ãªã‚¢ã‚¤ãƒ†ãƒ ã¨ãã®å€‹æ•°ã‚’è¡¨ã™æ§‹é€ ä½“ã®ãƒªã‚¹ãƒˆã€‚
         /// </summary>
         public Dictionary<int, List<LevelUpCost>> LevelUpCostTable { get; private set; }
 
@@ -30,9 +30,9 @@ namespace Lion.LevelManagement
 
         private void Initialize<T>(TextAsset levelUpCostTable, TextAsset statusTable) where T : IStatus, new()
         {
+            var input = levelUpCostTable.LoadCsv(1);
             CurrentLevel = 1;
 
-            var input = levelUpCostTable.LoadCsv(1);
             LevelUpCostTable = new Dictionary<int, List<LevelUpCost>>();
 
             for (int i = 0; i < input.Length; i++)
@@ -60,7 +60,14 @@ namespace Lion.LevelManagement
             {
                 var row = input[i];
                 T data = new T();
-                data.LoadItemSheet(row);
+                try
+                {
+                    data.LoadItemSheet(row);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Failed to load item sheet: {e.Message}");
+                }
                 StatusTable[i] = data;
             }
         }
@@ -69,6 +76,17 @@ namespace Lion.LevelManagement
         {
             return LevelUpCostTable[level];
         }
+
+        public List<LevelUpCost>[] GetLevelUpCostsRange(int from, int to)
+        {
+            var costs = new List<LevelUpCost>[to - from + 1];
+            for (int i = from; i <= to; i++)
+            {
+                costs[i - from] = GetLevelUpCosts(i);
+            }
+            return costs;
+        }
+
     }
 
     public struct LevelUpCost

@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour
 {
-    // �V���h�E�u���[�h (Shadow Blade):
-    // �e�̐n���������A�v���C���[�̎��͂���񂵂Ȃ���G��؂�􂭁B
-    // �e�̐n�̓v���C���[�̈ړ��ɍ��킹�ē������߁A�I�݂ɑ��삷�邱�Ƃő�ʂ̓G�������悭�U���ł���B
+    // シャドウブレード (Shadow Blade):
+    // 影の刃を召喚し、プレイヤーの周囲を旋回しながら敵を切り裂く。
+    // 影の刃はプレイヤーの移動に合わせて動くため、巧みに操作することで大量の敵を効率よく攻撃できる。
     public class ShadowBlade : WeaponBehaviour
     {
 

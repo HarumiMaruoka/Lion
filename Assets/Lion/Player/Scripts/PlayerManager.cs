@@ -1,4 +1,4 @@
-
+﻿
 using Lion.Formation;
 using Lion.LevelManagement;
 using System;
@@ -8,13 +8,19 @@ namespace Lion.Player
 {
     public class PlayerManager
     {
-        public static PlayerManager Instance { get; private set; } = new PlayerManager();
+        public static PlayerManager Instance { get; } = new PlayerManager();
 
         private PlayerManager()
         {
             ExpLevelManager = ExpLevelManager.Create<Status>("PlayerData_ExpLevelStatusTable");
             ItemLevelManager = ItemLevelManager.Create<Status>("PlayerData_ItemLevelUpCostTable", "PlayerData_ItemLevelStatusTable");
-            HealthManager = new HealthManager(100);
+            HPManager = new HPManager();
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Initialize()
+        {
+            Instance.HPManager.Heal(Instance.Status.HP);
         }
 
         public Status Status => (Status)ExpLevelManager.GetCurrentStatus() + (Status)ItemLevelManager.GetCurrentStatus();
@@ -22,6 +28,6 @@ namespace Lion.Player
 
         public ExpLevelManager ExpLevelManager { get; private set; }
         public ItemLevelManager ItemLevelManager { get; private set; }
-        public HealthManager HealthManager { get; private set; }
+        public HPManager HPManager { get; private set; }
     }
 }

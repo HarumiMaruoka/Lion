@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour
 {
-    // ���H�C�h�o�X�^�[ (Void Buster):
-    // �O���Ƀu���b�N�z�[���𔭐������A�G���z�����ݏ��ł�����B
-    // �u���b�N�z�[���͈�莞�Ԍ�ɔ������A���͂̓G�ɑ�_���[�W��^����B
+    // ヴォイドバスター (Void Buster):
+    // 前方にブラックホールを発生させ、敵を吸い込み消滅させる。
+    // ブラックホールは一定時間後に爆発し、周囲の敵に大ダメージを与える。
     public class VoidBuster : WeaponBehaviour
     {
 

@@ -24,8 +24,8 @@ namespace Lion.Weapon.Behaviour
 
         private float DaggerSpeed => Parameter == null ? 8f : Parameter.AttackSpeed;
 
-        private Vector3 _lastPosition = Vector3.up;
-        private Vector3 Direction => transform.position - _lastPosition;
+        [SerializeField]
+        private VirtualJoystick _joystick;
 
         private float _timer;
 
@@ -37,11 +37,14 @@ namespace Lion.Weapon.Behaviour
         private void Update()
         {
             // 向きを更新する。
-            if (_lastPosition != transform.position)
+            Vector2 moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (_joystick.IsDragging) moveDir += _joystick.Vector;
+
+            if (moveDir != Vector2.zero)
             {
-                transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg);
-                _lastPosition = transform.position;
+                transform.right = moveDir.normalized;
             }
+
 
             // 攻撃用のタイマーを更新する。タイマーが0になったら攻撃する。
             _timer -= Time.deltaTime;

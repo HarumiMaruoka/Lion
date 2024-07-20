@@ -1,11 +1,11 @@
-using Lion.Player;
+Ôªøusing Lion.Player;
 using System;
 using UnityEngine;
 
 namespace Lion.Enemy.Boss
 {
     /// <summary>
-    /// éÀåÇÉIÉuÉWÉFÉNÉgÅB
+    /// Â∞ÑÊíÉ„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà„ÄÇ
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class RangeAttackObject : MonoBehaviour
@@ -28,7 +28,7 @@ namespace Lion.Enemy.Boss
         {
             if (collision.gameObject == PlayerController.Instance.gameObject)
             {
-                PlayerController.Instance.Damage(1);
+                PlayerController.Instance.Damage(1f);
                 Destroy(gameObject);
             }
         }

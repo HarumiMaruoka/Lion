@@ -1,11 +1,11 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour
 {
-    // ƒXƒg[ƒ€ƒuƒŠƒ“ƒK[ (Storm Bringer):
-    // “VŒó‚ğ‘€‚èA“G‚ÉŒü‚©‚Á‚Ä—‹‚ğ—‚Æ‚·B
-    // —‹‚ÍüˆÍ‚Ì“G‚É˜A½‚µA‘å”ÍˆÍ‚É“n‚Á‚Äƒ_ƒ[ƒW‚ğ—^‚¦‚éB
+    // ã‚¹ãƒˆãƒ¼ãƒ ãƒ–ãƒªãƒ³ã‚¬ãƒ¼ (Storm Bringer):
+    // å¤©å€™ã‚’æ“ã‚Šã€æ•µã«å‘ã‹ã£ã¦é›·ã‚’è½ã¨ã™ã€‚
+    // é›·ã¯å‘¨å›²ã®æ•µã«é€£é–ã—ã€å¤§ç¯„å›²ã«æ¸¡ã£ã¦ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹ã€‚
     public class StormBringer : WeaponBehaviour
     {
 

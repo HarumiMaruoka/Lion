@@ -52,7 +52,7 @@ namespace Lion.Gem
 
             transform.position = _position;
 
-            if (_period <= 0)
+            if (_period <= 0.01f)
             {
                 Fire();
             }

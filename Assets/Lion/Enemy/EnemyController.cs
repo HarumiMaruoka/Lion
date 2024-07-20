@@ -7,7 +7,6 @@ using Lion.Damage;
 using System;
 using UnityEngine;
 using Lion.Player;
-using Cysharp.Threading.Tasks;
 
 namespace Lion.Enemy
 {
@@ -34,6 +33,13 @@ namespace Lion.Enemy
             _hp = EnemyData.Life;
         }
 
+        [SerializeField]
+        private float _attackRange = 1f;
+        [SerializeField]
+        private float _attackInterval = 1f;
+
+        private float _attackTimer = 0f;
+
         private void Update()
         {
             var playerPosition = PlayerController.Instance.transform.position;
@@ -43,6 +49,26 @@ namespace Lion.Enemy
             if (IsFreezed) Rigidbody2D.velocity = Vector2.zero;
 
             if (Camera.main.IsTooFarFromCamera(transform.position)) Die(false, null);
+            AttackUpdate();
+        }
+
+        private void AttackUpdate()
+        {
+            if (_attackTimer < _attackInterval)
+            {
+                _attackTimer += Time.deltaTime;
+                return;
+            }
+
+            // プレイヤーとの距離を計算
+            var playerPosition = PlayerController.Instance.transform.position;
+            var sqrDistance = Vector2.SqrMagnitude(playerPosition - transform.position);
+            // プレイヤーとの距離が一定以下であれば攻撃
+            if (sqrDistance < _attackRange * _attackRange)
+            {
+                PlayerController.Instance.Damage(EnemyData.Attack);
+                _attackTimer = 0f;
+            }
         }
 
         private void Die(bool isKill, IActor actor)

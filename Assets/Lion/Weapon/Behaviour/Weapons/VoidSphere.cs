@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour
 {
-    // �{�C�h�X�t�B�A (Void Sphere):
-    // �Í��̋��̂��������A���͂̓G���z���񂹂ď��ł�����B
-    // ���̂͂��΂炭���̏�ɗ��܂�A�߂Â��G�����X�Ƌz�����ށB
+    // ボイドスフィア (Void Sphere):
+    // 暗黒の球体を召喚し、周囲の敵を吸い寄せて消滅させる。
+    // 球体はしばらくその場に留まり、近づく敵を次々と吸い込む。
     public class VoidSphere : WeaponBehaviour
     {
 

@@ -13,22 +13,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 2
-  <Name>k__BackingField: 
-  <Prefab>k__BackingField: {fileID: 0}
---- !u!114 &-8154780974454789261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
-  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 16
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Blood Sickle
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &-4912032021663799282
 MonoBehaviour:
@@ -43,22 +28,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 11
-  <Name>k__BackingField: 
-  <Prefab>k__BackingField: {fileID: 0}
---- !u!114 &-3397136514727225672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
-  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 18
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Metallic Swarm
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &-2756049713853691823
 MonoBehaviour:
@@ -75,21 +45,6 @@ MonoBehaviour:
   <ID>k__BackingField: 1
   <Name>k__BackingField: Arcane Bolt
   <Prefab>k__BackingField: {fileID: 0}
---- !u!114 &-2749451086840084307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
-  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 13
-  <Name>k__BackingField: 
-  <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &-1328914966425610783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +58,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 7
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Gravity Hammer
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &-374820364891968732
 MonoBehaviour:
@@ -118,7 +73,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 10
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Healing Orb
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -146,29 +101,7 @@ MonoBehaviour:
   - {fileID: -374820364891968732}
   - {fileID: -4912032021663799282}
   - {fileID: 4532584526250865904}
-  - {fileID: -2749451086840084307}
-  - {fileID: 1242254529665463209}
-  - {fileID: 4772775959587323514}
-  - {fileID: -8154780974454789261}
-  - {fileID: 7298137934866688962}
-  - {fileID: -3397136514727225672}
-  - {fileID: 8270729639430045269}
   WindowLayout: {fileID: 4910399322062827081}
---- !u!114 &1242254529665463209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
-  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 14
-  <Name>k__BackingField: 
-  <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &1731174038761297919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +115,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 3
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Electric Charger
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &3594213285696177036
 MonoBehaviour:
@@ -197,7 +130,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 4
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Energy Spike
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &4532584526250865904
 MonoBehaviour:
@@ -212,22 +145,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 12
-  <Name>k__BackingField: 
-  <Prefab>k__BackingField: {fileID: 0}
---- !u!114 &4772775959587323514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
-  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 15
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Mirage Dagger
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &4910399322062827081
 MonoBehaviour:
@@ -246,9 +164,9 @@ MonoBehaviour:
   - 16
   - 50
   - 37
-  - 119.43
-  - 41
-  - 50
+  - 120
+  - 42
+  - 186
   VerticalSpacings:
   - 20
   - 20
@@ -286,7 +204,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 6
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Freeze Cannon
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &7013423313710781883
 MonoBehaviour:
@@ -301,22 +219,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 5
-  <Name>k__BackingField: 
-  <Prefab>k__BackingField: {fileID: 0}
---- !u!114 &7298137934866688962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
-  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 17
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Eternal Flame
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &7667949040993983263
 MonoBehaviour:
@@ -331,22 +234,7 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 9
-  <Name>k__BackingField: 
-  <Prefab>k__BackingField: {fileID: 0}
---- !u!114 &8270729639430045269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ed766ac6924484e932a2961b28eaaa, type: 3}
-  m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 19
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Force Barrier
   <Prefab>k__BackingField: {fileID: 0}
 --- !u!114 &8283328714818100354
 MonoBehaviour:
@@ -376,5 +264,5 @@ MonoBehaviour:
   m_Name: WeaponSheet (Lion.Weapon.WeaponSheet)
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 8
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Life Reaper
   <Prefab>k__BackingField: {fileID: 0}

@@ -15,7 +15,7 @@ namespace Lion.Weapon.Behaviour.AcidSprayModule
 
         private IWeaponParameter _weaponParameter;
 
-        public float DamageInterval => _damageInterval;   // 継続ダメージ状態がダメージを与える間隔
+        public float DamageInterval => _damageInterval; // 継続ダメージ状態がダメージを与える間隔
         public float DamageDuration => _weaponParameter == null ? 10f : _weaponParameter.Duration * 0.8f; // 継続ダメージの持続時間
         public float LifeTime => _weaponParameter == null ? 2.5f : _weaponParameter.Duration * 0.6f; // 酸の持続時間
         public float MagicAttackPower => _weaponParameter == null ? 1f : _weaponParameter.MagicPower; // 魔法攻撃力
