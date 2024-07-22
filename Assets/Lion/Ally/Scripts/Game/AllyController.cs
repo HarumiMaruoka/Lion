@@ -44,7 +44,7 @@ namespace Lion.Ally
         {
             GemCollectorContainer.Instance.Unregister(gameObject);
             GoldCollectorContainer.Instance.Unregister(gameObject);
-            
+
             ActorManager.Unregister(this);
         }
 
@@ -62,7 +62,7 @@ namespace Lion.Ally
 
         public void CollectGem(int amount)
         {
-            AllyData.ExpLevelManager.AddExp(amount);
+            AllyData.LevelManager.ExpLevelManager.AddExp(amount);
         }
 
         public void CollectGold(int amount)

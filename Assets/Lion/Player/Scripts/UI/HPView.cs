@@ -7,6 +7,8 @@ namespace Lion.Player.UI
     public class HPView : MonoBehaviour
     {
         [SerializeField]
+        private PlayerController _player;
+        [SerializeField]
         private Slider _slider;
         [SerializeField]
         private Vector3 _offset;
@@ -17,7 +19,6 @@ namespace Lion.Player.UI
             _slider.maxValue = 1;
 
             SetHP(PlayerController.Instance.CurrentHP);
-            // PlayerController.Instance.OnHPChanged += SetHP;
 
             transform.position = PlayerController.Instance.transform.position + _offset;
         }
@@ -27,11 +28,6 @@ namespace Lion.Player.UI
             SetHP(PlayerController.Instance.CurrentHP);
 
             transform.position = PlayerController.Instance.transform.position + _offset;
-        }
-
-        private void OnDestroy()
-        {
-            // if (PlayerController.Instance) PlayerController.Instance.OnHPChanged -= SetHP;
         }
 
         public void SetHP(float hp)

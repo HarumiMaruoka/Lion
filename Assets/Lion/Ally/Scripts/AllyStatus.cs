@@ -1,4 +1,4 @@
-using Lion.LevelManagement;
+ï»¿using Lion.LevelManagement;
 using System;
 using UnityEngine;
 
@@ -13,33 +13,24 @@ namespace Lion.Ally
         public float Speed;
         public float Range;
         public float Luck;
-        public int AvailableMinionsCount; // Žg–ð‰Â”\‚Èƒ~ƒjƒIƒ“‚Ì”
+        public int AvailableMinionsCount; // ä½¿å½¹å¯èƒ½ãªãƒŸãƒ‹ã‚ªãƒ³ã®æ•°
 
         public float BattlePower => HP + AttackPower + Defense + Speed + Range + Luck;
         public float MoveSpeed => 3f + Speed * 0.03f;
 
-        public void LoadExpSheet(string[] row)
-        {
-            HP = float.Parse(row[2]);
-            MP = float.Parse(row[3]);
-            AttackPower = float.Parse(row[4]);
-            Defense = float.Parse(row[5]);
-            Speed = float.Parse(row[6]);
-            Range = float.Parse(row[7]);
-            Luck = float.Parse(row[8]);
-            AvailableMinionsCount = int.Parse(row[9]);
-        }
+        public int Level { get; private set; }
 
-        public void LoadItemSheet(string[] row)
+        public void LoadStatusFromCsv(string[] csv)
         {
-            HP = float.Parse(row[1]);
-            MP = float.Parse(row[2]);
-            AttackPower = float.Parse(row[3]);
-            Defense = float.Parse(row[4]);
-            Speed = float.Parse(row[5]);
-            Range = float.Parse(row[6]);
-            Luck = float.Parse(row[7]);
-            AvailableMinionsCount = int.Parse(row[8]);
+            Level = int.Parse(csv[0]);
+            HP = float.Parse(csv[1]);
+            MP = float.Parse(csv[2]);
+            AttackPower = float.Parse(csv[3]);
+            Defense = float.Parse(csv[4]);
+            Speed = float.Parse(csv[5]);
+            Range = float.Parse(csv[6]);
+            Luck = float.Parse(csv[7]);
+            AvailableMinionsCount = int.Parse(csv[8]);
         }
 
         public static AllyStatus operator +(AllyStatus a, AllyStatus b)

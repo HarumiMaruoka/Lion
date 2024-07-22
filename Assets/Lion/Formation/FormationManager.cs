@@ -1,4 +1,4 @@
-using Lion.Ally;
+ï»¿using Lion.Ally;
 using Lion.Minion;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Lion.Formation
 {
     /// <summary>
-    /// ƒtƒH[ƒ[ƒVƒ‡ƒ“‚ÌŠÇ—‚ğs‚¤ƒNƒ‰ƒXB
+    /// ãƒ•ã‚©ãƒ¼ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ç®¡ç†ã‚’è¡Œã†ã‚¯ãƒ©ã‚¹ã€‚
     /// </summary>
     public class FormationManager
     {
@@ -22,7 +22,7 @@ namespace Lion.Formation
                 for (int i = 0; i < _activatedMinions.Length; i++)
                 {
                     if (_activatedMinions[i] == null) continue;
-                    battlePower += _activatedMinions[i].Status.BattlePower;
+                    battlePower += 1f; // _activatedMinions[i].Status.BattlePower;
                 }
                 return battlePower;
             }

@@ -1,5 +1,4 @@
-using JetBrains.Annotations;
-using Lion.LevelManagement;
+﻿using Lion.LevelManagement;
 using System;
 using UnityEngine;
 
@@ -18,6 +17,8 @@ namespace Lion.Minion
         public float BattlePower => HP + Attack + Defense + Speed + Range + Luck;
         public float MoveSpeed => 3f + Speed * 0.03f;
 
+        public int Level { get; private set; }
+
         public static MinionStatus operator +(MinionStatus a, MinionStatus b)
         {
             return new MinionStatus()
@@ -32,28 +33,6 @@ namespace Lion.Minion
             };
         }
 
-        public void LoadExpSheet(string[] row)
-        {
-            HP = float.Parse(row[2]);
-            MP = float.Parse(row[3]);
-            Attack = float.Parse(row[4]);
-            Defense = float.Parse(row[5]);
-            Speed = float.Parse(row[6]);
-            Range = float.Parse(row[7]);
-            Luck = float.Parse(row[8]);
-        }
-
-        public void LoadItemSheet(string[] row)
-        {
-            HP = float.Parse(row[1]);
-            MP = float.Parse(row[2]);
-            Attack = float.Parse(row[3]);
-            Defense = float.Parse(row[4]);
-            Speed = float.Parse(row[5]);
-            Range = float.Parse(row[6]);
-            Luck = float.Parse(row[7]);
-        }
-
         public override string ToString()
         {
             return
@@ -64,6 +43,18 @@ namespace Lion.Minion
                 $"Speed: {Speed}\n" +
                 $"Range: {Range}\n" +
                 $"Luck: {Luck}";
+        }
+
+        public void LoadStatusFromCsv(string[] csv)
+        {
+            Level = int.Parse(csv[0]);
+            HP = float.Parse(csv[1]);
+            MP = float.Parse(csv[2]);
+            Attack = float.Parse(csv[3]);
+            Defense = float.Parse(csv[4]);
+            Speed = float.Parse(csv[5]);
+            Range = float.Parse(csv[6]);
+            Luck = float.Parse(csv[7]);
         }
     }
 }

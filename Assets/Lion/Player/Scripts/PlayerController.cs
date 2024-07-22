@@ -57,7 +57,7 @@ namespace Lion.Player
 
         public void CollectGem(int amount)
         {
-            PlayerManager.Instance.ExpLevelManager.AddExp(amount);
+            PlayerManager.Instance.LevelManager.ExpLevelManager.AddExp(amount);
         }
 
         public event Action<float> OnHPChanged

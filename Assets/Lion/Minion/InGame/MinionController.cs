@@ -132,7 +132,7 @@ namespace Lion.Minion
 
         public void CollectGem(int amount)
         {
-            MinionData.ExpLevelManager.AddExp(amount);
+            MinionData.LevelManager.ExpLevelManager.AddExp(amount);
         }
 
         public void CollectGold(int amount)

@@ -6,6 +6,6 @@ using UnityEngine;
 public interface IActor : IGemCollector, IGoldCollector
 {
     GameObject gameObject { get; }
-    public void Heal(float amount);
-    public void Damage(float amount);
+    void Heal(float amount);
+    void Damage(float amount);
 }

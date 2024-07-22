@@ -10,39 +10,63 @@ namespace Lion.Weapon
         [field: SerializeField] public int ID { get; private set; }
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public WeaponBehaviour Prefab { get; private set; }
+        [field: SerializeField] public Sprite Icon { get; private set; }
 
-        public ItemLevelManager LevelManager { get; private set; }
+        public WeaponLevelManager LevelManager { get; private set; }
 
         public void Initialize()
         {
-            var levelUpCost = $"Weapon_{ID}_ItemLevelUpCostTable";
-            var status = $"Weapon_{ID}_ItemLevelStatusTable";
-            LevelManager = ItemLevelManager.Create<WeaponStatus>(levelUpCost, status);
+            LevelManager = new WeaponLevelManager(this);
         }
     }
 
     public struct WeaponStatus : IStatus
     {
+        public int Level { get; private set; }
         public float PhysicalPower { get; private set; }
         public float MagicPower { get; private set; }
         public float Range { get; private set; }
         public float Size { get; private set; }
         public float Duration { get; private set; }
         public float AttackSpeed { get; private set; }
+        public int Amount { get; private set; }
 
-        public void LoadExpSheet(string[] row)
+        public void LoadStatusFromCsv(string[] csv)
         {
-            // 不要なので実装しない
+            Level = int.Parse(csv[0]);
+            PhysicalPower = float.Parse(csv[1]);
+            MagicPower = float.Parse(csv[2]);
+            Range = float.Parse(csv[3]);
+            Size = float.Parse(csv[4]);
+            Duration = float.Parse(csv[5]);
+            AttackSpeed = float.Parse(csv[6]);
+                Amount = (int)float.Parse(csv[7]);
         }
 
-        public void LoadItemSheet(string[] row)
+        public static WeaponStatus operator +(WeaponStatus a, WeaponStatus b)
         {
-            PhysicalPower = float.Parse(row[1]);
-            MagicPower = float.Parse(row[2]);
-            Range = float.Parse(row[3]);
-            Size = float.Parse(row[4]);
-            Duration = float.Parse(row[5]);
-            AttackSpeed = float.Parse(row[6]);
+            return new WeaponStatus
+            {
+                PhysicalPower = a.PhysicalPower + b.PhysicalPower,
+                MagicPower = a.MagicPower + b.MagicPower,
+                Range = a.Range + b.Range,
+                Size = a.Size + b.Size,
+                Duration = a.Duration + b.Duration,
+                AttackSpeed = a.AttackSpeed + b.AttackSpeed,
+                Amount = a.Amount + b.Amount
+            };
+        }
+
+        public override string ToString()
+        {
+            return
+                $"PhysicalPower: {PhysicalPower}\n" +
+                $"MagicPower: {MagicPower}\n" +
+                $"Range: {Range}\n" +
+                $"Size: {Size}\n" +
+                $"Duration: {Duration}\n" +
+                $"AttackSpeed: {AttackSpeed}\n" +
+                $"Amount: {Amount}";
         }
     }
 }

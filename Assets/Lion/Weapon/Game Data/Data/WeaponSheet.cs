@@ -22,6 +22,11 @@ namespace Lion.Weapon
                 data.Initialize();
             }
         }
+
+        public bool TryGetValue(int id, out WeaponData data)
+        {
+            return _weaponDataByID.TryGetValue(id, out data);
+        }
     }
 
 
