@@ -7,8 +7,8 @@ namespace Lion.Weapon
 {
     public class WeaponLevelManager
     {
-        private LevelBasedStatusManager<WeaponStatus> _itemStatus;
-        public readonly LevelUpCostTable CostTable;
+        public LevelBasedStatusManager<WeaponStatus> StatusTable { get; }
+        public LevelUpCostTable CostTable { get; }
 
         public WeaponLevelManager(WeaponData weaponData)
         {
@@ -18,7 +18,7 @@ namespace Lion.Weapon
             try
             {
                 asset = Resources.Load<TextAsset>($"Weapon_{id}_ItemLevelStatusTable");
-                _itemStatus = new LevelBasedStatusManager<WeaponStatus>(asset);
+                StatusTable = new LevelBasedStatusManager<WeaponStatus>(asset);
             }
             catch (Exception)
             {
@@ -31,7 +31,7 @@ namespace Lion.Weapon
 
         public WeaponStatus GetStatus(int level)
         {
-            return _itemStatus.GetStatus(level);
+            return StatusTable.GetStatus(level);
         }
     }
 }

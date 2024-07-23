@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Lion.LevelManagement
 {
-    public class LevelBasedStatusManager<T> where T : IStatus, new()
+    public class LevelBasedStatusManager<T> : ILevelBasedStatusManager where T : IStatus, new()
     {
         private readonly T[] _statusByLevel;
         public int MaxLevel { get; }
@@ -44,6 +44,11 @@ namespace Lion.LevelManagement
                 Debug.LogError("Level " + level + " is out of range.");
                 return default(T);
             }
+        }
+
+        public string GetStatusText(int level)
+        {
+            return GetStatus(level).ToString();
         }
     }
 }

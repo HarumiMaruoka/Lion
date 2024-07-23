@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace Lion.Weapon.UI
 {
+    [RequireComponent(typeof(Button))]
     public class WeaponIcon : MonoBehaviour
     {
         [SerializeField]
@@ -12,6 +13,18 @@ namespace Lion.Weapon.UI
         private TMPro.TextMeshProUGUI _levelView;
 
         private WeaponInstance _weapon;
+
+        public event Action<WeaponInstance> OnSelected;
+
+        private void Start()
+        {
+            GetComponent<Button>().onClick.AddListener(Select);
+        }
+
+        private void Select()
+        {
+            OnSelected?.Invoke(_weapon);
+        }
 
         public void SetWeapon(WeaponInstance weapon)
         {

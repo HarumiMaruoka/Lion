@@ -7,13 +7,12 @@ namespace Lion.Weapon
 {
     public class WeaponInstance
     {
-        private readonly ItemLevelManager _levelManager;
         private WeaponBehaviour _gameObject;
 
         public WeaponInstance(WeaponData data)
         {
             Data = data;
-            _levelManager = new ItemLevelManager(data.LevelManager.CostTable);
+            LevelManager = new ItemLevelManager(data.LevelManager.CostTable);
         }
 
         public static WeaponInstance Create(int id)
@@ -27,13 +26,14 @@ namespace Lion.Weapon
         }
 
         public WeaponData Data { get; }
+        public ItemLevelManager LevelManager { get; }
 
         public bool IsActive => _gameObject != null;
 
         public int Level
         {
-            get => _levelManager.CurrentLevel;
-            set => _levelManager.CurrentLevel = value;
+            get => LevelManager.CurrentLevel;
+            set => LevelManager.CurrentLevel = value;
         }
 
         public WeaponStatus WeaponStatus => Data.LevelManager.GetStatus(Level);
@@ -42,8 +42,8 @@ namespace Lion.Weapon
 
         public event Action<int> OnLevelChanged
         {
-            add => _levelManager.OnLevelChanged += value;
-            remove => _levelManager.OnLevelChanged -= value;
+            add => LevelManager.OnLevelChanged += value;
+            remove => LevelManager.OnLevelChanged -= value;
         }
 
         public void Activation()

@@ -6,26 +6,23 @@ namespace Lion.LevelManagement.ItemLevel
 {
     public class ItemLevelChanger
     {
-        private readonly ItemLevelManager _itemLevelManager;
-        private readonly LevelUpCostTable _costManager;
+        private ItemLevelManager _itemLevelManager;
+        private LevelUpCostTable _costManager;
 
         // キーはアイテムID, 値は要求数
         private readonly Dictionary<int, int> _itemRequirements = new Dictionary<int, int>();
 
         public event Action<int> OnNextLevelChanged;
 
-        public ItemLevelChanger(ItemLevelManager itemLevelManager, LevelUpCostTable costManager)
-        {
-            _itemLevelManager = itemLevelManager;
-            _costManager = costManager;
-        }
-
         private int CurrentLevel => _itemLevelManager.CurrentLevel;
         private int MaxLevel => _costManager.MaxLevel;
         public int NextLevel { get; private set; }
 
-        public void Reset()
+        public void Setup(ItemLevelManager itemLevelManager, LevelUpCostTable costManager)
         {
+            _itemLevelManager = itemLevelManager;
+            _costManager = costManager;
+
             NextLevel = CurrentLevel;
             _itemRequirements.Clear();
         }
@@ -96,7 +93,12 @@ namespace Lion.LevelManagement.ItemLevel
             //}
 
             _itemLevelManager.CurrentLevel = NextLevel;
-            Reset();
+            Setup(_itemLevelManager, _costManager);
+        }
+
+        public IReadOnlyDictionary<int, int> GetRequiredItems()
+        {
+            return _itemRequirements;
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Lion.Player
     {
         public static PlayerManager Instance { get; } = new PlayerManager();
 
+        public Sprite Icon { get; private set; }
         public PlayerStatus Status => LevelManager.Status;
         public float BattlePower => Status.BattlePower + FormationManager.Instance.BattlePower;
 
@@ -19,6 +20,7 @@ namespace Lion.Player
         private static void Initialize()
         {
             Instance.HPManager.Heal(Instance.Status.HP);
+            Instance.Icon = Resources.Load<Sprite>("PlayerIcon");
         }
     }
 }

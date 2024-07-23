@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,24 @@ namespace Lion.Weapon.UI
 
         private Dictionary<WeaponInstance, WeaponIcon> _weaponIcons = new Dictionary<WeaponInstance, WeaponIcon>();
 
+        private Action<WeaponInstance> onSelectedBuffer;
+
+        public event Action OnDisabled;
+        public event Action<WeaponInstance> OnSelected
+        {
+            add
+            {
+                onSelectedBuffer += value;
+                foreach (var icon in _weaponIcons.Values) icon.OnSelected += value;
+
+            }
+            remove
+            {
+                onSelectedBuffer -= value;
+                foreach (var icon in _weaponIcons.Values) icon.OnSelected -= value;
+            }
+        }
+
         private void Start()
         {
             foreach (var weapon in WeaponManager.Instance.Inventory)
@@ -21,10 +39,20 @@ namespace Lion.Weapon.UI
             WeaponManager.Instance.Inventory.OnRemoved += OnRemoved;
         }
 
+        private void OnDisable()
+        {
+            OnDisabled?.Invoke();
+        }
+
         private void OnDestroy()
         {
             WeaponManager.Instance.Inventory.OnAdded -= OnAdded;
             WeaponManager.Instance.Inventory.OnRemoved -= OnRemoved;
+        }
+
+        public void Open()
+        {
+            gameObject.SetActive(true);
         }
 
         private void OnAdded(WeaponInstance weapon)

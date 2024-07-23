@@ -6,12 +6,12 @@ namespace Lion.LevelManagement.ItemLevel
     public class ItemLevelManager
     {
         private int _currentLevel;
-        private LevelUpCostTable _costManager;
+        public LevelUpCostTable CostTable { get; }
 
         public ItemLevelManager(LevelUpCostTable costManager)
         {
             _currentLevel = 1;
-            _costManager = costManager;
+            CostTable = costManager;
         }
 
         public int CurrentLevel
@@ -26,6 +26,6 @@ namespace Lion.LevelManagement.ItemLevel
 
         public event Action<int> OnLevelChanged;
 
-        public int MaxLevel => _costManager.MaxLevel;
+        public int MaxLevel => CostTable.MaxLevel;
     }
 }
