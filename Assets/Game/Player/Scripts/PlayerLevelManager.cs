@@ -19,17 +19,17 @@ namespace Lion.Player
 
         public PlayerLevelManager()
         {
-            var asset = Resources.Load<TextAsset>("PlayerData_ItemLevelUpCostTable");
-            ItemLevelManager = new ItemLevelManager(new LevelUpCostTable(asset));
-
-            asset = Resources.Load<TextAsset>("PlayerData_ItemLevelStatusTable");
+            var asset = Resources.Load<TextAsset>("PlayerData_ItemLevelStatusTable");
             ItemStatusManager = new LevelBasedStatusManager<PlayerStatus>(asset);
 
-            asset = Resources.Load<TextAsset>("PlayerData_ExpLevelUpCostTable");
-            ExpLevelManager = new ExperienceLevelManager(new LevelUpCostManager(asset));
+             asset = Resources.Load<TextAsset>("PlayerData_ItemLevelUpCostTable");
+            ItemLevelManager = new ItemLevelManager(new LevelUpCostTable(asset, ItemStatusManager.MaxLevel));
 
             asset = Resources.Load<TextAsset>("PlayerData_ExpLevelStatusTable");
             ExpStatusManager = new LevelBasedStatusManager<PlayerStatus>(asset);
+
+            asset = Resources.Load<TextAsset>("PlayerData_ExpLevelUpCostTable");
+            ExpLevelManager = new ExperienceLevelManager(new LevelUpCostManager(asset));
         }
     }
 }

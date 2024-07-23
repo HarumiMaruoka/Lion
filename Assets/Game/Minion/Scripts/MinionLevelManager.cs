@@ -22,17 +22,17 @@ namespace Lion.Minion
         {
             var id = minion.ID;
 
-            var asset = Resources.Load<TextAsset>($"Minion_{id}_ItemLevelUpCostTable");
-            ItemLevelManager = new ItemLevelManager(new LevelUpCostTable(asset));
-
-            asset = Resources.Load<TextAsset>($"Minion_{id}_ItemLevelStatusTable");
+            var asset = Resources.Load<TextAsset>($"Minion_{id}_ItemLevelStatusTable");
             ItemStatusManager = new LevelBasedStatusManager<MinionStatus>(asset);
 
-            asset = Resources.Load<TextAsset>($"Minion_{id}_ExpLevelUpCostTable");
-            ExpLevelManager = new ExperienceLevelManager(new LevelUpCostManager(asset));
+            asset = Resources.Load<TextAsset>($"Minion_{id}_ItemLevelUpCostTable");
+            ItemLevelManager = new ItemLevelManager(new LevelUpCostTable(asset, ItemStatusManager.MaxLevel));
 
             asset = Resources.Load<TextAsset>($"Minion_{id}_ExpLevelStatusTable");
             ExpStatusManager = new LevelBasedStatusManager<MinionStatus>(asset);
+
+            asset = Resources.Load<TextAsset>($"Minion_{id}_ExpLevelUpCostTable");
+            ExpLevelManager = new ExperienceLevelManager(new LevelUpCostManager(asset));
         }
     }
 }

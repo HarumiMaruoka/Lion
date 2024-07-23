@@ -26,7 +26,7 @@ namespace Lion.Weapon
             }
 
             asset = Resources.Load<TextAsset>($"Weapon_{id}_ItemLevelUpCostTable");
-            CostTable = new LevelUpCostTable(asset);
+            CostTable = new LevelUpCostTable(asset, StatusTable.MaxLevel);
         }
 
         public WeaponStatus GetStatus(int level)

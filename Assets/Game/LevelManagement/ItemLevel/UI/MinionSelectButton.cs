@@ -31,6 +31,8 @@ namespace Lion.LevelManagement.UI
 
         private void OnTargetSelected(MinionData selected)
         {
+            if (!selected.Unlocked) return;
+
             var icon = selected.IconSprite;
             var itemLevelManager = selected.LevelManager.ItemLevelManager;
             var statusTable = selected.LevelManager.ItemStatusManager;

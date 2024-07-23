@@ -22,17 +22,17 @@ namespace Lion.Ally
         {
             var id = ally.ID;
 
-            var asset = Resources.Load<TextAsset>($"Ally_{id}_ItemLevelUpCostTable");
-            ItemLevelManager = new ItemLevelManager(new LevelUpCostTable(asset));
-
-            asset = Resources.Load<TextAsset>($"Ally_{id}_ItemLevelStatusTable");
+            var asset = Resources.Load<TextAsset>($"Ally_{id}_ItemLevelStatusTable");
             ItemStatusManager = new LevelBasedStatusManager<AllyStatus>(asset);
 
-            asset = Resources.Load<TextAsset>($"Ally_{id}_ExpLevelUpCostTable");
-            ExpLevelManager = new ExperienceLevelManager(new LevelUpCostManager(asset));
+            asset = Resources.Load<TextAsset>($"Ally_{id}_ItemLevelUpCostTable");
+            ItemLevelManager = new ItemLevelManager(new LevelUpCostTable(asset, ItemStatusManager.MaxLevel));
 
             asset = Resources.Load<TextAsset>($"Ally_{id}_ExpLevelStatusTable");
             ExpStatusManager = new LevelBasedStatusManager<AllyStatus>(asset);
+
+            asset = Resources.Load<TextAsset>($"Ally_{id}_ExpLevelUpCostTable");
+            ExpLevelManager = new ExperienceLevelManager(new LevelUpCostManager(asset));
         }
     }
 }

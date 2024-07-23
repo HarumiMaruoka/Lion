@@ -59,6 +59,7 @@ namespace Lion.Weapon.UI
         {
             var icon = Instantiate(_iconPrefab, _content);
             icon.SetWeapon(weapon);
+            icon.OnSelected += onSelectedBuffer;
             _weaponIcons.Add(weapon, icon);
         }
 

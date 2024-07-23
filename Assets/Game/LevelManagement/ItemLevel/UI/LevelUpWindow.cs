@@ -42,6 +42,8 @@ namespace Lion.LevelManagement.UI
         public void Open(Sprite actorImage, ItemLevelManager target,
             ILevelBasedStatusManager targetStatusTable, LevelUpCostTable targetCostTable)
         {
+            gameObject.SetActive(true);
+
             UnsubscribeFromTarget();
 
             _actorImage.sprite = actorImage;
@@ -52,6 +54,11 @@ namespace Lion.LevelManagement.UI
             _itemLevelChanger.Setup(target, targetCostTable);
 
             SubscribeToTarget();
+
+            foreach (var icon in _requiredItemIcons.Values)
+            {
+                icon.SetRequiredAmount(0);
+            }
 
             RefreshUI();
         }

@@ -11,6 +11,8 @@ namespace Lion.Weapon.UI
         private Image _itemView;
         [SerializeField]
         private TMPro.TextMeshProUGUI _levelView;
+        [SerializeField]
+        private GameObject _activatedLabel;
 
         private WeaponInstance _weapon;
 
@@ -29,9 +31,32 @@ namespace Lion.Weapon.UI
         public void SetWeapon(WeaponInstance weapon)
         {
             _weapon = weapon;
-
             _itemView.sprite = weapon.Data.Icon;
-            // _levelView.text = $"Lv.{weapon.LevelManager.CurrentLevel}";
+            _activatedLabel.SetActive(weapon.IsActive);
+
+            UpdateLevel(default);
+
+            weapon.OnLevelChanged += UpdateLevel;
+            weapon.OnActiveChanged += OnActiveChanged;
+        }
+
+        private void OnDestroy()
+        {
+            _weapon.OnLevelChanged -= UpdateLevel;
+            _weapon.OnActiveChanged -= OnActiveChanged;
+        }
+
+        private void UpdateLevel(int _)
+        {
+            var level = _weapon.LevelManager.CurrentLevel;
+            var maxLevel = _weapon.LevelManager.MaxLevel;
+
+            _levelView.text = $"Lv.{level}/{maxLevel}";
+        }
+
+        private void OnActiveChanged(bool isActive)
+        {
+            _activatedLabel.SetActive(isActive);
         }
     }
 }

@@ -13,10 +13,10 @@ namespace Lion.LevelManagement.ItemLevel
 
         public int MaxLevel { get; }
 
-        public LevelUpCostTable(TextAsset input)
+        public LevelUpCostTable(TextAsset input, int maxLevel)
         {
             var csv = input.LoadCsv(1);
-            MaxLevel = csv.Length;
+            MaxLevel = maxLevel;
             _costByLevel = new List<LevelUpCost>[MaxLevel + 1];
             LoadLevelUpCost(csv);
         }

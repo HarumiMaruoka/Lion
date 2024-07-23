@@ -61,6 +61,8 @@ namespace Lion.Minion.UI
 
                 _actorView.sprite = _minion.IconSprite;
                 _name.text = _minion.Name;
+                _expLevel.text = _minion.LevelManager.ExpLevelManager.CurrentLevel.ToString();
+                _itemLevel.text = _minion.LevelManager.ItemLevelManager.CurrentLevel.ToString();
                 _haveCount.text = _minion.Count.ToString();
                 _skillName.text = "not implemented"; /*_minion.SkillPrefab.Name;*/
                 _lockedLabel.SetActive(!_minion.Unlocked);
@@ -75,6 +77,8 @@ namespace Lion.Minion.UI
             minion.OnActiveChanged += OnActiveChanged;
             minion.OnCountChanged += OnCountChanged;
             minion.OnUnlockStatusChanged += OnUnlockStatusChanged;
+            minion.LevelManager.ExpLevelManager.OnLevelChanged += OnExpLevelChanged;
+            minion.LevelManager.ItemLevelManager.OnLevelChanged += OnItemLevelChanged;
         }
 
         private void UnsubscribeFromMinionEvents(MinionData minion)
@@ -83,6 +87,8 @@ namespace Lion.Minion.UI
             minion.OnActiveChanged -= OnActiveChanged;
             minion.OnCountChanged -= OnCountChanged;
             minion.OnUnlockStatusChanged -= OnUnlockStatusChanged;
+            minion.LevelManager.ExpLevelManager.OnLevelChanged -= OnExpLevelChanged;
+            minion.LevelManager.ItemLevelManager.OnLevelChanged -= OnItemLevelChanged;
         }
 
         private void OnActiveChanged(bool isActive)
