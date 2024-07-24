@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lion.Item;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -63,12 +64,17 @@ namespace Lion.LevelManagement.ItemLevel
 
         public bool CanApplyLevel()
         {
-            Debug.Log("ここでアイテムを持っているかチェックする処理を書く");
-            //foreach (var pair in _itemRequirements)
-            //{
-            //    // ここでアイテムを持っているかチェックする処理を書く
-            //    Debug.Log($"ItemID: {pair.Key}, Amount: {pair.Value}");
-            //}
+            foreach (var pair in _itemRequirements)
+            {
+                var itemID = pair.Key;
+                var requiredAmount = pair.Value;
+                var currentAmount = ItemManager.Instance.ItemSheet.GetItemData(itemID).Count;
+
+                if (currentAmount < requiredAmount)
+                {
+                    return false;
+                }
+            }
 
             return true;
         }
@@ -85,12 +91,13 @@ namespace Lion.LevelManagement.ItemLevel
                 return;
             }
 
-            Debug.Log("ここでアイテムを減らす処理を書く");
-            //foreach (var pair in _itemRequirements)
-            //{
-            //    // ここでアイテムを減らす処理を書く
-            //    Debug.Log($"ItemID: {pair.Key}, Amount: {pair.Value}");
-            //}
+            foreach (var pair in _itemRequirements)
+            {
+                var itemID = pair.Key;
+                var requiredAmount = pair.Value;
+
+                ItemManager.Instance.ItemSheet.GetItemData(itemID).Count -= requiredAmount;
+            }
 
             _itemLevelManager.CurrentLevel = NextLevel;
             Setup(_itemLevelManager, _costManager);
