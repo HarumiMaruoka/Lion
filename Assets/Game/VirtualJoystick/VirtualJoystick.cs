@@ -1,4 +1,4 @@
-using Lion.LionDebugger;
+﻿using Lion.LionDebugger;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,6 +17,22 @@ namespace Lion
 
         private Color _initialColor;
         private Image _draggableArea;
+
+        public static VirtualJoystick Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance)
+            {
+                Debug.LogWarning("VirtualJoystick is already exists.");
+            }
+            Instance = this;
+        }
+
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
 
         private void Start()
         {

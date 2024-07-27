@@ -1,3 +1,4 @@
+ï»¿using Lion.Actor;
 using Lion.CameraUtility;
 using System;
 using UnityEngine;
@@ -14,9 +15,9 @@ namespace Lion.Ally
         {
             ally.Animator.Play(_runAnimation);
 
-            // –Ú“I’n‚ğİ’è‚·‚éB
-            _destination = Camera.main.GetRandomCameraArea();
-            // Œü‚«‚ğİ’è‚·‚éB
+            // ç›®çš„åœ°ã‚’è¨­å®šã™ã‚‹ã€‚
+            _destination = ActivityArea.Instance.GetRandomPosition();
+            // å‘ãã‚’è¨­å®šã™ã‚‹ã€‚
             var direction = _destination - ally.transform.position;
             if (direction.x > 0 && ally.transform.localScale.x < 0)
             {
@@ -30,27 +31,27 @@ namespace Lion.Ally
 
         public void Update(AllyController ally)
         {
-            // –Ú“I’n‚ÉŒü‚©‚Á‚ÄˆÚ“®‚·‚éB
+            // ç›®çš„åœ°ã«å‘ã‹ã£ã¦ç§»å‹•ã™ã‚‹ã€‚
             var currentPosition = ally.transform.position;
             var direction = (_destination - currentPosition).normalized;
             ally.Rigidbody2D.velocity = direction * (1.6f + ally.Status.Speed * 0.03f);
 
-            // ƒvƒŒƒCƒ„[‚Æ—£‚ê‚·‚¬‚Ä‚¢‚éê‡A‹­§“I‚É–Ú“I’n‚ÉˆÚ“®‚³‚¹‚éB
-            if (Camera.main.IsTooFarFromCamera(ally.transform.position))
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨é›¢ã‚Œã™ãã¦ã„ã‚‹å ´åˆã€å¼·åˆ¶çš„ã«ç›®çš„åœ°ã«ç§»å‹•ã•ã›ã‚‹ã€‚
+            if (ActivityArea.Instance.IsFarFromArea(ally.transform.position, 5f))
             {
                 ally.transform.position = _destination;
             }
 
-            // –Ú“I’n‚É“’B‚µ‚½‚çAIdleState‚É‘JˆÚ‚·‚éB
+            // ç›®çš„åœ°ã«åˆ°é”ã—ãŸã‚‰ã€IdleStateã«é·ç§»ã™ã‚‹ã€‚
             if (Vector2.SqrMagnitude(currentPosition - _destination) < 0.01f)
             {
                 ally.SetState<IdleState>();
             }
 
-            // –Ú“I’n‚ªƒJƒƒ‰‚Ì”ÍˆÍŠO‚É‚È‚Á‚½ê‡A–Ú“I’n‚ğÄİ’è‚·‚éB
-            if (Camera.main.IsFarFromCamera(_destination))
+            // ç›®çš„åœ°ãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰é ã™ãã‚‹å ´åˆã€å†åº¦ç›®çš„åœ°ã‚’è¨­å®šã™ã‚‹ã€‚
+            if (ActivityArea.Instance.IsFarFromArea(_destination))
             {
-                _destination = Camera.main.GetRandomCameraArea();
+                _destination = ActivityArea.Instance.GetRandomPosition();
             }
         }
 

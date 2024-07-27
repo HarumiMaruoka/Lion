@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Lion.Actor;
+using UnityEngine;
 
 namespace Lion.Minion.States
 {
@@ -32,8 +33,8 @@ namespace Lion.Minion.States
                 ChangeStateBasedOnProbability(minion);
             }
 
-            // プレイヤーとの距離が離れていれば、ReturnStateに遷移する。
-            if (minion.IsFarFromPlayer())
+            // ActivityAreaから離れたらReturnStateに遷移する。
+            if (ActivityArea.Instance.IsFarFromArea(minion.transform.position))
             {
                 minion.SetState<ReturnState>();
                 return;

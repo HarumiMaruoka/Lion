@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ namespace Lion.CameraUtility
             return _bottomLeft;
         }
 
-        // ƒJƒƒ‰‚©‚çˆê’è‹——£—£‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ•Ô‚·B
+        // ã‚«ãƒ¡ãƒ©ã‹ã‚‰ä¸€å®šè·é›¢é›¢ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’è¿”ã™ã€‚
         public static bool IsFarFromCamera(this Camera camera, Vector3 position, Vector2 distance)
         {
             var xDiff = Mathf.Abs(position.x - camera.transform.position.x);
@@ -46,7 +46,7 @@ namespace Lion.CameraUtility
             return xDiffIsFar || yDiffIsFar;
         }
 
-        // ƒJƒƒ‰‚Ì”ÍˆÍŠO‚É‚È‚Á‚½‚©‚Ç‚¤‚©‚ğ•Ô‚·B
+        // ã‚«ãƒ¡ãƒ©ã®ç¯„å›²å¤–ã«ãªã£ãŸã‹ã©ã†ã‹ã‚’è¿”ã™ã€‚
         public static bool IsFarFromCamera(this Camera camera, Vector3 position)
         {
             var topRight = camera.GetWorldTopRight();
@@ -63,7 +63,7 @@ namespace Lion.CameraUtility
             return camera.IsFarFromCamera(position, new Vector2(xDistance, yDistance));
         }
 
-        // ƒJƒƒ‰‚©‚ç‰“‚·‚¬‚é‚©‚Ç‚¤‚©‚ğ•Ô‚·B
+        // ã‚«ãƒ¡ãƒ©ã‹ã‚‰é ã™ãã‚‹ã‹ã©ã†ã‹ã‚’è¿”ã™ã€‚
         public static bool IsTooFarFromCamera(this Camera camera, Vector3 position)
         {
             var topRight = camera.GetWorldTopRight();
@@ -80,7 +80,7 @@ namespace Lion.CameraUtility
             return camera.IsFarFromCamera(position, new Vector2(xDistance, yDistance));
         }
 
-        // ƒJƒƒ‰‚Ì•`‰æ”ÍˆÍ“à‚Ìƒ‰ƒ“ƒ_ƒ€‚ÈÀ•W‚ğ•Ô‚·B
+        // ã‚«ãƒ¡ãƒ©ã®æç”»ç¯„å›²å†…ã®ãƒ©ãƒ³ãƒ€ãƒ ãªåº§æ¨™ã‚’è¿”ã™ã€‚
         public static Vector2 GetRandomCameraArea(this Camera camera)
         {
             var topRight = camera.GetWorldTopRight();

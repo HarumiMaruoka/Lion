@@ -8,7 +8,7 @@ namespace Lion.Weapon.Behaviour.BloodSickleModules
     {
         public IWeaponParameter Parameter { get; set; }
 
-        private float MagicPower => Parameter == null ? 15f : Parameter.MagicPower;
+        private float MagicPower => Parameter == null ? 15f : Parameter.PhysicalPower;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

@@ -6,12 +6,11 @@ namespace Lion.Weapon.Behaviour
     public class WeaponBehaviour : MonoBehaviour
     {
         public WeaponInstance Weapon { get; private set; }
-        public IWeaponParameter Parameter { get; private set; }
+        public IWeaponParameter Parameter => Weapon?.Parameter;
 
-        public void Initialize(WeaponInstance weapon, IWeaponParameter parameter)
+        public void Initialize(WeaponInstance weapon)
         {
             Weapon = weapon;
-            Parameter = parameter;
         }
     }
 }

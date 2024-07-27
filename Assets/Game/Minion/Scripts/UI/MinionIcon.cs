@@ -59,7 +59,7 @@ namespace Lion.Minion.UI
             {
                 _icon.color = Color.white;
 
-                _actorView.sprite = _minion.IconSprite;
+                _actorView.sprite = _minion.Icon;
                 _name.text = _minion.Name;
                 _expLevel.text = _minion.LevelManager.ExpLevelManager.CurrentLevel.ToString();
                 _itemLevel.text = _minion.LevelManager.ItemLevelManager.CurrentLevel.ToString();

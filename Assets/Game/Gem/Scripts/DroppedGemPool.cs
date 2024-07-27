@@ -34,7 +34,7 @@ namespace Lion.Gem
 
         public int ActiveCount => _activePool.Count;
 
-        public DroppedGem CreateDroppedGem(IGemCollector collector, Vector3 position, int amount)
+        public DroppedGem CreateDroppedGem(IActor collector, Vector3 position, int amount)
         {
             DroppedGem gem;
             if (_inactivePool.Count == 0)

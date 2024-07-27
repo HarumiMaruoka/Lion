@@ -9,7 +9,7 @@ namespace Lion.Gold
     {
         public DroppedGoldPool Pool { get; set; }
 
-        private IGoldCollector _collector;
+        private IActor _collector;
 
         private int _amount; // 取得することで入手できるゴールドの量。
         private float _period; // 命中までの時間
@@ -19,7 +19,7 @@ namespace Lion.Gold
 
         private Transform Target => _collector == null ? PlayerController.Instance.transform : _collector.transform;
 
-        public void Initialize(IGoldCollector collector, Vector3 position, int amount)
+        public void Initialize(IActor collector, Vector3 position, int amount)
         {
             _collector = collector;
             transform.position = position;
@@ -38,6 +38,10 @@ namespace Lion.Gold
         private void Update()
         {
             _period -= Time.deltaTime;
+            if (_period <= 0f)
+            {
+                Fire();
+            }
 
             var acceleration = Vector3.zero;
 
@@ -51,11 +55,6 @@ namespace Lion.Gold
             _position += _velocity * Time.deltaTime;
 
             transform.position = _position;
-
-            if (_period <= 0.01)
-            {
-                Fire();
-            }
         }
 
         private void Fire()

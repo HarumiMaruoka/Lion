@@ -1,6 +1,7 @@
 ﻿using Lion.LevelManagement.ItemLevel;
 using Lion.Weapon.Behaviour;
 using System;
+using System.Net.WebSockets;
 using UnityEngine;
 
 namespace Lion.Weapon
@@ -8,10 +9,12 @@ namespace Lion.Weapon
     public class WeaponInstance
     {
         private WeaponBehaviour _gameObject;
+        public WeaponParameter Parameter { get; }
 
         public WeaponInstance(WeaponData data)
         {
             Data = data;
+            Parameter = new WeaponParameter(this);
             LevelManager = new ItemLevelManager(data.LevelManager.CostTable);
         }
 
@@ -36,7 +39,7 @@ namespace Lion.Weapon
             set => LevelManager.CurrentLevel = value;
         }
 
-        public WeaponStatus WeaponStatus => Data.LevelManager.GetStatus(Level);
+        public WeaponStatus Status => Data.LevelManager.GetStatus(Level);
 
         public event Action<bool> OnActiveChanged;
 
@@ -46,14 +49,18 @@ namespace Lion.Weapon
             remove => LevelManager.OnLevelChanged -= value;
         }
 
-        public void Activation()
+        public void Activation(IActor owner)
         {
-            _gameObject = GameObject.Instantiate(Data.Prefab);
+            _gameObject = GameObject.Instantiate(Data.Prefab, owner.transform.position, Quaternion.identity);
+            _gameObject.transform.SetParent(owner.transform);
+            Parameter.Actor = owner;
+            _gameObject.Initialize(this);
             OnActiveChanged?.Invoke(true);
         }
 
         public void Deactivation()
         {
+            Parameter.Actor = null;
             GameObject.Destroy(_gameObject);
             _gameObject = null;
             OnActiveChanged?.Invoke(false);

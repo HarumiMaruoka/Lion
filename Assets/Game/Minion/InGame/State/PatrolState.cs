@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Lion.Actor;
+using UnityEngine;
 
 namespace Lion.Minion.States
 {
@@ -14,7 +15,7 @@ namespace Lion.Minion.States
         {
             minion.Animator.Play(_runAnimation);
             // 目的地を設定する。
-            _destination = minion.GetRandomPositionNearPlayer();
+            _destination = ActivityArea.Instance.GetRandomPosition();
 
             // 向きを設定する。
             var direction = _destination - minion.transform.position;
@@ -37,8 +38,8 @@ namespace Lion.Minion.States
                 return;
             }
 
-            // プレイヤーとの距離が離れていれば、ReturnStateに遷移する。
-            if (minion.IsFarFromPlayer())
+            // ActivityAreaから離れたらReturnStateに遷移する。
+            if (ActivityArea.Instance.IsFarFromArea(minion.transform.position))
             {
                 minion.SetState<ReturnState>();
                 return;

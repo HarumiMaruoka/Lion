@@ -18,6 +18,10 @@ namespace Lion.Ally
         public Animator Animator { get; private set; }
         public IState CurrentState { get; private set; }
 
+        private Vector3 _lastPosition = Vector3.left;
+        private Vector3 _currentPos;
+        public Vector3 Direction => (_lastPosition - transform.position).normalized;
+
         private Dictionary<Type, IState> _states = new Dictionary<Type, IState>()
         {
             {typeof(IdleState), new IdleState()},
@@ -32,18 +36,16 @@ namespace Lion.Ally
             Animator = GetComponent<Animator>();
             SetState<IdleState>();
 
-            GemCollectorContainer.Instance.Register(gameObject, this);
-            GoldCollectorContainer.Instance.Register(gameObject, this);
+            ActorContainer.Instance.Register(gameObject, this);
+            ActorManager.Register(this);
 
             Life = Status.HP;
-
-            ActorManager.Register(this);
+            _currentPos = transform.position;
         }
 
         private void OnDestroy()
         {
-            GemCollectorContainer.Instance.Unregister(gameObject);
-            GoldCollectorContainer.Instance.Unregister(gameObject);
+            ActorContainer.Instance.Unregister(gameObject);
 
             ActorManager.Unregister(this);
         }
@@ -51,6 +53,16 @@ namespace Lion.Ally
         private void Update()
         {
             CurrentState?.Update(this);
+            UpdatePosition();
+        }
+
+        private void UpdatePosition()
+        {
+            if (Vector3.SqrMagnitude(_currentPos - transform.position) > 0.01f)
+            {
+                _lastPosition = _currentPos;
+                _currentPos = transform.position;
+            }
         }
 
         public void SetState<T>() where T : IState
@@ -82,6 +94,10 @@ namespace Lion.Ally
             }
         }
 
+        public float PhysicalPower => Status.AttackPower;
+
+        public float MagicPower => Status.AttackPower;
+
         public void Heal(float amount)
         {
             Life += amount;
@@ -95,6 +111,13 @@ namespace Lion.Ally
         public void Damage(float amount)
         {
             Life -= amount;
+        }
+
+        public void ExecuteSkill()
+        {
+            var angle = (Mathf.Atan2(Direction.y, Direction.x) + Mathf.PI / 2f) * Mathf.Rad2Deg;
+            var skill = Instantiate(AllyData.SkillPrefab, transform.position, Quaternion.Euler(0, 0, angle));
+            skill.Owner = this;
         }
     }
 

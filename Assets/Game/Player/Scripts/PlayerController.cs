@@ -25,8 +25,7 @@ namespace Lion.Player
                 Debug.LogWarning("PlayerController instance already exists. Destroying duplicate.");
             }
 
-            GemCollectorContainer.Instance.Register(gameObject, this);
-            GoldCollectorContainer.Instance.Register(gameObject, this);
+            ActorContainer.Instance.Register(gameObject, this);
 
             ActorManager.Register(this);
         }
@@ -44,8 +43,7 @@ namespace Lion.Player
         private void OnDestroy()
         {
             Instance = null;
-            GemCollectorContainer.Instance.Unregister(gameObject);
-            GoldCollectorContainer.Instance.Unregister(gameObject);
+            ActorContainer.Instance.Unregister(gameObject);
 
             ActorManager.Unregister(this);
         }
@@ -68,6 +66,9 @@ namespace Lion.Player
 
         public float MaxHP => PlayerManager.Instance.HPManager.MaxHP;
         public float CurrentHP => PlayerManager.Instance.HPManager.CurrentHP;
+
+        public float PhysicalPower => 0f;
+        public float MagicPower => 0f;
 
         public void Heal(float amount) => PlayerManager.Instance.HPManager.Heal(amount);
         public void Damage(float amount) => PlayerManager.Instance.HPManager.Damage(amount);

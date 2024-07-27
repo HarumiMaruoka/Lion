@@ -1,16 +1,16 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Lion.Gold
+namespace Lion.Actor
 {
-    public class GoldCollectorContainer
+    public class ActorContainer
     {
-        public static GoldCollectorContainer Instance { get; private set; } = new GoldCollectorContainer();
+        public static ActorContainer Instance { get; } = new ActorContainer();
 
-        private Dictionary<int, IGoldCollector> _goldCollectorByInstanceID = new Dictionary<int, IGoldCollector>();
+        private Dictionary<int, IActor> _goldCollectorByInstanceID = new Dictionary<int, IActor>();
 
-        public void Register(GameObject gameObject, IGoldCollector goldCollector)
+        public void Register(GameObject gameObject, IActor goldCollector)
         {
             _goldCollectorByInstanceID[gameObject.GetInstanceID()] = goldCollector;
         }
@@ -20,7 +20,7 @@ namespace Lion.Gold
             _goldCollectorByInstanceID.Remove(gameObject.GetInstanceID());
         }
 
-        public bool TryGetGoldCollector(GameObject gameObject, out IGoldCollector goldCollector)
+        public bool TryGetGoldCollector(GameObject gameObject, out IActor goldCollector)
         {
             return _goldCollectorByInstanceID.TryGetValue(gameObject.GetInstanceID(), out goldCollector);
         }

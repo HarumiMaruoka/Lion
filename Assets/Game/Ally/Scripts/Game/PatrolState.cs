@@ -1,3 +1,4 @@
+ï»¿using Lion.Actor;
 using Lion.CameraUtility;
 using System;
 using UnityEngine;
@@ -15,9 +16,9 @@ namespace Lion.Ally
         public void Enter(AllyController ally)
         {
             ally.Animator.Play(_runAnimation);
-            // –Ú“I’n‚ðÝ’è‚·‚éB
-            _destination = Camera.main.GetRandomCameraArea();
-            // Œü‚«‚ðÝ’è‚·‚éB
+            // ç›®çš„åœ°ã‚’è¨­å®šã™ã‚‹ã€‚
+            _destination = ActivityArea.Instance.GetRandomPosition();
+            // å‘ãã‚’è¨­å®šã™ã‚‹ã€‚
             var direction = _destination - ally.transform.position;
             if (direction.x > 0 && ally.transform.localScale.x < 0)
             {
@@ -31,15 +32,15 @@ namespace Lion.Ally
 
         public void Update(AllyController ally)
         {
-            // ˆÚ“®‚µ–Ú“I’n‚É“ž’B‚µ‚½‚çAŠm—¦‚É‰ž‚¶‚ÄIdleState‚©AttackState‚É‘JˆÚ‚·‚éB
+            // ç§»å‹•ã—ç›®çš„åœ°ã«åˆ°é”ã—ãŸã‚‰ã€ç¢ºçŽ‡ã«å¿œã˜ã¦IdleStateã‹AttackStateã«é·ç§»ã™ã‚‹ã€‚
             if (MoveTowardsDestination(ally))
             {
                 ChangeStateBasedOnProbability(ally);
                 return;
             }
 
-            // ƒJƒƒ‰‚Ì”ÍˆÍŠO‚É‚È‚Á‚½ê‡AReturnState‚É‘JˆÚ‚·‚éB
-            if (Camera.main.IsFarFromCamera(ally.transform.position))
+            // ActivityAreaã‹ã‚‰é›¢ã‚ŒãŸã‚‰ReturnStateã«é·ç§»ã™ã‚‹ã€‚
+            if (ActivityArea.Instance.IsFarFromArea(ally.transform.position))
             {
                 ally.SetState<ReturnState>();
                 return;

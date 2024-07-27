@@ -33,7 +33,7 @@ namespace Lion.LevelManagement.UI
         {
             if (!selected.Unlocked) return;
 
-            var icon = selected.IconSprite;
+            var icon = selected.Icon;
             var itemLevelManager = selected.LevelManager.ItemLevelManager;
             var statusTable = selected.LevelManager.ItemStatusManager;
             var costTable = selected.LevelManager.ItemLevelManager.CostTable;

@@ -22,29 +22,28 @@ namespace Lion.Weapon.Behaviour
         private float AttackSpeed => Parameter == null ? 1f : Parameter.AttackSpeed;
         private float WaitTime => Mathf.Clamp(_maxFireInterval - AttackSpeed * 0.01f, _minFireInterval, _maxFireInterval);
 
-        private float DaggerSpeed => Parameter == null ? 8f : Parameter.AttackSpeed;
+        private float DaggerSpeed => 8f;
 
-        [SerializeField]
-        private VirtualJoystick _joystick;
+        private VirtualJoystick Joystick => VirtualJoystick.Instance;
 
         private float _timer;
+        private Vector3 _lastPos;
 
         private void OnEnable()
         {
+            _lastPos = transform.position - Vector3.left;
             _timer = WaitTime;
         }
 
         private void Update()
         {
             // 向きを更新する。
-            Vector2 moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            if (_joystick.IsDragging) moveDir += _joystick.Vector;
-
-            if (moveDir != Vector2.zero)
+            var currentPos = transform.position;
+            if (Vector3.SqrMagnitude(currentPos - _lastPos) > 0.01f)
             {
-                transform.right = moveDir.normalized;
+                transform.right = (currentPos - _lastPos).normalized;
+                _lastPos = currentPos;
             }
-
 
             // 攻撃用のタイマーを更新する。タイマーが0になったら攻撃する。
             _timer -= Time.deltaTime;

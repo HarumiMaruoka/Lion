@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lion.Actor;
+using System;
 using UnityEngine;
 
 namespace Lion.Minion.States
@@ -14,7 +15,7 @@ namespace Lion.Minion.States
             minion.Animator.Play(_runAnimation);
 
             // 目的地を設定する。
-            _destination = minion.GetRandomPositionNearPlayer();
+            _destination = ActivityArea.Instance.GetRandomPosition();
 
             // 向きを設定する。
             var direction = _destination - minion.transform.position;
@@ -36,7 +37,7 @@ namespace Lion.Minion.States
             minion.Rigidbody2D.velocity = direction * minion.Status.MoveSpeed * 1.5f;
 
             // プレイヤーと離れすぎている場合、強制的に目的地に移動させる。
-            if (minion.IsTooFarFromPlayer())
+            if (ActivityArea.Instance.IsFarFromArea(minion.transform.position, 5f))
             {
                 minion.transform.position = _destination;
             }
@@ -48,23 +49,15 @@ namespace Lion.Minion.States
             }
 
             // 目的地がプレイヤーから遠すぎる場合、再度目的地を設定する。
-            if (TargetIsFarFromPlayer(minion))
+            if (ActivityArea.Instance.IsFarFromArea(_destination))
             {
-                _destination = minion.GetRandomPositionNearPlayer();
+                _destination = ActivityArea.Instance.GetRandomPosition();
             }
         }
 
         public void Exit(MinionController minion)
         {
             minion.Rigidbody2D.velocity = Vector2.zero;
-        }
-
-        private bool TargetIsFarFromPlayer(MinionController minion)
-        {
-            var distanceX = (minion.BottomRight.x - minion.TopLeft.x) / 2f;
-            var distanceY = (minion.BottomRight.y - minion.TopLeft.y) / 2f;
-
-            return minion.IsFarFromPlayer((Vector2)_destination, new Vector2(distanceX, distanceY));
         }
     }
 }

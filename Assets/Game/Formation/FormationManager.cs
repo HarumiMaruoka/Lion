@@ -13,97 +13,83 @@ namespace Lion.Formation
     {
         public static FormationManager Instance { get; private set; } = new FormationManager();
 
+        private AllyData _activatedAlly;
+        private MinionData[] _frontlineMinions = new MinionData[4];
+
+        public event Action<AllyData> OnAllyChanged;
+        public Action<MinionData>[] OnMinionChangeds = new Action<MinionData>[4];
+        public Action<int, MinionData> OnMinionChanged;
+
         public float BattlePower
         {
             get
             {
-                float battlePower = 0;
-                if (ActivatedAlly != null) battlePower += ActivatedAlly.Status.BattlePower;
-                for (int i = 0; i < _activatedMinions.Length; i++)
+                float battlePower = 0f;
+                if (FrontlineAlly != null) battlePower += FrontlineAlly.Status.BattlePower;
+                foreach (var minion in _frontlineMinions)
                 {
-                    if (_activatedMinions[i] == null) continue;
-                    battlePower += 1f; // _activatedMinions[i].Status.BattlePower;
+                    if (minion != null) battlePower += minion.Status.BattlePower;
                 }
                 return battlePower;
             }
         }
 
-        private AllyData _activatedAlly;
-        public event Action<AllyData> OnActivatedAllyChanged;
-
-        public AllyData ActivatedAlly
+        public AllyData FrontlineAlly
         {
             get => _activatedAlly;
             set
             {
                 if (value.Count == 0) return;
 
-                if (_activatedAlly)
-                    _activatedAlly.Deactivate();
+                _activatedAlly?.Deactivate();
 
-                if (_activatedAlly != value) _activatedAlly = value;
-                else _activatedAlly = null;
+                // 既に選択されているアクターが選択された場合は、選択を解除する操作とする。
+                _activatedAlly = _activatedAlly != value ? value : null;
 
-                if (_activatedAlly)
-                    _activatedAlly.Activate();
+                _activatedAlly?.Activate();
 
                 ClearMinions();
-                OnActivatedAllyChanged?.Invoke(_activatedAlly);
+                OnAllyChanged?.Invoke(_activatedAlly);
             }
         }
 
-        public int AvailableMinionsCount
+        public MinionData GetFrontlineMinion(int index)
         {
-            get
-            {
-                if (ActivatedAlly == null) return 0;
-                return ActivatedAlly.Status.AvailableMinionsCount;
-            }
-        }
-
-        private MinionData[] _activatedMinions = new MinionData[4];
-        public Action<MinionData>[] OnActivatedMinionChanged = new Action<MinionData>[4];
-
-        public int ActivatableMinionsCount => _activatedMinions.Length;
-
-        public MinionData GetActivatedMinion(int index)
-        {
-            if (index < 0 || index >= _activatedMinions.Length)
+            if (index < 0 || index >= _frontlineMinions.Length)
             {
                 Debug.LogWarning("Index is out of range.");
                 return null;
             }
 
-            return _activatedMinions[index];
+            return _frontlineMinions[index];
         }
 
-        public void SetActivatedMinion(MinionData next, int index)
+        public void ChangeFrontlineMinion(MinionData next, int index)
         {
-            if (index < 0 || index >= _activatedMinions.Length)
+            if (index < 0 || index >= _frontlineMinions.Length)
             {
                 Debug.LogWarning("Index is out of range.");
                 return;
             }
 
-            var old = _activatedMinions[index];
-            if (old != null) old.Deactivate();
+            _frontlineMinions[index]?.Deactivate();
 
-            if (old == next) _activatedMinions[index] = null;
-            else _activatedMinions[index] = next;
+            _frontlineMinions[index] = _frontlineMinions[index] != next ? next : null;
 
-            if (_activatedMinions[index] != null) _activatedMinions[index].Activate();
+            _frontlineMinions[index]?.Activate();
 
-            OnActivatedMinionChanged[index]?.Invoke(_activatedMinions[index]);
+            OnMinionChangeds[index]?.Invoke(_frontlineMinions[index]);
+            OnMinionChanged?.Invoke(index, _frontlineMinions[index]);
         }
 
         public void ClearMinions()
         {
-            for (int i = 0; i < _activatedMinions.Length; i++)
+            for (int i = 0; i < _frontlineMinions.Length; i++)
             {
-                if (_activatedMinions[i] == null) continue;
-                _activatedMinions[i].Deactivate();
-                _activatedMinions[i] = null;
-                OnActivatedMinionChanged[i]?.Invoke(null);
+                if (_frontlineMinions[i] == null) continue;
+                _frontlineMinions[i].Deactivate();
+                _frontlineMinions[i] = null;
+                OnMinionChangeds[i]?.Invoke(null);
             }
         }
     }

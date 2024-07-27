@@ -9,7 +9,7 @@ namespace Lion.Gem
     {
         public DroppedGemPool Pool { get; set; }
 
-        private IGemCollector _collector;
+        private IActor _collector;
 
         private int _amount; // 取得することで入手できるExpの量。
         private float _period; // 命中までの時間
@@ -19,7 +19,7 @@ namespace Lion.Gem
 
         private Transform Target => _collector == null ? PlayerController.Instance.transform : _collector.transform;
 
-        public void Initialize(IGemCollector collector, Vector3 position, int amount)
+        public void Initialize(IActor collector, Vector3 position, int amount)
         {
             _collector = collector;
             transform.position = position;
@@ -38,6 +38,10 @@ namespace Lion.Gem
         private void Update()
         {
             _period -= Time.deltaTime;
+            if (_period <= 0f)
+            {
+                Fire();
+            }
 
             var acceleration = Vector3.zero;
 
@@ -51,11 +55,6 @@ namespace Lion.Gem
             _position += _velocity * Time.deltaTime;
 
             transform.position = _position;
-
-            if (_period <= 0.01f)
-            {
-                Fire();
-            }
         }
 
         private void Fire()

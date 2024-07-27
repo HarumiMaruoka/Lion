@@ -1,3 +1,4 @@
+﻿using Lion.Ally.Skill;
 using System;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ namespace Lion.Ally
 {
     public class AllyManager
     {
-        public static AllyManager Instance { get; private set; } = new AllyManager();
+        public static AllyManager Instance { get; } = new AllyManager();
 
         public AllySheet AllySheet { get; private set; }
 

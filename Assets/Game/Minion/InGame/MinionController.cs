@@ -42,8 +42,7 @@ namespace Lion.Minion
 
             SetState<PatrolState>();
 
-            GemCollectorContainer.Instance.Register(gameObject, this);
-            GoldCollectorContainer.Instance.Register(gameObject, this);
+            ActorContainer.Instance.Register(gameObject, this);
 
             Life = Status.HP;
 
@@ -52,8 +51,7 @@ namespace Lion.Minion
 
         private void OnDestroy()
         {
-            GemCollectorContainer.Instance.Unregister(gameObject);
-            GoldCollectorContainer.Instance.Unregister(gameObject);
+            ActorContainer.Instance.Unregister(gameObject);
 
             ActorManager.Unregister(this);
         }
@@ -84,45 +82,6 @@ namespace Lion.Minion
             _currentState.Enter(this);
         }
 
-        public Vector2 GetRandomPositionNearPlayer()
-        {
-            var randomX = UnityEngine.Random.Range(TopLeft.x, BottomRight.x);
-            var randomY = UnityEngine.Random.Range(TopLeft.y, BottomRight.y);
-            return new Vector2(randomX, randomY);
-        }
-
-        public bool IsFarFromPlayer(Vector2 position, Vector2 distance)
-        {
-            var xDiff = Mathf.Abs(position.x - Camera.main.transform.position.x);
-            var yDiff = Mathf.Abs(position.y - Camera.main.transform.position.y);
-
-            var xDiffIsFar = xDiff > distance.x;
-            var yDiffIsFar = yDiff > distance.y;
-
-            return xDiffIsFar || yDiffIsFar;
-        }
-
-        public bool IsFarFromPlayer(Vector2 distance)
-        {
-            return IsFarFromPlayer(transform.position, distance);
-        }
-
-        public bool IsFarFromPlayer()
-        {
-            var width = (BottomRight.x - TopLeft.x) / 2f;
-            var height = (BottomRight.y - TopLeft.y) / 2f;
-
-            return IsFarFromPlayer(new Vector2(width, height));
-        }
-
-        public bool IsTooFarFromPlayer()
-        {
-            var width = (BottomRight.x - TopLeft.x) / 2f + 5f;
-            var height = (BottomRight.y - TopLeft.y) / 2f + 5f;
-
-            return IsFarFromPlayer(new Vector2(width, height));
-        }
-
         public void Fire() // アニメーションイベントから呼び出す。
         {
             float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
@@ -151,6 +110,10 @@ namespace Lion.Minion
                 OnLifeChanged?.Invoke(_life);
             }
         }
+
+        public float PhysicalPower => Status.Attack;
+
+        public float MagicPower => Status.Attack;
 
         public void Heal(float amount)
         {

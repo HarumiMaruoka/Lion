@@ -30,7 +30,9 @@ namespace Lion.UI
         public DamageVFX Create(Vector3 worldPosition, float value)
         {
             // var canvasPosition = Camera.main.WorldToScreenPoint(worldPosition);
-             var canvasPosition = worldPosition;
+            var randomX = UnityEngine.Random.Range(0.3f, 0.3f);
+            var randomY = UnityEngine.Random.Range(0.3f, 0.3f);
+            var canvasPosition = worldPosition + new Vector3(randomX, randomY);
 
             DamageVFX vfx;
 

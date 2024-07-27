@@ -33,7 +33,7 @@ namespace Lion.Gold
 
         public int ActiveCount => _activePool.Count;
 
-        public DroppedGold CreateDroppedGold(IGoldCollector collector, Vector3 position, int amount)
+        public DroppedGold CreateDroppedGold(IActor collector, Vector3 position, int amount)
         {
             DroppedGold gold;
             if (_inactivePool.Count == 0)

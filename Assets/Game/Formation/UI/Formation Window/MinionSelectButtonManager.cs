@@ -1,33 +1,33 @@
-using Lion.Ally;
+﻿using Lion.Ally;
 using System;
 using UnityEngine;
 
 namespace Lion.Formation.UI
 {
-    public class MinionRowManager : MonoBehaviour
+    public class MinionSelectButtonManager : MonoBehaviour
     {
         [SerializeField]
         private GameObject[] _rows;
 
         private void Start()
         {
-            OnActivatedAllyChanged(FormationManager.Instance.ActivatedAlly);
-            FormationManager.Instance.OnActivatedAllyChanged += OnActivatedAllyChanged;
+            OnActivatedAllyChanged(FormationManager.Instance.FrontlineAlly);
+            FormationManager.Instance.OnAllyChanged += OnActivatedAllyChanged;
         }
 
         private void OnEnable()
         {
-            OnActivatedAllyChanged(FormationManager.Instance.ActivatedAlly);
+            OnActivatedAllyChanged(FormationManager.Instance.FrontlineAlly);
         }
 
         private void OnDestroy()
         {
-            FormationManager.Instance.OnActivatedAllyChanged -= OnActivatedAllyChanged;
+            FormationManager.Instance.OnAllyChanged -= OnActivatedAllyChanged;
         }
 
-        private void OnActivatedAllyChanged(AllyData data)
+        private void OnActivatedAllyChanged(AllyData ally)
         {
-            if (data == null)
+            if (ally == null)
             {
                 foreach (var row in _rows)
                 {
@@ -36,11 +36,11 @@ namespace Lion.Formation.UI
             }
             else
             {
-                UpdateButtonsActive(data.Status.AvailableMinionsCount);
+                RefreshRowStates(ally.Status.AvailableMinionsCount);
             }
         }
 
-        private void UpdateButtonsActive(int availableMinionsCount)
+        private void RefreshRowStates(int availableMinionsCount)
         {
             for (int i = 0; i < _rows.Length; i++)
             {

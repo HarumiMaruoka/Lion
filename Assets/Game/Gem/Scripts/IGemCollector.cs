@@ -3,9 +3,4 @@ using UnityEngine;
 
 namespace Lion.Gem
 {
-    public interface IGemCollector
-    {
-        void CollectGem(int amount);
-        Transform transform { get; }
-    }
 }

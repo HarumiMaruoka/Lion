@@ -87,3 +87,6 @@ https://assetstore.unity.com/packages/2d/textures-materials/super-pixel-projecti
 
 20 Evolving Fantasy RPG Weapons
 https://assetstore.unity.com/packages/2d/textures-materials/20-evolving-fantasy-rpg-weapons-61204
+
+3D Toon Lasers
+https://assetstore.unity.com/packages/vfx/particles/3d-toon-lasers-168810

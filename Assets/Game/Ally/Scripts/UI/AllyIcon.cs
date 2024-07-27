@@ -59,7 +59,7 @@ namespace Lion.Ally.UI
             {
                 _icon.color = Color.white;
 
-                _actorView.sprite = _ally.IconSprite;
+                _actorView.sprite = _ally.Icon;
                 _name.text = _ally.Name;
                 _expLevel.text = _ally.LevelManager.ExpLevelManager.CurrentLevel.ToString();
                 _itemLevel.text = _ally.LevelManager.ItemLevelManager.CurrentLevel.ToString();

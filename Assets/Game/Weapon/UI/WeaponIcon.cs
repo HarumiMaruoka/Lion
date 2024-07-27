@@ -14,6 +14,9 @@ namespace Lion.Weapon.UI
         [SerializeField]
         private GameObject _activatedLabel;
 
+        [field: SerializeField]
+        public GameObject RemoveLabel { get; private set; }
+
         private WeaponInstance _weapon;
 
         public event Action<WeaponInstance> OnSelected;

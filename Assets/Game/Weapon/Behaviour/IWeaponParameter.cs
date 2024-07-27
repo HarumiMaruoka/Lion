@@ -12,5 +12,6 @@ namespace Lion.Weapon
         float Size { get; }
         float Duration { get; }
         float AttackSpeed { get; }
+        int Amount { get; }
     }
 }

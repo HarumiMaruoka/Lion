@@ -1,4 +1,4 @@
-using Lion.Ally;
+﻿using Lion.Ally;
 using Lion.Ally.UI;
 using System;
 using UnityEngine;
@@ -7,10 +7,13 @@ using UnityEngine.UI;
 namespace Lion.Formation.UI
 {
     [RequireComponent(typeof(Button))]
-    public class AllySelectWindowOpenButton : MonoBehaviour
+    public class AllySelectButton : WeaponEquippableButton
     {
         [SerializeField] private Image _icon;
         [SerializeField] private AllyWindow _allySelectWindow;
+
+        private AllyData _selected;
+        public override IWeaponEquippable Equippable => _selected;
 
         private void Start()
         {
@@ -35,21 +38,24 @@ namespace Lion.Formation.UI
         {
             if (!data.Unlocked) return;
 
-            FormationManager.Instance.ActivatedAlly = data;
+            FormationManager.Instance.FrontlineAlly = data;
             ApplyIcon();
             _allySelectWindow.Close();
+
+            _selected = data;
+            OnSelected?.Invoke(data);
         }
 
         private void ApplyIcon()
         {
-            if (FormationManager.Instance.ActivatedAlly == null)
+            if (FormationManager.Instance.FrontlineAlly == null)
             {
                 _icon.sprite = null;
                 _icon.color = Color.clear;
             }
             else
             {
-                _icon.sprite = FormationManager.Instance.ActivatedAlly.IconSprite;
+                _icon.sprite = FormationManager.Instance.FrontlineAlly.Icon;
                 _icon.color = Color.white;
             }
         }

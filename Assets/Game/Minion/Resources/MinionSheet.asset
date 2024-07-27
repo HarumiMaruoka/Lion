@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
   <Name>k__BackingField: ChibiRobot
-  <IconSprite>k__BackingField: {fileID: 21300000, guid: 79ae5f08dbb59483baceb4ceeae85b0b, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 79ae5f08dbb59483baceb4ceeae85b0b, type: 3}
   <ActorSprite>k__BackingField: {fileID: 21300000, guid: 79ae5f08dbb59483baceb4ceeae85b0b, type: 3}
   <Prefab>k__BackingField: {fileID: 4458609382866859347, guid: eccc26e2977b0924c8f0ba61afcf3bc4, type: 3}
 --- !u!114 &-8106053766186286468
@@ -31,7 +31,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 2
   <Name>k__BackingField: Wolf
-  <IconSprite>k__BackingField: {fileID: 21300000, guid: c9f13fdf83a3dc349a0fd9f2640c5818, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: c9f13fdf83a3dc349a0fd9f2640c5818, type: 3}
   <ActorSprite>k__BackingField: {fileID: 21300000, guid: c9f13fdf83a3dc349a0fd9f2640c5818, type: 3}
   <Prefab>k__BackingField: {fileID: 8191213026010549355, guid: 0b716b9b5cc9a2c4aae9cc3571148848, type: 3}
 --- !u!114 &-4467718516866792505
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 1
   <Name>k__BackingField: Cat
-  <IconSprite>k__BackingField: {fileID: -1690786751, guid: 590af8f38727d264a9d41fd02adc7f7c, type: 3}
+  <Icon>k__BackingField: {fileID: -1690786751, guid: 590af8f38727d264a9d41fd02adc7f7c, type: 3}
   <ActorSprite>k__BackingField: {fileID: -1690786751, guid: 590af8f38727d264a9d41fd02adc7f7c, type: 3}
   <Prefab>k__BackingField: {fileID: 3316308766165302299, guid: 92d73d76cb517dd47b5d4286d688443f, type: 3}
 --- !u!114 &-390116572959013320

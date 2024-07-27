@@ -13,6 +13,8 @@ namespace Lion.Weapon.UI
 
         private Action<WeaponInstance> onSelectedBuffer;
 
+        public WeaponIcon GetWeaponIcon(WeaponInstance weapon) => _weaponIcons[weapon];
+
         public event Action OnDisabled;
         public event Action<WeaponInstance> OnSelected
         {
@@ -20,7 +22,6 @@ namespace Lion.Weapon.UI
             {
                 onSelectedBuffer += value;
                 foreach (var icon in _weaponIcons.Values) icon.OnSelected += value;
-
             }
             remove
             {

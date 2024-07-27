@@ -1,3 +1,4 @@
+ï»¿using Lion.Actor;
 using Lion.CameraUtility;
 using System;
 using UnityEngine;
@@ -28,14 +29,14 @@ namespace Lion.Ally
             ally.Rigidbody2D.velocity = Vector2.zero;
 
             _elapsed += Time.deltaTime;
-            // ˆê’èŠÔŒo‰ß‚µ‚½‚çŠm—¦‚É‰‚¶‚ÄAPatrolState‚©AttackState‚É‘JˆÚ‚·‚éB
+            // ä¸€å®šæ™‚é–“çµŒéã—ãŸã‚‰ç¢ºç‡ã«å¿œã˜ã¦ã€PatrolStateã‹AttackStateã«é·ç§»ã™ã‚‹ã€‚
             if (_elapsed > _changeTime)
             {
                 ChangeStateBasedOnProbability(ally);
             }
 
-            // ƒJƒƒ‰‚Ì”ÍˆÍŠO‚É‚È‚Á‚½ê‡AReturnState‚É‘JˆÚ‚·‚éB
-            if (Camera.main.IsFarFromCamera(ally.transform.position))
+            // ActivityAreaã‹ã‚‰é›¢ã‚ŒãŸã‚‰ReturnStateã«é·ç§»ã™ã‚‹ã€‚
+            if (ActivityArea.Instance.IsFarFromArea(ally.transform.position))
             {
                 ally.SetState<ReturnState>();
                 return;

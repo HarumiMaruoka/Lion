@@ -55,11 +55,6 @@ namespace Lion.LevelManagement.UI
 
             SubscribeToTarget();
 
-            foreach (var icon in _requiredItemIcons.Values)
-            {
-                icon.SetRequiredAmount(0);
-            }
-
             RefreshUI();
         }
 
@@ -78,7 +73,16 @@ namespace Lion.LevelManagement.UI
         {
             OnCurrentLevelChanged(_target.CurrentLevel);
             OnNextLevelChanged(_itemLevelChanger.NextLevel);
+            ClearRequiredItemIcons();
             UpdateRequiredItemIcons(_itemLevelChanger.GetRequiredItems());
+        }
+
+        private void ClearRequiredItemIcons()
+        {
+            foreach (var icon in _requiredItemIcons.Values)
+            {
+                icon.SetRequiredAmount(0);
+            }
         }
 
         private void UpdateRequiredItemIcons(IReadOnlyDictionary<int, int> requiredItems)
@@ -101,6 +105,7 @@ namespace Lion.LevelManagement.UI
         private void ApplyLevel()
         {
             _itemLevelChanger.ApplyLevel();
+            RefreshUI();
         }
 
         private void SubscribeToTarget()
