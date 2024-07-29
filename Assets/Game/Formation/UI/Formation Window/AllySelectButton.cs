@@ -15,10 +15,17 @@ namespace Lion.Formation.UI
         private AllyData _selected;
         public override IWeaponEquippable Equippable => _selected;
 
-        private void Start()
+        private void Awake()
         {
             GetComponent<Button>().onClick.AddListener(OpenWindow);
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            _selected = FormationManager.Instance.FrontlineAlly;
             ApplyIcon();
+            OnSelected?.Invoke(_selected);
         }
 
         private void OpenWindow()
@@ -34,16 +41,16 @@ namespace Lion.Formation.UI
             _allySelectWindow.OnDisabled -= OnClosedWindwo;
         }
 
-        private void OnSelectedAlly(AllyData data)
+        private void OnSelectedAlly(AllyData selected)
         {
-            if (!data.Unlocked) return;
+            if (!selected.Unlocked) return;
 
-            FormationManager.Instance.FrontlineAlly = data;
+            FormationManager.Instance.FrontlineAlly = selected;
             ApplyIcon();
             _allySelectWindow.Close();
 
-            _selected = data;
-            OnSelected?.Invoke(data);
+            _selected = selected;
+            OnSelected?.Invoke(selected);
         }
 
         private void ApplyIcon()

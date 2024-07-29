@@ -56,6 +56,11 @@ namespace Lion.Minion
         {
             _instance = GameObject.Instantiate(Prefab);
             _instance.MinionData = this;
+            for (int i = 0; i < _equipped.Length; i++)
+            {
+                _equipped[i]?.Activation(_instance);
+            }
+
             OnActiveChanged?.Invoke(true);
         }
 

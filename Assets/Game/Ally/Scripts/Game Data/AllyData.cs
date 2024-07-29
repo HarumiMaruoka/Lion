@@ -59,6 +59,10 @@ namespace Lion.Ally
         {
             _instance = Instantiate(Prefab, PlayerController.Instance.transform.position, Quaternion.identity);
             _instance.AllyData = this;
+            for (int i = 0; i < _equipped.Length; i++)
+            {
+                _equipped[i]?.Activation(_instance);
+            }
             OnActiveChanged?.Invoke(true);
         }
 

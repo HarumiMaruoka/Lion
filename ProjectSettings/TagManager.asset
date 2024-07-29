@@ -12,12 +12,12 @@ TagManager:
   - Player
   - Water
   - UI
-  - Map
+  - StageMap
   - Ally
   - Minion
   - Barrier
   - Enemy
-  - 
+  - HomeMap
   - 
   - 
   - 

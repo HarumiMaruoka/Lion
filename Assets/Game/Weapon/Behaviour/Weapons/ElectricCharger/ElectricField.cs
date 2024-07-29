@@ -1,4 +1,5 @@
-﻿using Lion.Enemy;
+﻿using Cysharp.Threading.Tasks;
+using Lion.Enemy;
 using System;
 using UnityEngine;
 
@@ -54,6 +55,8 @@ namespace Lion.Weapon.Behaviour.ElectricChargerModules
 
         private async void OnTriggerEnter2D(Collider2D other)
         {
+            if (isHit) return;
+
             if (EnemyManager.TryGetEnemy(other.gameObject, out var enemy))
             {
                 if (enemy == null) return;
@@ -62,14 +65,10 @@ namespace Lion.Weapon.Behaviour.ElectricChargerModules
                 chain.MaxCount = 10;
                 chain.Range = 5f;
 
-                _animator.enabled = false;
-                _spriteRenderer.enabled = false;
-                _collider.enabled = false;
-
                 isHit = true;
 
-                await chain.Fire(enemy);
-                if (gameObject) Destroy(gameObject);
+                chain.Fire(enemy).Forget();
+                Destroy(gameObject);
             }
         }
     }

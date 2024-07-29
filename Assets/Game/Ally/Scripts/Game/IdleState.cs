@@ -1,5 +1,6 @@
 ﻿using Lion.Actor;
 using Lion.CameraUtility;
+using Lion.Stage;
 using System;
 using UnityEngine;
 
@@ -50,7 +51,8 @@ namespace Lion.Ally
 
         private void ChangeStateBasedOnProbability(AllyController ally)
         {
-            if (UnityEngine.Random.Range(0f, 1f) < _attackStateTransitionProbability)
+            if (StageManager.Instance.IsBattleScene &&
+                UnityEngine.Random.Range(0f, 1f) < _attackStateTransitionProbability)
             {
                 ally.SetState<AttackState>();
             }

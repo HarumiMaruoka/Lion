@@ -23,12 +23,23 @@ namespace Lion.Formation.UI
 
         private void Start()
         {
-            GetComponent<Button>().onClick.AddListener(OpenWindow);
-            _weaponEquippableButton.OnSelected += OnTargetChanged;
+            // 装備者
+            var equippable = _weaponEquippableButton.Equippable;
 
-            OnTargetChanged(_weaponEquippableButton.Equippable);
-            var equipped = _weaponEquippableButton.Equippable?.Equipped(_index);
-            ChangeWeapon(equipped);
+            GetComponent<Button>().onClick.AddListener(OpenWindow);
+
+            _weaponEquippableButton.OnSelected += OnTargetChanged;
+            OnTargetChanged(equippable);
+
+            if (equippable != null)
+            {
+                var equipped = equippable.Equipped(_index);
+                UpdateSprite(equipped);
+            }
+            else
+            {
+                UpdateSprite(null);
+            }
         }
 
         private void OnTargetChanged(IWeaponEquippable equippable)
@@ -67,17 +78,16 @@ namespace Lion.Formation.UI
 
             // 武器の装備処理。
             _weaponEquippableButton.Equippable.Equip(selected, _index);
+            // 選択された武器を保存する。
+            _selected = _weaponEquippableButton.Equippable.Equipped(_index);
             // 武器のアイコン画像を設定する。
-            equipped = _weaponEquippableButton.Equippable.Equipped(_index);
-            ChangeWeapon(equipped);
+            UpdateSprite(_selected);
             // ウィンドウを閉じる。
             _weaponInventoryWindow.gameObject.SetActive(false);
         }
 
-        private void ChangeWeapon(WeaponInstance weapon)
+        private void UpdateSprite(WeaponInstance weapon)
         {
-            _selected = weapon;
-
             var sprite = weapon?.Data?.Icon;
             if (sprite)
             {

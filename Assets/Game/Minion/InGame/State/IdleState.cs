@@ -1,4 +1,5 @@
 ﻿using Lion.Actor;
+using Lion.Stage;
 using UnityEngine;
 
 namespace Lion.Minion.States
@@ -48,7 +49,8 @@ namespace Lion.Minion.States
 
         private void ChangeStateBasedOnProbability(MinionController minion)
         {
-            if (Random.Range(0f, 1f) < _attackStateTransitionProbability)
+            if (StageManager.Instance.IsBattleScene &&
+                Random.Range(0f, 1f) < _attackStateTransitionProbability)
             {
                 minion.SetState<AttackState>();
             }

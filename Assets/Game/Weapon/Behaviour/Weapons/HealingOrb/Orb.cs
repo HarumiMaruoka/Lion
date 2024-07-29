@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using DG.Tweening.Core;
 using Lion.CameraUtility;
 using System;
 using System.Collections;
@@ -19,9 +20,16 @@ namespace Lion.Weapon.Behaviour.HealingOrbModules
         [SerializeField]
         private float _fallingDuration = 1f;
 
+        TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> _moveTween;
+
         private void Start()
         {
-            transform.DOMove(GetTargetPosition(), _fallingDuration).SetEase(_ease).OnComplete(OnComplete);
+            _moveTween = transform.DOMove(GetTargetPosition(), _fallingDuration).SetEase(_ease).OnComplete(OnComplete);
+        }
+
+        private void OnDestroy()
+        {
+            _moveTween.Kill();
         }
 
         private Vector3 GetTargetPosition()

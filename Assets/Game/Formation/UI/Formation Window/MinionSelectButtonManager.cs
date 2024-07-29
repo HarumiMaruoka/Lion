@@ -11,21 +11,21 @@ namespace Lion.Formation.UI
 
         private void Start()
         {
-            OnActivatedAllyChanged(FormationManager.Instance.FrontlineAlly);
-            FormationManager.Instance.OnAllyChanged += OnActivatedAllyChanged;
+            OnFrontlineAllyChanged(FormationManager.Instance.FrontlineAlly);
+            FormationManager.Instance.OnAllyChanged += OnFrontlineAllyChanged;
         }
 
         private void OnEnable()
         {
-            OnActivatedAllyChanged(FormationManager.Instance.FrontlineAlly);
+            OnFrontlineAllyChanged(FormationManager.Instance.FrontlineAlly);
         }
 
         private void OnDestroy()
         {
-            FormationManager.Instance.OnAllyChanged -= OnActivatedAllyChanged;
+            FormationManager.Instance.OnAllyChanged -= OnFrontlineAllyChanged;
         }
 
-        private void OnActivatedAllyChanged(AllyData ally)
+        private void OnFrontlineAllyChanged(AllyData ally)
         {
             if (ally == null)
             {

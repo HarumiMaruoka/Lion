@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Lion.Mission.UI
@@ -17,8 +17,19 @@ namespace Lion.Mission.UI
 
         private void Start()
         {
-            MainMission.Instance.OnKillCountChanged += OnKillCountChanged;
-            OnKillCountChanged(MainMission.Instance.KillCount);
+            if (MainMission.Instance != null)
+            {
+                MainMission.Instance.OnKillCountChanged += OnKillCountChanged;
+                OnKillCountChanged(MainMission.Instance.KillCount);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (MainMission.Instance != null)
+            {
+                MainMission.Instance.OnKillCountChanged -= OnKillCountChanged;
+            }
         }
 
         private void OnKillCountChanged(int killCount)

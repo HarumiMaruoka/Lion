@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lion.Stage;
+using System;
 using UnityEngine;
 
 namespace Lion.Weapon.Behaviour
@@ -11,6 +12,22 @@ namespace Lion.Weapon.Behaviour
         public void Initialize(WeaponInstance weapon)
         {
             Weapon = weapon;
+        }
+
+        private void Start()
+        {
+            gameObject.SetActive(StageManager.Instance.IsBattleScene);
+            StageManager.Instance.OnBattleSceneChanged += OnBattleSceneChanged;
+        }
+
+        private void OnDestroy()
+        {
+            StageManager.Instance.OnBattleSceneChanged -= OnBattleSceneChanged;
+        }
+
+        private void OnBattleSceneChanged(bool isBattleScene)
+        {
+            gameObject.SetActive(StageManager.Instance.IsBattleScene);
         }
     }
 }

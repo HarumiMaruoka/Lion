@@ -3,6 +3,7 @@ using Lion.Minion;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Lion.Formation
 {
@@ -19,6 +20,12 @@ namespace Lion.Formation
         public event Action<AllyData> OnAllyChanged;
         public Action<MinionData>[] OnMinionChangeds = new Action<MinionData>[4];
         public Action<int, MinionData> OnMinionChanged;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Initialize()
+        {
+            SceneManager.sceneLoaded += Instance.OnSceneLoaded;
+        }
 
         public float BattlePower
         {
@@ -90,6 +97,15 @@ namespace Lion.Formation
                 _frontlineMinions[i].Deactivate();
                 _frontlineMinions[i] = null;
                 OnMinionChangeds[i]?.Invoke(null);
+            }
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (_activatedAlly) _activatedAlly.Activate();
+            foreach (var minion in _frontlineMinions)
+            {
+                if (minion) minion.Activate();
             }
         }
     }

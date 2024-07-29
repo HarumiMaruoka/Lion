@@ -20,23 +20,30 @@ namespace Lion.Weapon.Behaviour.ElectricChargerModules
             // 次の対象がいない場合は攻撃を終了する。
             // 次の対象がいる場合は、次の対象を設定し、攻撃を続ける。
 
-            var target = firstTarget;
+            var currentTarget = firstTarget;
 
             for (int i = 0; i < MaxCount; i++)
             {
-                if (target == null) return;
+                if (currentTarget == null) break;
 
-                target.MagicDamage(9f, null);
-                _alreadyAttackedEnemies.Add(target);
+                currentTarget.MagicDamage(9f, null);
+                _alreadyAttackedEnemies.Add(currentTarget);
 
                 var nextTarget = SearchNearlestEnemy();
                 if (nextTarget != null)
                 {
-                    CreateChainVFX(target.transform, nextTarget.transform);
+                    CreateChainVFX(currentTarget.transform, nextTarget.transform);
                 }
-                target = nextTarget;
+                currentTarget = nextTarget;
 
-                await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+                try
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: this.GetCancellationTokenOnDestroy());
+                }
+                catch (OperationCanceledException)
+                {
+                    return;
+                }
             }
 
             Destroy(gameObject);
@@ -51,7 +58,7 @@ namespace Lion.Weapon.Behaviour.ElectricChargerModules
             var angle = Vector2.SignedAngle(Vector2.up, to.position - from.position);
 
             var vfx = Instantiate(_chainVFXPrefab, center, Quaternion.Euler(0, 0, angle));
-           
+
             var distance = Vector2.Distance(from.position, to.position);
             vfx.size = new Vector2(vfx.size.x, distance);
 

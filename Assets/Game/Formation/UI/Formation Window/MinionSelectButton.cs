@@ -12,21 +12,29 @@ namespace Lion.Formation.UI
         [SerializeField] private Image _icon;
         [SerializeField] private int _index;
         [SerializeField] private MinionWindow _minionSelectWindow;
-        
+
         private MinionData _selected;
         public override IWeaponEquippable Equippable => _selected;
 
-        private void Start()
+        private void Awake()
         {
             GetComponent<Button>().onClick.AddListener(OpenWindow);
-            ApplyIcon();
 
-            FormationManager.Instance.OnMinionChangeds[_index] += OnActivatedMinionChanged;
+            Initialize();
+
+            FormationManager.Instance.OnMinionChangeds[_index] += OnFrontlineMinionChanged;
+        }
+
+        private void Initialize()
+        {
+            _selected = FormationManager.Instance.GetFrontlineMinion(_index);
+            ApplyIcon();
+            OnSelected?.Invoke(_selected);
         }
 
         private void OnDestroy()
         {
-            FormationManager.Instance.OnMinionChangeds[_index] -= OnActivatedMinionChanged;
+            FormationManager.Instance.OnMinionChangeds[_index] -= OnFrontlineMinionChanged;
         }
 
         private void OpenWindow()
@@ -43,20 +51,20 @@ namespace Lion.Formation.UI
             _minionSelectWindow.OnDisabled -= OnClosedWindwo;
         }
 
-        private void OnSelectedMinion(MinionData data)
+        private void OnSelectedMinion(MinionData selected)
         {
             // 未解放のミニオンが選択された場合は何もしない。
-            if (!data.Unlocked) return;
+            if (!selected.Unlocked) return;
             // 既にアクティブなミニオンが選択された場合は何もしない。
             var activated = FormationManager.Instance.GetFrontlineMinion(_index);
-            if (activated != data && data.IsActive) return;
+            if (activated != selected && selected.IsActive) return;
 
-            _selected = data;
+            _selected = selected;
 
-            FormationManager.Instance.ChangeFrontlineMinion(data, _index);
+            FormationManager.Instance.ChangeFrontlineMinion(selected, _index);
             ApplyIcon();
             _minionSelectWindow.Close();
-            OnSelected?.Invoke(data);
+            OnSelected?.Invoke(selected);
         }
 
         private void ApplyIcon()
@@ -73,7 +81,7 @@ namespace Lion.Formation.UI
             }
         }
 
-        private void OnActivatedMinionChanged(MinionData data)
+        private void OnFrontlineMinionChanged(MinionData data)
         {
             ApplyIcon();
         }
