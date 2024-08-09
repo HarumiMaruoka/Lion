@@ -1,4 +1,5 @@
 ﻿using Lion.Formation;
+using Lion.Stage;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +18,10 @@ namespace Lion.Ally.Skill
 
         private void ExecuteSkill()
         {
-            Ally?.ExecuteSkill();
+            if (StageManager.Instance.IsBattleScene)
+            {
+                Ally?.ExecuteSkill();
+            }
         }
     }
 }

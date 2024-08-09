@@ -1,3 +1,4 @@
+ï»¿using Lion.Enemy.Boss;
 using System;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ namespace Lion.Mission
             Instance = null;
         }
 
-        // G‹›“G‚ğƒLƒ‹‚µ‚½”
+        // é›‘é­šæ•µã‚’ã‚­ãƒ«ã—ãŸæ•°
         private int _killCount = 0;
         public int KillCount
         {
@@ -36,9 +37,12 @@ namespace Lion.Mission
         }
         public event Action<int> OnKillCountChanged;
 
-        // –Ú•W‚Æ‚È‚éG‹›“G‚ÌƒLƒ‹”
+        // ç›®æ¨™ã¨ãªã‚‹é›‘é­šæ•µã®ã‚­ãƒ«æ•°
         [SerializeField]
         private int _targetKillCount = 10;
         public int TargetKillCount => _targetKillCount;
+
+        // ãƒœã‚¹ã¨æˆ¦é—˜ã™ã‚‹ã“ã¨ãŒå¯èƒ½ã‹ã©ã†ã‹
+        public bool CanFightBoss => KillCount >= TargetKillCount;
     }
 }

@@ -44,5 +44,13 @@ namespace Lion.LevelManagement.ExperienceLevel
                 }
             }
         }
+
+        public void Clear()
+        {
+            CurrentLevel = 1;
+            CurrentExp = 0;
+            OnExpChanged?.Invoke(CurrentExp);
+            OnLevelChanged?.Invoke(CurrentLevel);
+        }
     }
 }

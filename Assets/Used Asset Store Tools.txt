@@ -90,3 +90,6 @@ https://assetstore.unity.com/packages/2d/textures-materials/20-evolving-fantasy-
 
 3D Toon Lasers
 https://assetstore.unity.com/packages/vfx/particles/3d-toon-lasers-168810
+
+Rounded M+
+http://jikasei.me/font/rounded-mplus/about.html

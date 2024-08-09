@@ -1,21 +1,21 @@
-using Lion.Player;
+ï»¿using Lion.Player;
 using System;
 using UnityEngine;
 
 namespace Lion.Enemy.Boss
 {
     /// <summary>
-    /// Ï‹É“I‚ÉUŒ‚‚·‚é‚Ì‚Å‚Í‚È‚­A‹——£‚ğ•Û‚¿‚È‚ª‚çƒvƒŒƒCƒ„[‚Ì“®‚«‚ğŠÏ@‚·‚éó‘ÔB
+    /// ç©æ¥µçš„ã«æ”»æ’ƒã™ã‚‹ã®ã§ã¯ãªãã€è·é›¢ã‚’ä¿ã¡ãªãŒã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ãã‚’è¦³å¯Ÿã™ã‚‹çŠ¶æ…‹ã€‚
     /// </summary>
     public class ObservingState : Stage1BossController.IState
     {
-        // ƒvƒŒƒCƒ„[‚ª‹ß‚Ã‚¯‚Î—£‚ê‚éB
-        // ƒvƒŒƒCƒ„[‚ª—£‚ê‚ê‚Î‹ß‚Ã‚­B
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¿‘ã¥ã‘ã°é›¢ã‚Œã‚‹ã€‚
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒé›¢ã‚Œã‚Œã°è¿‘ã¥ãã€‚
 
-        // ƒvƒŒƒCƒ„[‚ª‚Æ‚Ä‚à‹ß‚­‚É‚¢‚éê‡A‹ß‹——£UŒ‚‚ğs‚¤B
-        // ƒvƒŒƒCƒ„[‚ª‰“‚­‚É‚¢‚éê‡A‰“‹——£UŒ‚‚ğs‚¤B
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã¨ã¦ã‚‚è¿‘ãã«ã„ã‚‹å ´åˆã€è¿‘è·é›¢æ”»æ’ƒã‚’è¡Œã†ã€‚
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒé ãã«ã„ã‚‹å ´åˆã€é è·é›¢æ”»æ’ƒã‚’è¡Œã†ã€‚
 
-        // ˆê’èŠÔŒo‰ß‚µ‚½ŒãAŸ‚Ìs“®‚ğŒˆ’è‚·‚éB
+        // ä¸€å®šæ™‚é–“çµŒéã—ãŸå¾Œã€æ¬¡ã®è¡Œå‹•ã‚’æ±ºå®šã™ã‚‹ã€‚
         private Stage1BossParameters.ObservingStateParameters Parameters;
         private Transform Player => PlayerController.Instance.transform;
 
@@ -30,6 +30,7 @@ namespace Lion.Enemy.Boss
             UpdateObservingTime(boss);
             UpdateMeleeAttack(boss);
             UpdateMaintainDistance(boss);
+            UpdateState(boss);
             UpdateRangeAttack(boss);
         }
 
@@ -51,8 +52,8 @@ namespace Lion.Enemy.Boss
 
             if (ObservingTime <= 0)
             {
-                // ‚±‚±‚ÉŸ‚ÌƒXƒe[ƒg‚Ö‚Ì‘JˆÚˆ—‚ğ‘‚­B
-                // ƒeƒXƒg
+                // ã“ã“ã«æ¬¡ã®ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®é·ç§»å‡¦ç†ã‚’æ›¸ãã€‚
+                // ãƒ†ã‚¹ãƒˆ
                 boss.SetState<IdleState>();
             }
         }
@@ -63,10 +64,10 @@ namespace Lion.Enemy.Boss
 
         private void UpdateMeleeAttack(Stage1BossController boss)
         {
-            // ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ğŒvZ
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®è·é›¢ã‚’è¨ˆç®—
             float sqrDistance = Vector2.SqrMagnitude(boss.transform.position - Player.position);
 
-            // ˆê’è‹——£ˆÈ“à‚É‹ß‚Ã‚¢‚½‚ç‹ß‹——£UŒ‚‚ğs‚¤
+            // ä¸€å®šè·é›¢ä»¥å†…ã«è¿‘ã¥ã„ãŸã‚‰è¿‘è·é›¢æ”»æ’ƒã‚’è¡Œã†
             if (sqrDistance < ArrivalThresholdDistance * ArrivalThresholdDistance)
             {
                 boss.SetState<MeleeAttackState>();
@@ -79,40 +80,60 @@ namespace Lion.Enemy.Boss
         private float ObservingMinDistance => Parameters.ObservingMinDistance;
         private float MoveSpeed => Parameters.MoveSpeed;
 
-        private bool _isIdle;
+        private enum Direction
+        {
+            Approach, // è¿‘ã¥ã
+            Retreat, // é›¢ã‚Œã‚‹
+            Idle, // å¾…æ©Ÿ
+        }
+
+        private Direction _currentState;
+        private float _switchTimer;
+        private float _switchInterval = 0.5f;
+        private bool IsSwitchable => _switchTimer <= 0;
 
         private void UpdateMaintainDistance(Stage1BossController boss)
         {
-            // ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ğŒvZ
+            _switchTimer -= Time.deltaTime;
+            switch (_currentState)
+            {
+                case Direction.Approach:
+                    boss.Rigidbody2D.velocity = (Player.position - boss.transform.position).normalized * MoveSpeed;
+                    break;
+                case Direction.Retreat:
+                    boss.Rigidbody2D.velocity = (boss.transform.position - Player.position).normalized * MoveSpeed;
+                    break;
+                case Direction.Idle:
+                    boss.Rigidbody2D.velocity = Vector2.zero;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void UpdateState(Stage1BossController boss)
+        {
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®è·é›¢ã‚’è¨ˆç®—
             float sqrDistance = Vector2.SqrMagnitude(boss.transform.position - Player.position);
 
-            // ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ªˆê’è”ÍˆÍ“à‚Éû‚Ü‚é‚æ‚¤‚ÉˆÚ“®
-            if (sqrDistance > ObservingMaxDistance * ObservingMaxDistance)
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®è·é›¢ãŒä¸€å®šç¯„å›²å†…ã«åã¾ã‚‹ã‚ˆã†ã«ç§»å‹•
+            if (_currentState != Direction.Approach && sqrDistance > ObservingMaxDistance * ObservingMaxDistance && IsSwitchable)
             {
-                if (_isIdle)
-                {
-                    boss.Animator.Play("Run");
-                    _isIdle = false;
-                }
-                boss.Rigidbody2D.velocity = (Player.position - boss.transform.position).normalized * MoveSpeed;
+                boss.Animator.Play("Run");
+                _currentState = Direction.Approach;
+                _switchTimer = _switchInterval;
             }
-            else if (sqrDistance < ObservingMinDistance * ObservingMinDistance)
+            else if (_currentState != Direction.Retreat && sqrDistance < ObservingMinDistance * ObservingMinDistance && IsSwitchable)
             {
-                if (_isIdle)
-                {
-                    boss.Animator.Play("Run");
-                    _isIdle = false;
-                }
-                boss.Rigidbody2D.velocity = (boss.transform.position - Player.position).normalized * MoveSpeed;
+                boss.Animator.Play("Run");
+                _currentState = Direction.Retreat;
+                _switchTimer = _switchInterval;
             }
-            else
+            else if (_currentState != Direction.Idle && IsSwitchable)
             {
-                if (!_isIdle)
-                {
-                    boss.Animator.Play("Idle");
-                    _isIdle = true;
-                }
-                boss.Rigidbody2D.velocity = Vector2.zero;
+                boss.Animator.Play("Idle");
+                _currentState = Direction.Idle;
+                _switchTimer = _switchInterval;
             }
         }
         #endregion
@@ -122,10 +143,10 @@ namespace Lion.Enemy.Boss
 
         private void UpdateRangeAttack(Stage1BossController boss)
         {
-            // ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ğŒvZ
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®è·é›¢ã‚’è¨ˆç®—
             float sqrDistance = Vector2.SqrMagnitude(boss.transform.position - Player.position);
 
-            // ˆê’è‹——£ˆÈã—£‚ê‚½‚ç‰“‹——£UŒ‚‚ğs‚¤
+            // ä¸€å®šè·é›¢ä»¥ä¸Šé›¢ã‚ŒãŸã‚‰é è·é›¢æ”»æ’ƒã‚’è¡Œã†
             if (sqrDistance > RangeAttackThresholdDistance * RangeAttackThresholdDistance)
             {
                 boss.SetState<RangeAttackState>();

@@ -1,9 +1,10 @@
+﻿using Lion.Save;
 using System;
 using UnityEngine;
 
 namespace Lion.Item
 {
-    public class ItemData : ScriptableObject
+    public class ItemData : ScriptableObject, ISavable
     {
         [field: SerializeField] public int ID { get; private set; }
         [field: SerializeField] public string Name { get; private set; }
@@ -22,5 +23,15 @@ namespace Lion.Item
         }
 
         public event Action<int> OnCountChanged;
+
+        public void Save()
+        {
+            // 所持数をセーブする
+        }
+
+        public void Load()
+        {
+
+        }
     }
 }

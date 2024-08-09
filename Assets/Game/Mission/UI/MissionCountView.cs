@@ -17,11 +17,14 @@ namespace Lion.Mission.UI
 
         private void Start()
         {
-            if (MainMission.Instance != null)
+            if (!MainMission.Instance)
             {
-                MainMission.Instance.OnKillCountChanged += OnKillCountChanged;
-                OnKillCountChanged(MainMission.Instance.KillCount);
+                // Debug.LogError("MainMission is not exists.");
+                gameObject.SetActive(false);
+                return;
             }
+            MainMission.Instance.OnKillCountChanged += OnKillCountChanged;
+            OnKillCountChanged(MainMission.Instance.KillCount);
         }
 
         private void OnDestroy()

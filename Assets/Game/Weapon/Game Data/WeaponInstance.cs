@@ -1,7 +1,6 @@
 ﻿using Lion.LevelManagement.ItemLevel;
 using Lion.Weapon.Behaviour;
 using System;
-using System.Net.WebSockets;
 using UnityEngine;
 
 namespace Lion.Weapon
@@ -11,18 +10,18 @@ namespace Lion.Weapon
         private WeaponBehaviour _gameObject;
         public WeaponParameter Parameter { get; }
 
-        public WeaponInstance(WeaponData data)
+        private WeaponInstance(WeaponData data, int initialLevel)
         {
             Data = data;
             Parameter = new WeaponParameter(this);
-            LevelManager = new ItemLevelManager(data.LevelManager.CostTable);
+            LevelManager = new ItemLevelManager(data.LevelManager.CostTable, initialLevel);
         }
 
-        public static WeaponInstance Create(int id)
+        public static WeaponInstance Create(int id, int initialLevel = 1)
         {
             if (WeaponManager.Instance.WeaponSheet.TryGetValue(id, out var data))
             {
-                return new WeaponInstance(data);
+                return new WeaponInstance(data, initialLevel);
             }
             Debug.LogError($"WeaponData not found: {id}");
             return null;

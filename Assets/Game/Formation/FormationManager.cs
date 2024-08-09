@@ -1,7 +1,6 @@
 ﻿using Lion.Ally;
 using Lion.Minion;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +13,7 @@ namespace Lion.Formation
     {
         public static FormationManager Instance { get; private set; } = new FormationManager();
 
-        private AllyData _activatedAlly;
+        private AllyData _frontlineAlly;
         private MinionData[] _frontlineMinions = new MinionData[4];
 
         public event Action<AllyData> OnAllyChanged;
@@ -43,20 +42,20 @@ namespace Lion.Formation
 
         public AllyData FrontlineAlly
         {
-            get => _activatedAlly;
+            get => _frontlineAlly;
             set
             {
                 if (value.Count == 0) return;
 
-                _activatedAlly?.Deactivate();
+                _frontlineAlly?.Deactivate();
 
                 // 既に選択されているアクターが選択された場合は、選択を解除する操作とする。
-                _activatedAlly = _activatedAlly != value ? value : null;
+                _frontlineAlly = _frontlineAlly != value ? value : null;
 
-                _activatedAlly?.Activate();
+                _frontlineAlly?.Activate();
 
                 ClearMinions();
-                OnAllyChanged?.Invoke(_activatedAlly);
+                OnAllyChanged?.Invoke(_frontlineAlly);
             }
         }
 
@@ -102,7 +101,7 @@ namespace Lion.Formation
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (_activatedAlly) _activatedAlly.Activate();
+            if (_frontlineAlly) _frontlineAlly.Activate();
             foreach (var minion in _frontlineMinions)
             {
                 if (minion) minion.Activate();

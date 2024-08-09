@@ -1,10 +1,10 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 namespace Lion.Enemy.Boss
 {
     /// <summary>
-    /// ƒ{ƒX‚ÌƒXƒe[ƒW1‚Ìƒpƒ‰ƒ[ƒ^B
+    /// ãƒœã‚¹ã®ã‚¹ãƒ†ãƒ¼ã‚¸1ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã€‚
     /// </summary>
     public class Stage1BossParameters : MonoBehaviour
     {
@@ -14,7 +14,7 @@ namespace Lion.Enemy.Boss
         public RetreatStateParameters RetreatState;
         public ObservingStateParameters ObservingState;
 
-        // ‘Ò‹@ƒXƒe[ƒg‚Ìƒpƒ‰ƒ[ƒ^
+        // å¾…æ©Ÿã‚¹ãƒ†ãƒ¼ãƒˆã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
         [Serializable]
         public class IdleStateParameters
         {
@@ -22,7 +22,7 @@ namespace Lion.Enemy.Boss
             public float WaitMaxTime;
         }
 
-        // ƒvƒŒƒCƒ„[‚É‹ß‚Ã‚­ƒXƒe[ƒg‚Ìƒpƒ‰ƒ[ƒ^
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«è¿‘ã¥ãã‚¹ãƒ†ãƒ¼ãƒˆã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
         [Serializable]
         public class ApproachingStateParameters
         {
@@ -30,7 +30,7 @@ namespace Lion.Enemy.Boss
             public float MoveSpeed;
         }
 
-        // ƒvƒŒƒCƒ„[‚Æ—£‚ê‚éƒXƒe[ƒg‚Ìƒpƒ‰ƒ[ƒ^
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨é›¢ã‚Œã‚‹ã‚¹ãƒ†ãƒ¼ãƒˆã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
         [Serializable]
         public class RetreatStateParameters
         {
@@ -38,19 +38,19 @@ namespace Lion.Enemy.Boss
             public float MoveSpeed;
         }
 
-        // ŠÏ@ƒXƒe[ƒg‚Ìƒpƒ‰ƒ[ƒ^
+        // è¦³å¯Ÿã‚¹ãƒ†ãƒ¼ãƒˆã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
         [Serializable]
         public class ObservingStateParameters
         {
-            public float ObservingMinTime;
-            public float ObservingMaxTime;
+            public float ObservingMinTime; // è¦³å¯Ÿã™ã‚‹æœ€å°æ™‚é–“
+            public float ObservingMaxTime; // è¦³å¯Ÿã™ã‚‹æœ€å¤§æ™‚é–“
 
-            public float ObservingMaxDistance;
-            public float ObservingMinDistance;
+            public float ObservingMaxDistance; // è¦³å¯Ÿã™ã‚‹æœ€å¤§è·é›¢
+            public float ObservingMinDistance; // è¦³å¯Ÿã™ã‚‹æœ€å°è·é›¢
 
-            public float MoveSpeed;
-            public float ArrivalThresholdDistance;
-            public float RangeAttackThresholdDistance;
+            public float MoveSpeed; // ç§»å‹•é€Ÿåº¦
+            public float ArrivalThresholdDistance; // åˆ°ç€åˆ¤å®šè·é›¢
+            public float RangeAttackThresholdDistance; // é è·é›¢æ”»æ’ƒåˆ¤å®šè·é›¢
         }
     }
 }

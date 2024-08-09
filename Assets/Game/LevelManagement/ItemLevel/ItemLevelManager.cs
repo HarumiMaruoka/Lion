@@ -8,9 +8,9 @@ namespace Lion.LevelManagement.ItemLevel
         private int _currentLevel;
         public LevelUpCostTable CostTable { get; }
 
-        public ItemLevelManager(LevelUpCostTable costManager)
+        public ItemLevelManager(LevelUpCostTable costManager, int initialLevel = 1)
         {
-            _currentLevel = 1;
+            _currentLevel = Mathf.Clamp(initialLevel, 1, costManager.MaxLevel);
             CostTable = costManager;
         }
 

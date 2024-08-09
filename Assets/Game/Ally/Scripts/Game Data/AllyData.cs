@@ -1,13 +1,14 @@
 ﻿using Lion.Ally.Skill;
 using Lion.Formation;
 using Lion.Player;
+using Lion.Save;
 using Lion.Weapon;
 using System;
 using UnityEngine;
 
 namespace Lion.Ally
 {
-    public class AllyData : ScriptableObject, IWeaponEquippable
+    public class AllyData : ScriptableObject, IWeaponEquippable, ISavable
     {
         [field: SerializeField] public int ID { get; private set; }
         [field: SerializeField] public string Name { get; private set; }
@@ -53,6 +54,7 @@ namespace Lion.Ally
         {
             Count = 0;
             LevelManager = new AllyLevelManager(this);
+            SaveManager.Instance.Register(this);
         }
 
         public void Activate()
@@ -98,6 +100,16 @@ namespace Lion.Ally
             _equipped[index]?.Deactivation();
             _equipped[index] = weapon == _equipped[index] ? null : weapon;
             _equipped[index]?.Activation(_instance);
+        }
+
+        public void Save()
+        {
+            // カウント、装備状態、レベルを保存
+        }
+
+        public void Load()
+        {
+
         }
     }
 }

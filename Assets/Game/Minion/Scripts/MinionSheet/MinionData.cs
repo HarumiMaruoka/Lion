@@ -1,12 +1,13 @@
 ﻿using Lion.Formation;
 using Lion.LevelManagement;
+using Lion.Save;
 using Lion.Weapon;
 using System;
 using UnityEngine;
 
 namespace Lion.Minion
 {
-    public class MinionData : ScriptableObject, IWeaponEquippable
+    public class MinionData : ScriptableObject, IWeaponEquippable, ISavable
     {
         [field: SerializeField] public int ID { get; private set; }
         [field: SerializeField] public string Name { get; private set; }
@@ -50,6 +51,7 @@ namespace Lion.Minion
         {
             Count = 0;
             LevelManager = new MinionLevelManager(this);
+            SaveManager.Instance.Register(this);
         }
 
         public void Activate()
@@ -96,6 +98,66 @@ namespace Lion.Minion
             _equipped[index]?.Deactivation();
             _equipped[index] = weapon == _equipped[index] ? null : weapon;
             _equipped[index]?.Activation(_instance);
+        }
+
+        public void Save()
+        {
+            // カウント、レベル、装備を保存する。
+            var count = Count;
+            var itemLevel = LevelManager.ItemLevelManager.CurrentLevel;
+            var exp = LevelManager.ExpLevelManager.CurrentExp;
+
+            var equippedWeapon0 = _equipped[0] == null ? -1 : _equipped[0].InventoryIndex;
+            var equippedWeapon1 = _equipped[1] == null ? -1 : _equipped[1].InventoryIndex;
+            var equippedWeapon2 = _equipped[2] == null ? -1 : _equipped[2].InventoryIndex;
+            var equippedWeapon3 = _equipped[3] == null ? -1 : _equipped[3].InventoryIndex;
+
+            PlayerPrefs.SetInt($"Minion_{ID}_Count", count);
+            PlayerPrefs.SetInt($"Minion_{ID}_ItemLevel", itemLevel);
+            PlayerPrefs.SetInt($"Minion_{ID}_ExpLevel", exp);
+
+            PlayerPrefs.SetInt($"Minion_{ID}_Equipped0", equippedWeapon0);
+            PlayerPrefs.SetInt($"Minion_{ID}_Equipped1", equippedWeapon1);
+            PlayerPrefs.SetInt($"Minion_{ID}_Equipped2", equippedWeapon2);
+            PlayerPrefs.SetInt($"Minion_{ID}_Equipped3", equippedWeapon3);
+        }
+
+        public void Load()
+        {
+            // カウント、レベル、装備をロードする。
+            var count = PlayerPrefs.GetInt($"Minion_{ID}_Count", 0);
+            var itemLevel = PlayerPrefs.GetInt($"Minion_{ID}_ItemLevel", 1);
+            var exp = PlayerPrefs.GetInt($"Minion_{ID}_ExpLevel", 0);
+
+            var equippedWeapon0 = PlayerPrefs.GetInt($"Minion_{ID}_Equipped0", -1);
+            var equippedWeapon1 = PlayerPrefs.GetInt($"Minion_{ID}_Equipped1", -1);
+            var equippedWeapon2 = PlayerPrefs.GetInt($"Minion_{ID}_Equipped2", -1);
+            var equippedWeapon3 = PlayerPrefs.GetInt($"Minion_{ID}_Equipped3", -1);
+
+            Count = count;
+            LevelManager.ItemLevelManager.CurrentLevel = itemLevel;
+            LevelManager.ExpLevelManager.Clear();
+            LevelManager.ExpLevelManager.AddExp(exp);
+
+            if (equippedWeapon0 != -1)
+            {
+                _equipped[0] = WeaponManager.Instance.GetWeapon(equippedWeapon0);
+            }
+
+            if (equippedWeapon1 != -1)
+            {
+                _equipped[1] = WeaponManager.Instance.GetWeapon(equippedWeapon1);
+            }
+
+            if (equippedWeapon2 != -1)
+            {
+                _equipped[2] = WeaponManager.Instance.GetWeapon(equippedWeapon2);
+            }
+
+            if (equippedWeapon3 != -1)
+            {
+                _equipped[3] = WeaponManager.Instance.GetWeapon(equippedWeapon3);
+            }
         }
     }
 }

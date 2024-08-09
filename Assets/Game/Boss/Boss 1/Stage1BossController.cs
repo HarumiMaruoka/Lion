@@ -1,4 +1,4 @@
-using Lion.Player;
+ï»¿using Lion.Player;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,7 +86,7 @@ namespace Lion.Enemy.Boss
 
         private void UpdateDirection()
         {
-            // ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ğŒü‚­
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã‚’å‘ã
             Vector3 direction = PlayerController.Instance.transform.position - transform.position;
             var localScale = transform.localScale;
 
@@ -119,7 +119,7 @@ namespace Lion.Enemy.Boss
 
         public void RangeAttack()
         {
-            Instantiate(_rangeAttackObject, transform.position, Quaternion.identity, transform);
+            Instantiate(_rangeAttackObject, transform.position, Quaternion.identity);
         }
     }
 }
